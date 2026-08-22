@@ -3,525 +3,504 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>हमारा गाँव हमारी जिम्मेदारी</title>
-    <!-- QRCode Lib & html2canvas for Download Card -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <title>ग्राम पंचायत जोजलवाड़ी - हमारा गाँव हमारी जिम्मेदारी</title>
     <style>
         :root {
-            --primary: #058239;
-            --secondary: #ff9933;
-            --dark: #1a1a1a;
-            --light: #f4f7f6;
+            --primary: #1e5631;
+            --secondary: #0b3c40;
+            --accent: #d4ac0d;
+            --bg: #f4f7f6;
+            --card: #ffffff;
+            --text: #2c3e50;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--light);
-            color: #333;
+            background-color: var(--bg);
+            color: var(--text);
         }
 
-        /* Top Bar & Header */
         header {
-            background: linear-gradient(135deg, #ff9933 0%, #ffffff 50%, #058239 100%);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
             padding: 15px;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        header img.logo {
-            width: 90px;
-            height: 90px;
+        .logo-img {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            border: 3px solid #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border: 3px solid white;
+            object-fit: cover;
+            background: white;
         }
 
-        header h1 {
-            margin: 8px 0 2px 0;
-            font-size: 22px;
-            color: #058239;
-            text-shadow: 1px 1px 0px #fff;
-        }
-
-        header p {
-            margin: 0;
-            font-size: 13px;
-            font-weight: bold;
-            color: #ff9933;
-        }
-
-        /* Navigation Bar */
-        nav {
-            display: flex;
-            background: #222;
-            overflow-x: auto;
-            white-space: nowrap;
-        }
-
-        nav button {
-            flex: 1;
-            padding: 12px 15px;
-            border: none;
-            background: none;
-            color: #fff;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        nav button.active, nav button:hover {
-            background: var(--primary);
-            color: #fff;
-        }
+        header h1 { margin: 8px 0 2px; font-size: 20px; }
+        header h2 { margin: 0; font-size: 13px; color: var(--accent); }
 
         .container {
-            max-width: 600px;
-            margin: 15px auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            max-width: 800px;
+            margin: 10px auto;
+            padding: 0 10px;
         }
 
-        .tab-content { display: none; }
+        .tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px 2px;
+            border: none;
+            background: #dcdcdc;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--card);
+            padding: 18px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
         .tab-content.active { display: block; }
 
-        /* Form Styles */
-        .form-group { margin-bottom: 12px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px; }
-        input, select {
-            width: 100%; padding: 10px; border: 1px solid #ccc;
-            border-radius: 6px; box-sizing: border-box; font-size: 14px;
-        }
-
-        .btn {
-            width: 100%; padding: 12px; border: none; border-radius: 6px;
-            font-size: 15px; font-weight: bold; cursor: pointer; color: white;
-        }
-        .btn-primary { background-color: var(--primary); }
-        .btn-primary:hover { background-color: #04632b; }
-        .btn-danger { background-color: #d9534f; margin-top: 5px; }
-
-        /* Notice Section */
-        .notice-card {
-            border-left: 4px solid var(--secondary);
-            background: #fff9f2;
-            padding: 12px;
-            margin-bottom: 10px;
+        .notice-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin-bottom: 12px;
             border-radius: 4px;
+            font-size: 13px;
         }
-        .notice-card h4 { margin: 0 0 5px 0; color: #d97706; }
 
-        /* Digital Member Card UI */
-        .card-box {
-            background: linear-gradient(135deg, #ffffff 60%, #e6f4ea 100%);
+        .gram-sabha-box {
+            background-color: #e8f4f8;
+            border-left: 4px solid #17a2b8;
+            padding: 10px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .form-group { margin-bottom: 12px; }
+
+        label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 13px;
+        }
+
+        button.submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        /* Identity Card Layout */
+        .id-card {
+            width: 290px;
+            background: #fff;
             border: 2px solid var(--primary);
-            border-radius: 12px;
-            padding: 15px;
-            position: relative;
+            border-radius: 10px;
+            padding: 0 0 10px 0;
+            margin: 15px auto;
+            text-align: center;
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            text-align: left;
+            overflow: hidden;
         }
-        .card-header { display: flex; align-items: center; border-bottom: 2px solid var(--secondary); padding-bottom: 8px; }
-        .card-header img { width: 45px; height: 45px; border-radius: 50%; margin-right: 10px; }
-        .card-header-title h3 { margin: 0; font-size: 15px; color: var(--primary); }
-        .card-header-title p { margin: 0; font-size: 10px; color: var(--secondary); font-weight: bold; }
-        
-        .card-body { display: flex; margin-top: 12px; gap: 12px; }
-        .card-body img.user-img { width: 85px; height: 100px; border-radius: 6px; object-fit: cover; border: 1px solid #ccc; }
-        .card-info p { margin: 3px 0; font-size: 12px; }
 
-        .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 8px; }
-        #qrcode img { width: 50px !important; height: 50px !important; }
+        .id-card-header {
+            background: var(--primary);
+            color: white;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
 
-        /* Status Badge */
-        .badge { padding: 3px 8px; border-radius: 4px; font-size: 11px; color: #fff; font-weight: bold; }
-        .badge-pending { background-color: #f39c12; }
-        .badge-approved { background-color: #27ae60; }
-        .badge-rejected { background-color: #e74c3c; }
+        .id-card-header img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
 
-        /* Admin Dashboard Table */
-        .admin-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; }
-        .admin-table th, .admin-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        .admin-table th { background: var(--primary); color: #fff; }
+        .id-card-header h3 { margin: 0; font-size: 13px; color: var(--accent); }
+
+        .id-card img.profile-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-top: 10px;
+            border: 2px solid var(--primary);
+            object-fit: cover;
+        }
+
+        .id-card-body { text-align: left; padding: 0 15px; font-size: 12px; }
+        .id-card-body p { margin: 4px 0; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        table, th, td { border: 1px solid #ddd; }
+        th, td { padding: 6px; text-align: left; font-size: 11px; }
+        th { background-color: #f2f2f2; }
+
+        .action-btn {
+            padding: 4px 6px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10px;
+            color: white;
+        }
+        .approve-btn { background: #28a745; }
+        .reject-btn { background: #dc3545; }
+
+        footer {
+            text-align: center;
+            padding: 12px;
+            font-size: 11px;
+            color: #555;
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            background: #e9ecef;
+        }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 
 <header>
-    <!-- उपयोगकर्ता का लोगो लोड न होने पर डिफ़ॉल्ट SVG आइकॉन -->
-    <img src="1000467791.png" alt="Logo" class="logo" onerror="this.src='https://via.placeholder.com/90?text=HGHD'">
-    <h1>हमारा गाँव हमारी जिम्मेदारी</h1>
-    <p>“एक सोच, एक प्रयास, बेहतर गाँव”</p>
+    <img src="https://i.ibb.co/L8y2k1M/1000467791.png" alt="हमारा गाँव हमारी जिम्मेदारी" class="logo-img">
+    <h1>ग्राम पंचायत जोजलवाड़ी</h1>
+    <h2>"हमारा गाँव हमारी जिम्मेदारी"</h2>
 </header>
 
-<nav>
-    <button class="active" onclick="showTab('homeTab')">🏠 Home</button>
-    <button onclick="showTab('registerTab')">👥 सदस्य बनें</button>
-    <button onclick="showTab('cardTab')">🪪 Member Card</button>
-    <button onclick="showTab('noticeTab')">📢 सूचना</button>
-    <button onclick="showTab('adminTab')">👨‍💼 Admin</button>
-</nav>
-
 <div class="container">
-    
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('home', event)">🏠 HOME</button>
+        <button class="tab-btn" onclick="showTab('apply', event)">📋 सदस्यता</button>
+        <button class="tab-btn" onclick="showTab('card', event)">🪪 ID Card</button>
+        <button class="tab-btn" onclick="showTab('admin', event)">🔐 Admin</button>
+    </div>
+
     <!-- 1. HOME TAB -->
-    <div id="homeTab" class="tab-content active">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <h2>स्वागत है!</h2>
-            <p style="font-size: 14px; color: #555;">गाँव के विकास, एकता और नागरिक सहयोग की दिशा में एक साझा पहल।</p>
+    <div id="home" class="tab-content active">
+        <div class="notice-box" id="noticeDisplay">
+            📢 <b>सूचना:</b> ग्राम पंचायत जोजलवाड़ी के सर्वांगीण विकास हेतु सदस्यता पंजीकरण चालू है।
         </div>
         
-        <h3>📢 महत्वपूर्ण सूचनाएँ / घोषणाएँ</h3>
-        <div id="homeNotices">
-            <!-- Dynamic Notices -->
+        <div class="gram-sabha-box" id="gramSabhaDisplay">
+            🏛️ <b>ग्राम सभा सूचना:</b> आगामी ग्राम सभा बैठक की घोषणा जल्द की जाएगी।
+        </div>
+
+        <div style="text-align:center; padding:10px;">
+            <h3 style="color:var(--primary); font-size:16px;">"एक सोच, एक प्रयास, बेहतर गाँव"</h3>
+            <p style="font-size:12px; color:#555;">युवा शक्ति | स्वच्छता | शिक्षा | सेवा | विकास</p>
         </div>
     </div>
 
-    <!-- 2. MEMBER REGISTRATION TAB -->
-    <div id="registerTab" class="tab-content">
-        <h3>👥 सदस्यता फॉर्म</h3>
-        <form onsubmit="handleRegistration(event)">
+    <!-- 2. MEMBERSHIP FORM TAB -->
+    <div id="apply" class="tab-content">
+        <h3>सदस्यता पंजीकरण</h3>
+        <form id="memberForm" onsubmit="submitApplication(event)">
+            <div class="form-group">
+                <label>क्या आप ग्राम पंचायत जोजलवाड़ी के निवासी हैं?</label>
+                <select id="isRes" required>
+                    <option value="">-- चुनें --</option>
+                    <option value="हाँ">हाँ (निवासी)</option>
+                    <option value="नहीं">नहीं (अन्य)</option>
+                </select>
+            </div>
             <div class="form-group">
                 <label>पूरा नाम:</label>
-                <input type="text" id="regName" required placeholder="अपना नाम लिखें">
+                <input type="text" id="name" placeholder="अपना नाम लिखें" required>
+            </div>
+            <div class="form-group">
+                <label>उम्र:</label>
+                <input type="number" id="age" required>
             </div>
             <div class="form-group">
                 <label>मोबाइल नंबर:</label>
-                <input type="tel" id="regPhone" pattern="[0-9]{10}" required placeholder="10 अंकों का मोबाइल नंबर">
+                <input type="tel" id="mobile" pattern="[0-9]{10}" placeholder="10 अंकों का नंबर" required>
             </div>
             <div class="form-group">
-                <label>वार्ड / मोहल्ला:</label>
-                <input type="text" id="regWard" required placeholder="वार्ड नं. या मोहल्ला">
+                <label>गांव / वार्ड / फलिया:</label>
+                <input type="text" id="location" required>
             </div>
             <div class="form-group">
-                <label>पासपोर्ट साइज फोटो:</label>
-                <input type="file" id="regPhoto" accept="image/*" required onchange="compressPhoto(event)">
+                <label>आईडी कार्ड हेतु फोटो अपलोड करें:</label>
+                <input type="file" id="photo" accept="image/*" required onchange="previewImage(this)">
             </div>
-            <button type="submit" class="btn btn-primary">आवेदन Submit करें</button>
+            <button type="submit" class="submit-btn">आवेदन जमा करें</button>
         </form>
     </div>
 
-    <!-- 3. DIGITAL MEMBER CARD TAB -->
-    <div id="cardTab" class="tab-content">
-        <h3>🪪 डिजिटल सदस्य कार्ड खोजें</h3>
+    <!-- 3. IDENTITY CARD TAB -->
+    <div id="card" class="tab-content">
+        <h3>सदस्यता पहचान पत्र (Member ID Card)</h3>
         <div class="form-group">
-            <input type="tel" id="searchPhone" placeholder="अपना मोबाइल नंबर दर्ज करें">
-        </div>
-        <button class="btn btn-primary" onclick="searchMemberCard()">कार्ड देखें</button>
-
-        <div id="cardResult" style="margin-top: 20px;"></div>
-    </div>
-
-    <!-- 4. NOTICE BOARD TAB -->
-    <div id="noticeTab" class="tab-content">
-        <h3>📢 सूचना बोर्ड</h3>
-        <div id="publicNotices"></div>
-    </div>
-
-    <!-- 5. ADMIN PANEL TAB -->
-    <div id="adminTab" class="tab-content">
-        <div id="adminLogin">
-            <h3>🔐 Admin Login (Sachin Jamre)</h3>
-            <div class="form-group">
-                <label>पासवर्ड दर्ज करें:</label>
-                <input type="password" id="adminPass">
-            </div>
-            <button class="btn btn-primary" onclick="loginAdmin()">लॉगिन करें</button>
+            <input type="text" id="searchId" placeholder="Member ID दर्ज करें (उदा. JOJAL-1001)">
+            <button onclick="searchMember()" class="submit-btn" style="margin-top:6px;">कार्ड खोजें</button>
         </div>
 
-        <div id="adminDashboard" style="display: none;">
-            <h3>👨‍💼 Admin Panel</h3>
-            <p>स्वागत है, <b>Sachin Jamre (Lead)</b></p>
-            <button class="btn btn-danger" style="width: auto; padding: 5px 10px; float: right;" onclick="logoutAdmin()">लॉगआउट</button>
-            
-            <hr>
-            <h4>📢 नई सूचना जारी करें</h4>
-            <div class="form-group">
-                <input type="text" id="newNoticeTitle" placeholder="सूचना का शीर्षक">
-            </div>
-            <div class="form-group">
-                <input type="text" id="newNoticeBody" placeholder="विवरण...">
-            </div>
-            <button class="btn btn-primary" onclick="addNotice()">सूचना प्रकाशित करें</button>
+        <div id="cardDisplay" style="display:none;">
+            <div class="id-card">
+                <div class="id-card-header">
+                    <img src="https://i.ibb.co/L8y2k1M/1000467791.png" alt="Logo">
+                    <div>
+                        <h3 style="margin:0;">ग्राम पंचायत जोजलवाड़ी</h3>
+                        <p style="margin:0; font-size:9px; color:#fff;">हमारा गाँव हमारी जिम्मेदारी</p>
+                    </div>
+                </div>
+                <img id="cardPhoto" src="" class="profile-img" alt="Member Photo">
+                <h4 id="cardName" style="margin:5px 0 2px;">-</h4>
+                <p id="cardMemberId" style="color:var(--primary); font-weight:bold; margin:0; font-size:12px;">-</p>
+                
+                <div class="id-card-body">
+                    <p><b>गांव/वार्ड:</b> <span id="cardLocation">-</span></p>
+                    <p><b>मोबाइल:</b> <span id="cardMobile">-</span></p>
+                    <p><b>स्थिति:</b> <span style="color:green; font-weight:bold;">Approved Member</span></p>
+                </div>
 
-            <hr style="margin-top:20px;">
-            <h4>👥 सदस्य आवेदन एवं रिकॉर्ड</h4>
+                <div id="qrcode" style="display:flex; justify-content:center; margin-top:6px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. ADMIN TAB -->
+    <div id="admin" class="tab-content">
+        <div id="adminAuth">
+            <h3>Admin Login Panel</h3>
+            <div class="form-group">
+                <label>पासवर्ड:</label>
+                <input type="password" id="adminPass" placeholder="पासवर्ड दर्ज करें (सॉफ़्टवेयर पासवर्ड: sachin123)">
+            </div>
+            <button onclick="loginAdmin()" class="submit-btn">Login</button>
+        </div>
+
+        <div id="adminDashboard" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h4>Admin Dashboard Control</h4>
+                <button onclick="logoutAdmin()" style="padding:3px 6px;">Logout</button>
+            </div>
+
+            <div style="background:#f0f0f0; padding:8px; border-radius:4px; margin-bottom:10px;">
+                <label>📢 होम सूचना अपडेट करें:</label>
+                <input type="text" id="newNoticeText" placeholder="नई सूचना यहाँ लिखें...">
+                <button onclick="updateNotice()" style="margin-top:4px; padding:4px 8px; background:var(--primary); color:white; border:none; border-radius:3px;">अपडेट करें</button>
+            </div>
+
+            <button onclick="downloadCSV()" style="background:#0275d8; color:white; border:none; padding:6px 10px; border-radius:3px; margin-bottom:10px; cursor:pointer;">
+                📥 Excel / CSV डेटा डाउनलोड करें
+            </button>
+
+            <h4>प्राप्त आवेदन (Approve / Reject Control)</h4>
             <div style="overflow-x:auto;">
-                <table class="admin-table">
+                <table>
                     <thead>
                         <tr>
                             <th>फोटो</th>
-                            <th>नाम</th>
-                            <th>मो. नं.</th>
-                            <th>वार्ड</th>
-                            <th>स्टेटस</th>
+                            <th>नाम (उम्र)</th>
+                            <th>जोजलवाड़ी निवासी?</th>
+                            <th>स्थान/मोबाइल</th>
+                            <th>स्थिति</th>
                             <th>Member ID</th>
-                            <th>एक्शन</th>
+                            <th>कार्रवाई</th>
                         </tr>
                     </thead>
-                    <tbody id="adminTableBody">
-                    </tbody>
+                    <tbody id="adminTableBody"></tbody>
                 </table>
             </div>
         </div>
     </div>
-
 </div>
 
+<footer>
+    <b>Admin:</b> DIMAGI NAXAL | <b>Created by:</b> Sachin Jamre
+</footer>
+
 <script>
-    // System Local Data Storage
-    let members = JSON.parse(localStorage.getItem('hghd_members') || '[]');
-    let notices = JSON.parse(localStorage.getItem('hghd_notices') || '[]');
-    let compressedPhotoBase64 = "";
+    let members = JSON.parse(localStorage.getItem('jojal_final_members')) || [];
+    let base64Photo = "";
 
-    // Image Compressor
-    function compressPhoto(e) {
-        const file = e.target.files[0];
-        if(!file) return;
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = function(event) {
-            const img = new Image();
-            img.src = event.target.result;
-            img.onload = function() {
-                const canvas = document.createElement('canvas');
-                const maxWidth = 300;
-                const scale = maxWidth / img.width;
-                canvas.width = maxWidth;
-                canvas.height = img.height * scale;
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                compressedPhotoBase64 = canvas.toDataURL('image/jpeg', 0.7);
-            }
-        }
-    }
-
-    // Switch Tabs
-    function showTab(tabId) {
+    function showTab(tabName, evt) {
         document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-        document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
-        
-        document.getElementById(tabId).classList.add('active');
-        event.currentTarget.classList.add('active');
-
-        if(tabId === 'homeTab' || tabId === 'noticeTab') renderNotices();
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+        evt.currentTarget.classList.add('active');
     }
 
-    // Registration Form Submit
-    function handleRegistration(e) {
-        e.preventDefault();
-        const phone = document.getElementById('regPhone').value.trim();
-
-        // Check if exists
-        if(members.some(m => m.phone === phone)) {
-            alert('यह मोबाइल नंबर पहले से पंजीकृत है!');
-            return;
+    function previewImage(input) {
+        let file = input.files[0];
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                let img = new Image();
+                img.src = e.target.result;
+                img.onload = function() {
+                    let canvas = document.createElement('canvas');
+                    let ctx = canvas.getContext('2d');
+                    canvas.width = 120;
+                    canvas.height = 120;
+                    ctx.drawImage(img, 0, 0, 120, 120);
+                    base64Photo = canvas.toDataURL('image/jpeg', 0.6);
+                }
+            }
+            reader.readAsDataURL(file);
         }
+    }
 
-        const newMember = {
-            id: null,
-            name: document.getElementById('regName').value.trim(),
-            phone: phone,
-            ward: document.getElementById('regWard').value.trim(),
-            photo: compressedPhotoBase64 || 'https://via.placeholder.com/85x100',
-            status: 'Pending',
-            date: new Date().toLocaleDateString('hi-IN')
+    function submitApplication(e) {
+        e.preventDefault();
+        let newMember = {
+            id: 'REQ-' + Date.now().toString().slice(-4),
+            memberId: 'Pending',
+            isResident: document.getElementById('isRes').value,
+            name: document.getElementById('name').value,
+            age: document.getElementById('age').value,
+            mobile: document.getElementById('mobile').value,
+            location: document.getElementById('location').value,
+            photo: base64Photo || 'https://via.placeholder.com/120',
+            status: 'Pending'
         };
 
         members.push(newMember);
-        localStorage.setItem('hghd_members', JSON.stringify(members));
-        alert('आवेदन सफलतापूर्वक जमा हो गया है!\nवर्तमान स्थिति: Pending (एडमिन स्वीकृति की प्रतीक्षा करें)');
-        e.target.reset();
+        localStorage.setItem('jojal_final_members', JSON.stringify(members));
+        alert('आवेदन सफलतापूर्वक जमा हो गया! एडमिन (सचिन जामरे) द्वारा Approve होने पर Member ID प्राप्त होगी।');
+        document.getElementById('memberForm').reset();
     }
 
-    // Notice Rendering
-    function renderNotices() {
-        const homeDiv = document.getElementById('homeNotices');
-        const publicDiv = document.getElementById('publicNotices');
-        
-        if(notices.length === 0) {
-            const emptyMsg = "<p style='color:#777;'>अभी कोई नई सूचना उपलब्ध नहीं है।</p>";
-            homeDiv.innerHTML = emptyMsg;
-            publicDiv.innerHTML = emptyMsg;
-            return;
-        }
-
-        let html = '';
-        notices.forEach((n, idx) => {
-            html += `
-                <div class="notice-card">
-                    <h4>${n.title}</h4>
-                    <p style="margin:0; font-size:13px;">${n.body}</p>
-                    <small style="color:#888;">दिनांक: ${n.date}</small>
-                    ${document.getElementById('adminDashboard').style.display !== 'none' ? 
-                    `<br><button class="btn btn-danger" style="width:auto; padding:2px 6px; font-size:10px;" onclick="deleteNotice(${idx})">हटायें</button>` : ''}
-                </div>
-            `;
-        });
-
-        homeDiv.innerHTML = html;
-        publicDiv.innerHTML = html;
-    }
-
-    // Admin Authentication
     function loginAdmin() {
-        const pass = document.getElementById('adminPass').value;
-        if(pass === 'sachin@312' || pass === 'Sachin@2026#Admin') {
-            document.getElementById('adminLogin').style.display = 'none';
+        let pass = document.getElementById('adminPass').value;
+        if(pass === "sachin123") {
+            document.getElementById('adminAuth').style.display = 'none';
             document.getElementById('adminDashboard').style.display = 'block';
-            renderAdminTable();
-            renderNotices();
+            loadAdminData();
         } else {
-            alert('गलत पासवर्ड!');
+            alert('गलत पासवर्ड! (पासवर्ड है: sachin123)');
         }
     }
 
     function logoutAdmin() {
-        document.getElementById('adminLogin').style.display = 'block';
+        document.getElementById('adminAuth').style.display = 'block';
         document.getElementById('adminDashboard').style.display = 'none';
-        document.getElementById('adminPass').value = '';
     }
 
-    // Admin Table Render
-    function renderAdminTable() {
-        const tbody = document.getElementById('adminTableBody');
+    function updateNotice() {
+        let txt = document.getElementById('newNoticeText').value;
+        if(txt) {
+            document.getElementById('noticeDisplay').innerHTML = "📢 <b>सूचना:</b> " + txt;
+            alert('सूचना अपडेट कर दी गई है!');
+        }
+    }
+
+    function loadAdminData() {
+        let tbody = document.getElementById('adminTableBody');
         tbody.innerHTML = '';
 
-        members.forEach((m, idx) => {
-            let statusBadge = `<span class="badge badge-${m.status.toLowerCase()}">${m.status}</span>`;
+        members.forEach((m, index) => {
+            let row = `<tr>
+                <td><img src="${m.photo}" style="width:35px; height:35px; border-radius:50%; object-fit:cover;"></td>
+                <td>${m.name} (${m.age})</td>
+                <td><b>${m.isResident}</b></td>
+                <td>${m.mobile}<br><small>${m.location}</small></td>
+                <td><b>${m.status}</b></td>
+                <td>${m.memberId}</td>
+                <td>
+                    ${m.status === 'Pending' ? `
+                        <button class="action-btn approve-btn" onclick="approveMember(${index})">Approve</button>
+                        <button class="action-btn reject-btn" onclick="rejectMember(${index})">Reject</button>
+                    ` : 'पूर्ण'}
+                </td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+    }
+
+    function approveMember(index) {
+        let generatedId = 'JOJAL-' + Math.floor(1000 + Math.random() * 9000);
+        members[index].status = 'Approved';
+        members[index].memberId = generatedId;
+        localStorage.setItem('jojal_final_members', JSON.stringify(members));
+        loadAdminData();
+        alert(`स्वीकृत! Member ID आवंटित की गई: ${generatedId}`);
+    }
+
+    function rejectMember(index) {
+        members[index].status = 'Rejected';
+        localStorage.setItem('jojal_final_members', JSON.stringify(members));
+        loadAdminData();
+    }
+
+    function searchMember() {
+        let searchId = document.getElementById('searchId').value.trim();
+        let member = members.find(m => m.memberId === searchId && m.status === 'Approved');
+
+        if(member) {
+            document.getElementById('cardDisplay').style.display = 'block';
+            document.getElementById('cardPhoto').src = member.photo;
+            document.getElementById('cardName').innerText = member.name;
+            document.getElementById('cardMemberId').innerText = "ID: " + member.memberId;
+            document.getElementById('cardLocation').innerText = member.location;
+            document.getElementById('cardMobile').innerText = member.mobile;
+
+            document.getElementById('qrcode').innerHTML = "";
+            new QRCode(document.getElementById("qrcode"), {
+                text: `Member: ${member.name} | ID: ${member.memberId} | Panchayat: Jojalwadi`,
+                width: 65,
+                height: 65
+            });
+        } else {
+            alert('यह ID स्वीकृत नहीं है या दर्ज नहीं की गई है!');
+            document.getElementById('cardDisplay').style.display = 'none';
+        }
+    }
+
+    function downloadCSV() {
+        let csv = "Name,Age,Resident_of_Jojalwadi,Mobile,Location,Status,MemberID\n";
+        members.forEach(m => {
+            csv += `${m.name},${m.age},${m.isResident},${m.mobile},${m.location},${m.status},${m.memberId}\n`;
+        });
+        let encodedUri = encodeURI("data:text/csv;charset=utf-8," + csv);
+        let link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "Jojalwadi_Members_List.csv");
+        document.body.appendChild(link);
+        link.click();
+    }
+</script>
+
+</body>
+            </html>
             
-            let actions = '';
-            if(m.status === 'Pending') {
-                actions = `
-                    <button style="background:green; color:#fff; border:none; padding:4px; border-radius:3px;" onclick="approveMember(${idx})">Approve</button>
-                    <button style="background:red; color:#fff; border:none; padding:4px; border-radius:3px;" onclick="rejectMember(${idx})">Reject</button>
-                `;
-            } else if(m.status === 'Approved') {
-                actions = `<button style="background:#555; color:#fff; border:none; padding:4px; border-radius:3px;" onclick="toggleStatus(${idx})">निष्क्रिय करें</button>`;
-            } else {
-                actions = `<button style="background:green; color:#fff; border:none; padding:4px; border-radius:3px;" onclick="approveMember(${idx})">पुनः Approve</button>`;
-            }
-
-            tbody.innerHTML += `
-                <tr>
-                    <td><img src="${m.photo}" width="35" height="40" style="object-fit:cover;"></td>
-                    <td>${m.name}</td>
-                    <td>${m.phone}</td>
-                    <td>${m.ward}</td>
-                    <td>${statusBadge}</td>
-                    <td><b>${m.id || '-'}</b></td>
-                    <td>${actions}</td>
-                </tr>
-            `;
-        });
-    }
-
-    // Approve Member & Generate Unique HG-ID
-    function approveMember(idx) {
-        if(!members[idx].id) {
-            const randomNum = Math.floor(1000 + Math.random() * 9000);
-            members[idx].id = 'HG-' + randomNum;
-        }
-        members[idx].status = 'Approved';
-        localStorage.setItem('hghd_members', JSON.stringify(members));
-        renderAdminTable();
-    }
-
-    function rejectMember(idx) {
-        members[idx].status = 'Rejected';
-        localStorage.setItem('hghd_members', JSON.stringify(members));
-        renderAdminTable();
-    }
-
-    function toggleStatus(idx) {
-        members[idx].status = 'Rejected';
-        localStorage.setItem('hghd_members', JSON.stringify(members));
-        renderAdminTable();
-    }
-
-    // Notice Management
-    function addNotice() {
-        const title = document.getElementById('newNoticeTitle').value.trim();
-        const body = document.getElementById('newNoticeBody').value.trim();
-        
-        if(!title || !body) return alert('दोनों फ़ील्ड भरें');
-
-        notices.unshift({
-            title: title,
-            body: body,
-            date: new Date().toLocaleDateString('hi-IN')
-        });
-
-        localStorage.setItem('hghd_notices', JSON.stringify(notices));
-        document.getElementById('newNoticeTitle').value = '';
-        document.getElementById('newNoticeBody').value = '';
-        renderNotices();
-    }
-
-    function deleteNotice(idx) {
-        notices.splice(idx, 1);
-        localStorage.setItem('hghd_notices', JSON.stringify(notices));
-        renderNotices();
-    }
-
-    // Search & Render Digital Member Card
-    function searchMemberCard() {
-        const phone = document.getElementById('searchPhone').value.trim();
-        const resultDiv = document.getElementById('cardResult');
-        resultDiv.innerHTML = '';
-
-        const m = members.find(item => item.phone === phone);
-
-        if(!m) {
-            resultDiv.innerHTML = "<p style='color:red;'>यह मोबाइल नंबर पंजीकृत नहीं है।</p>";
-            return;
-        }
-
-        if(m.status === 'Pending') {
-            resultDiv.innerHTML = `
-                <div class="notice-card" style="border-left-color:#f39c12;">
-                    <h4>स्थिति: Pending ⏳</h4>
-                    <p>आपका आवेदन एडमिन (Sachin Jamre) की समीक्षा के अधीन है। अप्रूवल के बाद ही डिजिटल कार्ड जनरेट होगा।</p>
-                </div>
-            `;
-            return;
-        }
-
-        if(m.status === 'Rejected') {
-            resultDiv.innerHTML = `
-                <div class="notice-card" style="border-left-color:#e74c3c;">
-                    <h4>स्थिति: Rejected ❌</h4>
-                    <p>आपका आवेदन अस्वीकृत कर दिया गया है। अधिक जानकारी के लिए ग्राम टीम से संपर्क करें।</p>
-                </div>
-            `;
-            return;
-        }
-
-        // Generate Card Preview
-        resultDiv.innerHTML = `
-            <div class="card-box" id="memberCardRender">
-                <div class="card-header">
-                    <img src="1000467791.png" onerror="this.src='https://via.placeholder.com/45'">
-                    <div class="card-header-title">
-                        <h3>हमारा गाँव हमारी जिम्मेदारी</h3>
-                        <p>डिजिटल सदस्यता पहचान-पत्र</p>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <img src="${m.photo}" class="user-img">
-                    <div class="card-info">
-                        <p><b>नाम:</b> ${m.name}</p>
-                        <p><b>Member ID:</b> <span style="color:var(--primary); font-weight:bold;">${m.id}</span></p>
-                        <p><b>वार्ड/मोहल्ला:</b> ${m.ward}</p>
-                        <p><b>मोबाइल:</b> ${m.phone}</p>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <div id="qrcode"></div>
-                    <div style="text-align:right;">
-      
