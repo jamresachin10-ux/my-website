@@ -2,106 +2,415 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ग्राम पंचायत जोजलवाड़ी</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ग्राम पंचायत जोजलवाड़ी — हमारा गाँव हमारी जिम्मेदारी</title>
   <style>
-    *{box-sizing:border-box;margin:0;padding:0;font-family:sans-serif}
-    body{background:#f0f4f8;padding:15px;color:#333}
-    .card{background:#fff;padding:15px;border-radius:12px;margin-bottom:15px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
-    h2, h3{color:#1b7e42;margin-bottom:10px}
-    label{font-size:12px;font-weight:bold;display:block;margin:8px 0 4px}
-    input, select, textarea{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;margin-bottom:8px}
-    .btn{width:100%;background:#1b7e42;color:#fff;border:none;padding:12px;border-radius:8px;font-weight:bold;font-size:14px;cursor:pointer}
-    .nav-btn{background:#e8f5e9;color:#1b7e42;border:1px solid #1b7e42;padding:8px 12px;border-radius:6px;font-weight:bold;margin-right:5px;cursor:pointer}
-    .active-nav{background:#1b7e42;color:#fff}
-    .box{display:none}
-    .box.show{display:block}
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif;-webkit-tap-highlight-color:transparent}
+    body{background:#f0f4f8;color:#333;padding-bottom:30px}
+    
+    .hero{background:linear-gradient(135deg,#0d5c2e,#1b7e42);color:#fff;padding:20px 15px;text-align:center;border-bottom-left-radius:24px;border-bottom-right-radius:24px;box-shadow:0 4px 15px rgba(0,0,0,0.15)}
+    .hero .tag{background:#ffe600;color:#000;padding:4px 12px;border-radius:15px;font-size:12px;font-weight:bold;display:inline-block;margin-bottom:8px}
+    .hero h1{font-size:22px;margin-bottom:4px}
+    .hero p{font-size:13px;opacity:0.9}
+
+    .stats-container{display:grid;grid-template-columns:repeat(3, 1fr);gap:8px;margin:-15px 12px 10px}
+    .stat-card{background:#fff;padding:10px 5px;border-radius:12px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,0.06)}
+    .stat-card h2{font-size:18px;color:#1b7e42}
+    .stat-card p{font-size:10px;color:#666;font-weight:bold}
+    
+    .tabs{display:flex;justify-content:space-around;background:#fff;margin:10px 12px 15px;padding:6px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.08);position:relative;z-index:10}
+    .tab{border:none;background:none;padding:12px 5px;font-weight:bold;color:#666;font-size:13px;cursor:pointer;border-radius:10px;transition:0.2s;flex:1;text-align:center;outline:none}
+    .tab.active{background:#e8f5e9;color:#1b7e42;box-shadow:0 2px 6px rgba(27,126,66,0.15)}
+    
+    .section{display:none;padding:0 12px}
+    .section.active{display:block}
+    .card{background:#fff;padding:16px;border-radius:16px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,0.04)}
+    .card h3{font-size:16px;color:#1b7e42;margin-bottom:12px;border-bottom:2px solid #e8f5e9;padding-bottom:6px;display:flex;align-items:center;gap:6px;justify-content:space-between}
+    
+    label{font-size:12px;font-weight:bold;color:#555;display:block;margin:8px 0 4px}
+    input, select, textarea{width:100%;padding:12px;border:1px solid #dcdfe6;border-radius:10px;font-size:14px;outline:none;background:#fdfdfd;margin-bottom:4px}
+    input:focus, select:focus, textarea:focus{border-color:#1b7e42;background:#fff}
+    
+    .btn{width:100%;background:#1b7e42;color:#fff;border:none;padding:12px;border-radius:10px;font-weight:bold;font-size:15px;cursor:pointer;margin-top:12px;box-shadow:0 3px 8px rgba(27,126,66,0.25)}
+    .btn:active,.tab:active,.em-btn:active{transform:scale(0.98)}
+    
+    .emergency-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+    .em-btn{display:block;text-align:center;background:#fff0f0;color:#c62828;padding:12px;border-radius:10px;text-decoration:none;font-weight:bold;font-size:12px;border:1px solid #ffcdd2}
+    
+    .village-img{width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:12px}
+    .official-box{display:flex;gap:12px;background:#f8fafc;padding:10px;border-radius:12px;margin-bottom:8px;align-items:center}
+    .official-icon{width:45px;height:45px;background:#1b7e42;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+    .notice-board{background:#fff8e1;border-left:4px solid #ffa000;padding:10px;border-radius:8px;margin-bottom:10px;font-size:13px}
+    
+    .member-card{background:linear-gradient(135deg,#0d5c2e,#157337,#2e7d32);color:#fff;padding:16px;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,0.2);position:relative;overflow:hidden;margin-top:10px}
+    .mc-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:8px;margin-bottom:12px}
+    .mc-header h4{font-size:14px;color:#ffe600}
+    .mc-header span{font-size:10px;background:rgba(255,255,255,0.2);padding:2px 6px;border-radius:4px}
+    .mc-body{display:flex;gap:12px;align-items:center}
+    .mc-photo{width:70px;height:70px;border-radius:12px;border:2px solid #ffe600;object-fit:cover;background:#eee}
+    .mc-details p{font-size:12px;margin-bottom:3px;opacity:0.95}
+    .mc-details strong{font-size:13px;color:#fff}
+    .mc-id{margin-top:10px;background:rgba(0,0,0,0.2);padding:6px;border-radius:8px;text-align:center;font-family:monospace;font-size:13px;letter-spacing:1px;color:#ffe600}
+
+    .req-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin-bottom:10px}
+    .req-item img{max-width:100%;max-height:150px;border-radius:8px;margin-top:8px}
+    .btn-group{display:flex;gap:8px;margin-top:10px}
+    .btn-approve{background:#2e7d32;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-weight:bold;flex:1}
+    .btn-reject{background:#c62828;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-weight:bold;flex:1}
+    .badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;color:#fff}
+    .badge-pending{background:#f39c12}
+    .badge-approved{background:#27ae60}
   </style>
 </head>
 <body>
 
-  <div style="text-align:center;margin-bottom:15px;">
-    <h2> ग्राम पंचायत जोजलवाड़ी</h2>
-    <p>संयोजक: DIMAGI NAXAL e</p>
+  <div class="hero">
+    <span class="tag">ग्राम पंचायत जोजलवाड़ी</span>
+    <h1>हमारा गाँव हमारी जिम्मेदारी</h1>
+    <p>👑 मुख्य संयोजक — DIMAGI NAXAL e</p>
   </div>
 
-  <div style="margin-bottom:15px;text-align:center;">
-    <button class="nav-btn active-nav" onclick="openSection('home-sec', this)">🏠 होम</button>
-    <button class="nav-btn" onclick="openSection('admin-sec', this)">⚙️ एडमिन कंट्रोल</button>
+  <div class="stats-container">
+    <div class="stat-card">
+      <h2 id="stat-members">0</h2>
+      <p>कुल सदस्य</p>
+    </div>
+    <div class="stat-card">
+      <h2 id="stat-pending">0</h2>
+      <p>पेंडिंग मुद्दे</p>
+    </div>
+    <div class="stat-card">
+      <h2 id="stat-solved">0</h2>
+      <p>समाधान हुए</p>
+    </div>
   </div>
 
-  <!-- HOME SECTION -->
-  <div id="home-sec" class="box show">
+  <div class="tabs">
+    <button class="tab active" id="tab-home" onclick="showTab('home')">🏠 होम</button>
+    <button class="tab" id="tab-member" onclick="showTab('member')">🪪 सदस्यता</button>
+    <button class="tab" id="tab-issue" onclick="showTab('issue')">📝 समस्या</button>
+    <button class="tab" id="tab-admin" onclick="showTab('admin')">⚙️ Admin</button>
+  </div>
+
+  <!-- 1. HOME SECTION -->
+  <div id="home" class="section active">
     <div class="card">
-      <h3>🏛️ पंचायत विवरण</h3>
-      <p><b>सरपंच:</b> <span id="view-sarpanch">श्री सरपंच जी</span></p>
-      <p><b>मोबाइल:</b> <span id="view-sarpanch-p">9876543210</span></p>
-      <hr style="margin:10px 0;">
-      <p><b>सचिव:</b> <span id="view-sachiv">श्री सचिव जी</span></p>
-      <p><b>मोबाइल:</b> <span id="view-sachiv-p">9876543211</span></p>
+      <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80" alt="गाँव" class="village-img">
+      <h3>
+        <span>🏛️ ग्राम पंचायत जोजलवाड़ी</span>
+        <span style="font-size:11px;background:#e8f5e9;color:#2e7d32;padding:3px 8px;border-radius:10px;">🟢 सेवा चालू</span>
+      </h3>
+      <p style="font-size:13px;color:#666;line-height:1.5;">
+        हमारे गाँव के विकास, जन-जागरूकता और समस्याओं के त्वरित निवारण के लिए यह स्वतंत्र नागरिक डिजिटल मंच है।
+      </p>
     </div>
 
-    <div class="card" style="background:#fff8e1;">
-      <h3>📢 मुख्य सूचना</h3>
-      <p id="view-notice">अभी कोई जानकारी नहीं।</p>
+    <div class="card">
+      <h3>🚨 आपातकालीन नंबर</h3>
+      <div class="emergency-grid">
+        <a id="display-em-amb" href="tel:108" class="em-btn">🚑 एम्बुलेंस (108)</a>
+        <a id="display-em-pol" href="tel:100" class="em-btn">Police (100)</a>
+        <a id="display-em-wat" href="tel:1800123456" class="em-btn" style="color:#0288d1;background:#e1f5fe;border-color:#b3e5fc;">💧 जल विभाग</a>
+        <a id="display-em-ele" href="tel:1912" class="em-btn" style="color:#f57c00;background:#fff3e0;border-color:#ffe0b2;">⚡ बिजली बोर्ड</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>👥 पंचायत प्रतिनिधि / अधिकारी</h3>
+      <div class="official-box">
+        <div class="official-icon">🧑‍💼</div>
+        <div>
+          <strong style="font-size:14px;" id="display-sarpanch-name">सरपंच: श्री सरपंच जी</strong>
+          <p style="font-size:12px;color:#666;" id="display-sarpanch-phone">फोन: 9876543210</p>
+        </div>
+      </div>
+      <div class="official-box">
+        <div class="official-icon">👨‍💻</div>
+        <div>
+          <strong style="font-size:14px;" id="display-sachiv-name">सचिव: श्री सचिव जी</strong>
+          <p style="font-size:12px;color:#666;" id="display-sachiv-phone">फोन: 9876543211</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📢 सूचना बोर्ड एवं ग्राम सभा</h3>
+      <div class="notice-board">
+        <strong>⚠️ जरूरी सूचना:</strong> <span id="display-notice-1">गाँव में स्वच्छता अभियान चलाया जा रहा है।</span>
+      </div>
+      <div class="notice-board" style="background:#e3f2fd;border-left-color:#2196f3;">
+        <strong>🗓️ आगामी ग्राम सभा:</strong> <span id="display-notice-2">दिनांक 15 तारीख को पंचायत भवन में दोपहर 12:00 बजे विशेष ग्राम सभा।</span>
+      </div>
     </div>
   </div>
 
-  <!-- ADMIN SECTION -->
-  <div id="admin-sec" class="box">
-    <div class="card" style="border:2px solid #1b7e42;">
-      <h3>⚙️ एडमिन अपडेट (Direct Control)</h3>
-      
-      <label>सरपंच का नाम:</label>
-      <input type="text" id="in-sarpanch" placeholder="सरपंच का नाम लिखें">
-      
-      <label>सरपंच का नंबर:</label>
-      <input type="tel" id="in-sarpanch-p" placeholder="मोबाइल नंबर">
+  <!-- 2. MEMBERSHIP SECTION -->
+  <div id="member" class="section">
+    <div class="card">
+      <h3>🪪 नागरिक सदस्यता फ़ॉर्म</h3>
+      <label>पूरा नाम *</label>
+      <input type="text" id="m-name" placeholder="अपना पूरा नाम लिखें">
 
-      <label>सचिव का नाम:</label>
-      <input type="text" id="in-sachiv" placeholder="सचिव का नाम लिखें">
+      <label>मोबाइल नंबर *</label>
+      <input type="tel" id="m-phone" placeholder="10 अंकों का मोबाइल नंबर">
+
+      <label>वार्ड / मोहल्ला / फलिया *</label>
+      <input type="text" id="m-ward" placeholder="जैसे: पटेल फलिया, वार्ड नं 2">
+
+      <label>गाँव का नाम *</label>
+      <input type="text" id="m-village" value="जोजलवाड़ी" readonly style="background:#eee;">
+
+      <label>अपनी फोटो अपलोड करें (Card के लिए) *</label>
+      <input type="file" id="m-photo" accept="image/*">
+
+      <button class="btn" type="button" onclick="submitMembership()">सदस्यता के लिए आवेदन करें</button>
+    </div>
+
+    <div class="card">
+      <h3>🔍 अपनी प्रोफाइल / डिजिटल कार्ड देखें</h3>
+      <label>अपना मोबाइल नंबर दर्ज करें</label>
+      <input type="tel" id="search-phone" placeholder="रजिस्टर्ड मोबाइल नंबर लिखें">
+      <button class="btn" type="button" style="background:#0288d1;" onclick="searchProfile()">प्रोफ़ाइल / ID Card खोजें</button>
       
-      <label>सचिव का नंबर:</label>
-      <input type="tel" id="in-sachiv-p" placeholder="मोबाइल नंबर">
+      <div id="profile-result" style="margin-top:15px;"></div>
+    </div>
+  </div>
 
-      <label>नोटिस / सूचना टेक्स्ट:</label>
-      <textarea id="in-notice" rows="3" placeholder="गाँव के लिए सूचना लिखें"></textarea>
+  <!-- 3. ISSUE REPORTING SECTION -->
+  <div id="issue" class="section">
+    <div class="card">
+      <h3>📝 समस्या दर्ज करें</h3>
+      <label>आपका नाम *</label>
+      <input type="text" id="i-name" placeholder="अपना नाम लिखें">
 
-      <button class="btn" onclick="saveData()">अपडेट सेव करें</button>
+      <label>मोबाइल नंबर *</label>
+      <input type="tel" id="i-phone" placeholder="सम्पर्क हेतु मोबाइल नंबर">
+
+      <label>समस्या का प्रकार (Category) *</label>
+      <select id="i-cat">
+        <option value="">-- श्रेणी चुनें --</option>
+        <option value="🚰 पानी">🚰 पानी</option>
+        <option value="🧹 सफाई">🧹 सफाई</option>
+        <option value="💡 स्ट्रीट लाइट">💡 स्ट्रीट लाइट</option>
+        <option value="🛣️ सड़क">🛣️ सड़क</option>
+        <option value="🏫 स्कूल">🏫 स्कूल</option>
+        <option value="🏥 स्वास्थ्य">🏥 स्वास्थ्य</option>
+        <option value="🌳 नाली/कचरा">🌳 नाली / कचरा</option>
+        <option value="⚡ बिजली">⚡ बिजली</option>
+        <option value="अन्य समस्या">अन्य समस्या</option>
+      </select>
+
+      <label>सटीक स्थान (Location) *</label>
+      <input type="text" id="i-loc" placeholder="समस्या की जगह (जैसे: चौराहे के पास)">
+
+      <label>समस्या का पूरा विवरण *</label>
+      <textarea id="i-desc" rows="3" placeholder="अपनी समस्या के बारे में विस्तार से लिखें..."></textarea>
+
+      <label>समस्या की फोटो (यदि हो तो)</label>
+      <input type="file" id="i-photo" accept="image/*">
+
+      <button class="btn" type="button" onclick="submitIssue()">समस्या रिपोर्ट भेजें</button>
+    </div>
+  </div>
+
+  <!-- 4. ADMIN PANEL SECTION -->
+  <div id="admin" class="section">
+    <div class="card" id="admin-login-box">
+      <h3>⚙️ लीडर / एडमिन लॉगिन</h3>
+      <p style="font-size:12px;color:#666;margin-bottom:10px;">केवल मुख्य संयोजक (Sachin Jamre) के लिए</p>
+      <label>एडमिन पासवर्ड</label>
+      <input type="password" id="admin-pass" placeholder="पासवर्ड दर्ज करें">
+      <button class="btn" type="button" onclick="loginAdmin()">लॉगिन करें</button>
+    </div>
+
+    <div id="admin-dashboard" style="display:none;">
+      <div class="card" style="background:#e8f5e9;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <h3>👑 Admin Dashboard</h3>
+            <p style="font-size:12px;">स्वागत है, <b>Sachin Jamre</b></p>
+          </div>
+          <button type="button" onclick="logoutAdmin()" style="background:#c62828;color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px;">लॉगआउट</button>
+        </div>
+      </div>
+
+      <!-- HOME CONTENT CONTROL -->
+      <div class="card" style="border:2px solid #1b7e42; background:#ffffff;">
+        <h3 style="color:#1b7e42;">📢 होम पेज डायरेक्ट कंट्रोल</h3>
+        
+        <label>सरपंच का नाम</label>
+        <input type="text" id="adm-sarpanch-name" placeholder="उदा: श्री रमेश चंद्र">
+        
+        <label>सरपंच का मोबाइल नंबर</label>
+        <input type="tel" id="adm-sarpanch-phone" placeholder="10 अंक का नंबर">
+
+        <label>सचिव का नाम</label>
+        <input type="text" id="adm-sachiv-name" placeholder="उदा: श्री दिनेश शर्मा">
+        
+        <label>सचिव का मोबाइल नंबर</label>
+        <input type="tel" id="adm-sachiv-phone" placeholder="10 अंक का नंबर">
+
+        <label>जरूरी सूचना Text</label>
+        <input type="text" id="adm-notice-1" placeholder="सूचना बोर्ड 1 के लिए...">
+
+        <label>ग्राम सभा सूचना Text</label>
+        <input type="text" id="adm-notice-2" placeholder="सूचना बोर्ड 2 के लिए...">
+
+        <label>जल विभाग नंबर</label>
+        <input type="tel" id="adm-em-wat" placeholder="जल विभाग का नंबर">
+
+        <label>बिजली बोर्ड नंबर</label>
+        <input type="tel" id="adm-em-ele" placeholder="बिजली विभाग का नंबर">
+
+        <button class="btn" style="background:#0d5c2e; margin-top:15px;" onclick="saveHomeSettings()">होम पेज अपडेट करें</button>
+      </div>
+
+      <div class="card">
+        <h3>👥 सदस्यता आवेदन (Approval Control)</h3>
+        <div id="admin-member-list">कोई नया आवेदन नहीं है।</div>
+      </div>
+
+      <div class="card">
+        <h3>📢 दर्ज की गई समस्याएँ</h3>
+        <div id="admin-issue-list">कोई समस्या रिपोर्ट दर्ज नहीं है।</div>
+      </div>
     </div>
   </div>
 
   <script>
-    function openSection(secId, btnElement) {
-      document.getElementById('home-sec').classList.remove('show');
-      document.getElementById('admin-sec').classList.remove('show');
-      
-      var btns = document.getElementsByClassName('nav-btn');
-      for(var i=0; i<btns.length; i++){
-        btns[i].classList.remove('active-nav');
+    var members = [];
+    var issues = [];
+
+    var homeConfig = {
+      sarpanchName: 'श्री सरपंच जी',
+      sarpanchPhone: '9876543210',
+      sachivName: 'श्री सचिव जी',
+      sachivPhone: '9876543211',
+      notice1: 'गाँव में स्वच्छता अभियान चलाया जा रहा है।',
+      notice2: 'दिनांक 15 तारीख को पंचायत भवन में दोपहर 12:00 बजे विशेष ग्राम सभा।',
+      waterPhone: '1800123456',
+      elecPhone: '1912'
+    };
+
+    window.onload = function(){
+      var storedMembers = localStorage.getItem('jj_members');
+      if(storedMembers) { try { members = JSON.parse(storedMembers); } catch(e){} }
+
+      var storedIssues = localStorage.getItem('jj_issues');
+      if(storedIssues) { try { issues = JSON.parse(storedIssues); } catch(e){} }
+
+      var storedConfig = localStorage.getItem('jj_homeConfig');
+      if(storedConfig) { try { homeConfig = JSON.parse(storedConfig); } catch(e){} }
+
+      renderHomeContent();
+      updateStats();
+    };
+
+    function renderHomeContent(){
+      document.getElementById('display-sarpanch-name').innerText = 'सरपंच: ' + (homeConfig.sarpanchName || '');
+      document.getElementById('display-sarpanch-phone').innerText = 'फोन: ' + (homeConfig.sarpanchPhone || '');
+      document.getElementById('display-sachiv-name').innerText = 'सचिव: ' + (homeConfig.sachivName || '');
+      document.getElementById('display-sachiv-phone').innerText = 'फोन: ' + (homeConfig.sachivPhone || '');
+      document.getElementById('display-notice-1').innerText = homeConfig.notice1 || '';
+      document.getElementById('display-notice-2').innerText = homeConfig.notice2 || '';
+      document.getElementById('display-em-wat').href = 'tel:' + (homeConfig.waterPhone || '');
+      document.getElementById('display-em-ele').href = 'tel:' + (homeConfig.elecPhone || '');
+    }
+
+    function showTab(tabId){
+      var sections = document.getElementsByClassName('section');
+      for(var i=0; i<sections.length; i++){ sections[i].classList.remove('active'); }
+      var tabs = document.getElementsByClassName('tab');
+      for(var j=0; j<tabs.length; j++){ tabs[j].classList.remove('active'); }
+
+      document.getElementById(tabId).classList.add('active');
+      document.getElementById('tab-' + tabId).classList.add('active');
+    }
+
+    function loginAdmin(){
+      var pass = document.getElementById('admin-pass').value.trim();
+      if(pass === 'sachin@312'){
+        document.getElementById('admin-login-box').style.display = 'none';
+        document.getElementById('admin-dashboard').style.display = 'block';
+        
+        document.getElementById('adm-sarpanch-name').value = homeConfig.sarpanchName || '';
+        document.getElementById('adm-sarpanch-phone').value = homeConfig.sarpanchPhone || '';
+        document.getElementById('adm-sachiv-name').value = homeConfig.sachivName || '';
+        document.getElementById('adm-sachiv-phone').value = homeConfig.sachivPhone || '';
+        document.getElementById('adm-notice-1').value = homeConfig.notice1 || '';
+        document.getElementById('adm-notice-2').value = homeConfig.notice2 || '';
+        document.getElementById('adm-em-wat').value = homeConfig.waterPhone || '';
+        document.getElementById('adm-em-ele').value = homeConfig.elecPhone || '';
+
+        renderAdminData();
+      } else {
+        alert('गलत पासवर्ड!');
+      }
+    }
+
+    function logoutAdmin(){
+      document.getElementById('admin-login-box').style.display = 'block';
+      document.getElementById('admin-dashboard').style.display = 'none';
+      document.getElementById('admin-pass').value = '';
+    }
+
+    function saveHomeSettings(){
+      homeConfig.sarpanchName = document.getElementById('adm-sarpanch-name').value;
+      homeConfig.sarpanchPhone = document.getElementById('adm-sarpanch-phone').value;
+      homeConfig.sachivName = document.getElementById('adm-sachiv-name').value;
+      homeConfig.sachivPhone = document.getElementById('adm-sachiv-phone').value;
+      homeConfig.notice1 = document.getElementById('adm-notice-1').value;
+      homeConfig.notice2 = document.getElementById('adm-notice-2').value;
+      homeConfig.waterPhone = document.getElementById('adm-em-wat').value;
+      homeConfig.elecPhone = document.getElementById('adm-em-ele').value;
+
+      localStorage.setItem('jj_homeConfig', JSON.stringify(homeConfig));
+      renderHomeContent();
+      alert('होम पेज की जानकारी अपडेट हो गई है!');
+    }
+
+    function updateStats(){
+      var approvedM = members.filter(function(m){ return m.status === 'approved'; }).length;
+      var pendingI = issues.filter(function(i){ return i.status === 'pending'; }).length;
+      var solvedI = issues.filter(function(i){ return i.status === 'approved'; }).length;
+
+      document.getElementById('stat-members').innerText = approvedM;
+      document.getElementById('stat-pending').innerText = pendingI;
+      document.getElementById('stat-solved').innerText = solvedI;
+    }
+
+    function getBase64(file) {
+      return new Promise(function(resolve, reject) {
+        if(!file) { resolve(''); return; }
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function() { resolve(reader.result); };
+        reader.onerror = function(error) { reject(error); };
+      });
+    }
+
+    function submitMembership(){
+      var name = document.getElementById('m-name').value.trim();
+      var phone = document.getElementById('m-phone').value.trim();
+      var ward = document.getElementById('m-ward').value.trim();
+      var village = document.getElementById('m-village').value;
+      var photoFile = document.getElementById('m-photo').files[0];
+
+      if(!name || !phone || !ward || !photoFile){
+        alert('कृपया पूरी जानकारी भरें!');
+        return;
       }
 
-      document.getElementById(secId).classList.add('show');
-      btnElement.classList.add('active-nav');
-    }
+      getBase64(photoFile).then(function(photoData){
+        members.push({
+          id: Date.now(),
+          memberId: 'J' + Math.floor(1000 + Math.random() * 9000),
+          name: name,
+          phone: phone,
+          ward: ward,
+          village: village,
+          photo: photoData,
+          status: 'pending'
+        });
 
-    function saveData() {
-      var sarpanch = document.getElementById('in-sarpanch').value;
-      var sarpanchP = document.getElementById('in-sarpanch-p').value;
-      var sachiv = document.getElementById('in-sachiv').value;
-      var sachivP = document.getElementById('in-sachiv-p').value;
-      var notice = document.getElementById('in-notice').value;
-
-      if(sarpanch) document.getElementById('view-sarpanch').innerText = sarpanch;
-      if(sarpanchP) document.getElementById('view-sarpanch-p').innerText = sarpanchP;
-      if(sachiv) document.getElementById('view-sachiv').innerText = sachiv;
-      if(sachivP) document.getElementById('view-sachiv-p').innerText = sachivP;
-      if(notice) document.getElementById('view-notice').innerText = notice;
-
-      alert('डेटा अपडेट हो गया है!');
-      openSection('home-sec', document.getElementsByClassName('nav-btn')[0]);
-    }
-  </script>
-</body>
-  </html>
-        
+      
