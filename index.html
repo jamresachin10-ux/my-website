@@ -234,17 +234,19 @@
         </div>
       </div>
 
-      <!-- NEW HOME CONTENT CONTROL SECTION -->
-      <div class="card" style="border:2px solid #1b7e42;">
-        <h3>📢 होम पेज कंट्रोल (Home Control)</h3>
+      <!-- HOME CONTENT CONTROL DIRECT IN HTML -->
+      <div class="card" style="border:2px solid #1b7e42; background:#ffffff;">
+        <h3 style="color:#1b7e42;">📢 होम पेज कंट्रोल (Home Control)</h3>
         
         <label>सरपंच का नाम</label>
         <input type="text" id="adm-sarpanch-name" placeholder="उदा: श्री रमेश चंद्र">
+        
         <label>सरपंच का मोबाइल नंबर</label>
         <input type="tel" id="adm-sarpanch-phone" placeholder="10 अंक का नंबर">
 
         <label>सचिव का नाम</label>
         <input type="text" id="adm-sachiv-name" placeholder="उदा: श्री दिनेश शर्मा">
+        
         <label>सचिव का मोबाइल नंबर</label>
         <input type="tel" id="adm-sachiv-phone" placeholder="10 अंक का नंबर">
 
@@ -260,25 +262,28 @@
         <label>बिजली बोर्ड नंबर</label>
         <input type="tel" id="adm-em-ele" placeholder="बिजली विभाग का नंबर">
 
-        <button class="btn" style="background:#0d5c2e;" onclick="saveHomeSettings()">Save Updates (अपडेट सहेजें)</button>
+        <button class="btn" style="background:#0d5c2e; margin-top:15px;" onclick="saveHomeSettings()">Save Updates (अपडेट सहेजें)</button>
       </div>
 
       <div class="card">
         <h3>👥 सदस्यता आवेदन (Approval Control)</h3>
-        <div id="admin-member-list">कोई आवेदन नहीं।</div>
+        <div id="admin-member-list">कोई नया आवेदन नहीं है।</div>
       </div>
 
       <div class="card">
         <h3>📢 दर्ज की गई समस्याएँ</h3>
-        <div id="admin-issue-list">कोई समस्या रिपोर्ट नहीं।</div>
+        <div id="admin-issue-list">कोई समस्या रिपोर्ट दर्ज नहीं है।</div>
       </div>
     </div>
   </div>
 
   <script>
-    var members = JSON.parse(localStorage.getItem('jj_members')) || [];
-    var issues = JSON.parse(localStorage.getItem('jj_issues')) || [];
-    var homeConfig = JSON.parse(localStorage.getItem('jj_homeConfig')) || {
+    var members = [];
+    var issues = [];
+    try { members = JSON.parse(localStorage.getItem('jj_members')) || []; } catch(e){}
+    try { issues = JSON.parse(localStorage.getItem('jj_issues')) || []; } catch(e){}
+
+    var defaultHome = {
       sarpanchName: 'श्री सरपंच जी',
       sarpanchPhone: '9876543210',
       sachivName: 'श्री सचिव जी',
@@ -289,19 +294,28 @@
       elecPhone: '1912'
     };
 
-    renderHomeContent();
-    updateStats();
+    var homeConfig = defaultHome;
+    try {
+      var stored = localStorage.getItem('jj_homeConfig');
+      if(stored) homeConfig = JSON.parse(stored);
+    } catch(e){}
+
+    window.onload = function(){
+      renderHomeContent();
+      updateStats();
+    };
 
     function renderHomeContent(){
-      document.getElementById('display-sarpanch-name').innerText = 'सरपंच: ' + homeConfig.sarpanchName;
-      document.getElementById('display-sarpanch-phone').innerText = 'फोन: ' + homeConfig.sarpanchPhone;
-      document.getElementById('display-sachiv-name').innerText = 'सचिव: ' + homeConfig.sachivName;
-      document.getElementById('display-sachiv-phone').innerText = 'फोन: ' + homeConfig.sachivPhone;
-      document.getElementById('display-notice-1').innerText = homeConfig.notice1;
-      document.getElementById('display-notice-2').innerText = homeConfig.notice2;
-
-      document.getElementById('display-em-wat').href = 'tel:' + homeConfig.waterPhone;
-      document.getElementById('display-em-ele').href = 'tel:' + homeConfig.elecPhone;
+      try {
+        if(document.getElementById('display-sarpanch-name')) document.getElementById('display-sarpanch-name').innerText = 'सरपंच: ' + (homeConfig.sarpanchName || '');
+        if(document.getElementById('display-sarpanch-phone')) document.getElementById('display-sarpanch-phone').innerText = 'फोन: ' + (homeConfig.sarpanchPhone || '');
+        if(document.getElementById('display-sachiv-name')) document.getElementById('display-sachiv-name').innerText = 'सचिव: ' + (homeConfig.sachivName || '');
+        if(document.getElementById('display-sachiv-phone')) document.getElementById('display-sachiv-phone').innerText = 'फोन: ' + (homeConfig.sachivPhone || '');
+        if(document.getElementById('display-notice-1')) document.getElementById('display-notice-1').innerText = homeConfig.notice1 || '';
+        if(document.getElementById('display-notice-2')) document.getElementById('display-notice-2').innerText = homeConfig.notice2 || '';
+        if(document.getElementById('display-em-wat')) document.getElementById('display-em-wat').href = 'tel:' + (homeConfig.waterPhone || '');
+        if(document.getElementById('display-em-ele')) document.getElementById('display-em-ele').href = 'tel:' + (homeConfig.elecPhone || '');
+      } catch(err){}
     }
 
     function saveHomeSettings(){
@@ -316,28 +330,30 @@
 
       localStorage.setItem('jj_homeConfig', JSON.stringify(homeConfig));
       renderHomeContent();
-      alert('होम पेज का डेटा सफलतापूर्वक अपडेट हो गया है!');
+      alert('होम पेज की जानकारी सफलतापूर्वक अपडेट हो गई!');
     }
 
     function loadAdminInputs(){
-      document.getElementById('adm-sarpanch-name').value = homeConfig.sarpanchName;
-      document.getElementById('adm-sarpanch-phone').value = homeConfig.sarpanchPhone;
-      document.getElementById('adm-sachiv-name').value = homeConfig.sachivName;
-      document.getElementById('adm-sachiv-phone').value = homeConfig.sachivPhone;
-      document.getElementById('adm-notice-1').value = homeConfig.notice1;
-      document.getElementById('adm-notice-2').value = homeConfig.notice2;
-      document.getElementById('adm-em-wat').value = homeConfig.waterPhone;
-      document.getElementById('adm-em-ele').value = homeConfig.elecPhone;
+      document.getElementById('adm-sarpanch-name').value = homeConfig.sarpanchName || '';
+      document.getElementById('adm-sarpanch-phone').value = homeConfig.sarpanchPhone || '';
+      document.getElementById('adm-sachiv-name').value = homeConfig.sachivName || '';
+      document.getElementById('adm-sachiv-phone').value = homeConfig.sachivPhone || '';
+      document.getElementById('adm-notice-1').value = homeConfig.notice1 || '';
+      document.getElementById('adm-notice-2').value = homeConfig.notice2 || '';
+      document.getElementById('adm-em-wat').value = homeConfig.waterPhone || '';
+      document.getElementById('adm-em-ele').value = homeConfig.elecPhone || '';
     }
 
     function updateStats(){
-      var approvedM = members.filter(function(m){ return m.status === 'approved'; }).length;
-      var pendingI = issues.filter(function(i){ return i.status === 'pending'; }).length;
-      var solvedI = issues.filter(function(i){ return i.status === 'approved'; }).length;
+      try {
+        var approvedM = members.filter(function(m){ return m.status === 'approved'; }).length;
+        var pendingI = issues.filter(function(i){ return i.status === 'pending'; }).length;
+        var solvedI = issues.filter(function(i){ return i.status === 'approved'; }).length;
 
-      document.getElementById('stat-members').innerText = approvedM;
-      document.getElementById('stat-pending').innerText = pendingI;
-      document.getElementById('stat-solved').innerText = solvedI;
+        document.getElementById('stat-members').innerText = approvedM;
+        document.getElementById('stat-pending').innerText = pendingI;
+        document.getElementById('stat-solved').innerText = solvedI;
+      } catch(e){}
     }
 
     function showTab(tabId){
@@ -345,7 +361,6 @@
       for(var i=0; i<sections.length; i++){
         sections[i].classList.remove('active');
       }
-      
       var tabs = document.getElementsByClassName('tab');
       for(var j=0; j<tabs.length; j++){
         tabs[j].classList.remove('active');
@@ -380,34 +395,4 @@
       getBase64(photoFile).then(function(photoData){
         var memberId = 'J' + Math.floor(1000 + Math.random() * 9000);
         members.push({
-          id: Date.now(),
-          memberId: memberId,
-          name: name,
-          phone: phone,
-          ward: ward,
-          village: village,
-          photo: photoData,
-          status: 'pending'
-        });
-
-        localStorage.setItem('jj_members', JSON.stringify(members));
-        alert('आपका सदस्यता आवेदन जमा हो गया है!\n\nएडमिन के अप्रूवल के बाद आपका डिजिटल कार्ड जारी होगा।');
-
-        document.getElementById('m-name').value = '';
-        document.getElementById('m-phone').value = '';
-        document.getElementById('m-ward').value = '';
-        document.getElementById('m-photo').value = '';
-        updateStats();
-      });
-    }
-
-    function searchProfile(){
-      var phone = document.getElementById('search-phone').value.trim();
-      var resDiv = document.getElementById('profile-result');
-
-      if(!phone){
-        alert('कृपया मोबाइल नंबर दर्ज करें!');
-        return;
-      }
-
-      var user = memb
+          id:
