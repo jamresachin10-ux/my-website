@@ -5,134 +5,370 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ग्राम पंचायत जोजलवाड़ी — हमारा गाँव हमारी जिम्मेदारी</title>
   <style>
-    *{box-sizing:border-box}
-    body{margin:0;font-family:sans-serif;background:#f4f6f8;color:#333}
-    .hero{background:linear-gradient(135deg,#1b7e42,#0b5326);color:#fff;padding:20px;text-align:center;border-bottom-left-radius:20px;border-bottom-right-radius:20px}
-    .hero h1{margin:5px 0 10px;font-size:22px}
-    .tag{background:#ffe600;color:#000;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:bold}
-    .tabs{display:flex;justify-content:space-around;background:#fff;margin:-15px 15px 15px;padding:8px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.08)}
-    .tab{border:none;background:none;padding:8px 12px;font-weight:bold;color:#666;cursor:pointer;border-radius:8px}
-    .tab.active{background:#e8f5e9;color:#1b7e42}
-    .section{display:none;padding:0 15px 20px}
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
+    body{background:#f0f4f8;color:#333;padding-bottom:30px}
+    
+    /* Header & Hero */
+    .hero{background:linear-gradient(135deg,#0d5c2e,#1b7e42);color:#fff;padding:20px 15px;text-align:center;border-bottom-left-radius:24px;border-bottom-right-radius:24px;box-shadow:0 4px 15px rgba(0,0,0,0.15)}
+    .hero .tag{background:#ffe600;color:#000;padding:4px 12px;border-radius:15px;font-size:12px;font-weight:bold;display:inline-block;margin-bottom:8px}
+    .hero h1{font-size:22px;margin-bottom:4px}
+    .hero p{font-size:13px;opacity:0.9}
+    
+    /* Navigation Tabs */
+    .tabs{display:flex;justify-content:space-around;background:#fff;margin:-18px 12px 15px;padding:8px 5px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.08);position:sticky;top:10px;z-index:100}
+    .tab{border:none;background:none;padding:8px 10px;font-weight:bold;color:#666;font-size:13px;cursor:pointer;border-radius:10px;transition:0.3s}
+    .tab.active{background:#e8f5e9;color:#1b7e42;box-shadow:0 2px 6px rgba(27,126,66,0.15)}
+    
+    /* Content Sections */
+    .section{display:none;padding:0 12px}
     .section.active{display:block}
-    .card{background:#fff;padding:15px;border-radius:12px;margin-bottom:15px;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
-    .btn{width:100%;background:#1b7e42;color:#fff;border:none;padding:12px;border-radius:8px;font-weight:bold;cursor:pointer;margin-top:10px}
-    .btn-approve{background:#2e7d32;color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer}
-    .btn-reject{background:#c62828;color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;margin-left:5px}
-    input, textarea{width:100%;padding:10px;margin:6px 0 12px;border:1px solid #ccc;border-radius:6px}
-    .item-card{border-left:4px solid #f39c12;padding:10px;background:#f9f9f9;margin-bottom:10px;border-radius:4px}
-    .item-card.approved{border-left-color:#27ae60}
-    .status-badge{font-size:11px;padding:2px 6px;border-radius:4px;color:#fff;display:inline-block;margin-top:4px}
-    .pending-bg{background:#f39c12}
-    .approved-bg{background:#27ae60}
+    .card{background:#fff;padding:16px;border-radius:16px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,0.04)}
+    .card h3{font-size:16px;color:#1b7e42;margin-bottom:12px;border-bottom:2px solid #e8f5e9;padding-bottom:6px;display:flex;align-items:center;gap:6px}
+    
+    /* Form Elements */
+    label{font-size:12px;font-weight:bold;color:#555;display:block;margin:8px 0 4px}
+    input, select, textarea{width:100%;padding:11px;border:1px solid #dcdfe6;border-radius:10px;font-size:14px;outline:none;background:#fdfdfd;margin-bottom:4px}
+    input:focus, select:focus, textarea:focus{border-color:#1b7e42;background:#fff}
+    .btn{width:100%;background:#1b7e42;color:#fff;border:none;padding:12px;border-radius:10px;font-weight:bold;font-size:15px;cursor:pointer;margin-top:12px;box-shadow:0 3px 8px rgba(27,126,66,0.25)}
+    
+    /* Home Banner & Cards */
+    .village-img{width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:12px}
+    .official-box{display:flex;gap:12px;background:#f8fafc;padding:10px;border-radius:12px;margin-bottom:8px;align-items:center}
+    .official-icon{width:45px;height:45px;background:#1b7e42;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+    .notice-board{background:#fff8e1;border-left:4px solid #ffa000;padding:10px;border-radius:8px;margin-bottom:10px;font-size:13px}
+    
+    /* Member Card Design */
+    .member-card{background:linear-gradient(135deg,#0d5c2e,#157337,#2e7d32);color:#fff;padding:16px;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,0.2);position:relative;overflow:hidden;margin-top:10px}
+    .member-card::before{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;background:rgba(255,255,255,0.1);border-radius:50%}
+    .mc-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:8px;margin-bottom:12px}
+    .mc-header h4{font-size:14px;color:#ffe600}
+    .mc-header span{font-size:10px;background:rgba(255,255,255,0.2);padding:2px 6px;border-radius:4px}
+    .mc-body{display:flex;gap:12px;align-items:center}
+    .mc-photo{width:70px;height:70px;border-radius:12px;border:2px solid #ffe600;object-fit:cover;background:#eee}
+    .mc-details p{font-size:12px;margin-bottom:3px;opacity:0.95}
+    .mc-details strong{font-size:13px;color:#fff}
+    .mc-id{margin-top:10px;background:rgba(0,0,0,0.2);padding:6px;border-radius:8px;text-align:center;font-family:monospace;font-size:13px;letter-spacing:1px;color:#ffe600}
+
+    /* Admin Requests Display */
+    .req-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin-bottom:10px}
+    .req-item img{max-width:100%;max-height:150px;border-radius:8px;margin-top:8px}
+    .btn-group{display:flex;gap:8px;margin-top:10px}
+    .btn-approve{background:#2e7d32;color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-weight:bold;flex:1}
+    .btn-reject{background:#c62828;color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-weight:bold;flex:1}
+    .badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;color:#fff}
+    .badge-pending{background:#f39c12}
+    .badge-approved{background:#27ae60}
   </style>
 </head>
 <body>
 
+  <!-- Hero Header -->
   <div class="hero">
-    <span class="tag">केवल ग्राम पंचायत जोजलवाड़ी</span>
+    <span class="tag">ग्राम पंचायत जोजलवाड़ी</span>
     <h1>हमारा गाँव हमारी जिम्मेदारी</h1>
-    <div>👑 मुख्य संयोजक — dimagi naxal e</div>
+    <p>👑 मुख्य संयोजक — DIMAGI NAXAL e</p>
   </div>
 
+  <!-- Navigation Tabs -->
   <div class="tabs">
     <button class="tab active" onclick="showTab('home')">🏠 होम</button>
-    <button class="tab" onclick="showTab('join')">👥 सदस्य</button>
-    <button class="tab" onclick="showTab('issue')">📝 समस्या</button>
+    <button class="tab" onclick="showTab('member')">🪪 नागरिक सदस्यता</button>
+    <button class="tab" onclick="showTab('issue')">📝 समस्या दर्ज</button>
     <button class="tab" onclick="showTab('admin')">⚙️ Admin</button>
   </div>
 
-  <!-- Home Section -->
+  <!-- 1. HOME SECTION -->
   <div id="home" class="section active">
     <div class="card">
-      <h3>स्वीकृत सदस्य (Approved Members)</h3>
-      <div id="approved-members-list">कोई स्वीकृत सदस्य नहीं है।</div>
+      <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80" alt="गाँव" class="village-img">
+      <h3>🏛️ ग्राम पंचायत जोजलवाड़ी</h3>
+      <p style="font-size:13px;color:#666;line-height:1.5;">
+        हमारे गाँव के विकास, जन-जागरूकता और समस्याओं के त्वरित निवारण के लिए यह स्वतंत्र नागरिक मंच बनाया गया है।
+      </p>
     </div>
-  </div>
 
-  <!-- Join Form -->
-  <div id="join" class="section">
     <div class="card">
-      <h3>सदस्यता फ़ॉर्म</h3>
-      <input type="text" id="m-name" placeholder="आपका पूरा नाम">
-      <input type="text" id="m-phone" placeholder="मोबाइल नंबर">
-      <button class="btn" onclick="submitMember()">आवेदन जमा करें</button>
+      <h3>👥 पंचायत प्रतिनिधि / अधिकारी</h3>
+      <div class="official-box">
+        <div class="official-icon">🧑‍💼</div>
+        <div>
+          <strong style="font-size:14px;">सरपंच</strong>
+          <p style="font-size:12px;color:#666;">ग्राम पंचायत जोजलवाड़ी</p>
+        </div>
+      </div>
+      <div class="official-box">
+        <div class="official-icon">👨‍💻</div>
+        <div>
+          <strong style="font-size:14px;">सचिव / पंचायत सचिव</strong>
+          <p style="font-size:12px;color:#666;">ग्राम पंचायत जोजलवाड़ी</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📢 सूचना बोर्ड एवं ग्राम सभा</h3>
+      <div class="notice-board">
+        <strong>⚠️ जरूरी सूचना:</strong> गाँव में स्वच्छता अभियान चलाया जा रहा है। कृपया कचरा निर्धारित स्थान पर ही डालें।
+      </div>
+      <div class="notice-board" style="background:#e3f2fd;border-left-color:#2196f3;">
+        <strong>🗓️ आगामी ग्राम सभा:</strong> दिनांक 15 तारीख को पंचायत भवन में दोपहर 12:00 बजे विशेष ग्राम सभा आयोजित की जाएगी।
+      </div>
     </div>
   </div>
 
-  <!-- Issue Form -->
+  <!-- 2. MEMBERSHIP SECTION -->
+  <div id="member" class="section">
+    <div class="card">
+      <h3>🪪 नागरिक सदस्यता फ़ॉर्म</h3>
+      <label>पूरा नाम *</label>
+      <input type="text" id="m-name" placeholder="अपना पूरा नाम लिखें">
+
+      <label>मोबाइल नंबर *</label>
+      <input type="tel" id="m-phone" placeholder="10 अंकों का मोबाइल नंबर">
+
+      <label>वार्ड / मोहल्ला / फलिया *</label>
+      <input type="text" id="m-ward" placeholder="जैसे: पटेल फलिया, वार्ड नं 2">
+
+      <label>गाँव का नाम *</label>
+      <input type="text" id="m-village" value="जोजलवाड़ी" readonly style="background:#eee;">
+
+      <label>अपनी फोटो अपलोड करें (Card के लिए) *</label>
+      <input type="file" id="m-photo" accept="image/*">
+
+      <button class="btn" onclick="submitMembership()">सदस्यता के लिए आवेदन करें</button>
+    </div>
+
+    <!-- Search / View Profile Section -->
+    <div class="card">
+      <h3>🔍 अपनी प्रोफाइल / डिजिटल कार्ड देखें</h3>
+      <label>अपना मोबाइल नंबर दर्ज करें</label>
+      <input type="tel" id="search-phone" placeholder="रजिस्टर्ड मोबाइल नंबर लिखें">
+      <button class="btn" style="background:#0288d1;" onclick="searchProfile()">प्रोफ़ाइल / ID Card खोजें</button>
+      
+      <div id="profile-result" style="margin-top:15px;"></div>
+    </div>
+  </div>
+
+  <!-- 3. ISSUE REPORTING SECTION -->
   <div id="issue" class="section">
     <div class="card">
-      <h3>समस्या दर्ज करें</h3>
-      <input type="text" id="i-name" placeholder="आपका नाम">
-      <textarea id="i-desc" placeholder="समस्या का विवरण लिखें..."></textarea>
-      <button class="btn" onclick="submitIssue()">रिपोर्ट जमा करें</button>
+      <h3>📝 समस्या दर्ज करें</h3>
+      <label>आपका नाम *</label>
+      <input type="text" id="i-name" placeholder="अपना नाम लिखें">
+
+      <label>मोबाइल नंबर *</label>
+      <input type="tel" id="i-phone" placeholder="सम्पर्क हेतु मोबाइल नंबर">
+
+      <label>समस्या का प्रकार (Category) *</label>
+      <select id="i-cat">
+        <option value="">-- श्रेणी चुनें --</option>
+        <option value="🚰 पानी">🚰 पानी</option>
+        <option value="🧹 सफाई">🧹 सफाई</option>
+        <option value="💡 स्ट्रीट लाइट">💡 स्ट्रीट लाइट</option>
+        <option value="🛣️ सड़क">🛣️ सड़क</option>
+        <option value="🏫 स्कूल">🏫 स्कूल</option>
+        <option value="🏥 स्वास्थ्य">🏥 स्वास्थ्य</option>
+        <option value="🌳 नाली/कचरा">🌳 नाली / कचरा</option>
+        <option value="⚡ बिजली">⚡ बिजली</option>
+        <option value="अन्य समस्या">अन्य समस्या</option>
+      </select>
+
+      <label>सटीक स्थान (Location) *</label>
+      <input type="text" id="i-loc" placeholder="समस्या की जगह (जैसे: नसबंदी चौराहे के पास)">
+
+      <label>समस्या का पूरा विवरण *</label>
+      <textarea id="i-desc" rows="3" placeholder="अपनी समस्या के बारे में विस्तार से लिखें..."></textarea>
+
+      <label>समस्या की फोटो (यदि हो तो)</label>
+      <input type="file" id="i-photo" accept="image/*">
+
+      <button class="btn" onclick="submitIssue()">समस्या रिपोर्ट भेजें</button>
     </div>
   </div>
 
-  <!-- Admin Panel -->
+  <!-- 4. ADMIN PANEL SECTION -->
   <div id="admin" class="section">
     <div class="card" id="admin-login-box">
-      <h3>⚙️ एडमिन लॉगिन</h3>
-      <input type="password" id="admin-pass" placeholder="पासवर्ड दर्ज करें (Default: 1234)">
+      <h3>⚙️ लीडर / एडमिन लॉगिन</h3>
+      <p style="font-size:12px;color:#666;margin-bottom:10px;">केवल मुख्य संयोजक (Sachin Jamre) के लिए</p>
+      <label>एडमिन पासवर्ड</label>
+      <input type="password" id="admin-pass" placeholder="सुरक्षित पासवर्ड डालें">
       <button class="btn" onclick="loginAdmin()">लॉगिन करें</button>
     </div>
 
-    <div class="card" id="admin-dashboard" style="display:none;">
-      <h3>⚙️ Admin Panel (Approval Control)</h3>
-      <button onclick="logoutAdmin()" style="float:right;background:#666;color:#fff;border:none;padding:4px 8px;border-radius:4px;">लॉगआउट</button>
-      
-      <h4>pending सदस्य आवेदन</h4>
-      <div id="admin-member-requests"></div>
+    <div id="admin-dashboard" style="display:none;">
+      <div class="card" style="background:#e8f5e9;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <h3>👑 Admin Dashboard</h3>
+            <p style="font-size:12px;">स्वागत है, <b>Sachin Jamre</b></p>
+          </div>
+          <button onclick="logoutAdmin()" style="background:#c62828;color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px;">लॉगआउट</button>
+        </div>
+      </div>
 
-      <h4 style="margin-top:20px;">Pending समस्या रिपोर्ट</h4>
-      <div id="admin-issue-requests"></div>
+      <div class="card">
+        <h3>👥 सदस्यता आवेदन (Approval Control)</h3>
+        <div id="admin-member-list">कोई आवेदन नहीं।</div>
+      </div>
+
+      <div class="card">
+        <h3>📢 दर्ज की गई समस्याएँ</h3>
+        <div id="admin-issue-list">कोई समस्या रिपोर्ट नहीं।</div>
+      </div>
     </div>
   </div>
 
   <script>
-    let members = JSON.parse(localStorage.getItem('members')) || [];
-    let issues = JSON.parse(localStorage.getItem('issues')) || [];
+    // Storage Initializers
+    let members = JSON.parse(localStorage.getItem('jj_members')) || [];
+    let issues = JSON.parse(localStorage.getItem('jj_issues')) || [];
 
+    // Tab Switcher
     function showTab(id){
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.getElementById(id).classList.add('active');
-      renderAll();
     }
 
-    function submitMember(){
-      let name = document.getElementById('m-name').value;
-      let phone = document.getElementById('m-phone').value;
-      if(!name || !phone) return alert('कृपया पूरी जानकारी भरें');
-      members.push({ id: Date.now(), name, phone, status: 'pending' });
-      localStorage.setItem('members', JSON.stringify(members));
-      alert('आपका आवेदन एडमिन (Sachin Jamre) के अप्रूवल के लिए भेज दिया गया है।');
+    // Convert Image to Base64
+    function getBase64(file) {
+      return new Promise((resolve, reject) => {
+        if(!file) resolve('');
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+      });
+    }
+
+    // Submit Membership
+    async function submitMembership(){
+      let name = document.getElementById('m-name').value.trim();
+      let phone = document.getElementById('m-phone').value.trim();
+      let ward = document.getElementById('m-ward').value.trim();
+      let village = document.getElementById('m-village').value;
+      let photoFile = document.getElementById('m-photo').files[0];
+
+      if(!name || !phone || !ward || !photoFile){
+        return alert('कृपया सभी जानकारी भरें और अपनी फोटो अपलोड करें!');
+      }
+
+      let photoData = await getBase64(photoFile);
+      let memberId = 'J' + Math.floor(1000 + Math.random() * 9000);
+
+      members.push({
+        id: Date.now(),
+        memberId: memberId,
+        name: name,
+        phone: phone,
+        ward: ward,
+        village: village,
+        photo: photoData,
+        status: 'pending'
+      });
+
+      localStorage.setItem('jj_members', JSON.stringify(members));
+      alert('आपका सदस्यता आवेदन सफलतापूर्वक जमा हो गया है!\n\nएडमिन (Sachin Jamre) के अप्रूवल के बाद आप अपना डिजिटल कार्ड देख सकेंगे।');
+      
+      // Clear Form
       document.getElementById('m-name').value = '';
       document.getElementById('m-phone').value = '';
-      showTab('home');
+      document.getElementById('m-ward').value = '';
+      document.getElementById('m-photo').value = '';
     }
 
-    function submitIssue(){
-      let name = document.getElementById('i-name').value;
-      let desc = document.getElementById('i-desc').value;
-      if(!name || !desc) return alert('कृपया पूरी जानकारी भरें');
-      issues.push({ id: Date.now(), name, desc, status: 'pending' });
-      localStorage.setItem('issues', JSON.stringify(issues));
-      alert('आपकी समस्या दर्ज हो गई है। एडमिन के अप्रूवल के बाद दिखेगी।');
+    // Search Member Profile & Card
+    function searchProfile(){
+      let phone = document.getElementById('search-phone').value.trim();
+      let resDiv = document.getElementById('profile-result');
+
+      if(!phone) return alert('कृपया मोबाइल नंबर दर्ज करें!');
+
+      let user = members.find(m => m.phone === phone);
+
+      if(!user){
+        resDiv.innerHTML = `<p style="color:#c62828;font-size:13px;text-align:center;">इस नंबर से कोई रिकॉर्ड नहीं मिला।</p>`;
+        return;
+      }
+
+      if(user.status === 'pending'){
+        resDiv.innerHTML = `
+          <div style="background:#fff8e1;padding:12px;border-radius:10px;text-align:center;font-size:13px;color:#b78103;">
+            <b>⏳ आपका आवेदन अभी विचाराधीन (Pending) है।</b><br>
+            एडमिन के अप्रूव करते ही आपका डिजिटल ID कार्ड यहाँ दिखाई देगा।
+          </div>`;
+        return;
+      }
+
+      // Render Active ID Card
+      resDiv.innerHTML = `
+        <div class="member-card">
+          <div class="mc-header">
+            <h4>ग्राम पंचायत जोजलवाड़ी</h4>
+            <span>डिजिटल आईडी कार्ड</span>
+          </div>
+          <div class="mc-body">
+            <img src="${user.photo}" class="mc-photo" alt="Photo">
+            <div class="mc-details">
+              <p>नाम: <strong>${user.name}</strong></p>
+              <p>वार्ड/मोहल्ला: <strong>${user.ward}</strong></p>
+              <p>गाँव: <strong>${user.village}</strong></p>
+              <p>स्थिति: <strong style="color:#ffe600;">सक्रिय सदस्य ✅</strong></p>
+            </div>
+          </div>
+          <div class="mc-id">ID: ${user.memberId}</div>
+        </div>
+      `;
+    }
+
+    // Submit Issue Report
+    async function submitIssue(){
+      let name = document.getElementById('i-name').value.trim();
+      let phone = document.getElementById('i-phone').value.trim();
+      let cat = document.getElementById('i-cat').value;
+      let loc = document.getElementById('i-loc').value.trim();
+      let desc = document.getElementById('i-desc').value.trim();
+      let photoFile = document.getElementById('i-photo').files[0];
+
+      if(!name || !phone || !cat || !loc || !desc){
+        return alert('कृपया समस्या से जुड़ी सभी आवश्यक जानकारी भरें!');
+      }
+
+      let photoData = await getBase64(photoFile);
+
+      issues.push({
+        id: Date.now(),
+        name: name,
+        phone: phone,
+        category: cat,
+        location: loc,
+        description: desc,
+        photo: photoData,
+        status: 'pending'
+      });
+
+      localStorage.setItem('jj_issues', JSON.stringify(issues));
+      alert('आपकी समस्या दर्ज कर ली गई है। एडमिन द्वारा इसे जल्द ही समीक्षा में लिया जाएगा।');
+
+      // Clear Form
       document.getElementById('i-name').value = '';
+      document.getElementById('i-phone').value = '';
+      document.getElementById('i-cat').value = '';
+      document.getElementById('i-loc').value = '';
       document.getElementById('i-desc').value = '';
-      showTab('home');
+      document.getElementById('i-photo').value = '';
     }
 
+    // Admin Login (Hardened Password)
     function loginAdmin(){
       let pass = document.getElementById('admin-pass').value;
-      if(pass === '1234'){
+      if(pass === 'Sachin@Jamre#2026'){
         document.getElementById('admin-login-box').style.display = 'none';
         document.getElementById('admin-dashboard').style.display = 'block';
-        renderAdminPanel();
+        renderAdminData();
       } else {
-        alert('गलत पासवर्ड!');
+        alert('गलत पासवर्ड! केवल मुख्य संयोजक ही लॉगिन कर सकते हैं।');
       }
     }
 
@@ -142,69 +378,88 @@
       document.getElementById('admin-pass').value = '';
     }
 
+    // Render Admin Data
+    function renderAdminData(){
+      // 1. Members List
+      let mDiv = document.getElementById('admin-member-list');
+      if(members.length === 0){
+        mDiv.innerHTML = '<p style="font-size:13px;color:#777;">कोई नया आवेदन नहीं है।</p>';
+      } else {
+        let html = '';
+        members.forEach(m => {
+          html += `
+            <div class="req-item">
+              <div style="display:flex;gap:10px;align-items:center;">
+                <img src="${m.photo}" style="width:50px;height:50px;border-radius:8px;object-fit:cover;">
+                <div>
+                  <strong style="font-size:14px;">${m.name}</strong> (${m.phone})<br>
+                  <span style="font-size:12px;color:#666;">वार्ड: ${m.ward} | ID: ${m.memberId}</span><br>
+                  <span class="badge ${m.status==='approved'?'badge-approved':'badge-pending'}">${m.status.toUpperCase()}</span>
+                </div>
+              </div>
+              ${m.status === 'pending' ? `
+                <div class="btn-group">
+                  <button class="btn-approve" onclick="approveMember(${m.id})">Approve & Card Issue</button>
+                  <button class="btn-reject" onclick="rejectMember(${m.id})">Reject</button>
+                </div>
+              ` : ''}
+            </div>
+          `;
+        });
+        mDiv.innerHTML = html;
+      }
+
+      // 2. Issues List
+      let iDiv = document.getElementById('admin-issue-list');
+      if(issues.length === 0){
+        iDiv.innerHTML = '<p style="font-size:13px;color:#777;">कोई समस्या रिपोर्ट दर्ज नहीं है।</p>';
+      } else {
+        let html = '';
+        issues.forEach(i => {
+          html += `
+            <div class="req-item">
+              <strong style="font-size:14px;color:#1b7e42;">${i.category}</strong> - <span style="font-size:12px;color:#555;">${i.location}</span><br>
+              <p style="font-size:13px;margin:5px 0;"><b>विवरण:</b> ${i.description}</p>
+              <span style="font-size:12px;color:#666;">शिकायतकर्ता: ${i.name} (${i.phone})</span><br>
+              ${i.photo ? `<img src="${i.photo}" alt="Issue Photo">` : ''}<br>
+              <span class="badge ${i.status==='approved'?'badge-approved':'badge-pending'}" style="margin-top:5px;">${i.status.toUpperCase()}</span>
+              ${i.status === 'pending' ? `
+                <div class="btn-group">
+                  <button class="btn-approve" onclick="approveIssue(${i.id})">Mark Solved / Approved</button>
+                  <button class="btn-reject" onclick="rejectIssue(${i.id})">Delete</button>
+                </div>
+              ` : ''}
+            </div>
+          `;
+        });
+        iDiv.innerHTML = html;
+      }
+    }
+
+    // Admin Action Handlers
     function approveMember(id){
       members = members.map(m => m.id === id ? {...m, status: 'approved'} : m);
-      localStorage.setItem('members', JSON.stringify(members));
-      renderAll();
+      localStorage.setItem('jj_members', JSON.stringify(members));
+      renderAdminData();
     }
 
     function rejectMember(id){
       members = members.filter(m => m.id !== id);
-      localStorage.setItem('members', JSON.stringify(members));
-      renderAll();
+      localStorage.setItem('jj_members', JSON.stringify(members));
+      renderAdminData();
     }
 
     function approveIssue(id){
       issues = issues.map(i => i.id === id ? {...i, status: 'approved'} : i);
-      localStorage.setItem('issues', JSON.stringify(issues));
-      renderAll();
+      localStorage.setItem('jj_issues', JSON.stringify(issues));
+      renderAdminData();
     }
 
     function rejectIssue(id){
       issues = issues.filter(i => i.id !== id);
-      localStorage.setItem('issues', JSON.stringify(issues));
-      renderAll();
+      localStorage.setItem('jj_issues', JSON.stringify(issues));
+      renderAdminData();
     }
-
-    function renderAdminPanel(){
-      let mHtml = '';
-      members.forEach(m => {
-        mHtml += `<div class="item-card ${m.status}">
-          <b>${m.name}</b> (${m.phone})<br>
-          <span class="status-badge ${m.status==='approved'?'approved-bg':'pending-bg'}">${m.status.toUpperCase()}</span><br><br>
-          ${m.status === 'pending' ? `
-            <button class="btn-approve" onclick="approveMember(${m.id})">Approve</button>
-            <button class="btn-reject" onclick="rejectMember(${m.id})">Reject</button>
-          ` : ''}
-        </div>`;
-      });
-      document.getElementById('admin-member-requests').innerHTML = mHtml || 'कोई नया आवेदन नहीं है।';
-
-      let iHtml = '';
-      issues.forEach(i => {
-        iHtml += `<div class="item-card ${i.status}">
-          <b>${i.name}:</b> ${i.desc}<br>
-          <span class="status-badge ${i.status==='approved'?'approved-bg':'pending-bg'}">${i.status.toUpperCase()}</span><br><br>
-          ${i.status === 'pending' ? `
-            <button class="btn-approve" onclick="approveIssue(${i.id})">Approve</button>
-            <button class="btn-reject" onclick="rejectIssue(${i.id})">Reject</button>
-          ` : ''}
-        </div>`;
-      });
-      document.getElementById('admin-issue-requests').innerHTML = iHtml || 'कोई नई समस्या रिपोर्ट नहीं है।';
-    }
-
-    function renderAll(){
-      let approvedM = members.filter(m => m.status === 'approved');
-      let hHtml = '';
-      approvedM.forEach(m => {
-        hHtml += `<div class="item-card approved"><b>👤 ${m.name}</b></div>`;
-      });
-      document.getElementById('approved-members-list').innerHTML = hHtml || 'अभी कोई स्वीकृत सदस्य नहीं है।';
-      renderAdminPanel();
-    }
-
-    renderAll();
   </script>
 </body>
 </html>
