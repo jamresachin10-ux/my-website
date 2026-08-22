@@ -8,36 +8,41 @@
     *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
     body{background:#f0f4f8;color:#333;padding-bottom:30px}
     
-    /* Header & Hero */
-    .hero{background:linear-gradient(135deg,#0d5c2e,#1b7e42);color:#fff;padding:20px 15px;text-align:center;border-bottom-left-radius:24px;border-bottom-right-radius:24px;box-shadow:0 4px 15px rgba(0,0,0,0.15)}
+    .hero{background:linear-gradient(135deg,#0d5c2e,#1b7e42);color:#fff;padding:22px 15px;text-align:center;border-bottom-left-radius:24px;border-bottom-right-radius:24px;box-shadow:0 4px 15px rgba(0,0,0,0.15)}
     .hero .tag{background:#ffe600;color:#000;padding:4px 12px;border-radius:15px;font-size:12px;font-weight:bold;display:inline-block;margin-bottom:8px}
     .hero h1{font-size:22px;margin-bottom:4px}
     .hero p{font-size:13px;opacity:0.9}
+
+    /* Stats Grid */
+    .stats-container{display:grid;grid-template-columns:repeat(3, 1fr);gap:8px;margin:-15px 12px 10px}
+    .stat-card{background:#fff;padding:10px 5px;border-radius:12px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,0.06)}
+    .stat-card h2{font-size:18px;color:#1b7e42}
+    .stat-card p{font-size:10px;color:#666;font-weight:bold}
     
-    /* Navigation Tabs */
-    .tabs{display:flex;justify-content:space-around;background:#fff;margin:-18px 12px 15px;padding:8px 5px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.08);position:sticky;top:10px;z-index:100}
+    .tabs{display:flex;justify-content:space-around;background:#fff;margin:10px 12px 15px;padding:8px 5px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.08);position:sticky;top:10px;z-index:100}
     .tab{border:none;background:none;padding:8px 10px;font-weight:bold;color:#666;font-size:13px;cursor:pointer;border-radius:10px;transition:0.3s}
     .tab.active{background:#e8f5e9;color:#1b7e42;box-shadow:0 2px 6px rgba(27,126,66,0.15)}
     
-    /* Content Sections */
     .section{display:none;padding:0 12px}
     .section.active{display:block}
     .card{background:#fff;padding:16px;border-radius:16px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,0.04)}
-    .card h3{font-size:16px;color:#1b7e42;margin-bottom:12px;border-bottom:2px solid #e8f5e9;padding-bottom:6px;display:flex;align-items:center;gap:6px}
+    .card h3{font-size:16px;color:#1b7e42;margin-bottom:12px;border-bottom:2px solid #e8f5e9;padding-bottom:6px;display:flex;align-items:center;gap:6px;justify-content:space-between}
     
-    /* Form Elements */
     label{font-size:12px;font-weight:bold;color:#555;display:block;margin:8px 0 4px}
     input, select, textarea{width:100%;padding:11px;border:1px solid #dcdfe6;border-radius:10px;font-size:14px;outline:none;background:#fdfdfd;margin-bottom:4px}
     input:focus, select:focus, textarea:focus{border-color:#1b7e42;background:#fff}
-    .btn{width:100%;background:#1b7e42;color:#fff;border:none;padding:12px;border-radius:10px;font-weight:bold;font-size:15px;cursor:pointer;margin-top:12px;box-shadow:0 3px 8px rgba(27,126,66,0.25)}
+    .btn{width:100%;background:#1b7e42;color:#fff;border:none;padding:12px;border-radius:10px;font-weight:bold;font-size:15px;cursor:pointer;margin-top:12px;box-shadow:0 3px 8px rgba(27,126,66,0.25);transition:0.2s}
+    .btn:active{transform:scale(0.98)}
+
+    /* Emergency Grid */
+    .emergency-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+    .em-btn{display:flex;align-items:center;gap:8px;background:#fff0f0;color:#c62828;padding:10px;border-radius:10px;text-decoration:none;font-weight:bold;font-size:12px;border:1px solid #ffcdd2}
     
-    /* Home Banner & Cards */
     .village-img{width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:12px}
     .official-box{display:flex;gap:12px;background:#f8fafc;padding:10px;border-radius:12px;margin-bottom:8px;align-items:center}
     .official-icon{width:45px;height:45px;background:#1b7e42;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
     .notice-board{background:#fff8e1;border-left:4px solid #ffa000;padding:10px;border-radius:8px;margin-bottom:10px;font-size:13px}
     
-    /* Member Card Design */
     .member-card{background:linear-gradient(135deg,#0d5c2e,#157337,#2e7d32);color:#fff;padding:16px;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,0.2);position:relative;overflow:hidden;margin-top:10px}
     .member-card::before{content:'';position:absolute;top:-30px;right:-30px;width:100px;height:100px;background:rgba(255,255,255,0.1);border-radius:50%}
     .mc-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:8px;margin-bottom:12px}
@@ -49,7 +54,6 @@
     .mc-details strong{font-size:13px;color:#fff}
     .mc-id{margin-top:10px;background:rgba(0,0,0,0.2);padding:6px;border-radius:8px;text-align:center;font-family:monospace;font-size:13px;letter-spacing:1px;color:#ffe600}
 
-    /* Admin Requests Display */
     .req-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin-bottom:10px}
     .req-item img{max-width:100%;max-height:150px;border-radius:8px;margin-top:8px}
     .btn-group{display:flex;gap:8px;margin-top:10px}
@@ -62,18 +66,32 @@
 </head>
 <body>
 
-  <!-- Hero Header -->
   <div class="hero">
     <span class="tag">ग्राम पंचायत जोजलवाड़ी</span>
     <h1>हमारा गाँव हमारी जिम्मेदारी</h1>
-    <p>👑 मुख्य संयोजक — DIMAGI NAXAL e</p>
+    <p>👑 मुख्य संयोजक — Sachin Jamre</p>
   </div>
 
-  <!-- Navigation Tabs -->
+  <!-- Live Stats -->
+  <div class="stats-container">
+    <div class="stat-card">
+      <h2 id="stat-members">0</h2>
+      <p>कुल सदस्य</p>
+    </div>
+    <div class="stat-card">
+      <h2 id="stat-pending">0</h2>
+      <p>पेंडिंग मुद्दे</p>
+    </div>
+    <div class="stat-card">
+      <h2 id="stat-solved">0</h2>
+      <p>समाधान हुए</p>
+    </div>
+  </div>
+
   <div class="tabs">
     <button class="tab active" onclick="showTab('home')">🏠 होम</button>
-    <button class="tab" onclick="showTab('member')">🪪 नागरिक सदस्यता</button>
-    <button class="tab" onclick="showTab('issue')">📝 समस्या दर्ज</button>
+    <button class="tab" onclick="showTab('member')">🪪 सदस्यता</button>
+    <button class="tab" onclick="showTab('issue')">📝 समस्या</button>
     <button class="tab" onclick="showTab('admin')">⚙️ Admin</button>
   </div>
 
@@ -81,10 +99,24 @@
   <div id="home" class="section active">
     <div class="card">
       <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80" alt="गाँव" class="village-img">
-      <h3>🏛️ ग्राम पंचायत जोजलवाड़ी</h3>
+      <h3>
+        <span>🏛️ ग्राम पंचायत जोजलवाड़ी</span>
+        <span style="font-size:11px;background:#e8f5e9;color:#2e7d32;padding:3px 8px;border-radius:10px;">🟢 कार्यालय खुला है</span>
+      </h3>
       <p style="font-size:13px;color:#666;line-height:1.5;">
-        हमारे गाँव के विकास, जन-जागरूकता और समस्याओं के त्वरित निवारण के लिए यह स्वतंत्र नागरिक मंच बनाया गया है।
+        हमारे गाँव के विकास, जन-जागरूकता और समस्याओं के त्वरित निवारण के लिए यह स्वतंत्र नागरिक डिजिटल मंच है।
       </p>
+    </div>
+
+    <!-- Emergency Contacts -->
+    <div class="card">
+      <h3>🚨 आपातकालीन संपर्क (Emergency)</h3>
+      <div class="emergency-grid">
+        <a href="tel:108" class="em-btn">🚑 एम्बुलेंस (108)</a>
+        <a href="tel:100" class="em-btn">पुलिस (100)</a>
+        <a href="tel:1800123456" class="em-btn" style="color:#0288d1;background:#e1f5fe;border-color:#b3e5fc;">💧 जल आपूर्ति</a>
+        <a href="tel:1912" class="em-btn" style="color:#f57c00;background:#fff3e0;border-color:#ffe0b2;">⚡ बिजली शिकायत</a>
+      </div>
     </div>
 
     <div class="card">
@@ -138,7 +170,6 @@
       <button class="btn" onclick="submitMembership()">सदस्यता के लिए आवेदन करें</button>
     </div>
 
-    <!-- Search / View Profile Section -->
     <div class="card">
       <h3>🔍 अपनी प्रोफाइल / डिजिटल कार्ड देखें</h3>
       <label>अपना मोबाइल नंबर दर्ज करें</label>
@@ -174,7 +205,7 @@
       </select>
 
       <label>सटीक स्थान (Location) *</label>
-      <input type="text" id="i-loc" placeholder="समस्या की जगह (जैसे: नसबंदी चौराहे के पास)">
+      <input type="text" id="i-loc" placeholder="समस्या की जगह (जैसे: चौराहे के पास)">
 
       <label>समस्या का पूरा विवरण *</label>
       <textarea id="i-desc" rows="3" placeholder="अपनी समस्या के बारे में विस्तार से लिखें..."></textarea>
@@ -192,7 +223,7 @@
       <h3>⚙️ लीडर / एडमिन लॉगिन</h3>
       <p style="font-size:12px;color:#666;margin-bottom:10px;">केवल मुख्य संयोजक (Sachin Jamre) के लिए</p>
       <label>एडमिन पासवर्ड</label>
-      <input type="password" id="admin-pass" placeholder="सुरक्षित पासवर्ड डालें">
+      <input type="password" id="admin-pass" placeholder="पासवर्ड दर्ज करें">
       <button class="btn" onclick="loginAdmin()">लॉगिन करें</button>
     </div>
 
@@ -220,18 +251,23 @@
   </div>
 
   <script>
-    // Storage Initializers
     let members = JSON.parse(localStorage.getItem('jj_members')) || [];
     let issues = JSON.parse(localStorage.getItem('jj_issues')) || [];
 
-    // Tab Switcher
+    updateStats();
+
+    function updateStats(){
+      document.getElementById('stat-members').innerText = members.filter(m => m.status === 'approved').length;
+      document.getElementById('stat-pending').innerText = issues.filter(i => i.status === 'pending').length;
+      document.getElementById('stat-solved').innerText = issues.filter(i => i.status === 'approved').length;
+    }
+
     function showTab(id){
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.getElementById(id).classList.add('active');
     }
 
-    // Convert Image to Base64
     function getBase64(file) {
       return new Promise((resolve, reject) => {
         if(!file) resolve('');
@@ -242,7 +278,6 @@
       });
     }
 
-    // Submit Membership
     async function submitMembership(){
       let name = document.getElementById('m-name').value.trim();
       let phone = document.getElementById('m-phone').value.trim();
@@ -270,15 +305,14 @@
 
       localStorage.setItem('jj_members', JSON.stringify(members));
       alert('आपका सदस्यता आवेदन सफलतापूर्वक जमा हो गया है!\n\nएडमिन (Sachin Jamre) के अप्रूवल के बाद आप अपना डिजिटल कार्ड देख सकेंगे।');
-      
-      // Clear Form
+
       document.getElementById('m-name').value = '';
       document.getElementById('m-phone').value = '';
       document.getElementById('m-ward').value = '';
       document.getElementById('m-photo').value = '';
+      updateStats();
     }
 
-    // Search Member Profile & Card
     function searchProfile(){
       let phone = document.getElementById('search-phone').value.trim();
       let resDiv = document.getElementById('profile-result');
@@ -301,7 +335,6 @@
         return;
       }
 
-      // Render Active ID Card
       resDiv.innerHTML = `
         <div class="member-card">
           <div class="mc-header">
@@ -322,7 +355,6 @@
       `;
     }
 
-    // Submit Issue Report
     async function submitIssue(){
       let name = document.getElementById('i-name').value.trim();
       let phone = document.getElementById('i-phone').value.trim();
@@ -351,24 +383,23 @@
       localStorage.setItem('jj_issues', JSON.stringify(issues));
       alert('आपकी समस्या दर्ज कर ली गई है। एडमिन द्वारा इसे जल्द ही समीक्षा में लिया जाएगा।');
 
-      // Clear Form
       document.getElementById('i-name').value = '';
       document.getElementById('i-phone').value = '';
       document.getElementById('i-cat').value = '';
       document.getElementById('i-loc').value = '';
       document.getElementById('i-desc').value = '';
       document.getElementById('i-photo').value = '';
+      updateStats();
     }
 
-    // Admin Login (Hardened Password)
     function loginAdmin(){
-      let pass = document.getElementById('admin-pass').value;
-      if(pass === 'Sachin@Jamre#2026'){
+      let pass = document.getElementById('admin-pass').value.trim();
+      if(pass === 'sachin@312'){
         document.getElementById('admin-login-box').style.display = 'none';
         document.getElementById('admin-dashboard').style.display = 'block';
         renderAdminData();
       } else {
-        alert('गलत पासवर्ड! केवल मुख्य संयोजक ही लॉगिन कर सकते हैं।');
+        alert('गलत पासवर्ड!');
       }
     }
 
@@ -378,9 +409,7 @@
       document.getElementById('admin-pass').value = '';
     }
 
-    // Render Admin Data
     function renderAdminData(){
-      // 1. Members List
       let mDiv = document.getElementById('admin-member-list');
       if(members.length === 0){
         mDiv.innerHTML = '<p style="font-size:13px;color:#777;">कोई नया आवेदन नहीं है।</p>';
@@ -409,7 +438,6 @@
         mDiv.innerHTML = html;
       }
 
-      // 2. Issues List
       let iDiv = document.getElementById('admin-issue-list');
       if(issues.length === 0){
         iDiv.innerHTML = '<p style="font-size:13px;color:#777;">कोई समस्या रिपोर्ट दर्ज नहीं है।</p>';
@@ -418,48 +446,4 @@
         issues.forEach(i => {
           html += `
             <div class="req-item">
-              <strong style="font-size:14px;color:#1b7e42;">${i.category}</strong> - <span style="font-size:12px;color:#555;">${i.location}</span><br>
-              <p style="font-size:13px;margin:5px 0;"><b>विवरण:</b> ${i.description}</p>
-              <span style="font-size:12px;color:#666;">शिकायतकर्ता: ${i.name} (${i.phone})</span><br>
-              ${i.photo ? `<img src="${i.photo}" alt="Issue Photo">` : ''}<br>
-              <span class="badge ${i.status==='approved'?'badge-approved':'badge-pending'}" style="margin-top:5px;">${i.status.toUpperCase()}</span>
-              ${i.status === 'pending' ? `
-                <div class="btn-group">
-                  <button class="btn-approve" onclick="approveIssue(${i.id})">Mark Solved / Approved</button>
-                  <button class="btn-reject" onclick="rejectIssue(${i.id})">Delete</button>
-                </div>
-              ` : ''}
-            </div>
-          `;
-        });
-        iDiv.innerHTML = html;
-      }
-    }
-
-    // Admin Action Handlers
-    function approveMember(id){
-      members = members.map(m => m.id === id ? {...m, status: 'approved'} : m);
-      localStorage.setItem('jj_members', JSON.stringify(members));
-      renderAdminData();
-    }
-
-    function rejectMember(id){
-      members = members.filter(m => m.id !== id);
-      localStorage.setItem('jj_members', JSON.stringify(members));
-      renderAdminData();
-    }
-
-    function approveIssue(id){
-      issues = issues.map(i => i.id === id ? {...i, status: 'approved'} : i);
-      localStorage.setItem('jj_issues', JSON.stringify(issues));
-      renderAdminData();
-    }
-
-    function rejectIssue(id){
-      issues = issues.filter(i => i.id !== id);
-      localStorage.setItem('jj_issues', JSON.stringify(issues));
-      renderAdminData();
-    }
-  </script>
-</body>
-</html>
+              <strong style="font-size:14px;color:#1b7e4
