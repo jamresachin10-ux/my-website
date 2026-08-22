@@ -2,10 +2,10 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>ग्राम पंचायत जोजलवाड़ी — हमारा गाँव हमारी जिम्मेदारी</title>
   <style>
-    *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif;-webkit-tap-highlight-color:transparent}
     body{background:#f0f4f8;color:#333;padding-bottom:30px}
     
     .hero{background:linear-gradient(135deg,#0d5c2e,#1b7e42);color:#fff;padding:20px 15px;text-align:center;border-bottom-left-radius:24px;border-bottom-right-radius:24px;box-shadow:0 4px 15px rgba(0,0,0,0.15)}
@@ -18,8 +18,8 @@
     .stat-card h2{font-size:18px;color:#1b7e42}
     .stat-card p{font-size:10px;color:#666;font-weight:bold}
     
-    .tabs{display:flex;justify-content:space-around;background:#fff;margin:10px 12px 15px;padding:8px 5px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.08)}
-    .tab{border:none;background:none;padding:10px 8px;font-weight:bold;color:#666;font-size:13px;cursor:pointer;border-radius:10px;transition:0.2s;flex:1;text-align:center}
+    .tabs{display:flex;justify-content:space-around;background:#fff;margin:10px 12px 15px;padding:6px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.08);position:relative;z-index:10}
+    .tab{border:none;background:none;padding:12px 5px;font-weight:bold;color:#666;font-size:13px;cursor:pointer;border-radius:10px;transition:0.2s;flex:1;text-align:center;outline:none}
     .tab.active{background:#e8f5e9;color:#1b7e42;box-shadow:0 2px 6px rgba(27,126,66,0.15)}
     
     .section{display:none;padding:0 12px}
@@ -28,12 +28,14 @@
     .card h3{font-size:16px;color:#1b7e42;margin-bottom:12px;border-bottom:2px solid #e8f5e9;padding-bottom:6px;display:flex;align-items:center;gap:6px;justify-content:space-between}
     
     label{font-size:12px;font-weight:bold;color:#555;display:block;margin:8px 0 4px}
-    input, select, textarea{width:100%;padding:11px;border:1px solid #dcdfe6;border-radius:10px;font-size:14px;outline:none;background:#fdfdfd;margin-bottom:4px}
+    input, select, textarea{width:100%;padding:12px;border:1px solid #dcdfe6;border-radius:10px;font-size:14px;outline:none;background:#fdfdfd;margin-bottom:4px}
     input:focus, select:focus, textarea:focus{border-color:#1b7e42;background:#fff}
-    .btn{width:100%;background:#1b7e42;color:#fff;border:none;padding:12px;border-radius:10px;font-weight:bold;font-size:15px;cursor:pointer;margin-top:12px;box-shadow:0 3px 8px rgba(27,126,66,0.25)}
+    
+    .btn{width:100%;background:#1b7e42;color:#fff;border:none;padding:12px;border-radius:10px;font-weight:bold;font-size:15px;cursor:pointer;margin-top:12px;box-shadow:0 3px 8px rgba(27,126,66,0.25);position:relative;z-index:5}
+    .btn:active,.tab:active,.em-btn:active{transform:scale(0.98)}
     
     .emergency-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
-    .em-btn{display:block;text-align:center;background:#fff0f0;color:#c62828;padding:10px;border-radius:10px;text-decoration:none;font-weight:bold;font-size:12px;border:1px solid #ffcdd2}
+    .em-btn{display:block;text-align:center;background:#fff0f0;color:#c62828;padding:12px;border-radius:10px;text-decoration:none;font-weight:bold;font-size:12px;border:1px solid #ffcdd2;position:relative;z-index:5}
     
     .village-img{width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:12px}
     .official-box{display:flex;gap:12px;background:#f8fafc;padding:10px;border-radius:12px;margin-bottom:8px;align-items:center}
@@ -53,8 +55,8 @@
     .req-item{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px;margin-bottom:10px}
     .req-item img{max-width:100%;max-height:150px;border-radius:8px;margin-top:8px}
     .btn-group{display:flex;gap:8px;margin-top:10px}
-    .btn-approve{background:#2e7d32;color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-weight:bold;flex:1}
-    .btn-reject{background:#c62828;color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-weight:bold;flex:1}
+    .btn-approve{background:#2e7d32;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-weight:bold;flex:1}
+    .btn-reject{background:#c62828;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer;font-weight:bold;flex:1}
     .badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:11px;font-weight:bold;color:#fff}
     .badge-pending{background:#f39c12}
     .badge-approved{background:#27ae60}
@@ -84,10 +86,10 @@
   </div>
 
   <div class="tabs">
-    <button class="tab active" onclick="showTab('home')">🏠 होम</button>
-    <button class="tab" onclick="showTab('member')">🪪 सदस्यता</button>
-    <button class="tab" onclick="showTab('issue')">📝 समस्या</button>
-    <button class="tab" onclick="showTab('admin')">⚙️ Admin</button>
+    <button class="tab active" id="tab-home" onclick="showTab('home')">🏠 होम</button>
+    <button class="tab" id="tab-member" onclick="showTab('member')">🪪 सदस्यता</button>
+    <button class="tab" id="tab-issue" onclick="showTab('issue')">📝 समस्या</button>
+    <button class="tab" id="tab-admin" onclick="showTab('admin')">⚙️ Admin</button>
   </div>
 
   <!-- 1. HOME SECTION -->
@@ -106,10 +108,10 @@
     <div class="card">
       <h3>🚨 आपातकालीन नंबर</h3>
       <div class="emergency-grid">
-        <a href="tel:108" class="em-btn">🚑 एम्बुलेंस (108)</a>
-        <a href="tel:100" class="em-btn">Police (100)</a>
-        <a href="tel:1800123456" class="em-btn" style="color:#0288d1;background:#e1f5fe;border-color:#b3e5fc;">💧 जल विभाग</a>
-        <a href="tel:1912" class="em-btn" style="color:#f57c00;background:#fff3e0;border-color:#ffe0b2;">⚡ बिजली बोर्ड</a>
+        <a id="display-em-amb" href="tel:108" class="em-btn">🚑 एम्बुलेंस (108)</a>
+        <a id="display-em-pol" href="tel:100" class="em-btn">Police (100)</a>
+        <a id="display-em-wat" href="tel:1800123456" class="em-btn" style="color:#0288d1;background:#e1f5fe;border-color:#b3e5fc;">💧 जल विभाग</a>
+        <a id="display-em-ele" href="tel:1912" class="em-btn" style="color:#f57c00;background:#fff3e0;border-color:#ffe0b2;">⚡ बिजली बोर्ड</a>
       </div>
     </div>
 
@@ -118,15 +120,15 @@
       <div class="official-box">
         <div class="official-icon">🧑‍💼</div>
         <div>
-          <strong style="font-size:14px;">सरपंच</strong>
-          <p style="font-size:12px;color:#666;">ग्राम पंचायत जोजलवाड़ी</p>
+          <strong style="font-size:14px;" id="display-sarpanch-name">सरपंच: उपलब्ध नहीं</strong>
+          <p style="font-size:12px;color:#666;" id="display-sarpanch-phone">फोन: -</p>
         </div>
       </div>
       <div class="official-box">
         <div class="official-icon">👨‍💻</div>
         <div>
-          <strong style="font-size:14px;">सचिव / पंचायत सचिव</strong>
-          <p style="font-size:12px;color:#666;">ग्राम पंचायत जोजलवाड़ी</p>
+          <strong style="font-size:14px;" id="display-sachiv-name">सचिव: उपलब्ध नहीं</strong>
+          <p style="font-size:12px;color:#666;" id="display-sachiv-phone">फोन: -</p>
         </div>
       </div>
     </div>
@@ -134,10 +136,10 @@
     <div class="card">
       <h3>📢 सूचना बोर्ड एवं ग्राम सभा</h3>
       <div class="notice-board">
-        <strong>⚠️ जरूरी सूचना:</strong> गाँव में स्वच्छता अभियान चलाया जा रहा है। कृपया कचरा निर्धारित स्थान पर ही डालें।
+        <strong>⚠️ जरूरी सूचना:</strong> <span id="display-notice-1">गाँव में स्वच्छता अभियान चलाया जा रहा है।</span>
       </div>
       <div class="notice-board" style="background:#e3f2fd;border-left-color:#2196f3;">
-        <strong>🗓️ आगामी ग्राम सभा:</strong> दिनांक 15 तारीख को पंचायत भवन में दोपहर 12:00 बजे विशेष ग्राम सभा आयोजित की जाएगी।
+        <strong>🗓️ आगामी ग्राम सभा:</strong> <span id="display-notice-2">दिनांक 15 तारीख को पंचायत भवन में दोपहर 12:00 बजे विशेष ग्राम सभा।</span>
       </div>
     </div>
   </div>
@@ -161,14 +163,14 @@
       <label>अपनी फोटो अपलोड करें (Card के लिए) *</label>
       <input type="file" id="m-photo" accept="image/*">
 
-      <button class="btn" onclick="submitMembership()">सदस्यता के लिए आवेदन करें</button>
+      <button class="btn" type="button" onclick="submitMembership()">सदस्यता के लिए आवेदन करें</button>
     </div>
 
     <div class="card">
       <h3>🔍 अपनी प्रोफाइल / डिजिटल कार्ड देखें</h3>
       <label>अपना मोबाइल नंबर दर्ज करें</label>
       <input type="tel" id="search-phone" placeholder="रजिस्टर्ड मोबाइल नंबर लिखें">
-      <button class="btn" style="background:#0288d1;" onclick="searchProfile()">प्रोफ़ाइल / ID Card खोजें</button>
+      <button class="btn" type="button" style="background:#0288d1;" onclick="searchProfile()">प्रोफ़ाइल / ID Card खोजें</button>
       
       <div id="profile-result" style="margin-top:15px;"></div>
     </div>
@@ -207,7 +209,7 @@
       <label>समस्या की फोटो (यदि हो तो)</label>
       <input type="file" id="i-photo" accept="image/*">
 
-      <button class="btn" onclick="submitIssue()">समस्या रिपोर्ट भेजें</button>
+      <button class="btn" type="button" onclick="submitIssue()">समस्या रिपोर्ट भेजें</button>
     </div>
   </div>
 
@@ -218,7 +220,7 @@
       <p style="font-size:12px;color:#666;margin-bottom:10px;">केवल मुख्य संयोजक (Sachin Jamre) के लिए</p>
       <label>एडमिन पासवर्ड</label>
       <input type="password" id="admin-pass" placeholder="पासवर्ड दर्ज करें">
-      <button class="btn" onclick="loginAdmin()">लॉगिन करें</button>
+      <button class="btn" type="button" onclick="loginAdmin()">लॉगिन करें</button>
     </div>
 
     <div id="admin-dashboard" style="display:none;">
@@ -228,8 +230,37 @@
             <h3>👑 Admin Dashboard</h3>
             <p style="font-size:12px;">स्वागत है, <b>Sachin Jamre</b></p>
           </div>
-          <button onclick="logoutAdmin()" style="background:#c62828;color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px;">लॉगआउट</button>
+          <button type="button" onclick="logoutAdmin()" style="background:#c62828;color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px;">लॉगआउट</button>
         </div>
+      </div>
+
+      <!-- NEW HOME CONTENT CONTROL SECTION -->
+      <div class="card" style="border:2px solid #1b7e42;">
+        <h3>📢 होम पेज कंट्रोल (Home Control)</h3>
+        
+        <label>सरपंच का नाम</label>
+        <input type="text" id="adm-sarpanch-name" placeholder="उदा: श्री रमेश चंद्र">
+        <label>सरपंच का मोबाइल नंबर</label>
+        <input type="tel" id="adm-sarpanch-phone" placeholder="10 अंक का नंबर">
+
+        <label>सचिव का नाम</label>
+        <input type="text" id="adm-sachiv-name" placeholder="उदा: श्री दिनेश शर्मा">
+        <label>सचिव का मोबाइल नंबर</label>
+        <input type="tel" id="adm-sachiv-phone" placeholder="10 अंक का नंबर">
+
+        <label>जरूरी सूचना Text</label>
+        <input type="text" id="adm-notice-1" placeholder="सूचना बोर्ड 1 के लिए...">
+
+        <label>ग्राम सभा सूचना Text</label>
+        <input type="text" id="adm-notice-2" placeholder="सूचना बोर्ड 2 के लिए...">
+
+        <label>जल विभाग नंबर</label>
+        <input type="tel" id="adm-em-wat" placeholder="जल विभाग का नंबर">
+
+        <label>बिजली बोर्ड नंबर</label>
+        <input type="tel" id="adm-em-ele" placeholder="बिजली विभाग का नंबर">
+
+        <button class="btn" style="background:#0d5c2e;" onclick="saveHomeSettings()">Save Updates (अपडेट सहेजें)</button>
       </div>
 
       <div class="card">
@@ -247,30 +278,81 @@
   <script>
     var members = JSON.parse(localStorage.getItem('jj_members')) || [];
     var issues = JSON.parse(localStorage.getItem('jj_issues')) || [];
+    var homeConfig = JSON.parse(localStorage.getItem('jj_homeConfig')) || {
+      sarpanchName: 'श्री सरपंच जी',
+      sarpanchPhone: '9876543210',
+      sachivName: 'श्री सचिव जी',
+      sachivPhone: '9876543211',
+      notice1: 'गाँव में स्वच्छता अभियान चलाया जा रहा है। कृपया कचरा निर्धारित स्थान पर ही डालें।',
+      notice2: 'दिनांक 15 तारीख को पंचायत भवन में दोपहर 12:00 बजे विशेष ग्राम सभा आयोजित की जाएगी।',
+      waterPhone: '1800123456',
+      elecPhone: '1912'
+    };
 
+    renderHomeContent();
     updateStats();
 
-    function updateStats(){
-      document.getElementById('stat-members').innerText = members.filter(function(m){ return m.status === 'approved'; }).length;
-      document.getElementById('stat-pending').innerText = issues.filter(function(i){ return i.status === 'pending'; }).length;
-      document.getElementById('stat-solved').innerText = issues.filter(function(i){ return i.status === 'approved'; }).length;
+    function renderHomeContent(){
+      document.getElementById('display-sarpanch-name').innerText = 'सरपंच: ' + homeConfig.sarpanchName;
+      document.getElementById('display-sarpanch-phone').innerText = 'फोन: ' + homeConfig.sarpanchPhone;
+      document.getElementById('display-sachiv-name').innerText = 'सचिव: ' + homeConfig.sachivName;
+      document.getElementById('display-sachiv-phone').innerText = 'फोन: ' + homeConfig.sachivPhone;
+      document.getElementById('display-notice-1').innerText = homeConfig.notice1;
+      document.getElementById('display-notice-2').innerText = homeConfig.notice2;
+
+      document.getElementById('display-em-wat').href = 'tel:' + homeConfig.waterPhone;
+      document.getElementById('display-em-ele').href = 'tel:' + homeConfig.elecPhone;
     }
 
-    function showTab(id){
-      var sections = document.querySelectorAll('.section');
+    function saveHomeSettings(){
+      homeConfig.sarpanchName = document.getElementById('adm-sarpanch-name').value || homeConfig.sarpanchName;
+      homeConfig.sarpanchPhone = document.getElementById('adm-sarpanch-phone').value || homeConfig.sarpanchPhone;
+      homeConfig.sachivName = document.getElementById('adm-sachiv-name').value || homeConfig.sachivName;
+      homeConfig.sachivPhone = document.getElementById('adm-sachiv-phone').value || homeConfig.sachivPhone;
+      homeConfig.notice1 = document.getElementById('adm-notice-1').value || homeConfig.notice1;
+      homeConfig.notice2 = document.getElementById('adm-notice-2').value || homeConfig.notice2;
+      homeConfig.waterPhone = document.getElementById('adm-em-wat').value || homeConfig.waterPhone;
+      homeConfig.elecPhone = document.getElementById('adm-em-ele').value || homeConfig.elecPhone;
+
+      localStorage.setItem('jj_homeConfig', JSON.stringify(homeConfig));
+      renderHomeContent();
+      alert('होम पेज का डेटा सफलतापूर्वक अपडेट हो गया है!');
+    }
+
+    function loadAdminInputs(){
+      document.getElementById('adm-sarpanch-name').value = homeConfig.sarpanchName;
+      document.getElementById('adm-sarpanch-phone').value = homeConfig.sarpanchPhone;
+      document.getElementById('adm-sachiv-name').value = homeConfig.sachivName;
+      document.getElementById('adm-sachiv-phone').value = homeConfig.sachivPhone;
+      document.getElementById('adm-notice-1').value = homeConfig.notice1;
+      document.getElementById('adm-notice-2').value = homeConfig.notice2;
+      document.getElementById('adm-em-wat').value = homeConfig.waterPhone;
+      document.getElementById('adm-em-ele').value = homeConfig.elecPhone;
+    }
+
+    function updateStats(){
+      var approvedM = members.filter(function(m){ return m.status === 'approved'; }).length;
+      var pendingI = issues.filter(function(i){ return i.status === 'pending'; }).length;
+      var solvedI = issues.filter(function(i){ return i.status === 'approved'; }).length;
+
+      document.getElementById('stat-members').innerText = approvedM;
+      document.getElementById('stat-pending').innerText = pendingI;
+      document.getElementById('stat-solved').innerText = solvedI;
+    }
+
+    function showTab(tabId){
+      var sections = document.getElementsByClassName('section');
       for(var i=0; i<sections.length; i++){
         sections[i].classList.remove('active');
       }
-      var tabs = document.querySelectorAll('.tab');
+      
+      var tabs = document.getElementsByClassName('tab');
       for(var j=0; j<tabs.length; j++){
         tabs[j].classList.remove('active');
       }
-      document.getElementById(id).classList.add('active');
 
-      var currentTab = Array.from(tabs).find(function(t){
-        return t.getAttribute('onclick').includes(id);
-      });
-      if(currentTab) currentTab.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+      document.getElementById('tab-' + tabId).classList.add('active');
     }
 
     function getBase64(file) {
@@ -328,127 +410,4 @@
         return;
       }
 
-      var user = members.find(function(m){ return m.phone === phone; });
-
-      if(!user){
-        resDiv.innerHTML = '<p style="color:#c62828;font-size:13px;text-align:center;">इस नंबर से कोई रिकॉर्ड नहीं मिला।</p>';
-        return;
-      }
-
-      if(user.status === 'pending'){
-        resDiv.innerHTML = '<div style="background:#fff8e1;padding:12px;border-radius:10px;text-align:center;font-size:13px;color:#b78103;"><b>⏳ आपका आवेदन अभी पेंडिंग है।</b><br>एडमिन अप्रूवल के बाद यहाँ कार्ड दिखेगा।</div>';
-        return;
-      }
-
-      resDiv.innerHTML = '<div class="member-card"><div class="mc-header"><h4>ग्राम पंचायत जोजलवाड़ी</h4><span>डिजिटल आईडी कार्ड</span></div><div class="mc-body"><img src="'+user.photo+'" class="mc-photo" alt="Photo"><div class="mc-details"><p>नाम: <strong>'+user.name+'</strong></p><p>वार्ड/मोहल्ला: <strong>'+user.ward+'</strong></p><p>गाँव: <strong>'+user.village+'</strong></p><p>स्थिति: <strong style="color:#ffe600;">सक्रिय सदस्य ✅</strong></p></div></div><div class="mc-id">ID: '+user.memberId+'</div></div>';
-    }
-
-    function submitIssue(){
-      var name = document.getElementById('i-name').value.trim();
-      var phone = document.getElementById('i-phone').value.trim();
-      var cat = document.getElementById('i-cat').value;
-      var loc = document.getElementById('i-loc').value.trim();
-      var desc = document.getElementById('i-desc').value.trim();
-      var photoFile = document.getElementById('i-photo').files[0];
-
-      if(!name || !phone || !cat || !loc || !desc){
-        alert('कृपया सभी आवश्यक जानकारी भरें!');
-        return;
-      }
-
-      getBase64(photoFile).then(function(photoData){
-        issues.push({
-          id: Date.now(),
-          name: name,
-          phone: phone,
-          category: cat,
-          location: loc,
-          description: desc,
-          photo: photoData,
-          status: 'pending'
-        });
-
-        localStorage.setItem('jj_issues', JSON.stringify(issues));
-        alert('आपकी समस्या दर्ज कर ली गई है!');
-
-        document.getElementById('i-name').value = '';
-        document.getElementById('i-phone').value = '';
-        document.getElementById('i-cat').value = '';
-        document.getElementById('i-loc').value = '';
-        document.getElementById('i-desc').value = '';
-        document.getElementById('i-photo').value = '';
-        updateStats();
-      });
-    }
-
-    function loginAdmin(){
-      var pass = document.getElementById('admin-pass').value.trim();
-      if(pass === 'sachin@312'){
-        document.getElementById('admin-login-box').style.display = 'none';
-        document.getElementById('admin-dashboard').style.display = 'block';
-        renderAdminData();
-      } else {
-        alert('गलत पासवर्ड!');
-      }
-    }
-
-    function logoutAdmin(){
-      document.getElementById('admin-login-box').style.display = 'block';
-      document.getElementById('admin-dashboard').style.display = 'none';
-      document.getElementById('admin-pass').value = '';
-    }
-
-    function renderAdminData(){
-      var mDiv = document.getElementById('admin-member-list');
-      if(members.length === 0){
-        mDiv.innerHTML = '<p style="font-size:13px;color:#777;">कोई नया आवेदन नहीं है।</p>';
-      } else {
-        var html = '';
-        members.forEach(function(m){
-          html += '<div class="req-item"><div style="display:flex;gap:10px;align-items:center;"><img src="'+m.photo+'" style="width:50px;height:50px;border-radius:8px;object-fit:cover;"><div><strong style="font-size:14px;">'+m.name+'</strong> ('+m.phone+')<br><span style="font-size:12px;color:#666;">वार्ड: '+m.ward+' | ID: '+m.memberId+'</span><br><span class="badge '+(m.status==='approved'?'badge-approved':'badge-pending')+'">'+m.status.toUpperCase()+'</span></div></div>'+(m.status === 'pending' ? '<div class="btn-group"><button class="btn-approve" onclick="approveMember('+m.id+')">Approve</button><button class="btn-reject" onclick="rejectMember('+m.id+')">Reject</button></div>' : '')+'</div>';
-        });
-        mDiv.innerHTML = html;
-      }
-
-      var iDiv = document.getElementById('admin-issue-list');
-      if(issues.length === 0){
-        iDiv.innerHTML = '<p style="font-size:13px;color:#777;">कोई समस्या रिपोर्ट दर्ज नहीं है।</p>';
-      } else {
-        var html2 = '';
-        issues.forEach(function(i){
-          html2 += '<div class="req-item"><strong style="font-size:14px;color:#1b7e42;">'+i.category+'</strong> - <span style="font-size:12px;color:#555;">'+i.location+'</span><br><p style="font-size:13px;margin:5px 0;"><b>विवरण:</b> '+i.description+'</p><span style="font-size:12px;color:#666;">शिकायतकर्ता: '+i.name+' ('+i.phone+')</span><br>'+(i.photo ? '<img src="'+i.photo+'" alt="Photo">' : '')+'<br><span class="badge '+(i.status==='approved'?'badge-approved':'badge-pending')+'" style="margin-top:5px;">'+i.status.toUpperCase()+'</span>'+(i.status === 'pending' ? '<div class="btn-group"><button class="btn-approve" onclick="approveIssue('+i.id+')">Solute / Approve</button><button class="btn-reject" onclick="rejectIssue('+i.id+')">Delete</button></div>' : '')+'</div>';
-        });
-        iDiv.innerHTML = html2;
-      }
-    }
-
-    function approveMember(id){
-      members = members.map(function(m){ return m.id === id ? Object.assign({}, m, {status: 'approved'}) : m; });
-      localStorage.setItem('jj_members', JSON.stringify(members));
-      renderAdminData();
-      updateStats();
-    }
-
-    function rejectMember(id){
-      members = members.filter(function(m){ return m.id !== id; });
-      localStorage.setItem('jj_members', JSON.stringify(members));
-      renderAdminData();
-      updateStats();
-    }
-
-    function approveIssue(id){
-      issues = issues.map(function(i){ return i.id === id ? Object.assign({}, i, {status: 'approved'}) : i; });
-      localStorage.setItem('jj_issues', JSON.stringify(issues));
-      renderAdminData();
-      updateStats();
-    }
-
-    function rejectIssue(id){
-      issues = issues.filter(function(i){ return i.id !== id; });
-      localStorage.setItem('jj_issues', JSON.stringify(issues));
-      renderAdminData();
-      updateStats();
-    }
-  </script>
-</body>
-</html>
+      var user = memb
