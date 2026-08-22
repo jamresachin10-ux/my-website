@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>हमारा गाँव हमारी जिम्मेदारी</title>
+    <!-- QRCode Lib & html2canvas for Download Card -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
             --primary: #058239;
             --secondary: #ff9933;
-            --dark: #222;
+            --dark: #1a1a1a;
             --light: #f4f7f6;
         }
 
@@ -17,311 +20,508 @@
             margin: 0;
             padding: 0;
             background-color: var(--light);
-            color: var(--dark);
+            color: #333;
         }
 
+        /* Top Bar & Header */
         header {
-            background: linear-gradient(135deg, var(--secondary), #ffffff, var(--primary));
+            background: linear-gradient(135deg, #ff9933 0%, #ffffff 50%, #058239 100%);
             padding: 15px;
             text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        header img.logo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid #fff;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         header h1 {
-            margin: 0;
+            margin: 8px 0 2px 0;
             font-size: 22px;
-            color: #111;
+            color: #058239;
+            text-shadow: 1px 1px 0px #fff;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 13px;
+            font-weight: bold;
+            color: #ff9933;
+        }
+
+        /* Navigation Bar */
+        nav {
+            display: flex;
+            background: #222;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        nav button {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            background: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        nav button.active, nav button:hover {
+            background: var(--primary);
+            color: #fff;
         }
 
         .container {
             max-width: 600px;
-            margin: 20px auto;
+            margin: 15px auto;
             background: #fff;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
-        .tabs {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #ddd;
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Form Styles */
+        .form-group { margin-bottom: 12px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px; }
+        input, select {
+            width: 100%; padding: 10px; border: 1px solid #ccc;
+            border-radius: 6px; box-sizing: border-box; font-size: 14px;
         }
 
-        .tab-btn {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            background: none;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 15px;
+        .btn {
+            width: 100%; padding: 12px; border: none; border-radius: 6px;
+            font-size: 15px; font-weight: bold; cursor: pointer; color: white;
         }
+        .btn-primary { background-color: var(--primary); }
+        .btn-primary:hover { background-color: #04632b; }
+        .btn-danger { background-color: #d9534f; margin-top: 5px; }
 
-        .tab-btn.active {
-            border-bottom: 3px solid var(--primary);
-            color: var(--primary);
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 14px;
-        }
-
-        button.btn-submit {
-            width: 100%;
+        /* Notice Section */
+        .notice-card {
+            border-left: 4px solid var(--secondary);
+            background: #fff9f2;
             padding: 12px;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        button.btn-submit:hover {
-            background-color: #04632b;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .card-preview {
-            border: 2px dashed #ccc;
-            padding: 10px;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            color: #fff;
-        }
-
-        .status-pending { background-color: #f39c12; }
-        .status-approved { background-color: #2ecc71; }
-        .status-resolved { background-color: #27ae60; }
-
-        .issue-item {
-            border: 1px solid #ddd;
-            padding: 12px;
-            border-radius: 5px;
             margin-bottom: 10px;
-            background: #fafafa;
+            border-radius: 4px;
         }
+        .notice-card h4 { margin: 0 0 5px 0; color: #d97706; }
+
+        /* Digital Member Card UI */
+        .card-box {
+            background: linear-gradient(135deg, #ffffff 60%, #e6f4ea 100%);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            padding: 15px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            text-align: left;
+        }
+        .card-header { display: flex; align-items: center; border-bottom: 2px solid var(--secondary); padding-bottom: 8px; }
+        .card-header img { width: 45px; height: 45px; border-radius: 50%; margin-right: 10px; }
+        .card-header-title h3 { margin: 0; font-size: 15px; color: var(--primary); }
+        .card-header-title p { margin: 0; font-size: 10px; color: var(--secondary); font-weight: bold; }
+        
+        .card-body { display: flex; margin-top: 12px; gap: 12px; }
+        .card-body img.user-img { width: 85px; height: 100px; border-radius: 6px; object-fit: cover; border: 1px solid #ccc; }
+        .card-info p { margin: 3px 0; font-size: 12px; }
+
+        .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 8px; }
+        #qrcode img { width: 50px !important; height: 50px !important; }
+
+        /* Status Badge */
+        .badge { padding: 3px 8px; border-radius: 4px; font-size: 11px; color: #fff; font-weight: bold; }
+        .badge-pending { background-color: #f39c12; }
+        .badge-approved { background-color: #27ae60; }
+        .badge-rejected { background-color: #e74c3c; }
+
+        /* Admin Dashboard Table */
+        .admin-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; }
+        .admin-table th, .admin-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .admin-table th { background: var(--primary); color: #fff; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>🚩 हमारा गाँव हमारी जिम्मेदारी</h1>
+    <!-- उपयोगकर्ता का लोगो लोड न होने पर डिफ़ॉल्ट SVG आइकॉन -->
+    <img src="1000467791.png" alt="Logo" class="logo" onerror="this.src='https://via.placeholder.com/90?text=HGHD'">
+    <h1>हमारा गाँव हमारी जिम्मेदारी</h1>
+    <p>“एक सोच, एक प्रयास, बेहतर गाँव”</p>
 </header>
 
+<nav>
+    <button class="active" onclick="showTab('homeTab')">🏠 Home</button>
+    <button onclick="showTab('registerTab')">👥 सदस्य बनें</button>
+    <button onclick="showTab('cardTab')">🪪 Member Card</button>
+    <button onclick="showTab('noticeTab')">📢 सूचना</button>
+    <button onclick="showTab('adminTab')">👨‍💼 Admin</button>
+</nav>
+
 <div class="container">
-    <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('memberTab')">👥 सदस्य आवेदन</button>
-        <button class="tab-btn" onclick="switchTab('issueTab')">🚨 समस्या दर्ज करें</button>
-        <button class="tab-btn" onclick="switchTab('statusTab')">🔍 स्टेटस देखें</button>
+    
+    <!-- 1. HOME TAB -->
+    <div id="homeTab" class="tab-content active">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <h2>स्वागत है!</h2>
+            <p style="font-size: 14px; color: #555;">गाँव के विकास, एकता और नागरिक सहयोग की दिशा में एक साझा पहल।</p>
+        </div>
+        
+        <h3>📢 महत्वपूर्ण सूचनाएँ / घोषणाएँ</h3>
+        <div id="homeNotices">
+            <!-- Dynamic Notices -->
+        </div>
     </div>
 
-    <!-- 1. सदस्यता आवेदन फॉर्म -->
-    <div id="memberTab" class="tab-content active">
-        <h3>सदस्यता फॉर्म</h3>
-        <form id="memberForm" onsubmit="submitMemberForm(event)">
+    <!-- 2. MEMBER REGISTRATION TAB -->
+    <div id="registerTab" class="tab-content">
+        <h3>👥 सदस्यता फॉर्म</h3>
+        <form onsubmit="handleRegistration(event)">
             <div class="form-group">
                 <label>पूरा नाम:</label>
-                <input type="text" required placeholder="अपना नाम लिखें">
+                <input type="text" id="regName" required placeholder="अपना नाम लिखें">
             </div>
             <div class="form-group">
                 <label>मोबाइल नंबर:</label>
-                <input type="tel" required pattern="[0-9]{10}" placeholder="10 अंकों का नंबर">
+                <input type="tel" id="regPhone" pattern="[0-9]{10}" required placeholder="10 अंकों का मोबाइल नंबर">
             </div>
             <div class="form-group">
-                <label>मोहल्ला / वार्ड:</label>
-                <input type="text" required placeholder="वार्ड नंबर या मोहल्ला">
+                <label>वार्ड / मोहल्ला:</label>
+                <input type="text" id="regWard" required placeholder="वार्ड नं. या मोहल्ला">
             </div>
             <div class="form-group">
                 <label>पासपोर्ट साइज फोटो:</label>
-                <input type="file" accept="image/*" required onchange="compressImage(event, 'memberPhoto')">
+                <input type="file" id="regPhoto" accept="image/*" required onchange="compressPhoto(event)">
             </div>
-            <button type="submit" class="btn-submit">आवेदन जमा करें</button>
+            <button type="submit" class="btn btn-primary">आवेदन Submit करें</button>
         </form>
     </div>
 
-    <!-- 2. समस्या दर्ज करने का फॉर्म -->
-    <div id="issueTab" class="tab-content">
-        <h3>गाँव की समस्या दर्ज करें</h3>
-        <form id="issueForm" onsubmit="submitIssueForm(event)">
-            <div class="form-group">
-                <label>शिकायतकर्ता का नाम:</label>
-                <input type="text" id="issueName" required placeholder="अपना नाम लिखें">
-            </div>
-            <div class="form-group">
-                <label>मोबाइल नंबर:</label>
-                <input type="tel" id="issuePhone" required pattern="[0-9]{10}">
-            </div>
-            <div class="form-group">
-                <label>समस्या की श्रेणी (Category):</label>
-                <select id="issueCategory" required>
-                    <option value="">-- चुनें --</option>
-                    <option value="पानी">🚰 पानी की समस्या</option>
-                    <option value="बिजली">💡 बिजली / स्ट्रीट लाइट</option>
-                    <option value="सड़क व नाली">🛣️ सड़क व नाली</option>
-                    <option value="सफाई">🧹 साफ-सफाई व कचरा</option>
-                    <option value="अन्य">❓ अन्य समस्या</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>स्थान / वार्ड नंबर:</label>
-                <input type="text" id="issueLocation" required placeholder="समस्या कहाँ पर है?">
-            </div>
-            <div class="form-group">
-                <label>समस्या का विवरण (Detail):</label>
-                <textarea id="issueDesc" rows="3" required placeholder="समस्या के बारे में विस्तार से लिखें..."></textarea>
-            </div>
-            <div class="form-group">
-                <label>समस्या की फोटो (यदि हो):</label>
-                <input type="file" accept="image/*" onchange="compressImage(event, 'issuePhoto')">
-            </div>
-            <button type="submit" class="btn-submit">समस्या दर्ज करें</button>
-        </form>
-    </div>
-
-    <!-- 3. स्टेटस देखने का सेक्शन -->
-    <div id="statusTab" class="tab-content">
-        <h3>अपनी समस्या या आवेदन का स्टेटस चेक करें</h3>
+    <!-- 3. DIGITAL MEMBER CARD TAB -->
+    <div id="cardTab" class="tab-content">
+        <h3>🪪 डिजिटल सदस्य कार्ड खोजें</h3>
         <div class="form-group">
-            <input type="text" id="searchID" placeholder="Ticket ID या मोबाइल नंबर दर्ज करें">
+            <input type="tel" id="searchPhone" placeholder="अपना मोबाइल नंबर दर्ज करें">
         </div>
-        <button type="button" class="btn-submit" onclick="checkStatus()">खोजें</button>
-        
-        <div id="statusResult" style="margin-top: 20px;"></div>
+        <button class="btn btn-primary" onclick="searchMemberCard()">कार्ड देखें</button>
+
+        <div id="cardResult" style="margin-top: 20px;"></div>
     </div>
+
+    <!-- 4. NOTICE BOARD TAB -->
+    <div id="noticeTab" class="tab-content">
+        <h3>📢 सूचना बोर्ड</h3>
+        <div id="publicNotices"></div>
+    </div>
+
+    <!-- 5. ADMIN PANEL TAB -->
+    <div id="adminTab" class="tab-content">
+        <div id="adminLogin">
+            <h3>🔐 Admin Login (Sachin Jamre)</h3>
+            <div class="form-group">
+                <label>पासवर्ड दर्ज करें:</label>
+                <input type="password" id="adminPass">
+            </div>
+            <button class="btn btn-primary" onclick="loginAdmin()">लॉगिन करें</button>
+        </div>
+
+        <div id="adminDashboard" style="display: none;">
+            <h3>👨‍💼 Admin Panel</h3>
+            <p>स्वागत है, <b>Sachin Jamre (Lead)</b></p>
+            <button class="btn btn-danger" style="width: auto; padding: 5px 10px; float: right;" onclick="logoutAdmin()">लॉगआउट</button>
+            
+            <hr>
+            <h4>📢 नई सूचना जारी करें</h4>
+            <div class="form-group">
+                <input type="text" id="newNoticeTitle" placeholder="सूचना का शीर्षक">
+            </div>
+            <div class="form-group">
+                <input type="text" id="newNoticeBody" placeholder="विवरण...">
+            </div>
+            <button class="btn btn-primary" onclick="addNotice()">सूचना प्रकाशित करें</button>
+
+            <hr style="margin-top:20px;">
+            <h4>👥 सदस्य आवेदन एवं रिकॉर्ड</h4>
+            <div style="overflow-x:auto;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>फोटो</th>
+                            <th>नाम</th>
+                            <th>मो. नं.</th>
+                            <th>वार्ड</th>
+                            <th>स्टेटस</th>
+                            <th>Member ID</th>
+                            <th>एक्शन</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script>
-    // इमेज कंप्रेसर फ़ंक्शन (Browser Hang होने से बचाएगा)
-    let compressedMemberPhoto = "";
-    let compressedIssuePhoto = "";
+    // System Local Data Storage
+    let members = JSON.parse(localStorage.getItem('hghd_members') || '[]');
+    let notices = JSON.parse(localStorage.getItem('hghd_notices') || '[]');
+    let compressedPhotoBase64 = "";
 
-    function compressImage(event, type) {
-        const file = event.target.files[0];
-        if (!file) return;
-
+    // Image Compressor
+    function compressPhoto(e) {
+        const file = e.target.files[0];
+        if(!file) return;
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = function(e) {
+        reader.onload = function(event) {
             const img = new Image();
-            img.src = e.target.result;
+            img.src = event.target.result;
             img.onload = function() {
                 const canvas = document.createElement('canvas');
-                const maxWidth = 600;
-                const scaleSize = maxWidth / img.width;
+                const maxWidth = 300;
+                const scale = maxWidth / img.width;
                 canvas.width = maxWidth;
-                canvas.height = img.height * scaleSize;
-
-                const ctx = canvas.getContext('canvas');
+                canvas.height = img.height * scale;
+                const ctx = canvas.getContext('2d');
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-                const compressedUrl = canvas.toDataURL('image/jpeg', 0.7); // 70% Quality
-                
-                if (type === 'memberPhoto') compressedMemberPhoto = compressedUrl;
-                if (type === 'issuePhoto') compressedIssuePhoto = compressedUrl;
+                compressedPhotoBase64 = canvas.toDataURL('image/jpeg', 0.7);
             }
         }
     }
 
-    // टैब बदलने का फ़ंक्शन
-    function switchTab(tabId) {
+    // Switch Tabs
+    function showTab(tabId) {
         document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
         
         document.getElementById(tabId).classList.add('active');
         event.currentTarget.classList.add('active');
+
+        if(tabId === 'homeTab' || tabId === 'noticeTab') renderNotices();
     }
 
-    // सदस्यता फॉर्म सबमिट
-    function submitMemberForm(e) {
+    // Registration Form Submit
+    function handleRegistration(e) {
         e.preventDefault();
-        alert("आपका आवेदन सफलता पूर्वक जमा हो गया है! स्टेटस: Pending (एडमिन अप्रूवल के बाद Member ID मिलेगी।)");
-        e.target.reset();
-    }
+        const phone = document.getElementById('regPhone').value.trim();
 
-    // समस्या फॉर्म सबमिट
-    function submitIssueForm(e) {
-        e.preventDefault();
-        const ticketId = "ISSUE-" + Math.floor(1000 + Math.random() * 9000);
-        
-        const issueData = {
-            id: ticketId,
-            name: document.getElementById('issueName').value,
-            phone: document.getElementById('issuePhone').value,
-            category: document.getElementById('issueCategory').value,
-            location: document.getElementById('issueLocation').value,
-            desc: document.getElementById('issueDesc').value,
-            photo: compressedIssuePhoto,
-            status: "Pending"
-        };
-
-        // लोकल स्टोरेज में सेव (डेमो के लिए)
-        let issues = JSON.parse(localStorage.getItem('village_issues') || '[]');
-        issues.push(issueData);
-        localStorage.setItem('village_issues', JSON.stringify(issues));
-
-        alert(`आपकी समस्या दर्ज कर ली गई है।\nशिकायत संख्या (Ticket ID): ${ticketId}`);
-        e.target.reset();
-    }
-
-    // स्टेटस चेक फ़ंक्शन
-    function checkStatus() {
-        const query = document.getElementById('searchID').value.trim();
-        const issues = JSON.parse(localStorage.getItem('village_issues') || '[]');
-        const resultDiv = document.getElementById('statusResult');
-
-        const found = issues.filter(i => i.id === query || i.phone === query);
-
-        if (found.length === 0) {
-            resultDiv.innerHTML = "<p style='color:red;'>कोई रिकॉर्ड नहीं मिला।</p>";
+        // Check if exists
+        if(members.some(m => m.phone === phone)) {
+            alert('यह मोबाइल नंबर पहले से पंजीकृत है!');
             return;
         }
 
-        let html = "<h4>दर्ज समस्याएं:</h4>";
-        found.forEach(item => {
+        const newMember = {
+            id: null,
+            name: document.getElementById('regName').value.trim(),
+            phone: phone,
+            ward: document.getElementById('regWard').value.trim(),
+            photo: compressedPhotoBase64 || 'https://via.placeholder.com/85x100',
+            status: 'Pending',
+            date: new Date().toLocaleDateString('hi-IN')
+        };
+
+        members.push(newMember);
+        localStorage.setItem('hghd_members', JSON.stringify(members));
+        alert('आवेदन सफलतापूर्वक जमा हो गया है!\nवर्तमान स्थिति: Pending (एडमिन स्वीकृति की प्रतीक्षा करें)');
+        e.target.reset();
+    }
+
+    // Notice Rendering
+    function renderNotices() {
+        const homeDiv = document.getElementById('homeNotices');
+        const publicDiv = document.getElementById('publicNotices');
+        
+        if(notices.length === 0) {
+            const emptyMsg = "<p style='color:#777;'>अभी कोई नई सूचना उपलब्ध नहीं है।</p>";
+            homeDiv.innerHTML = emptyMsg;
+            publicDiv.innerHTML = emptyMsg;
+            return;
+        }
+
+        let html = '';
+        notices.forEach((n, idx) => {
             html += `
-                <div class="issue-item">
-                    <b>ID:</b> ${item.id} <br>
-                    <b>श्रेणी:</b> ${item.category} <br>
-                    <b>विवरण:</b> ${item.desc} <br>
-                    <b>स्थिति:</b> <span class="status-badge status-pending">${item.status}</span>
+                <div class="notice-card">
+                    <h4>${n.title}</h4>
+                    <p style="margin:0; font-size:13px;">${n.body}</p>
+                    <small style="color:#888;">दिनांक: ${n.date}</small>
+                    ${document.getElementById('adminDashboard').style.display !== 'none' ? 
+                    `<br><button class="btn btn-danger" style="width:auto; padding:2px 6px; font-size:10px;" onclick="deleteNotice(${idx})">हटायें</button>` : ''}
                 </div>
             `;
         });
-        resultDiv.innerHTML = html;
-    }
-</script>
 
-</body>
-</html>
+        homeDiv.innerHTML = html;
+        publicDiv.innerHTML = html;
+    }
+
+    // Admin Authentication
+    function loginAdmin() {
+        const pass = document.getElementById('adminPass').value;
+        if(pass === 'sachin@312' || pass === 'Sachin@2026#Admin') {
+            document.getElementById('adminLogin').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'block';
+            renderAdminTable();
+            renderNotices();
+        } else {
+            alert('गलत पासवर्ड!');
+        }
+    }
+
+    function logoutAdmin() {
+        document.getElementById('adminLogin').style.display = 'block';
+        document.getElementById('adminDashboard').style.display = 'none';
+        document.getElementById('adminPass').value = '';
+    }
+
+    // Admin Table Render
+    function renderAdminTable() {
+        const tbody = document.getElementById('adminTableBody');
+        tbody.innerHTML = '';
+
+        members.forEach((m, idx) => {
+            let statusBadge = `<span class="badge badge-${m.status.toLowerCase()}">${m.status}</span>`;
+            
+            let actions = '';
+            if(m.status === 'Pending') {
+                actions = `
+                    <button style="background:green; color:#fff; border:none; padding:4px; border-radius:3px;" onclick="approveMember(${idx})">Approve</button>
+                    <button style="background:red; color:#fff; border:none; padding:4px; border-radius:3px;" onclick="rejectMember(${idx})">Reject</button>
+                `;
+            } else if(m.status === 'Approved') {
+                actions = `<button style="background:#555; color:#fff; border:none; padding:4px; border-radius:3px;" onclick="toggleStatus(${idx})">निष्क्रिय करें</button>`;
+            } else {
+                actions = `<button style="background:green; color:#fff; border:none; padding:4px; border-radius:3px;" onclick="approveMember(${idx})">पुनः Approve</button>`;
+            }
+
+            tbody.innerHTML += `
+                <tr>
+                    <td><img src="${m.photo}" width="35" height="40" style="object-fit:cover;"></td>
+                    <td>${m.name}</td>
+                    <td>${m.phone}</td>
+                    <td>${m.ward}</td>
+                    <td>${statusBadge}</td>
+                    <td><b>${m.id || '-'}</b></td>
+                    <td>${actions}</td>
+                </tr>
+            `;
+        });
+    }
+
+    // Approve Member & Generate Unique HG-ID
+    function approveMember(idx) {
+        if(!members[idx].id) {
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            members[idx].id = 'HG-' + randomNum;
+        }
+        members[idx].status = 'Approved';
+        localStorage.setItem('hghd_members', JSON.stringify(members));
+        renderAdminTable();
+    }
+
+    function rejectMember(idx) {
+        members[idx].status = 'Rejected';
+        localStorage.setItem('hghd_members', JSON.stringify(members));
+        renderAdminTable();
+    }
+
+    function toggleStatus(idx) {
+        members[idx].status = 'Rejected';
+        localStorage.setItem('hghd_members', JSON.stringify(members));
+        renderAdminTable();
+    }
+
+    // Notice Management
+    function addNotice() {
+        const title = document.getElementById('newNoticeTitle').value.trim();
+        const body = document.getElementById('newNoticeBody').value.trim();
+        
+        if(!title || !body) return alert('दोनों फ़ील्ड भरें');
+
+        notices.unshift({
+            title: title,
+            body: body,
+            date: new Date().toLocaleDateString('hi-IN')
+        });
+
+        localStorage.setItem('hghd_notices', JSON.stringify(notices));
+        document.getElementById('newNoticeTitle').value = '';
+        document.getElementById('newNoticeBody').value = '';
+        renderNotices();
+    }
+
+    function deleteNotice(idx) {
+        notices.splice(idx, 1);
+        localStorage.setItem('hghd_notices', JSON.stringify(notices));
+        renderNotices();
+    }
+
+    // Search & Render Digital Member Card
+    function searchMemberCard() {
+        const phone = document.getElementById('searchPhone').value.trim();
+        const resultDiv = document.getElementById('cardResult');
+        resultDiv.innerHTML = '';
+
+        const m = members.find(item => item.phone === phone);
+
+        if(!m) {
+            resultDiv.innerHTML = "<p style='color:red;'>यह मोबाइल नंबर पंजीकृत नहीं है।</p>";
+            return;
+        }
+
+        if(m.status === 'Pending') {
+            resultDiv.innerHTML = `
+                <div class="notice-card" style="border-left-color:#f39c12;">
+                    <h4>स्थिति: Pending ⏳</h4>
+                    <p>आपका आवेदन एडमिन (Sachin Jamre) की समीक्षा के अधीन है। अप्रूवल के बाद ही डिजिटल कार्ड जनरेट होगा।</p>
+                </div>
+            `;
+            return;
+        }
+
+        if(m.status === 'Rejected') {
+            resultDiv.innerHTML = `
+                <div class="notice-card" style="border-left-color:#e74c3c;">
+                    <h4>स्थिति: Rejected ❌</h4>
+                    <p>आपका आवेदन अस्वीकृत कर दिया गया है। अधिक जानकारी के लिए ग्राम टीम से संपर्क करें।</p>
+                </div>
+            `;
+            return;
+        }
+
+        // Generate Card Preview
+        resultDiv.innerHTML = `
+            <div class="card-box" id="memberCardRender">
+                <div class="card-header">
+                    <img src="1000467791.png" onerror="this.src='https://via.placeholder.com/45'">
+                    <div class="card-header-title">
+                        <h3>हमारा गाँव हमारी जिम्मेदारी</h3>
+                        <p>डिजिटल सदस्यता पहचान-पत्र</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <img src="${m.photo}" class="user-img">
+                    <div class="card-info">
+                        <p><b>नाम:</b> ${m.name}</p>
+                        <p><b>Member ID:</b> <span style="color:var(--primary); font-weight:bold;">${m.id}</span></p>
+                        <p><b>वार्ड/मोहल्ला:</b> ${m.ward}</p>
+                        <p><b>मोबाइल:</b> ${m.phone}</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div id="qrcode"></div>
+                    <div style="text-align:right;">
+      
