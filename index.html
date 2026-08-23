@@ -3,42 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎯 Daily Master Routine & Control System</title>
+  <title>🎯 Daily Master Routine & Tracker</title>
   <style>
     :root {
       --primary: #176b3a;
       --secondary: #0d4d2b;
-      --bg: #f4f6f9;
-      --card-bg: #fff;
+      --bg: #ffffff;
+      --card-bg: #f9fbfd;
       --text: #222;
-      --border: #ccd4dc;
+      --border: #d0d7de;
     }
     * { box-sizing: border-box; }
     body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
     header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 20px; text-align: center; }
-    header h1 { margin: 0 0 5px; font-size: 24px; }
+    header h1 { margin: 0 0 5px; font-size: 22px; }
     header p { margin: 0; font-size: 14px; opacity: 0.9; }
     
-    main { max-width: 900px; margin: auto; padding: 15px; }
-    .card { background: var(--card-bg); border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
-    .card h2 { color: var(--primary); margin-top: 0; border-bottom: 2px solid #eaf5ee; padding-bottom: 8px; font-size: 20px; }
-    
-    .routine-item { display: flex; align-items: center; margin: 10px 0; font-size: 16px; cursor: pointer; }
-    .routine-item input[type="checkbox"] { width: 20px; height: 20px; margin-right: 12px; accent-color: var(--primary); cursor: pointer; }
-    
-    .sub-box { background: #f9fcfa; border-left: 4px solid var(--primary); padding: 12px 15px; margin: 12px 0; border-radius: 0 8px 8px 0; }
-    .sub-box h3 { margin: 0 0 8px; font-size: 16px; color: var(--secondary); }
-    
-    .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px; }
-    .score-box { background: #eaf5ee; padding: 12px; border-radius: 8px; text-align: center; }
-    .score-box label { display: block; font-weight: bold; margin-bottom: 5px; color: var(--secondary); }
-    .score-box input { width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; text-align: center; font-size: 16px; }
+    .date-banner { background: #eaf5ee; color: var(--secondary); text-align: center; padding: 10px; font-weight: bold; font-size: 15px; border-bottom: 1px solid #c8e6c9; }
 
-    .control-tips { background: #fff8e1; border-left: 5px solid #ffa000; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
-    .control-tips h3 { margin-top: 0; color: #d84315; }
+    main { max-width: 850px; margin: auto; padding: 15px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 20px; }
+    .card h2 { color: var(--primary); margin-top: 0; border-bottom: 2px solid #eaf5ee; padding-bottom: 8px; font-size: 18px; }
+    
+    .routine-item { display: flex; align-items: center; margin: 10px 0; font-size: 15px; cursor: pointer; }
+    .routine-item input[type="checkbox"] { width: 18px; height: 18px; margin-right: 12px; accent-color: var(--primary); cursor: pointer; }
+    
+    .sub-box { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--primary); padding: 12px 15px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+    .sub-box h3 { margin: 0 0 8px; font-size: 15px; color: var(--secondary); }
+    
+    .topic-input { width: 100%; padding: 8px 10px; margin-top: 5px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px; }
+
+    .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 15px; }
+    .score-box { background: #fff; border: 1px solid var(--border); padding: 10px; border-radius: 8px; text-align: center; }
+    .score-box label { display: block; font-weight: bold; margin-bottom: 5px; color: var(--secondary); font-size: 13px; }
+    .score-box input { width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; text-align: center; font-size: 15px; }
+
+    .control-tips { background: #fffdf4; border: 1px solid #ffe082; border-left: 5px solid #ffa000; padding: 12px; border-radius: 8px; margin-bottom: 12px; }
+    .control-tips h3 { margin: 0 0 5px; font-size: 15px; color: #d84315; }
     
     .btn { background: var(--primary); color: #fff; border: 0; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; margin-top: 10px; }
     .btn:hover { background: var(--secondary); }
+    
+    /* Attendance Table */
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; background: #fff; }
+    th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: center; }
+    th { background: #eaf5ee; color: var(--secondary); }
     
     .footer { text-align: center; padding: 20px; color: #666; font-size: 13px; }
   </style>
@@ -49,6 +58,8 @@
     <h1>🎯 DAILY MASTER ROUTINE & CONTROL SYSTEM</h1>
     <p>“Perfect Day ❌ जरूरी नहीं, Comeback Day ✅ जरूरी है।”</p>
   </header>
+
+  <div class="date-banner" id="currentDateBanner">📅 तारीख लोड हो रही है...</div>
 
   <main>
     <!-- Daily Checklist -->
@@ -67,11 +78,20 @@
       </div>
 
       <div class="sub-box">
-        <h3>📚 7:00–11:00 — DEEP STUDY ZONE</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ➗ MATH Target Complete</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 REASONING Target Complete</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ⚖️ POLITY Target Complete</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 📝 Notes System (Main Notes, Short Notes, Doubt)</label>
+        <h3>📚 7:00–11:00 — DEEP STUDY ZONE (विषय और टॉपिक लिखें)</h3>
+        <div style="margin-bottom: 10px;">
+          <label class="routine-item"><input type="checkbox" class="t-check"> ➗ MATH Target Complete</label>
+          <input type="text" id="topicMath" class="topic-input" placeholder="आज का मैथ टॉपिक लिखें (जैसे: Percentage)">
+        </div>
+        <div style="margin-bottom: 10px;">
+          <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 REASONING Target Complete</label>
+          <input type="text" id="topicReasoning" class="topic-input" placeholder="आज का रीजनिंग टॉपिक लिखें (जैसे: Syllogism)">
+        </div>
+        <div style="margin-bottom: 10px;">
+          <label class="routine-item"><input type="checkbox" class="t-check"> ⚖️ POLITY Target Complete</label>
+          <input type="text" id="topicPolity" class="topic-input" placeholder="आज की पॉलिटी टॉपिक लिखें (जैसे: Fundamental Rights)">
+        </div>
+        <label class="routine-item"><input type="checkbox" class="t-check"> 📝 Notes System (Main, Short Notes, Doubt)</label>
       </div>
 
       <div class="sub-box">
@@ -100,66 +120,94 @@
       </div>
     </div>
 
-    <!-- Daily Control Score -->
+    <!-- Control System Rules with Checkboxes -->
     <div class="card">
-      <h2>⭐ आपका DAILY CONTROL SCORE (रात को भरें)</h2>
-      <div class="score-grid">
-        <div class="score-box">
-          <label>📚 Study Target (out of 10)</label>
-          <input type="number" id="scoreStudy" min="0" max="10" placeholder="जैसे: 8">
-        </div>
-        <div class="score-box">
-          <label>💪 Health (out of 5)</label>
-          <input type="number" id="scoreHealth" min="0" max="5" placeholder="जैसे: 4">
-        </div>
-        <div class="score-box">
-          <label>🔥 Discipline (out of 5)</label>
-          <input type="number" id="scoreDiscipline" min="0" max="5" placeholder="जैसे: 4">
-        </div>
-        <div class="score-box">
-          <label>🎯 Accuracy (%)</label>
-          <input type="text" id="scoreAccuracy" placeholder="जैसे: 85%">
-        </div>
-        <div class="score-box">
-          <label>📱 Distraction Control (out of 5)</label>
-          <input type="number" id="scoreDistraction" min="0" max="5" placeholder="जैसे: 5">
-        </div>
-      </div>
-      <button class="btn" onclick="saveScores()">💾 आज का स्कोर सेव करें</button>
-    </div>
-
-    <!-- Quick Control Guide -->
-    <div class="card">
-      <h2>🔐 नियंत्रण प्रणाली (Control System Quick Rules)</h2>
+      <h2>🔐 नियंत्रण प्रणाली (Control System Quick Rules) - आज पालन हुआ?</h2>
       
       <div class="control-tips">
         <h3>📱 1. Reels Control</h3>
-        <p>Study Block के दौरान फोन दूसरे कमरे में रखें। "Break" का मतलब Reel नहीं, Recovery (पानी पीना/चलना) है।</p>
+        <label class="routine-item"><input type="checkbox" class="t-check"> फोन दूर रखा और रील्स से दूर रहा (Break = Recovery)</label>
       </div>
 
       <div class="control-tips">
         <h3>🧠 2. ज्यादा सोचने का तरीका</h3>
-        <p>नियम: <b>STOP → लिखो → वापस आओ।</b> कागज पर लिखें कि दिमाग में क्या चल रहा है और उसे कब सोचेंगे, फिर तुरंत Task पर लौटें।</p>
+        <label class="routine-item"><input type="checkbox" class="t-check"> नियम पालन: STOP → लिखा → वापस Task पर आया</label>
       </div>
 
       <div class="control-tips">
         <h3>🚭 3. Cigarette / Craving</h3>
-        <p>Craving आने पर तुरंत रुकें, पानी पिएँ, जगह बदलें और अकेले न रहें। किसी भरोसेमंद व्यक्ति या डॉक्टर से मदद लें।</p>
+        <label class="routine-item"><input type="checkbox" class="t-check"> Craving आने पर पानी पिया / जगह बदली / कंट्रोल रखा</label>
       </div>
 
       <div class="control-tips">
         <h3>🔒 4. अश्लील सामग्री से बचाव</h3>
-        <p>फोन अकेले बिस्तर में न ले जाएं। रात में फोन दूर रखें। गलती होने पर गिल्ट महसूस न करें, तुरंत रूटीन पर लौटें।</p>
+        <label class="routine-item"><input type="checkbox" class="t-check"> फोन बिस्तर में नहीं ले गया / ट्रिगर से बचा रहा</label>
       </div>
+    </div>
+
+    <!-- Daily Control Score -->
+    <div class="card">
+      <h2>⭐ आपका DAILY CONTROL SCORE (सख्त सीमा के साथ)</h2>
+      <div class="score-grid">
+        <div class="score-box">
+          <label>📚 Study (Max 10)</label>
+          <input type="number" id="scoreStudy" min="0" max="10" placeholder="0-10">
+        </div>
+        <div class="score-box">
+          <label>💪 Health (Max 5)</label>
+          <input type="number" id="scoreHealth" min="0" max="5" placeholder="0-5">
+        </div>
+        <div class="score-box">
+          <label>🔥 Discipline (Max 5)</label>
+          <input type="number" id="scoreDiscipline" min="0" max="5" placeholder="0-5">
+        </div>
+        <div class="score-box">
+          <label>🎯 Accuracy (%)</label>
+          <input type="number" id="scoreAccuracy" min="0" max="100" placeholder="0-100%">
+        </div>
+        <div class="score-box">
+          <label>📱 Distraction (Max 5)</label>
+          <input type="number" id="scoreDistraction" min="0" max="5" placeholder="0-5">
+        </div>
+      </div>
+      <button class="btn" onclick="saveAttendance()">💾 आज की अटेंडेंस और स्कोर सेव करें</button>
+    </div>
+
+    <!-- Attendance & History Log -->
+    <div class="card">
+      <h2>📊 पिछला रिकॉर्ड / अटेंडेंस शीट (Page Log)</h2>
+      <p style="font-size: 13px; color: #555;">यहाँ आपके द्वारा सेव किए गए हर दिन के काम और स्कोर की पूरी जानकारी दिखेगी:</p>
+      <div style="overflow-x: auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>तारीख / दिन</th>
+              <th>मैथ्स टॉपिक</th>
+              <th>रीजनिंग टॉपिक</th>
+              <th>पॉलिटी टॉपिक</th>
+              <th>स्कोर (Study/10)</th>
+              <th>एक्यूरेसी</th>
+            </tr>
+          </thead>
+          <tbody id="attendanceTableBody">
+            <tr><td colspan="6" style="text-align:center;">अभी कोई डेटा सेव नहीं है।</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="btn" style="background: #a21d1d; margin-top: 15px;" onclick="clearHistory()">🗑️ सारा इतिहास साफ़ करें</button>
     </div>
   </main>
 
-  <div class="footer">© 2026 Daily Master Routine • लक्ष्य: सफलता और अनुशासन</div>
+  <div class="footer">© Daily Master Routine • लक्ष्य: सफलता और अनुशासन</div>
 
   <script>
-    // Save/Load Checkboxes and Scores using localStorage
+    // Set Date and Day automatically
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const todayStr = new Date().toLocaleDateString('hi-IN', options);
+    document.getElementById('currentDateBanner').textContent = '📅 आज की तारीख और दिन: ' + todayStr;
+
+    // Checkboxes saving logic
     const checkboxes = document.querySelectorAll('.t-check');
-    
     checkboxes.forEach((chk, index) => {
       let savedState = localStorage.getItem('chk_' + index);
       if(savedState === 'true') chk.checked = true;
@@ -169,24 +217,83 @@
       });
     });
 
-    function saveScores() {
-      localStorage.setItem('scoreStudy', document.getElementById('scoreStudy').value);
-      localStorage.setItem('scoreHealth', document.getElementById('scoreHealth').value);
-      localStorage.setItem('scoreDiscipline', document.getElementById('scoreDiscipline').value);
-      localStorage.setItem('scoreAccuracy', document.getElementById('scoreAccuracy').value);
-      localStorage.setItem('scoreDistraction', document.getElementById('scoreDistraction').value);
-      alert('✅ आपका आज का स्कोर सुरक्षित हो गया है!');
+    // Topic inputs saving logic
+    ['topicMath', 'topicReasoning', 'topicPolity'].forEach(id => {
+      let el = document.getElementById(id);
+      if(localStorage.getItem(id)) el.value = localStorage.getItem(id);
+      el.addEventListener('input', () => {
+        localStorage.setItem(id, el.value);
+      });
+    });
+
+    // Score validation and Attendance Saving
+    function saveAttendance() {
+      let sStudy = parseInt(document.getElementById('scoreStudy').value) || 0;
+      let sHealth = parseInt(document.getElementById('scoreHealth').value) || 0;
+      let sDiscipline = parseInt(document.getElementById('scoreDiscipline').value) || 0;
+      let sAccuracy = parseInt(document.getElementById('scoreAccuracy').value) || 0;
+      let sDistraction = parseInt(document.getElementById('scoreDistraction').value) || 0;
+
+      // Strict validation based on user instructions
+      if(sStudy > 10) { alert('❌ Study Target के नंबर 10 से ज्यादा नहीं हो सकते!'); return; }
+      if(sHealth > 5) { alert('❌ Health के नंबर 5 से ज्यादा नहीं हो सकते!'); return; }
+      if(sDiscipline > 5) { alert('❌ Discipline के नंबर 5 से ज्यादा नहीं हो सकते!'); return; }
+      if(sAccuracy > 100) { alert('❌ Accuracy 100% से ज्यादा नहीं हो सकती!'); return; }
+      if(sDistraction > 5) { alert('❌ Distraction Control के नंबर 5 से ज्यादा नहीं हो सकते!'); return; }
+
+      let entry = {
+        date: todayStr,
+        math: document.getElementById('topicMath').value || '-لا-',
+        reasoning: document.getElementById('topicReasoning').value || '-',
+        polity: document.getElementById('topicPolity').value || '-',
+        study: sStudy,
+        accuracy: sAccuracy + '%'
+      };
+
+      let history = JSON.parse(localStorage.getItem('study_history') || '[]');
+      history.unshift(entry); // Add new entry to top
+      localStorage.setItem('study_history', JSON.stringify(history));
+
+      loadHistory();
+      alert('✅ आपकी आज की अटेंडेंस और डेटा सफलतापूर्वक सेव हो गया है!');
     }
 
-    // Load saved scores
+    // Load History Table
+    function loadHistory() {
+      let history = JSON.parse(localStorage.getItem('study_history') || '[]');
+      let tbody = document.getElementById('attendanceTableBody');
+      
+      if(history.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;">अभी कोई डेटा सेव नहीं है।</td></tr>`;
+        return;
+      }
+
+      let html = '';
+      history.forEach(item => {
+        html += `<tr>
+          <td>${item.date}</td>
+          <td>${item.math}</td>
+          <td>${item.reasoning}</td>
+          <td>${item.polity}</td>
+          <td>${item.study}/10</td>
+          <td>${item.accuracy}</td>
+        </tr>`;
+      });
+      tbody.innerHTML = html;
+    }
+
+    function clearHistory() {
+      if(confirm('क्या आप सारा पुराना इतिहास मिटाना चाहते हैं?')) {
+        localStorage.removeItem('study_history');
+        loadHistory();
+      }
+    }
+
+    // Load history on page start
     window.onload = function() {
-      if(localStorage.getItem('scoreStudy')) document.getElementById('scoreStudy').value = localStorage.getItem('scoreStudy');
-      if(localStorage.getItem('scoreHealth')) document.getElementById('scoreHealth').value = localStorage.getItem('scoreHealth');
-      if(localStorage.getItem('scoreDiscipline')) document.getElementById('scoreDiscipline').value = localStorage.getItem('scoreDiscipline');
-      if(localStorage.getItem('scoreAccuracy')) document.getElementById('scoreAccuracy').value = localStorage.getItem('scoreAccuracy');
-      if(localStorage.getItem('scoreDistraction')) document.getElementById('scoreDistraction').value = localStorage.getItem('scoreDistraction');
+      loadHistory();
     };
   </script>
 </body>
-                                     </html>
-         
+  </html>
+          
