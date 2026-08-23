@@ -1,227 +1,254 @@
-
-/* File is 566 KB. Showing the first 292 KB in the highlighted view to avoid running out of memory. Use the Editor tab to see the full file. */
- 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>हमारा गाँव हमारी जिम्मेदारी | ग्राम पंचायत जोजलवाड़ी</title>
-<style>
-:root{--g:#087a35;--g2:#0b5f2a;--o:#e85d04;--n:#102a43;--bg:#f4f8f5;--card:#fff;--muted:#667085;--red:#b42318;--line:#dfe8e2}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Devanagari",Arial,sans-serif;background:var(--bg);color:#182230}
-button,input,select,textarea{font:inherit}button{cursor:pointer}
-header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 14px #0000000b}
-.top{max-width:1180px;margin:auto;display:flex;align-items:center;gap:12px;padding:9px 16px}.logo{width:58px;height:58px;border-radius:50%;object-fit:cover}.brand{font-weight:900;color:var(--n);font-size:19px}.sub{font-size:12px;color:var(--g)}
-nav{max-width:1180px;margin:auto;display:flex;gap:7px;overflow:auto;padding:7px 16px 10px}nav button,.btn{border:0;border-radius:11px;padding:10px 14px;background:var(--g);color:#fff;font-weight:800}.secondary{background:#e8f4ec!important;color:var(--g)!important}.danger{background:#fee4e2!important;color:var(--red)!important}.dark{background:var(--n)!important}
-main{max-width:1180px;margin:auto;padding:18px 16px 35px}.hero{background:linear-gradient(135deg,#fff,#eaf7ee);border:1px solid #d7e9dc;border-radius:24px;padding:25px;display:grid;grid-template-columns:1fr 190px;gap:20px;align-items:center}.hero h1{margin:0;color:var(--n);font-size:clamp(27px,5vw,44px)}.hero p{font-size:17px;line-height:1.6}.hero img{width:180px;max-width:100%;justify-self:end}
-.notice{background:#fff7ed;border-left:5px solid var(--o);padding:14px;border-radius:12px;margin:15px 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:0 5px 20px #00000008}.card h2,.card h3{color:var(--n);margin-top:0}.stat{text-align:center}.stat b{display:block;color:var(--g);font-size:28px}.small{font-size:12px;color:var(--muted)}section{display:none}.active{display:block}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}form{display:grid;gap:12px}label{font-weight:800;font-size:14px;display:block;margin-bottom:5px}input,select,textarea{width:100%;padding:11px;border:1px solid #cbd8cf;border-radius:10px;background:#fff}textarea{min-height:110px;resize:vertical}.actions{display:flex;gap:8px;flex-wrap:wrap}.pill{display:inline-block;padding:4px 9px;border-radius:999px;font-size:12px;font-weight:800;background:#eef2f4}.ok{background:#dcfce7;color:#166534}.pending{background:#fff3cd;color:#8a5a00}.bad{background:#fee2e2;color:#991b1b}.list{display:grid;gap:10px}.post{border:1px solid var(--line);border-radius:13px;padding:13px;background:#fff}.post img{max-width:100%;border-radius:10px;margin-top:8px;max-height:300px;object-fit:cover}.hidden{display:none!important}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap;font-size:13px}th{background:#eef7f0}.footer{background:var(--n);color:#fff;text-align:center;padding:25px 16px;margin-top:20px}.badge{display:inline-block;background:var(--g);color:#fff;border-radius:999px;padding:5px 9px;font-size:12px}.search{display:grid;grid-template-columns:1fr auto;gap:8px}
-@media(max-width:800px){.grid,.grid4{grid-template-columns:1fr 1fr}.hero{grid-template-columns:1fr}.hero img{justify-self:start;width:130px}.row{grid-template-columns:1fr}}
-@media(max-width:520px){.grid,.grid4{grid-template-columns:1fr}.top{padding-left:10px;padding-right:10px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ग्राम पंचायत जोजलवाड़ी - हमारा गाँव हमारी जिम्मेदारी</title>
+    <style>
+        :root {
+            --primary: #1b5e20;
+            --secondary: #e65100;
+            --light: #f4f6f8;
+            --dark: #2c3e50;
+        }
+        * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; }
+        body { background: #eef2f5; color: #333; line-height: 1.6; }
+        
+        /* Header */
+        header { background: var(--primary); color: white; padding: 15px 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header-container { display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .logo-img { width: 70px; height: 70px; border-radius: 50%; border: 2px solid white; object-fit: cover; }
+        .header-title h1 { font-size: 1.5rem; margin-bottom: 2px; }
+        .header-title p { font-size: 0.9rem; opacity: 0.9; }
+
+        /* Container & Grid */
+        .container { max-width: 1100px; margin: 20px auto; padding: 0 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        
+        /* Cards & Sections */
+        .card { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 20px; }
+        .card-header { font-size: 1.2rem; font-weight: bold; color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 8px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        
+        /* Emergency Contacts */
+        .emergency-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; text-align: center; }
+        .em-box { background: #ffebee; border: 1px solid #ffcdd2; padding: 10px; border-radius: 6px; }
+        .em-box strong { color: #c62828; display: block; }
+
+        /* Forms */
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 0.95rem; }
+        .btn { background: var(--primary); color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; transition: 0.2s; }
+        .btn:hover { background: #134217; }
+        .btn-orange { background: var(--secondary); }
+        .btn-orange:hover { background: #bf4300; }
+
+        /* Tracker Result */
+        .status-badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 0.85rem; font-weight: bold; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-approved { background: #d4edda; color: #155724; }
+        .status-rejected { background: #f8d7da; color: #721c24; }
+
+        /* Digital ID Preview */
+        .id-card { border: 2px solid var(--primary); border-radius: 10px; padding: 15px; background: #fff; text-align: center; max-width: 320px; margin: 10px auto; position: relative; overflow: hidden; }
+        .id-card-header { background: var(--primary); color: white; padding: 8px; margin: -15px -15px 10px -15px; font-size: 0.9rem; font-weight: bold; }
+        .id-user-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 5px auto; border: 2px solid #ccc; }
+        .id-details { text-align: left; font-size: 0.85rem; margin: 10px 0; }
+
+        /* Admin Table */
+        .admin-section { display: none; margin-top: 20px; background: #fff; padding: 20px; border-radius: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: var(--primary); color: white; }
+        .btn-sm { padding: 4px 8px; font-size: 0.75rem; width: auto; margin-right: 2px; }
+        .btn-danger { background: #d32f2f; }
+    </style>
 </head>
 <body>
-<header>
-  <div class="top">
-    <img id="logo" class="logo">
-    <div><div class="brand">हमारा गाँव हमारी जिम्मेदारी</div><div class="sub">ग्राम पंचायत जोजलवाड़ी • एक सोच • एक प्रयास • बेहतर गाँव</div></div>
-  </div>
-  <nav>
 
-            <h1>हमारा गाँव हमारी जिम्मेदारी</h1>
-            <p>ग्राम पंचायत जोजलवाड़ी • एक सोच • एक प्रयास • बेहतर गाँव</p>
-            <small style="color:#666;">Founder - DIMAGI NAXAL</small>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <img src="https://i.ibb.co/L5BfN7R/logo.png" id="main-logo" class="logo-img" alt="हमारा गांव हमारी जिम्मेदारी">
+            <div class="header-title">
+                <h1>ग्राम पंचायत जोजलवाड़ी</h1>
+                <p><strong>Founder:</strong> DIMAGI NAXAL | <i>"एक सोच, एक प्रयास, बेहतर गाँव"</i></p>
+            </div>
         </div>
     </header>
 
-    <!-- Horizontal Navigation Bar -->
-    <div class="nav-scroll-container">
-        <div class="nav-menu">
-            <button class="nav-btn" onclick="showSection('homeSection')">
-                <span class="icon">🏡</span>
-                <span class="label">होम</span>
-            </button>
-            <button class="nav-btn" onclick="showSection('memberSection')">
-                <span class="icon">👥</span>
-                <span class="label">सदस्य<br>बनें</span>
-            </button>
-            <button class="nav-btn" onclick="showSection('issueSection')">
-                <span class="icon">📢</span>
-                <span class="label">मुद्दा<br>रखें</span>
-            </button>
-            <button class="nav-btn" onclick="showSection('idCardSection')">
-                <span class="icon">🪪</span>
-                <span class="label">ID<br>Card</span>
-            </button>
-            <button class="nav-btn" onclick="showSection('trackerSection')">
-                <span class="icon">🤓</span>
-                <span class="label">QR<br>SMART</span>
-            </button>
-            <button class="nav-btn" style="background-color: #d9534f;" onclick="showAdminSection()">
-                <span class="icon">🔐</span>
-                <span class="label">Admin<br>Control</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- Content Sections -->
-    <div class="main-container">
-
-        <!-- 1. HOME SECTION -->
-        <div id="homeSection" class="section-card active">
-            <h2>📢 ग्राम पंचायत जोजलवाड़ी - सूचना एवं आपातकाल</h2>
-            <div class="notice-box">
-                <strong>महत्वपूर्ण सूचना:</strong> ग्राम पंचायत जोजलवाड़ी के सभी निवासियों का स्वागत है। पंचायत से जुड़ी समस्याओं को ऑनलाइन दर्ज कराने तथा अपनी डिजिटल ID प्राप्त करने के लिए ऊपर दिए गए मेनू का उपयोग करें।
+    <div class="container">
+        
+        <!-- Top Info Grid -->
+        <div class="grid">
+            <!-- Notice Board -->
+            <div class="card">
+                <div class="card-header">📢 ग्राम पंचायत सूचना</div>
+                <ul style="padding-left: 20px; font-size: 0.95rem;">
+                    <li>ग्राम सभा की बैठक जल्द आयोजित होगी।</li>
+                    <li>जल संरक्षण एवं स्वच्छता अभियान में भाग लें।</li>
+                    <li>डिजिटल सदस्य पहचान पत्र हेतु ऑनलाइन आवेदन करें।</li>
+                </ul>
             </div>
 
-            <h2 style="margin-top:20px;">🚨 आपातकाल संपर्क नंबर</h2>
-            <ul class="emergency-list">
-                <li><span>सरपंच:</span> <strong>+91 98XXXXXXXX</strong></li>
-                <li><span>सचिव:</span> <strong>+91 97XXXXXXXX</strong></li>
-                <li><span>सहायक सचिव:</span> <strong>+91 96XXXXXXXX</strong></li>
-            </ul>
-        </div>
-
-        <!-- 2. MEMBER REGISTRATION SECTION -->
-        <div id="memberSection" class="section-card">
-            <h2>👥 सदस्य आवेदन - ग्राम पंचायत जोजलवाड़ी</h2>
-            <form id="memberForm">
-                <div class="form-group">
-                    <label>पूरा नाम *</label>
-                    <input type="text" id="mName" required placeholder="अपना नाम दर्ज करें">
-                </div>
-                <div class="form-group">
-                    <label>मोबाइल नंबर *</label>
-                    <input type="tel" id="mMobile" pattern="[0-9]{10}" required placeholder="10 अंकों का मोबाइल नंबर">
-                </div>
-                <div class="form-group">
-                    <label>मोहल्ला / वार्ड *</label>
-                    <input type="text" id="mWard" required placeholder="मोहल्ला या वार्ड क्रमांक">
-                </div>
-                <div class="form-group">
-                    <label>उम्र *</label>
-                    <input type="number" id="mAge" required placeholder="आयु">
-                </div>
-                <div class="form-group">
-                    <label>फोटो अपलोड *</label>
-                    <input type="file" id="mPhoto" accept="image/*" required>
-                </div>
-                <button type="submit" class="submit-btn">📩 आवेदन भेजें</button>
-            </form>
-        </div>
-
-        <!-- 3. ISSUE SUBMISSION SECTION -->
-        <div id="issueSection" class="section-card">
-            <h2>📷 गाँव का मुद्दा / समस्या दर्ज करें</h2>
-            <form id="issueForm">
-                <div class="form-group">
-                    <label>नाम *</label>
-                    <input type="text" id="iName" required>
-                </div>
-                <div class="form-group">
-                    <label>मोबाइल नंबर *</label>
-                    <input type="tel" id="iMobile" pattern="[0-9]{10}" required>
-                </div>
-                <div class="form-group">
-                    <label>लोकेशन / स्थान *</label>
-                    <input type="text" id="iLocation" required placeholder="समस्या का स्थान दर्ज करें">
-                </div>
-                <div class="form-group">
-                    <label>समस्या का प्रकार *</label>
-                    <select id="iType" required>
-                        <option value="">-- चुनें --</option>
-                        <option value="पानी">पानी</option>
-                        <option value="शिक्षा">शिक्षा</option>
-                        <option value="स्वास्थ्य">स्वास्थ्य</option>
-                        <option value="सड़क">सड़क</option>
-                        <option value="अन्य">अन्य</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>विवरण *</label>
-                    <textarea id="iDesc" rows="3" required placeholder="समस्या की जानकारी लिखें"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>फोटो अपलोड करें</label>
-                    <input type="file" id="iPhoto" accept="image/*">
-                </div>
-                <button type="submit" class="submit-btn" style="background-color: #d9534f;">समस्या रिपोर्ट करें</button>
-            </form>
-        </div>
-
-        <!-- 4. ID CARD SECTION -->
-        <div id="idCardSection" class="section-card">
-            <h2>🪪 डिजिटल ID कार्ड जनरेटर</h2>
-            <div class="form-group">
-                <label>पंजीकृत मोबाइल नंबर दर्ज करें:</label>
-                <input type="tel" id="checkMobile" placeholder="10 अंकों का मोबाइल नंबर">
-            </div>
-            <button class="submit-btn" onclick="generateIDCard()">डिजिटल ID देखें</button>
-
-            <div id="idCardContainer" style="display:none; margin-top: 20px;">
-                <div class="id-card">
-                    <div class="id-card-header">
-                        डिजिटल पहचान पत्र - ग्राम पंचायत जोजलवाड़ी
-                    </div>
-                    <img id="cardPhotoImg" src="" class="id-photo" alt="Member Photo">
-                    <div style="text-align: left; font-size:0.85rem; line-height: 1.5;">
-                        <p><strong>नाम:</strong> <span id="cardNameVal"></span></p>
-                        <p><strong>मोबाइल:</strong> <span id="cardMobileVal"></span></p>
-                        <p><strong>मोहल्ला/वार्ड:</strong> <span id="cardWardVal"></span></p>
-                        <p><strong>उम्र:</strong> <span id="cardAgeVal"></span> वर्ष</p>
-                        <p><strong>स्थिति:</strong> <span class="badge badge-approved">प्रमाणित सदस्य ✔</span></p>
-                    </div>
-                    <div id="qrcode" style="display: flex; justify-content: center; margin-top: 10px;"></div>
+            <!-- Emergency Numbers -->
+            <div class="card">
+                <div class="card-header">🚨 आपातकाल संपर्क नंबर</div>
+                <div class="emergency-list">
+                    <div class="em-box"><strong>सरपंच</strong> 98xxxxxx01</div>
+                    <div class="em-box"><strong>सचिव</strong> 98xxxxxx02</div>
+                    <div class="em-box"><strong>सहायक सचिव</strong> 98xxxxxx03</div>
                 </div>
             </div>
         </div>
 
-        <!-- 5. TRACKER / QR SMART SECTION -->
-        <div id="trackerSection" class="section-card">
-            <h2>📝 शिकायत ट्रैकर (QR SMART)</h2>
-            <div class="form-group">
-                <label>Ticket ID दर्ज करें:</label>
-                <input type="text" id="trackTicketInput" placeholder="उदा. TKT12345">
-            </div>
-            <button class="submit-btn" onclick="trackTicket()">स्थिति देखें</button>
-            <div id="ticketResult" style="margin-top: 15px;"></div>
-        </div>
-
-        <!-- 6. ADMIN CONTROL SECTION -->
-        <div id="adminSection" class="section-card">
-            <h2>🔐 ADMIN CONTROL PANEL - ग्राम पंचायत जोजलवाड़ी</h2>
+        <!-- Main Form Grid -->
+        <div class="grid">
             
-            <h3>👥 सदस्यता आवेदन सूची</h3>
+            <!-- Member Registration Form -->
+            <div class="card">
+                <div class="card-header">👥 सदस्य बनें (डिजिटल ID कार्ड)</div>
+                <form id="memberForm">
+                    <div class="form-group">
+                        <label>पूरा नाम *</label>
+                        <input type="text" id="mName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>मोबाइल नंबर *</label>
+                        <input type="tel" id="mPhone" pattern="[0-9]{10}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>मोहल्ला / वार्ड *</label>
+                        <input type="text" id="mWard" required>
+                    </div>
+                    <div class="form-group">
+                        <label>उम्र *</label>
+                        <input type="number" id="mAge" required>
+                    </div>
+                    <div class="form-group">
+                        <label>पासपोर्ट साइज फोटो अपलोड *</label>
+                        <input type="file" id="mPhoto" accept="image/*" required>
+                    </div>
+                    <button type="submit" class="btn">📩 आवेदन भेजें</button>
+                </form>
+            </div>
+
+            <!-- Village Issue Form -->
+            <div class="card">
+                <div class="card-header">📷 गाँव का मुद्दा / समस्या दर्ज करें</div>
+                <form id="issueForm">
+                    <div class="form-group">
+                        <label>आपका नाम *</label>
+                        <input type="text" id="iName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>मोबाइल नंबर *</label>
+                        <input type="tel" id="iPhone" pattern="[0-9]{10}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>लोकेशन / वार्ड *</label>
+                        <input type="text" id="iLoc" required>
+                    </div>
+                    <div class="form-group">
+                        <label>समस्या का प्रकार *</label>
+                        <select id="iType">
+                            <option value="पानी">पानी की समस्या</option>
+                            <option value="शिक्षा">शिक्षा संबंधी</option>
+                            <option value="स्वास्थ्य">स्वास्थ्य सुविधा</option>
+                            <option value="सड़क">सड़क / नाली</option>
+                            <option value="अन्य">अन्य</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>विवरण</label>
+                        <textarea id="iDesc" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>समस्या की फोटो अपलोड</label>
+                        <input type="file" id="iPhoto" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-orange">🚨 समस्या रिपोर्ट करें</button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Tracker Section -->
+        <div class="card">
+            <div class="card-header">📝 शिकायत / आवेदन ट्रैकर</div>
+            <div style="display: flex; gap: 10px; max-width: 500px;">
+                <input type="text" id="trackId" placeholder="अपनी Ticket ID डालें (जैसे: JOJ-101)" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
+                <button onclick="trackStatus()" class="btn" style="width: auto;">स्थिति देखें</button>
+            </div>
+            <div id="trackResult" style="margin-top: 15px;"></div>
+        </div>
+
+        <!-- ID Card Display Modal Preview (Simulated) -->
+        <div id="idCardModal" class="card" style="display: none; background: #eef2f5;">
+            <div class="card-header">🪪 अनुमोदित डिजिटल पहचान पत्र</div>
+            <div class="id-card" id="printableCard">
+                <div class="id-card-header">ग्राम पंचायत जोजलवाड़ी - डिजिटल पहचान पत्र</div>
+                <img src="" id="cardImg" class="id-user-img" alt="User">
+                <h3 id="cardName" style="font-size: 1rem; color: #1b5e20;">-</h3>
+                <div class="id-details">
+                    <p><strong>मोबाइल:</strong> <span id="cardPhone">-</span></p>
+                    <p><strong>वार्ड:</strong> <span id="cardWard">-</span></p>
+                    <p><strong>उम्र:</strong> <span id="cardAge">-</span></p>
+                    <p><strong>स्थिति:</strong> <span style="color: green;">प्रमाणित सदस्य ✔</span></p>
+                </div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=VERIFIED_MEMBER" style="width: 70px; margin-top: 5px;" alt="QR">
+            </div>
+            <button onclick="window.print()" class="btn" style="max-width: 200px; margin: 10px auto; display: block;">🖨️ प्रिंट करें</button>
+        </div>
+
+        <!-- Admin Access Toggle Button -->
+        <div style="text-align: center; margin-top: 30px; margin-bottom: 20px;">
+            <button onclick="toggleAdminPanel()" class="btn btn-orange" style="max-width: 250px;">🔐 ADMIN CONTROL</button>
+        </div>
+
+        <!-- ADMIN PANEL SECTION -->
+        <div id="adminPanel" class="admin-section card">
+            <div class="card-header" style="color: #d32f2f;">🔐 ADMIN CONTROL PANEL</div>
+            
+            <!-- Member Approvals -->
+            <h3 style="margin-top: 10px; font-size: 1rem;">👥 सदस्य आवेदन प्रबंधन</h3>
             <div style="overflow-x: auto;">
-                <table id="adminMembersTable">
+                <table>
                     <thead>
                         <tr>
-                            <th>फोटो</th>
+                            <th>ID</th>
                             <th>नाम</th>
                             <th>मोबाइल</th>
                             <th>वार्ड</th>
+                            <th>फोटो</th>
                             <th>स्थिति</th>
                             <th>कार्रवाई</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody id="adminMembersTable">
+                        <!-- Dynamic Rows -->
+                    </tbody>
                 </table>
             </div>
 
-            <h3 style="margin-top: 25px;">📷 दर्ज शिकायतें / मुद्दे</h3>
+            <!-- Issue Reports -->
+            <h3 style="margin-top: 20px; font-size: 1rem;">📷 गाँव की समस्याएँ & शिकायतें</h3>
             <div style="overflow-x: auto;">
-                <table id="adminIssuesTable">
+                <table>
                     <thead>
                         <tr>
                             <th>Ticket ID</th>
                             <th>नाम</th>
                             <th>प्रकार</th>
+                            <th>स्थान</th>
                             <th>विवरण</th>
                             <th>स्थिति</th>
                             <th>कार्रवाई</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody id="adminIssuesTable">
+                        <!-- Dynamic Rows -->
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -229,94 +256,172 @@ main{max-width:1180px;margin:auto;padding:18px 16px 35px}.hero{background:linear
     </div>
 
     <script>
-        // Data Stores
-        let membersData = JSON.parse(localStorage.getItem('jojalwadi_members')) || [];
-        let issuesData = JSON.parse(localStorage.getItem('jojalwadi_issues')) || [];
-        
-        // ADMIN PASSWORD UPDATED
-        const ADMIN_PASSWORD = "Sachin@312";
+        // Data Stores (LocalStorage Simulation)
+        let members = JSON.parse(localStorage.getItem('jojal_members')) || [];
+        let issues = JSON.parse(localStorage.getItem('jojal_issues')) || [];
+        let adminLoggedIn = false;
 
-        // Navigation Controller
-        function showSection(sectionId) {
-            document.querySelectorAll('.section-card').forEach(sec => sec.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-        }
-
-        function showAdminSection() {
-            const pass = prompt("Admin Password दर्ज करें:");
-            if (pass === ADMIN_PASSWORD) {
-                showSection('adminSection');
-                renderAdminTables();
-            } else {
-                alert("गलत पासवर्ड!");
-            }
-        }
-
-        // Save Data Helper
-        function updateStorage() {
-            localStorage.setItem('jojalwadi_members', JSON.stringify(membersData));
-            localStorage.setItem('jojalwadi_issues', JSON.stringify(issuesData));
+        // Image Convert Helper
+        function getBase64(file, callback) {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => callback(reader.result);
+            reader.onerror = error => console.log('Error: ', error);
         }
 
         // Member Form Submit
         document.getElementById('memberForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const file = document.getElementById('mPhoto').files[0];
-            const reader = new FileReader();
-
-            reader.onload = function(evt) {
-                const member = {
-                    id: Date.now(),
+            const fileInput = document.getElementById('mPhoto').files[0];
+            
+            getBase64(fileInput, function(base64Image) {
+                const newMember = {
+                    id: 'MEM-' + Math.floor(1000 + Math.random() * 9000),
                     name: document.getElementById('mName').value,
-                    mobile: document.getElementById('mMobile').value,
+                    phone: document.getElementById('mPhone').value,
                     ward: document.getElementById('mWard').value,
                     age: document.getElementById('mAge').value,
-                    photo: evt.target.result,
+                    photo: base64Image,
                     status: 'Pending'
                 };
-                membersData.push(member);
-                updateStorage();
-                alert('आवेदन सफलतापूर्वक भेजा गया! Admin approval के बाद ID दिखेगी।');
+                members.push(newMember);
+                localStorage.setItem('jojal_members', JSON.stringify(members));
+                alert('आवेदन सफलतापूर्वक भेजा गया! आपकी Ticket/Member ID है: ' + newMember.id);
                 document.getElementById('memberForm').reset();
-            };
-            if(file) reader.readAsDataURL(file);
+            });
         });
 
         // Issue Form Submit
         document.getElementById('issueForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const tkt = 'TKT' + Math.floor(10000 + Math.random() * 90000);
-            const issue = {
-                ticketId: tkt,
+            const newIssue = {
+                id: 'JOJ-' + Math.floor(100 + Math.random() * 900),
                 name: document.getElementById('iName').value,
-                mobile: document.getElementById('iMobile').value,
-                location: document.getElementById('iLocation').value,
+                phone: document.getElementById('iPhone').value,
+                location: document.getElementById('iLoc').value,
                 type: document.getElementById('iType').value,
                 desc: document.getElementById('iDesc').value,
-                status: 'लंबित'
+                status: 'लंबित (Pending)'
             };
-            issuesData.push(issue);
-            updateStorage();
-            alert(`मुद्दा दर्ज कर लिया गया है। Ticket ID: ${tkt}`);
+            issues.push(newIssue);
+            localStorage.setItem('jojal_issues', JSON.stringify(issues));
+            alert('समस्या दर्ज की गई! आपकी Ticket ID है: ' + newIssue.id);
             document.getElementById('issueForm').reset();
         });
 
-        // Generate ID Card
-        function generateIDCard() {
-            const mob = document.getElementById('checkMobile').value;
-            const found = membersData.find(m => m.mobile === mob && m.status === 'Approved');
+        // Track Status Function
+        function trackStatus() {
+            const id = document.getElementById('trackId').value.trim();
+            const resDiv = document.getElementById('trackResult');
+            const cardModal = document.getElementById('idCardModal');
+            resDiv.innerHTML = '';
+            cardModal.style.display = 'none';
 
-            const container = document.getElementById('idCardContainer');
-            if(found) {
-                document.getElementById('cardPhotoImg').src = found.photo;
-                document.getElementById('cardNameVal').innerText = found.name;
-                document.getElementById('cardMobileVal').innerText = found.mobile;
-                document.getElementById('cardWardVal').innerText = found.ward;
-                document.getElementById('cardAgeVal').innerText = found.age;
+            // Check Issues
+            const foundIssue = issues.find(i => i.id === id);
+            if(foundIssue) {
+                resDiv.innerHTML = `<p><strong>प्रकार:</strong> ${foundIssue.type} | <strong>स्थिति:</strong> <span class="status-badge status-pending">${foundIssue.status}</span></p>`;
+                return;
+            }
 
-                document.getElementById('qrcode').innerHTML = "";
-                new QRCode(document.getElementById("qrcode"), {
-                    text: `ग्राम पंचायत जोजलवाड़ी\nनाम: ${found.name}\nसत्यापित सदस्य`,
-                    width: 70,
-                    height: 70
-              
+            // Check Members
+            const foundMember = members.find(m => m.id === id);
+            if(foundMember) {
+                if(foundMember.status === 'Approved') {
+                    resDiv.innerHTML = `<p style="color:green;">✔ आपका आवेदन स्वीकृत हो गया है! नीचे अपनी Digital ID देखें।</p>`;
+                    document.getElementById('cardImg').src = foundMember.photo;
+                    document.getElementById('cardName').innerText = foundMember.name;
+                    document.getElementById('cardPhone').innerText = foundMember.phone;
+                    document.getElementById('cardWard').innerText = foundMember.ward;
+                    document.getElementById('cardAge').innerText = foundMember.age;
+                    cardModal.style.display = 'block';
+                } else if(foundMember.status === 'Rejected') {
+                    resDiv.innerHTML = `<p style="color:red;">❌ आपका आवेदन अस्वीकृत (Reject) कर दिया गया है।</p>`;
+                } else {
+                    resDiv.innerHTML = `<p><strong>आवेदन स्थिति:</strong> <span class="status-badge status-pending">समीक्षाधीन (Pending Admin Approval)</span></p>`;
+                }
+                return;
+            }
+
+            resDiv.innerHTML = `<p style="color:red;">कोई रिकॉर्ड नहीं मिला। कृपया सही ID दर्ज करें।</p>`;
+        }
+
+        // Admin Auth
+        function toggleAdminPanel() {
+            if(!adminLoggedIn) {
+                const pass = prompt('Admin पासवर्ड दर्ज करें:');
+                if(pass === '1234') { // Demo Password
+                    adminLoggedIn = true;
+                    document.getElementById('adminPanel').style.display = 'block';
+                    loadAdminData();
+                } else {
+                    alert('गलत पासवर्ड!');
+                }
+            } else {
+                document.getElementById('adminPanel').style.display = 'none';
+                adminLoggedIn = false;
+            }
+        }
+
+        // Load Admin Table Data
+        function loadAdminData() {
+            // Members
+            const mBody = document.getElementById('adminMembersTable');
+            mBody.innerHTML = '';
+            members.forEach((m, idx) => {
+                mBody.innerHTML += `
+                    <tr>
+                        <td>${m.id}</td>
+                        <td>${m.name}</td>
+                        <td>${m.phone}</td>
+                        <td>${m.ward}</td>
+                        <td><img src="${m.photo}" width="35" height="35" style="border-radius:50%"></td>
+                        <td><span class="status-badge ${m.status === 'Approved' ? 'status-approved' : 'status-pending'}">${m.status}</span></td>
+                        <td>
+                            <button onclick="approveMember(${idx})" class="btn btn-sm">Approve</button>
+                            <button onclick="rejectMember(${idx})" class="btn btn-sm btn-danger">Reject</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Issues
+            const iBody = document.getElementById('adminIssuesTable');
+            iBody.innerHTML = '';
+            issues.forEach((i, idx) => {
+                iBody.innerHTML += `
+                    <tr>
+                        <td>${i.id}</td>
+                        <td>${i.name} (${i.phone})</td>
+                        <td>${i.type}</td>
+                        <td>${i.location}</td>
+                        <td>${i.desc}</td>
+                        <td>${i.status}</td>
+                        <td>
+                            <button onclick="resolveIssue(${idx})" class="btn btn-sm">हल हुआ (Resolve)</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function approveMember(idx) {
+            members[idx].status = 'Approved';
+            localStorage.setItem('jojal_members', JSON.stringify(members));
+            loadAdminData();
+        }
+
+        function rejectMember(idx) {
+            members[idx].status = 'Rejected';
+            localStorage.setItem('jojal_members', JSON.stringify(members));
+            loadAdminData();
+        }
+
+        function resolveIssue(idx) {
+            issues[idx].status = 'निस्तारित (Resolved)';
+            localStorage.setItem('jojal_issues', JSON.stringify(issues));
+            loadAdminData();
+        }
+    </script>
+</body>
+</html>
