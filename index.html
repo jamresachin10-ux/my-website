@@ -11,7 +11,7 @@ header h1{margin:4px 0;font-size:24px}header p{margin:5px 0}
 nav{display:flex;gap:6px;overflow:auto;background:#fff;padding:9px;position:sticky;top:0;z-index:5;box-shadow:0 2px 8px #0001}
 nav button{border:0;background:#eaf5ee;padding:10px 13px;border-radius:8px;white-space:nowrap;font-weight:bold;cursor:pointer}
 main{max-width:1050px;margin:auto;padding:14px}.hero{background:#fff;border-radius:15px;padding:22px;box-shadow:0 2px 10px #0001;margin-bottom:15px}
-.hero h2{color:#176b3a}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}.card{background:#fff;padding:17px;border-radius:13px;box-shadow:0 2px 9px #0001}.card b{font-size:24px;color:#176b3a}
+.hero h2{color:#176b3a}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}.card{background:#fff;padding:17px;border-radius:13px;box-shadow:0 2px 9px #0001;margin-bottom:10px}.card b{font-size:24px;color:#176b3a}
 section{display:none}.active{display:block}.btn{background:#176b3a;color:#fff;border:0;border-radius:8px;padding:10px 15px;font-weight:bold;cursor:pointer}.btn.red{background:#a21d1d}.btn.blue{background:#2467a8}input,textarea,select{width:100%;padding:11px;margin:6px 0 12px;border:1px solid #ccd4dc;border-radius:8px}label{font-weight:bold}.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.notice{padding:12px;background:#fff5d8;border-left:5px solid #e0a000;border-radius:8px;margin:8px 0}.photo{width:100%;max-height:280px;object-fit:cover;border-radius:12px;background:#ddd}.status{padding:6px 10px;border-radius:20px;background:#e8f5e9;display:inline-block;font-weight:bold}.timeline{border-left:3px solid #176b3a;padding-left:15px}.timeline div{margin:12px 0}.small{font-size:13px;color:#666}.admin{background:#fff0f0;border:1px solid #e0aaaa}.hidden{display:none!important}.footer{text-align:center;padding:25px;color:#666}
 </style>
 </head>
@@ -53,7 +53,7 @@ section{display:none}.active{display:block}.btn{background:#176b3a;color:#fff;bo
 <section id="members">
 <div class="hero"><h2>👥 सदस्यता आवेदन</h2>
 <form id="memberForm">
-<div class="row"><div><label>नाम</label><input id="mname" required></div><div><label>मोबाइल</label><input id="mphone" required></div><div><label>वार्ड/मोहल्ला</label><input id="mward" required></div></div>
+<div class="row"><div><label>नाम</label><input id="mname" required></div><div><label>मोबाइल (10 अंक)</label><input id="mphone" type="tel" pattern="[0-9]{10}" placeholder="10 अंकों का नंबर" required></div><div><label>वार्ड/मोहल्ला</label><input id="mward" required></div></div>
 <label>📸 सदस्य की फोटो</label><input id="mphoto" type="file" accept="image/*" required>
 <label>उद्देश्य</label><textarea id="mreason" placeholder="गाँव के विकास में कैसे सहयोग करेंगे?"></textarea>
 <button class="btn">आवेदन जमा करें</button></form>
@@ -64,7 +64,7 @@ section{display:none}.active{display:block}.btn{background:#176b3a;color:#fff;bo
 <div class="hero"><h2>📝 गाँव की समस्या दर्ज करें</h2>
 <form id="complaintForm">
 <div class="row"><div><label>समस्या की श्रेणी</label><select id="ccat"><option>सड़क</option><option>पानी</option><option>नाली/स्वच्छता</option><option>बिजली/स्ट्रीट लाइट</option><option>शिक्षा</option><option>स्वास्थ्य</option><option>पंचायत कार्य</option><option>अन्य</option></select></div>
-<div><label>नाम</label><input id="cname" required></div><div><label>मोबाइल</label><input id="cphone" required></div><div><label>वार्ड/मोहल्ला</label><input id="cward" required></div></div>
+<div><label>नाम</label><input id="cname" required></div><div><label>मोबाइल (10 अंक)</label><input id="cphone" type="tel" pattern="[0-9]{10}" placeholder="10 अंकों का नंबर" required></div><div><label>वार्ड/मोहल्ला</label><input id="cward" required></div></div>
 <label>समस्या का विवरण</label><textarea id="cdesc" rows="4" required></textarea>
 <label>📍 समस्या की Location</label><input id="cloc" placeholder="लोकेशन पाने के लिए बटन दबाएँ" readonly>
 <button type="button" class="btn blue" onclick="getLocation()">📍 मेरी Location लें</button>
@@ -96,11 +96,7 @@ section{display:none}.active{display:block}.btn{background:#176b3a;color:#fff;bo
 
 <section id="admin" class="admin-section">
 <div class="hero admin"><h2>🔐 Admin Panel</h2>
-<div id="loginBox">
-<label>पासवर्ड दर्ज करें:</label>
-<input id="adminPass" type="password" placeholder="Admin Password">
-<button class="btn" onclick="login()">Login</button>
-</div>
+<div id="loginBox"><input id="adminUser" placeholder="Admin Username"><input id="adminPass" type="password" placeholder="Password"><button class="btn" onclick="login()">Login</button><p class="small">Login Credential: sachin / sachin@312</p></div>
 <div id="panel" class="hidden">
 <h3>🏠 Home Control</h3>
 <label>Home शीर्षक</label><input id="aTitle"><label>Home परिचय</label><textarea id="aText"></textarea>
@@ -118,7 +114,7 @@ section{display:none}.active{display:block}.btn{background:#176b3a;color:#fff;bo
 </div></div>
 </section>
 </main>
-<div class="footer">© 2026 हमारा गाँव, हमारी जिम्मेदारी</div>
+<div class="footer">© 2026 हमारा गाँव, हमारी जिम्मेदारी • ग्राम पंचायत जोजलवाड़ी</div>
 
 <script>
 const K={members:'jwl_members',complaints:'jwl_complaints',works:'jwl_works',notices:'jwl_notices',home:'jwl_home'};
@@ -129,15 +125,19 @@ function save(k,v){localStorage.setItem(k,JSON.stringify(v))}
 
 function openAdmin(){
   const key='jwl_admin_session';
-  if(sessionStorage.getItem(key)==='ok'){
-    show('admin'); return;
-  }
   show('admin');
-  document.getElementById('loginBox').classList.remove('hidden');
-  document.getElementById('panel').classList.add('hidden');
+  if(sessionStorage.getItem(key)==='ok'){
+    document.getElementById('loginBox').classList.add('hidden');
+    document.getElementById('panel').classList.remove('hidden');
+    renderAdmin();
+  } else {
+    document.getElementById('loginBox').classList.remove('hidden');
+    document.getElementById('panel').classList.add('hidden');
+  }
 }
 
 function show(id){document.querySelectorAll('main section').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');render()}
+
 function render(){
 document.getElementById('memberCount').textContent=members.filter(x=>x.status==='Approved').length;
 document.getElementById('complaintCount').textContent=complaints.length;
@@ -150,35 +150,81 @@ document.getElementById('noticeList').innerHTML=notices.map(n=>`<div class="noti
 document.getElementById('workList').innerHTML=works.map(w=>`<div class="card"><b>${esc(w.name)}</b><br>Work ID: ${esc(w.id)}<br>राशि: ${esc(w.amount)}<br><span class="status">${esc(w.status)}</span></div>`).join('')||'<p>अभी कोई कार्य प्रकाशित नहीं है।</p>';
 if(document.getElementById('panel')&&!document.getElementById('panel').classList.contains('hidden')) renderAdmin();
 }
+
 function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
-document.getElementById('memberForm').onsubmit=e=>{e.preventDefault();let f=mphoto.files[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{members.push({id:Date.now(),name:mname.value,phone:mphone.value,ward:mward.value,reason:mreason.value,photo:rd.result,status:'Pending'});save(K.members,members);e.target.reset();alert('आवेदन जमा हो गया। Admin की स्वीकृति के बाद Member ID मिलेगी।');render()};rd.readAsDataURL(f)};
-document.getElementById('complaintForm').onsubmit=e=>{e.preventDefault();let id='JWL-CMP-'+String(complaints.length+1).padStart(6,'0');complaints.push({id,cat:ccat.value,name:cname.value,phone:cphone.value,ward:cward.value,desc:cdesc.value,loc:cloc.value,photo:'',status:'नई शिकायत',level:'ग्राम पंचायत',history:[{status:'नई शिकायत',level:'ग्राम पंचायत',date:new Date().toLocaleString('hi-IN')} ]});save(K.complaints,complaints);e.target.reset();alert('शिकायत दर्ज हुई। आपकी Complaint ID: '+id);document.getElementById('trackId').value=id;show('track')};
+
+// 1 Mobile Number = 1 Registration Restriction
+document.getElementById('memberForm').onsubmit=e=>{
+  e.preventDefault();
+  let phone = document.getElementById('mphone').value.trim();
+  
+  // Check Duplicate Mobile Number
+  let exists = members.some(m => m.phone === phone);
+  if(exists){
+    alert('❌ यह मोबाइल नंबर पहले से पंजीकृत है! एक मोबाइल नंबर से केवल एक ही आवेदन किया जा सकता है।');
+    return;
+  }
+
+  let f=mphoto.files[0];
+  if(!f)return;
+  let rd=new FileReader();
+  rd.onload=()=>{
+    members.push({id:Date.now(),name:mname.value,phone:phone,ward:mward.value,reason:mreason.value,photo:rd.result,status:'Pending'});
+    save(K.members,members);
+    e.target.reset();
+    alert('✅ आपका सदस्यता आवेदन जमा हो गया है। Admin स्वीकृति के बाद Member ID जारी करेगा।');
+    render();
+  };
+  rd.readAsDataURL(f);
+};
+
+// 1 Mobile Number = 1 Active Complaint Check
+document.getElementById('complaintForm').onsubmit=e=>{
+  e.preventDefault();
+  let phone = document.getElementById('cphone').value.trim();
+
+  let activeComplaint = complaints.some(c => c.phone === phone && c.status !== 'समाधान/बंद');
+  if(activeComplaint){
+    alert('❌ इस मोबाइल नंबर पर पहले से एक शिकायत प्रक्रियाधीन है। कृपया पुरानी शिकायत के समाधान का इंतज़ार करें।');
+    return;
+  }
+
+  let id='JWL-CMP-'+String(complaints.length+1).padStart(6,'0');
+  complaints.push({id,cat:ccat.value,name:cname.value,phone:phone,ward:cward.value,desc:cdesc.value,loc:cloc.value,photo:'',status:'नई शिकायत',level:'ग्राम पंचायत',history:[{status:'नई शिकायत',level:'ग्राम पंचायत',date:new Date().toLocaleString('hi-IN')}]});
+  save(K.complaints,complaints);
+  e.target.reset();
+  alert('✅ शिकायत दर्ज हुई। आपकी Complaint ID: '+id);
+  document.getElementById('trackId').value=id;
+  show('track');
+};
+
 function getLocation(){if(!navigator.geolocation)return alert('आपके ब्राउज़र में Location उपलब्ध नहीं है।');navigator.geolocation.getCurrentPosition(p=>cloc.value=p.coords.latitude.toFixed(6)+', '+p.coords.longitude.toFixed(6),()=>alert('Location की अनुमति दें।'))}
+
 function trackComplaint(){let id=document.getElementById('trackId').value.trim();let c=complaints.find(x=>x.id===id),r=document.getElementById('trackResult');if(!c){r.innerHTML='<p>❌ शिकायत नहीं मिली।</p>';return}r.innerHTML=`<hr><h3>${esc(c.id)}</h3><p><b>श्रेणी:</b> ${esc(c.cat)}</p><p><b>स्थिति:</b> <span class="status">${esc(c.status)}</span></p><p><b>वर्तमान स्तर:</b> ${esc(c.level)}</p><p><b>विवरण:</b> ${esc(c.desc)}</p><div class="timeline">${c.history.map(h=>`<div>📌 <b>${esc(h.status)}</b><br>${esc(h.level)}<br><span class="small">${esc(h.date)}</span></div>`).join('')}</div>`}
 
-function login(){
-  if(adminPass.value==='sachin@312'){
-    sessionStorage.setItem('jwl_admin_session','ok');
-    loginBox.classList.add('hidden');
-    panel.classList.remove('hidden');
-    renderAdmin();
-  } else {
-    alert('गलत पासवर्ड!');
-  }
-}
+function login(){if(adminUser.value==='sachin'&&adminPass.value==='sachin@312'){
+sessionStorage.setItem('jwl_admin_session','ok');
+loginBox.classList.add('hidden');panel.classList.remove('hidden');renderAdmin()
+}else alert('गलत Login Password')}
 
 function renderAdmin(){
 aTitle.value=home.title||'';aText.value=home.text||'';
-adminMembers.innerHTML=members.map(m=>`<div class="card">${m.photo?`<img src="${m.photo}" alt="सदस्य फोटो" style="width:90px;height:90px;object-fit:cover;border-radius:50%;display:block;margin-bottom:8px">`:''}<b>${esc(m.name)}</b> • ${esc(m.ward)}<br>मोबाइल: ${esc(m.phone)}<br>स्थिति: ${esc(m.status)}<br>${m.status==='Pending'?`<button class="btn" onclick="approveMember(${m.id})">Approve & ID दें</button>`:''} ${m.status==='Approved'?`<span class="status">Member ID: ${esc(m.memberId)}</span>`:''}</div>`).join('')||'<p>कोई आवेदन नहीं।</p>';
-adminComplaints.innerHTML=complaints.map(c=>`<div class="card"><b>${esc(c.id)}</b> • ${esc(c.cat)}<br>${esc(c.desc)}<br><small>वर्तमान: ${esc(c.status)} | ${esc(c.level)}</small><br><select onchange="updateComplaint('${c.id}',this.value)"><option>${esc(c.status)}</option><option>ग्राम पंचायत में प्राप्त</option><option>जाँच चल रही है</option><option>जनपद पंचायत को भेजी गई</option><option>जिला पंचायत को भेजी गई</option><option>उच्च अधिकारी को भेजी गई</option><option>कार्यवाही पूर्ण</option><option>समाधान/बंद</option></select></div>`).join('')||'<p>कोई शिकायत नहीं।</p>';
+adminMembers.innerHTML=members.map((m,i)=>`<div class="card">${m.photo?`<img src="${m.photo}" alt="सदस्य फोटो" style="width:90px;height:90px;object-fit:cover;border-radius:50%;display:block;margin-bottom:8px">`:''}<b>${esc(m.name)}</b> • ${esc(m.ward)}<br>मोबाइल: ${esc(m.phone)}<br>स्थिति: <b>${esc(m.status)}</b><br>${m.status==='Pending'?`<button class="btn" onclick="approveMember(${m.id})">Approve & ID दें</button> <button class="btn red" onclick="deleteMember(${i})">Reject/Delete</button>`:''} ${m.status==='Approved'?`<span class="status">Member ID: ${esc(m.memberId)}</span> <button class="btn red" onclick="deleteMember(${i})">हटाएं</button>`:''}</div>`).join('')||'<p>कोई आवेदन नहीं।</p>';
+
+adminComplaints.innerHTML=complaints.map((c,i)=>`<div class="card"><b>${esc(c.id)}</b> • ${esc(c.cat)}<br>नाम: ${esc(c.name)} (${esc(c.phone)})<br>विवरण: ${esc(c.desc)}<br><small>वर्तमान: ${esc(c.status)} | ${esc(c.level)}</small><br><select onchange="updateComplaint('${c.id}',this.value)"><option value="">स्थिति बदलें</option><option>ग्राम पंचायत में प्राप्त</option><option>जाँच चल रही है</option><option>जनपद पंचायत को भेजी गई</option><option>जिला पंचायत को भेजी गई</option><option>उच्च अधिकारी को भेजी गई</option><option>कार्यवाही पूर्ण</option><option>समाधान/बंद</option></select> <button class="btn red" onclick="deleteComplaint(${i})">हटाएं</button></div>`).join('')||'<p>कोई शिकायत नहीं।</p>';
 }
-function approveMember(id){let m=members.find(x=>x.id===id);m.status='Approved';m.memberId='HGMJ-'+String(members.indexOf(m)+1).padStart(4,'0');save(K.members,members);render()}
-function updateComplaint(id,status){let c=complaints.find(x=>x.id===id);c.status=status;let map={'जनपद पंचायत को भेजी गई':'जनपद पंचायत','जिला पंचायत को भेजी गई':'जिला पंचायत','उच्च अधिकारी को भेजी गई':'उच्च अधिकारी','ग्राम पंचायत में प्राप्त':'ग्राम पंचायत','जाँच चल रही है':'ग्राम पंचायत','कार्यवाही पूर्ण':'संबंधित विभाग','समाधान/बंद':'संबंधित विभाग'};c.level=map[status]||c.level;c.history.push({status,level:c.level,date:new Date().toLocaleString('hi-IN')});save(K.complaints,complaints);render()}
+
+function approveMember(id){let m=members.find(x=>x.id===id);if(m){m.status='Approved';m.memberId='HGMJ-'+String(members.indexOf(m)+1).padStart(4,'0');save(K.members,members);render();alert('सदस्यता Approve कर दी गई!');}}
+function deleteMember(index){if(confirm('क्या आप इस आवेदन को हटाना चाहते हैं?')){members.splice(index,1);save(K.members,members);render();}}
+
+function updateComplaint(id,status){if(!status)return;let c=complaints.find(x=>x.id===id);if(c){c.status=status;let map={'जनपद पंचायत को भेजी गई':'जनपद पंचायत','जिला पंचायत को भेजी गई':'जिला पंचायत','उच्च अधिकारी को भेजी गई':'उच्च अधिकारी','ग्राम पंचायत में प्राप्त':'ग्राम पंचायत','जाँच चल रही है':'ग्राम पंचायत','कार्यवाही पूर्ण':'संबंधित विभाग','समाधान/बंद':'संबंधित विभाग'};c.level=map[status]||c.level;c.history.push({status,level:c.level,date:new Date().toLocaleString('hi-IN')});save(K.complaints,complaints);render();alert('स्थिति अपडेट हो गई!');}}
+function deleteComplaint(index){if(confirm('क्या आप इस शिकायत को हटाना चाहते हैं?')){complaints.splice(index,1);save(K.complaints,complaints);render();}}
+
 function saveHome(){home.title=aTitle.value;home.text=aText.value;let f=aPhoto.files[0];if(f){let rd=new FileReader();rd.onload=()=>{home.photo=rd.result;save(K.home,home);render();alert('Home अपडेट हो गया।')};rd.readAsDataURL(f)}else{save(K.home,home);render();alert('Home अपडेट हो गया।')}}
-function addNotice(){if(!aNotice.value.trim())return;notices.unshift(aNotice.value.trim());save(K.notices,notices);aNotice.value='';render()}
+function addNotice(){if(!aNotice.value.trim())return;notices.unshift(aNotice.value.trim());save(K.notices,notices);aNotice.value='';render();alert('सूचना प्रकाशित हुई!');}
 function addWork(){if(!wname.value.trim())return;works.unshift({name:wname.value,id:wid.value||'-',amount:wamount.value||'-',status:wstatus.value});save(K.works,works);wname.value='';wid.value='';wamount.value='';render();alert('कार्य Publish हो गया।')}
+
 render();
 </script>
 </body>
- </html>
-                                                 
+</html>
