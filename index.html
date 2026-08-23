@@ -12,7 +12,7 @@ nav{display:flex;gap:6px;overflow:auto;background:#fff;padding:9px;position:stic
 nav button{border:0;background:#eaf5ee;padding:10px 13px;border-radius:8px;white-space:nowrap;font-weight:bold;cursor:pointer}
 main{max-width:1050px;margin:auto;padding:14px}.hero{background:#fff;border-radius:15px;padding:22px;box-shadow:0 2px 10px #0001;margin-bottom:15px}
 .hero h2{color:#176b3a}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}.card{background:#fff;padding:17px;border-radius:13px;box-shadow:0 2px 9px #0001;margin-bottom:10px}.card b{font-size:24px;color:#176b3a}
-section{display:none}.active{display:block}.btn{background:#176b3a;color:#fff;border:0;border-radius:8px;padding:10px 15px;font-weight:bold;cursor:pointer}.btn.red{background:#a21d1d}.btn.blue{background:#2467a8}input,textarea,select{width:100%;padding:11px;margin:6px 0 12px;border:1px solid #ccd4dc;border-radius:8px}label{font-weight:bold}.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.notice{padding:12px;background:#fff5d8;border-left:5px solid #e0a000;border-radius:8px;margin:8px 0}.photo{width:100%;max-height:280px;object-fit:cover;border-radius:12px;background:#ddd}.status{padding:6px 10px;border-radius:20px;background:#e8f5e9;display:inline-block;font-weight:bold}.timeline{border-left:3px solid #176b3a;padding-left:15px}.timeline div{margin:12px 0}.small{font-size:13px;color:#666}.admin{background:#fff0f0;border:1px solid #e0aaaa}.hidden{display:none!important}.footer{text-align:center;padding:25px;color:#666}
+section{display:none}.active{display:block}.btn{background:#176b3a;color:#fff;border:0;border-radius:8px;padding:10px 15px;font-weight:bold;cursor:pointer}.btn.red{background:#a21d1d}.btn.blue{background:#2467a8}input,textarea,select{width:100%;padding:11px;margin:6px 0 12px;border:1px solid #ccd4dc;border-radius:8px}label{font-weight:bold}.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.notice{padding:12px;background:#fff5d8;border-left:5px solid #e0a000;border-radius:8px;margin:8px 0}.photo{width:100%;max-height:280px;object-fit:cover;border-radius:12px;background:#ddd}.status{padding:6px 10px;border-radius:20px;background:#e8f5e9;display:inline-block;font-weight:bold}.timeline{border-left:3px solid #176b3a;padding-left:15px}.timeline div{margin:12px 0}.small{font-size:13px;color:#666}.admin{background:#fff0f0;border:1px solid #e0aaaa}.hidden{display:none!important}.footer{text-align:center;padding:25px;color:#666;cursor:pointer;user-select:none}
 </style>
 </head>
 <body>
@@ -28,7 +28,6 @@ section{display:none}.active{display:block}.btn{background:#176b3a;color:#fff;bo
 <button onclick="show('works')">🏗️ पंचायत कार्य</button>
 <button onclick="show('gram')">🏛️ ग्रामसभा</button>
 <button onclick="show('contact')">📞 संपर्क</button>
-<button onclick="openAdmin()">🔐 Admin</button>
 </nav>
 
 <main>
@@ -95,9 +94,22 @@ section{display:none}.active{display:block}.btn{background:#176b3a;color:#fff;bo
 </section>
 
 <section id="admin" class="admin-section">
-<div class="hero admin"><h2>🔐 Admin Panel</h2>
-<div id="loginBox"><input id="adminUser" placeholder="Admin Username"><input id="adminPass" type="password" placeholder="Password"><button class="btn" onclick="login()">Login</button><p class="small">Login Credential: sachin / sachin@312</p></div>
+<div class="hero admin"><h2>🔐 Admin Panel Control</h2>
+<div id="loginBox">
+<label>Admin Username</label>
+<input id="adminUser" placeholder="यूज़रनेम दर्ज करें">
+<label>Password</label>
+<input id="adminPass" type="password" placeholder="पासवर्ड दर्ज करें">
+<button class="btn" onclick="login()">लॉगिन करें</button>
+<button class="btn red" onclick="logoutAdmin()" style="margin-left:10px;">बाहर निकलें</button>
+</div>
+
 <div id="panel" class="hidden">
+<div style="display:flex; justify-content:space-between; align-items:center;">
+<span class="status">लॉगिन स्थिति: सक्रिय (Active)</span>
+<button class="btn red" onclick="logoutAdmin()">Logout</button>
+</div>
+<hr>
 <h3>🏠 Home Control</h3>
 <label>Home शीर्षक</label><input id="aTitle"><label>Home परिचय</label><textarea id="aText"></textarea>
 <label>📷 पंचायत की फोटो</label><input id="aPhoto" type="file" accept="image/*">
@@ -114,7 +126,8 @@ section{display:none}.active{display:block}.btn{background:#176b3a;color:#fff;bo
 </div></div>
 </section>
 </main>
-<div class="footer">© 2026 हमारा गाँव, हमारी जिम्मेदारी • ग्राम पंचायत जोजलवाड़ी</div>
+
+<div class="footer" onclick="secretAdminClick()">© 2026 हमारा गाँव, हमारी जिम्मेदारी • ग्राम पंचायत जोजलवाड़ी</div>
 
 <script>
 const K={members:'jwl_members',complaints:'jwl_complaints',works:'jwl_works',notices:'jwl_notices',home:'jwl_home'};
@@ -123,9 +136,18 @@ let home=JSON.parse(localStorage.getItem(K.home)||'{}');
 
 function save(k,v){localStorage.setItem(k,JSON.stringify(v))}
 
+let clickCount = 0;
+function secretAdminClick() {
+  clickCount++;
+  if(clickCount >= 3) {
+    clickCount = 0;
+    openAdmin();
+  }
+}
+
 function openAdmin(){
-  const key='jwl_admin_session';
   show('admin');
+  const key='jwl_admin_session';
   if(sessionStorage.getItem(key)==='ok'){
     document.getElementById('loginBox').classList.add('hidden');
     document.getElementById('panel').classList.remove('hidden');
@@ -158,7 +180,6 @@ document.getElementById('memberForm').onsubmit=e=>{
   e.preventDefault();
   let phone = document.getElementById('mphone').value.trim();
   
-  // Check Duplicate Mobile Number
   let exists = members.some(m => m.phone === phone);
   if(exists){
     alert('❌ यह मोबाइल नंबर पहले से पंजीकृत है! एक मोबाइल नंबर से केवल एक ही आवेदन किया जा सकता है।');
@@ -178,7 +199,7 @@ document.getElementById('memberForm').onsubmit=e=>{
   rd.readAsDataURL(f);
 };
 
-// 1 Mobile Number = 1 Active Complaint Check
+// 1 Mobile Number = 1 Active Complaint
 document.getElementById('complaintForm').onsubmit=e=>{
   e.preventDefault();
   let phone = document.getElementById('cphone').value.trim();
@@ -202,10 +223,26 @@ function getLocation(){if(!navigator.geolocation)return alert('आपके ब�
 
 function trackComplaint(){let id=document.getElementById('trackId').value.trim();let c=complaints.find(x=>x.id===id),r=document.getElementById('trackResult');if(!c){r.innerHTML='<p>❌ शिकायत नहीं मिली।</p>';return}r.innerHTML=`<hr><h3>${esc(c.id)}</h3><p><b>श्रेणी:</b> ${esc(c.cat)}</p><p><b>स्थिति:</b> <span class="status">${esc(c.status)}</span></p><p><b>वर्तमान स्तर:</b> ${esc(c.level)}</p><p><b>विवरण:</b> ${esc(c.desc)}</p><div class="timeline">${c.history.map(h=>`<div>📌 <b>${esc(h.status)}</b><br>${esc(h.level)}<br><span class="small">${esc(h.date)}</span></div>`).join('')}</div>`}
 
-function login(){if(adminUser.value==='sachin'&&adminPass.value==='sachin@312'){
-sessionStorage.setItem('jwl_admin_session','ok');
-loginBox.classList.add('hidden');panel.classList.remove('hidden');renderAdmin()
-}else alert('गलत Login Password')}
+// Fixed Admin Login Validation
+function login(){
+  let u = document.getElementById('adminUser').value.trim();
+  let p = document.getElementById('adminPass').value.trim();
+
+  if(u.toLowerCase() === 'sachin' && p === 'Sachin@312'){
+    sessionStorage.setItem('jwl_admin_session','ok');
+    document.getElementById('loginBox').classList.add('hidden');
+    document.getElementById('panel').classList.remove('hidden');
+    renderAdmin();
+    alert('लॉगिन सफल हुआ!');
+  } else {
+    alert('❌ गलत Username या Password! कृपया सही जानकारी दर्ज करें।');
+  }
+}
+
+function logoutAdmin(){
+  sessionStorage.removeItem('jwl_admin_session');
+  show('home');
+}
 
 function renderAdmin(){
 aTitle.value=home.title||'';aText.value=home.text||'';
@@ -224,7 +261,12 @@ function saveHome(){home.title=aTitle.value;home.text=aText.value;let f=aPhoto.f
 function addNotice(){if(!aNotice.value.trim())return;notices.unshift(aNotice.value.trim());save(K.notices,notices);aNotice.value='';render();alert('सूचना प्रकाशित हुई!');}
 function addWork(){if(!wname.value.trim())return;works.unshift({name:wname.value,id:wid.value||'-',amount:wamount.value||'-',status:wstatus.value});save(K.works,works);wname.value='';wid.value='';wamount.value='';render();alert('कार्य Publish हो गया।')}
 
-render();
+if(window.location.hash === '#admin') {
+  openAdmin();
+} else {
+  render();
+}
 </script>
 </body>
-</html>
+  </html>
+                                                                       
