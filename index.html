@@ -3,206 +3,105 @@
  <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ग्राम पंचायत जोजलवाड़ी — हमारा गाँव हमारी जिम्मेदारी</title>
+  <title>हमारा गाँव हमारी जिम्मेदारी</title>
   <style>
-*{box-sizing:border-box}body{margin:0;background:#f3f7f4;color:#17231b;font-family:Arial,sans-serif}.app{max-width:480px;margin:auto;min-height:100vh;padding-bottom:75px}
-.hero{background:linear-gradient(145deg,#075c31,#159447);color:#fff;padding:25px 17px 23px;border-radius:0 0 26px 26px}.logo{font-size:36px}.tag{display:inline-block;background:#ffd34d;color:#17351f;padding:6px 9px;border-radius:20px;font-size:11px;font-weight:bold;margin-top:8px}
-h1{font-size:25px;line-height:1.2;margin:10px 0 5px}.lead{font-size:13px}.note{font-size:11px;color:#68746b;line-height:1.5}.hero .note{color:#e6f5eb;margin-top:9px}
-.tabs{display:flex;gap:7px;overflow:auto;padding:12px}.tab{border:0;background:#fff;padding:9px 12px;border-radius:20px;white-space:nowrap;color:#48554c;font-size:12px}.tab.active{background:#075c31;color:#fff}
-section{padding:0 13px 13px}.panel{background:#fff;border-radius:17px;padding:16px;margin-bottom:12px;box-shadow:0 3px 14px #0000000b}h2{font-size:18px;margin:0 0 12px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#edf7ef;padding:13px 4px;text-align:center;border-radius:13px}.n{font-size:22px;font-weight:800;color:#075c31}.l{font-size:10px;color:#69746d}
-.row{display:flex;justify-content:space-between;gap:8px;padding:11px 0;border-bottom:1px solid #edf0ed;font-size:13px}.row:last-child{border:0}.pill{font-size:10px;background:#e5f5e9;color:#176036;padding:5px 8px;border-radius:10px}
-.member{border:2px solid #0b6b3a;border-radius:17px;padding:15px;background:linear-gradient(145deg,#fff,#eff8f1)}.memberTop{display:flex;justify-content:space-between}.id{font-weight:800;color:#075c31}.role{font-size:10px;background:#ffd34d;padding:5px 8px;border-radius:12px}.name{font-size:20px;font-weight:800;margin-top:15px}.meta{font-size:12px;color:#59665e;line-height:1.7}
-label{display:block;font-size:12px;font-weight:bold;margin:11px 0 5px}input,select,textarea{width:100%;padding:12px;border:1px solid #ccd8cf;border-radius:10px;font-size:14px;background:#fff}textarea{min-height:75px}.check{display:flex;gap:8px;font-weight:400;line-height:1.4}.check input{width:auto;margin-top:3px}
-.btn{width:100%;border:0;border-radius:11px;padding:13px;background:#075c31;color:#fff;font-size:15px;font-weight:bold;margin-top:12px}.btn.light{background:#edf6ef;color:#075c31}.btn.red{background:#b3261e}.ok{display:none;background:#e7f7ec;color:#155c31;padding:10px;border-radius:10px;font-size:12px;margin-top:9px}
-.empty{text-align:center;padding:20px;background:#f7faf7;border-radius:13px;color:#69746d;font-size:13px}nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);background:#fff;border-top:1px solid #dce3de;display:grid;grid-template-columns:repeat(4,1fr);padding:7px 2px;z-index:4}nav a{text-align:center;text-decoration:none;color:#59645d;font-size:10px}nav b{display:block;font-size:19px}
-.hidden{display:none!important}.small{font-size:10px;color:#777}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f7f3;color:#172018}
+header{background:#176b3a;color:#fff;padding:18px 12px;text-align:center}header h1{margin:0;font-size:22px}
+nav{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding:10px;background:#fff;position:sticky;top:0;z-index:5}
+button{border:0;border-radius:10px;padding:12px;font-size:16px;background:#176b3a;color:#fff}
+nav button{background:#edf5ef;color:#176b3a;font-weight:bold}
+main{max-width:720px;margin:auto;padding:12px}section{display:none;background:#fff;padding:16px;border-radius:14px;box-shadow:0 2px 8px #0001}section.active{display:block}
+h2{color:#176b3a}.notice{background:#eff7f0;padding:12px;margin:8px 0;border-radius:8px;border-left:4px solid #176b3a}
+label{display:block;font-weight:bold;margin-top:12px}input,textarea,select{width:100%;padding:12px;margin-top:5px;border:1px solid #ccd5cd;border-radius:9px;font-size:16px}textarea{min-height:100px}
+.card{border:2px solid #176b3a;border-radius:14px;padding:16px;text-align:center;margin-top:12px}.hidden{display:none}.danger{background:#a51d2d}.small{font-size:13px;color:#667}
 </style>
  </head>
  <body>
-  <div class="app">
-   <header class="hero">
-    <div class="logo">🏡</div>
-    <span class="tag">केवल ग्राम पंचायत जोजलवाड़ी</span>
-    <h1>हमारा गाँव
-     <br>
-     हमारी जिम्मेदारी</h1>
-    <div class="lead">
-     👑 मुख्य संयोजक — <b>Sachin Jamre</b>
+  <header>
+   <h1>🌾 हमारा गाँव हमारी जिम्मेदारी</h1>
+   <div>गाँव की जानकारी • सदस्यता • समस्याएँ</div>
+  </header>
+  <nav>
+   <button onclick="show('home')">🏠 होम</button>
+   <button onclick="show('join')">👥 सदस्य बनें</button>
+   <button onclick="show('issue')">📢 मुद्दा रखें</button>
+   <button onclick="show('card')">🪪 ID Card</button>
+   <button onclick="show('qr')">🤓 QR SMART</button>
+   <button onclick="show('admin')">🔐 मेरा Admin</button>
+  </nav>
+  <main>
+   <section id="home" class="active">
+    <h2>🏠 होम</h2>
+    <h3>📢 महत्वपूर्ण सूचना</h3>
+    <div id="notices"></div>
+   </section>
+   <section id="join">
+    <h2>👥 सदस्य बनें</h2>
+    <form id="joinForm">
+     <label>नाम</label><input id="jname" required> <label>मोबाइल</label><input id="jmobile" inputmode="numeric" maxlength="10" required> <label>गाँव/वार्ड</label><input id="jward" required> <label>उम्र</label><input id="jage" type="number">
+     <button type="submit">आवेदन जमा करें</button>
+    </form>
+    <p id="joinMsg"></p>
+   </section>
+   <section id="issue">
+    <h2>📢 मुद्दा रखें</h2>
+    <form id="issueForm">
+     <label>नाम</label><input id="iname" required> <label>मोबाइल</label><input id="imobile" inputmode="numeric" maxlength="10" required> <label>मुद्दा</label><textarea id="itext" required></textarea>
+     <button type="submit">मुद्दा भेजें</button>
+    </form>
+    <p id="issueMsg"></p>
+   </section>
+   <section id="card">
+    <h2>🪪 ID Card</h2>
+    <input id="cmobile" inputmode="numeric" maxlength="10" placeholder="Approved सदस्य का मोबाइल">
+    <button onclick="makeCard()" style="margin-top:10px">ID Card देखें</button>
+    <div id="cardOut"></div>
+   </section>
+   <section id="qr">
+    <h2>🤓 QR SMART</h2>
+    <p class="small">अपनी Live website का URL डालकर QR बनाएं।</p>
+    <input id="url" placeholder="https://...github.io/...">
+    <button onclick="makeQR()" style="margin-top:10px">QR बनाएं</button>
+    <div id="qrOut"></div>
+   </section>
+   <section id="admin">
+    <h2>🔐 मेरा Admin</h2>
+    <div id="login">
+     <input id="pass" type="password" placeholder="Admin password">
+     <button onclick="login()" style="margin-top:10px">Admin खोलें</button>
+     <p id="loginMsg"></p>
     </div>
-    <div class="note">स्वतंत्र नागरिक जन-जागरूकता मंच • सरकारी वेबसाइट नहीं</div>
-   </header>
-   <div class="tabs">
-    <button class="tab active" onclick="show('home',this)">🏠 होम</button>
-    <button class="tab" onclick="show('join',this)">👥 सदस्य</button>
-    <button class="tab" onclick="show('issue',this)">📝 समस्या</button>
-    <button class="tab" onclick="show('admin',this)">⚙️ Admin</button>
-   </div>
-   <section id="home">
-    <div class="panel">
-     <h2>📊 अभी की स्थिति</h2>
-     <div class="stats">
-      <div class="stat">
-       <div class="n" id="totalApproved">0</div>
-       <div class="l">कुल सदस्य</div>
-      </div>
-      <div class="stat">
-       <div class="n" id="totalPending">0</div>
-       <div class="l">नए आवेदन</div>
-      </div>
-      <div class="stat">
-       <div class="n" id="totalIssues">0</div>
-       <div class="l">समस्याएँ</div>
-      </div>
-     </div>
-    </div>
-    <div class="panel">
-     <h2>📢 महत्वपूर्ण सूचना</h2>
-     <div id="publicNotices" class="empty">अभी कोई सूचना नहीं है।</div>
-    </div>
-    <div class="panel">
-     <h2>🎯 उद्देश्य</h2>
-     <p class="note">जोजलवाड़ी ग्राम पंचायत के नागरिकों को जनहित, ग्राम सभा, शिक्षा, पानी, स्वच्छता और स्थानीय समस्याओं पर शांतिपूर्ण एवं जिम्मेदार भागीदारी के लिए जोड़ना।</p>
+    <div id="panel" class="hidden">
+     <h3>📊 Admin Control</h3>
+     <div id="counts"></div>
+     <label>नई महत्वपूर्ण सूचना</label><textarea id="newNotice"></textarea>
+     <button onclick="addNotice()">सूचना प्रकाशित करें</button>
+     <h3>👥 सदस्य आवेदन</h3>
+     <div id="members"></div>
+     <h3>📢 मुद्दे</h3>
+     <div id="issues"></div>
+     <button class="danger" onclick="logout()">Logout</button>
     </div>
    </section>
-   <section id="join" class="hidden">
-    <div class="panel">
-     <h2>👥 सदस्यता आवेदन</h2>
-     <p class="note">आवेदन Admin की जाँच और स्वीकृति के बाद ही सदस्य बनेगा।</p>
-     <form id="joinForm">
-      <label>पूरा नाम *</label><input required> <label>ग्राम / मोहल्ला *</label><input required> <label>मोबाइल नंबर *</label><input required type="tel" inputmode="numeric" pattern="[0-9]{10}"> <label>सहयोग का क्षेत्र</label><select><option>सभी जनहित कार्य</option><option>शिक्षा</option><option>पानी</option><option>स्वच्छता</option><option>सड़क/नाली</option><option>ग्राम सभा जागरूकता</option></select> <label>भूमिका</label><select><option>सामान्य सदस्य</option><option>स्वयंसेवक</option><option>क्षेत्र सहयोगी</option></select> <label class="check"><input required type="checkbox"> मैं ग्राम पंचायत जोजलवाड़ी का निवासी हूँ और मंच के शांतिपूर्ण व सम्मानजनक नियम स्वीकार करता/करती हूँ।</label>
-      <button class="btn">📤 आवेदन भेजें</button>
-      <div id="joinok" class="ok"></div>
-     </form>
-    </div>
-   </section>
-   <section id="issue" class="hidden">
-    <div class="panel">
-     <h2>📝 पंचायत की समस्या दर्ज करें</h2>
-     <form id="issueForm">
-      <label>समस्या का विषय *</label><input required> <label>श्रेणी</label><select><option>पानी</option><option>शिक्षा</option><option>स्वच्छता</option><option>सड़क/नाली</option><option>स्ट्रीट लाइट</option><option>अन्य</option></select> <label>स्थान *</label><input required> <label>विवरण *</label><textarea required></textarea> <label>फोटो (वैकल्पिक)</label><input type="file" accept="image/*"> <label class="check"><input required type="checkbox"> मैं दी गई जानकारी को अपनी जानकारी के अनुसार सही मानता/मानती हूँ।</label>
-      <button class="btn">📤 समस्या भेजें</button>
-      <div id="issueok" class="ok"></div>
-     </form>
-    </div>
-   </section>
-   <section id="admin" class="hidden">
-    <div id="loginBox" class="panel">
-     <h2>🔐 मेरा Admin</h2>
-     <p class="note">पहली बार अपने इसी फोन पर Admin password सेट करें। Password इस HTML में plain text में नहीं रखा गया है।</p>
-     <label>Admin Password</label><input id="adminPassword" type="password" minlength="8" placeholder="कम से कम 8 अक्षर">
-     <button class="btn" onclick="adminLogin()">🔓 Login</button>
-     <div id="loginMsg" class="ok"></div>
-    </div>
-    <div id="adminPanel" class="hidden">
-     <div class="panel">
-      <h2>👑 पूरा Admin Control</h2>
-      <p class="note">सदस्य की approval, ID, सूचना, समस्या और local data का नियंत्रण।</p>
-      <button class="btn light" onclick="logout()">🔒 Logout</button>
-     </div>
-     <div class="panel">
-      <h2>📢 महत्वपूर्ण सूचना</h2>
-      <textarea id="noticeText" placeholder="गाँव की सूचना लिखें"></textarea>
-      <button class="btn" onclick="addNotice()">📢 सूचना प्रकाशित करें</button>
-      <div id="noticeAdminList"></div>
-     </div>
-     <div class="panel">
-      <h2>👥 सदस्य आवेदन</h2>
-      <div id="membersAdmin" class="empty">कोई आवेदन नहीं।</div>
-     </div>
-     <div class="panel">
-      <h2>📝 समस्या रिपोर्ट</h2>
-      <div id="issuesAdmin" class="empty">कोई समस्या नहीं।</div>
-     </div>
-     <div class="panel">
-      <h2>📦 Backup / Data Control</h2>
-      <button class="btn light" onclick="backup()">📦 Backup डाउनलोड करें</button>
-      <button class="btn red" onclick="deleteAll()">🗑️ सभी local data हटाएँ</button>
-      <p class="small">Backup पहले लें।</p>
-     </div>
-    </div>
-   </section>
-   <section>
-    <div class="panel">
-     <h2>📜 नियम</h2>
-     <p class="note">सदस्यता स्वैच्छिक है। मंच जनहित और जागरूकता के लिए है। धमकी, अपमान, अफवाह या गैर-कानूनी गतिविधि के लिए मंच का उपयोग नहीं किया जाएगा। यह सरकारी वेबसाइट नहीं है।</p>
-    </div>
-   </section>
-   <nav>
-    <a href="#" onclick="show('home',this)"><b>🏠</b>होम</a><a href="#" onclick="show('join',this)"><b>👥</b>सदस्य</a><a href="#" onclick="show('issue',this)"><b>📝</b>समस्या</a><a href="#" onclick="show('admin',this)"><b>⚙️</b>Admin</a>
-   </nav>
-  </div>
+  </main>
   <script>
 const $=id=>document.getElementById(id);
-const read=(k,d=[])=>JSON.parse(localStorage.getItem(k)||JSON.stringify(d));
-const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
- 
-function show(id,el){
- ['home','join','issue','admin'].forEach(x=>$(x).classList.toggle('hidden',x!==id));
- document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
- if(el&&el.classList.contains('tab'))el.classList.add('active');
- if(id==='admin')renderAdmin(); render(); scrollTo(0,0);
-}
-function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return(h>>>0).toString(16)}
-function isAdmin(){return sessionStorage.getItem('gaon_admin')==='1'}
-function adminLogin(){
- const p=$('adminPassword').value;
- if(p.length<8){msg('कम से कम 8 अक्षर का password रखें।');return}
- const saved=localStorage.getItem('gaon_admin_hash');
- if(!saved)localStorage.setItem('gaon_admin_hash',hash(p));
- if(hash(p)===localStorage.getItem('gaon_admin_hash')){
-  sessionStorage.setItem('gaon_admin','1');$('adminPassword').value='';msg('Admin login सफल।');renderAdmin();
- }else msg('गलत password।');
-}
-function msg(t){$('loginMsg').textContent=t;$('loginMsg').style.display='block'}
-function logout(){sessionStorage.removeItem('gaon_admin');renderAdmin()}
-function addNotice(){
- if(!isAdmin())return;let t=$('noticeText').value.trim();if(!t)return;
- let a=read('gaon_notices');a.unshift({text:t,date:new Date().toLocaleString('hi-IN')});write('gaon_notices',a);$('noticeText').value='';render();
-}
-function approve(i){
- if(!isAdmin())return;let a=read('gaon_members');a[i].approved=true;a[i].memberId='JWL-'+String(Date.now()).slice(-6);write('gaon_members',a);renderAdmin();render();
-}
-function removeMember(i){if(!isAdmin())return;let a=read('gaon_members');a.splice(i,1);write('gaon_members',a);renderAdmin();render()}
-function removeIssue(i){if(!isAdmin())return;let a=read('gaon_issues');a.splice(i,1);write('gaon_issues',a);renderAdmin();render()}
-function removeNotice(i){if(!isAdmin())return;let a=read('gaon_notices');a.splice(i,1);write('gaon_notices',a);renderAdmin();render()}
- 
-$('joinForm').onsubmit=e=>{
- e.preventDefault();let v=e.target.querySelectorAll('input,select'),a=read('gaon_members');
- a.push({name:v[0].value,village:v[1].value,mobile:v[2].value,area:v[3].value,role:v[4].value,approved:false,date:Date.now()});
- write('gaon_members',a);e.target.reset();$('joinok').textContent='आवेदन जमा हुआ। Admin की approval के बाद Member ID जारी होगी।';$('joinok').style.display='block';render();
-};
-$('issueForm').onsubmit=e=>{
- e.preventDefault();let v=e.target.querySelectorAll('input,select,textarea'),a=read('gaon_issues');
- a.push({title:v[0].value,category:v[1].value,place:v[2].value,text:v[3].value,date:Date.now()});
- write('gaon_issues',a);e.target.reset();$('issueok').textContent='समस्या जमा हो गई। Admin इसे देख सकता है।';$('issueok').style.display='block';render();
-};
- 
-function render(){
- let m=read('gaon_members'),i=read('gaon_issues'),n=read('gaon_notices');
- $('totalApproved').textContent=m.filter(x=>x.approved).length;
- $('totalPending').textContent=m.filter(x=>!x.approved).length;
- $('totalIssues').textContent=i.length;
- $('publicNotices').innerHTML=n.length?n.map(x=>'<div class="row">'+x.text+' <span class="pill">'+x.date+'</span></div>').join(''):'अभी कोई सूचना नहीं है।';
-}
-function renderAdmin(){
- if(!isAdmin()){$('loginBox').classList.remove('hidden');$('adminPanel').classList.add('hidden');return}
- $('loginBox').classList.add('hidden');$('adminPanel').classList.remove('hidden');
- let m=read('gaon_members'),i=read('gaon_issues'),n=read('gaon_notices');
- $('noticeAdminList').innerHTML=n.length?n.map((x,j)=>'<div class="row">'+x.text+' <button class="btn light" style="width:auto;padding:7px" onclick="removeNotice('+j+')">Delete</button></div>').join(''):'<div class="empty">कोई सूचना नहीं।</div>';
- $('membersAdmin').innerHTML=m.length?m.map((x,j)=>'<div class="panel"><b>'+x.name+'</b><br>'+x.village+' • '+x.mobile+'<br><span class="pill">'+(x.approved?x.memberId:'PENDING')+'</span>'+(!x.approved?'<button class="btn" onclick="approve('+j+')">✅ Approve + ID दें</button>':'')+'<button class="btn light" onclick="removeMember('+j+')">🗑️ Delete</button></div>').join(''):'कोई आवेदन नहीं।';
- $('issuesAdmin').innerHTML=i.length?i.map((x,j)=>'<div class="panel"><b>'+x.title+'</b><br>'+x.category+' • '+x.place+'<p class="note">'+x.text+'</p><button class="btn light" onclick="removeIssue('+j+')">🗑️ Delete</button></div>').join(''):'कोई समस्या नहीं।';
-}
-function backup(){
- if(!isAdmin())return;
- let data={members:read('gaon_members'),issues:read('gaon_issues'),notices:read('gaon_notices')};
- let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.download='gaon-backup.json';a.click();
-}
-function deleteAll(){
- if(!isAdmin())return;
- if(confirm('सभी सदस्य, समस्या और सूचना डेटा हटाना है?')){['gaon_members','gaon_issues','gaon_notices'].forEach(k=>localStorage.removeItem(k));renderAdmin();render()}
-}
-render();renderAdmin();
+const load=(k,d)=>JSON.parse(localStorage.getItem(k)||JSON.stringify(d));
+const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+function show(id){document.querySelectorAll('section').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');scrollTo(0,0)}
+function mobileOk(x){return /^\d{10}$/.test(x)}
+$('joinForm').onsubmit=e=>{e.preventDefault();let m=$('jmobile').value.trim();if(!mobileOk(m)){ $('joinMsg').textContent='10 अंकों का मोबाइल नंबर डालें';return}let a=load('members',[]);a.push({id:'M'+Date.now().toString().slice(-6),name:$('jname').value.trim(),mobile:m,ward:$('jward').value.trim(),age:$('jage').value,approved:false});save('members',a);e.target.reset();$('joinMsg').textContent='आवेदन जमा हो गया। Admin approval के बाद ID Card मिलेगा।'};
+$('issueForm').onsubmit=e=>{e.preventDefault();let a=load('issues',[]);a.push({name:$('iname').value.trim(),mobile:$('imobile').value.trim(),text:$('itext').value.trim(),date:new Date().toLocaleString('hi-IN')});save('issues',a);e.target.reset();$('issueMsg').textContent='मुद्दा भेज दिया गया।'};
+let ap=localStorage.getItem('adminPassword');if(!ap){ap='123456';localStorage.setItem('adminPassword',ap)}
+function login(){if($('pass').value===localStorage.getItem('adminPassword')){$('login').classList.add('hidden');$('panel').classList.remove('hidden');renderAdmin()}else $('loginMsg').textContent='गलत password'}
+function logout(){$('login').classList.remove('hidden');$('panel').classList.add('hidden');$('pass').value=''}
+function renderAdmin(){let m=load('members',[]),i=load('issues',[]);$('counts').innerHTML='<div class="notice">कुल सदस्य आवेदन: '+m.length+' | Approved: '+m.filter(x=>x.approved).length+' | मुद्दे: '+i.length+'</div>';$('members').innerHTML=m.length?m.map((x,n)=>'<div class="notice"><b>'+x.name+'</b><br>'+x.mobile+' • '+x.ward+'<br>स्थिति: '+(x.approved?'Approved ✅':'Pending ⏳')+(x.approved?'':'<br><button onclick="approve('+n+')">Approve</button>')+'</div>').join(''):'कोई आवेदन नहीं';$('issues').innerHTML=i.length?i.map(x=>'<div class="notice"><b>'+x.name+'</b><br>'+x.text+'<br><span class="small">'+x.date+'</span></div>').join(''):'कोई मुद्दा नहीं'}
+function approve(n){let a=load('members',[]);a[n].approved=true;save('members',a);renderAdmin()}
+function addNotice(){let t=$('newNotice').value.trim();if(!t)return;let a=load('notices',[]);a.unshift(t);save('notices',a);$('newNotice').value='';renderNotices()}
+function renderNotices(){let a=load('notices',[]);$('notices').innerHTML=a.length?a.map(x=>'<div class="notice">'+x+'</div>').join(''):'<div class="notice">अभी कोई नई सूचना नहीं है।</div>'}
+function makeCard(){let x=load('members',[]).find(v=>v.mobile===$('cmobile').value.trim()&&v.approved);$('cardOut').innerHTML=x?'<div class="card"><h2>🌾 हमारा गाँव</h2><h3>'+x.name+'</h3><p>Member ID: <b>'+x.id+'</b></p><p>'+x.ward+'</p><b>Approved ✅</b></div>':'<div class="notice">Approved सदस्य नहीं मिला।</div>'}
+function makeQR(){let u=$('url').value.trim();if(!u){$('qrOut').textContent='पहले Live URL डालें';return}$('qrOut').innerHTML='<p>QR तैयार है:</p><img style="max-width:220px" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(u)+'">'}
+renderNotices();
 </script>
  </body>
 </html>
