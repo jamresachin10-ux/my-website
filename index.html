@@ -1,21 +1,9 @@
-आपके मंथली टारगेट (Maths 800, Reasoning 800, Polity 300, 🗽vocab words व हिंदी+इंग.600) को ऑटो-डिडेक्ट/कम (Dynamic Progress Tracker) करने वाला फीचर कोड में जोड़ दिया गया है!
-अब जैसे ही आप आज के हल किए गए सवाल दर्ज करके अटेंडेंस सेव करेंगे (जैसे Math में 25, Reasoning में 25 आदि), वैसे ही Monthly Target में से उतने सवाल अपने आप घट (- Minus) जाएंगे और आपकी Progress Bar भी उसी हिसाब से बढ़ जाएगी।
-🛠️ क्या-क्या नया जोड़ा गया है:
- * Auto-Deduct Monthly Target Feature:
-   * Maths Target: initial 800 Qs (रोज के सवाल डालते ही Remaining Qs घटेंगे)।
-   * Reasoning Target: initial 800 Qs (रोज के सवाल माइनस होंगे)।
-   * Polity Target: initial 300 MCQs (माइनस होंगे)।
-   * Administrative Vocab Target: initial 600 Words (रोज याद किए शब्द माइनस होंगे)।
- * Auto Progress Bar %: Remaining Targets घटते ही आपकी Monthly Completion Progress % ऑटोमेटिक बढ़ जाएगी।
- * Daily Questions Input Fields: आज आपने किस विषय में कितने प्रश्न या शब्द किए हैं, दर्ज करने के लिए इनपुट बॉक्स दिए गए हैं जो सीधे आपके मंथली बैकलाग को कम करेंगे।
-🌐 अपडेटेड All-In-One Code (routine.html):
-इस पूरे कोड को कॉपी करें और अपने routine.html में सेव कर लें:
 <!doctype html>
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎯 Ultimate Master Routine & Dynamic Target Tracker</title>
+  <title>🎯 Master Routine & Dynamic Target Tracker</title>
   <style>
     :root {
       --primary: #0f5132;
@@ -51,7 +39,6 @@
     
     .topic-input { width: 100%; padding: 7px 10px; margin-top: 5px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; }
 
-    /* Monthly Target Dynamic Display */
     .target-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 12px 0; }
     .target-box { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; }
     .target-box h4 { margin: 0 0 5px; font-size: 13px; color: var(--primary); }
@@ -59,9 +46,6 @@
 
     .progress-container { background: #e9ecef; border-radius: 20px; height: 22px; width: 100%; margin: 10px 0; overflow: hidden; border: 1px solid var(--border); }
     .progress-bar { background: var(--secondary); height: 100%; width: 0%; text-align: center; color: white; font-size: 12px; font-weight: bold; line-height: 22px; transition: width 0.4s ease; }
-
-    /* Accuracy Calculator */
-    .calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin: 10px 0; }
 
     .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-top: 10px; }
     .score-box { background: #fff; border: 1px solid var(--border); padding: 8px; border-radius: 6px; text-align: center; }
@@ -92,7 +76,7 @@
   </div>
 
   <div class="alert-banner" id="mockAlertBanner" style="display:none;">
-    ⚠️ अलर्ट: हफ्ते में कम से कम 2 बार (जैसे Wednesday & Sunday) Mock Test / PYQ देना अनिवार्य है!
+    ⚠️ अलर्ट: हफ्ते में कम से कम 2 बार Mock Test / PYQ देना अनिवार्य है!
   </div>
 
   <main>
@@ -100,13 +84,11 @@
     <!-- 1. SUNDAY REVIEW MODE -->
     <div class="card sunday-card" id="sundaySection" style="display:none; background: #fffdf0; border-color: #ffeba0;">
       <h2>🏆 SUNDAY = TEST & REVIEW DAY (संडे स्पेशल मोड)</h2>
-      <p style="font-size: 13px; color: #660000; font-weight: bold;">आज का लक्ष्य सिर्फ पढ़ना नहीं—अपनी गलतियां पकड़ना है!</p>
       <label class="routine-item"><input type="checkbox" class="t-check"> 🔄 पूरे सप्ताह का Complete Revision</label>
       <label class="routine-item"><input type="checkbox" class="t-check"> 📝 Short Notes Revision</label>
-      <label class="routine-item"><input type="checkbox" class="t-check"> ❌ Error Notebook Revision (पुरानी गलतियों का सुधार)</label>
+      <label class="routine-item"><input type="checkbox" class="t-check"> ❌ Error Notebook Revision</label>
       <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 Full Mock Test Attend किया</label>
-      <label class="routine-item"><input type="checkbox" class="t-check"> 🔍 गलत Questions का Depth Analysis</label>
-      <label class="routine-item"><input type="checkbox" class="t-check"> 📅 अगले सप्ताह का Routine & Plan तैयार</label>
+      <label class="routine-item"><input type="checkbox" class="t-check"> 🔍 गलत Questions का Analysis</label>
     </div>
 
     <!-- 2. AUTO-DEDUCT MONTHLY TARGET TRACKER -->
@@ -144,148 +126,62 @@
       </div>
     </div>
 
-    <!-- 3. ACCURACY CALCULATOR -->
-    <div class="card">
-      <h2>🎯 Accuracy & Practice Question Status Calculator</h2>
-      <div class="calc-grid">
-        <div>
-          <label style="font-size: 12px; font-weight: bold;">कुल सवाल (Total Qs):</label>
-          <input type="number" id="calcTotal" class="topic-input" placeholder="जैसे: 60" oninput="calculateAccuracy()">
-        </div>
-        <div>
-          <label style="font-size: 12px; font-weight: bold;">✅ सही सवाल (Correct):</label>
-          <input type="number" id="calcCorrect" class="topic-input" placeholder="जैसे: 50" oninput="calculateAccuracy()">
-        </div>
-        <div>
-          <label style="font-size: 12px; font-weight: bold;">❌ गलत सवाल (Wrong):</label>
-          <input type="number" id="calcWrong" class="topic-input" placeholder="जैसे: 10" oninput="calculateAccuracy(true)">
-        </div>
-      </div>
-      <div style="font-size: 14px; font-weight: bold; color: var(--primary); text-align: center; margin-top: 5px;">
-        आपकी Accuracy: <span id="accuracyResult" style="color: var(--fire);">0%</span>
-      </div>
-    </div>
-
-    <!-- 4. DAILY ROUTINE COMPLETE TIMETABLE -->
+    <!-- 3. DAILY ROUTINE -->
     <div class="card" id="regularDailySection">
-      <h2>⏳ आज का डेली मास्टर रूटीन</h2>
+      <h2>⏳ आज का डेली स्टडी एवं प्रैक्टिस इनपुट</h2>
 
       <div class="sub-box">
-        <h3>🌅 6:00–7:00 — MORNING RESET</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ⏰ 6:00 उठना | 🪥 Brush | 🚿 Fresh | 🥗 नाश्ता</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🧘 Meditation (10m) + 🧘‍♂️ Yoga/Exercise (15-20m)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 📱 6–7 बजे Reel/Shorts = ZERO (फोन दूर)</label>
-      </div>
-
-      <div class="sub-box">
-        <h3>📚 7:00–11:00 — DEEP STUDY ZONE</h3>
-        
-        <!-- Math Block -->
-        <div style="margin-bottom: 10px;">
-          <label class="routine-item"><input type="checkbox" class="t-check"> ➗ MATH Target Complete</label>
-          <div style="display:flex; gap:5px;">
-            <input type="text" id="chapterMath" class="topic-input" placeholder="चैप्टर का नाम">
-            <select id="statusMath" class="topic-input" style="width: auto;">
-              <option value="In Progress">⏳ In Progress</option>
-              <option value="Completed ✅">Completed ✅</option>
-            </select>
+        <h3>📚 CHAPTER & TOPIC ZONE</h3>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px;">
+          <div>
+            <label style="font-size:12px; font-weight:bold;">➗ Math Topic:</label>
+            <input type="text" id="chapterMath" class="topic-input" placeholder="Chapter / Topic नाम">
           </div>
-          <input type="text" id="detailMath" class="topic-input" placeholder="Topic विवरण लिखना">
-        </div>
-
-        <!-- Reasoning Block -->
-        <div style="margin-bottom: 10px;">
-          <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 REASONING Target Complete</label>
-          <div style="display:flex; gap:5px;">
-            <input type="text" id="chapterReasoning" class="topic-input" placeholder="चैप्टर का नाम">
-            <select id="statusReasoning" class="topic-input" style="width: auto;">
-              <option value="In Progress">⏳ In Progress</option>
-              <option value="Completed ✅">Completed ✅</option>
-            </select>
+          <div>
+            <label style="font-size:12px; font-weight:bold;">🧠 Reasoning Topic:</label>
+            <input type="text" id="chapterReasoning" class="topic-input" placeholder="Chapter / Topic नाम">
           </div>
-          <input type="text" id="detailReasoning" class="topic-input" placeholder="Topic विवरण लिखना">
-        </div>
-
-        <!-- Polity Block -->
-        <div style="margin-bottom: 10px;">
-          <label class="routine-item"><input type="checkbox" class="t-check"> ⚖️ POLITY Target Complete</label>
-          <div style="display:flex; gap:5px;">
-            <input type="text" id="chapterPolity" class="topic-input" placeholder="चैप्टर का नाम">
-            <select id="statusPolity" class="topic-input" style="width: auto;">
-              <option value="In Progress">⏳ In Progress</option>
-              <option value="Completed ✅">Completed ✅</option>
-            </select>
+          <div>
+            <label style="font-size:12px; font-weight:bold;">⚖️ Polity Topic:</label>
+            <input type="text" id="chapterPolity" class="topic-input" placeholder="Chapter / Topic नाम">
           </div>
-          <input type="text" id="detailPolity" class="topic-input" placeholder="Topic विवरण लिखना">
-        </div>
-
-        <div>
-          <label class="routine-item"><input type="checkbox" class="t-check"> 📖 Main Notes | ⭐ Short Notes | ❓ Doubt Marked</label>
         </div>
       </div>
 
-      <!-- ADMINISTRATIVE WORDS SECTION -->
-      <div class="sub-box" style="border-left-color: #0d6efd;">
-        <h3>🏛️ प्रशासनिक भाषा एवं Vocabulary (Daily 20 Words)</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 📑 आज के 20 प्रशासनिक/अंग्रेजी/हिंदी शब्द याद किए</label>
-        <textarea id="adminWords" class="topic-input" rows="2" placeholder="आज के नए शब्द (जैसे: Notification = अधिसूचना, Affidavit = शपथ-पत्र)"></textarea>
-      </div>
-
-      <div class="sub-box">
-        <h3>🔄 11:40–3:30 — REVISION ZONE & PREPARATION</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ➗ Maths Revision टिक ✅</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 Reasoning Revision टिक ✅</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ⚖️ Polity Revision टिक ✅</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🏫 Coaching Revision टिक ✅</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🍱 30 मिनट खाना/नाश्ता Preparation (Planned Time)</label>
-      </div>
-
-      <div class="sub-box">
-        <h3>🏫 4:00–6:00 — COACHING ZONE</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> Coaching Attend + Important Points & Doubts Marked</label>
-      </div>
-
-      <!-- PRACTICE INPUTS (THIS FEEDS THE AUTO-DEDUCT ENGINE) -->
+      <!-- PRACTICE INPUTS -->
       <div class="sub-box" style="border-left-color: #d9534f;">
-        <h3>🔥 6:40–11:30 PM — DAILY PRACTICE (संख्या दर्ज करें - मंथली से घटेगा)</h3>
-        
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:10px; margin-bottom:10px;">
+        <h3>🔥 DAILY PRACTICE (अटेंडेंस लगाने पर माइनस होंगे)</h3>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:10px;">
           <div>
-            <label style="font-size:11px; font-weight:bold;">➗ आज हल किए Math Qs:</label>
-            <input type="number" id="todayMathQs" class="topic-input" placeholder="जैसे: 25">
+            <label style="font-size:11px; font-weight:bold;">➗ आज के Math Qs:</label>
+            <input type="number" id="todayMathQs" class="topic-input" placeholder="0">
           </div>
           <div>
-            <label style="font-size:11px; font-weight:bold;">🧠 आज हल किए Reasoning Qs:</label>
-            <input type="number" id="todayReasoningQs" class="topic-input" placeholder="जैसे: 25">
+            <label style="font-size:11px; font-weight:bold;">🧠 आज के Reasoning Qs:</label>
+            <input type="number" id="todayReasoningQs" class="topic-input" placeholder="0">
           </div>
           <div>
-            <label style="font-size:11px; font-weight:bold;">⚖️ आज हल किए Polity MCQs:</label>
-            <input type="number" id="todayPolityQs" class="topic-input" placeholder="जैसे: 10">
+            <label style="font-size:11px; font-weight:bold;">⚖️ आज के Polity MCQs:</label>
+            <input type="number" id="todayPolityQs" class="topic-input" placeholder="0">
           </div>
           <div>
-            <label style="font-size:11px; font-weight:bold;">🏛️ आज याद किए Vocab Words:</label>
-            <input type="number" id="todayVocabWords" class="topic-input" placeholder="जैसे: 20">
+            <label style="font-size:11px; font-weight:bold;">🏛️ आज के Vocab Words:</label>
+            <input type="number" id="todayVocabWords" class="topic-input" placeholder="0">
           </div>
         </div>
-
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🏫 Coaching Revision Complete</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ❌ Error Notebook Analysis (आज की गलतियाँ नोट कीं)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ⚡ Quick Revision (आज का पूरा दोहराव)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ⌨️ 11:00 PM के बाद: Typing Practice (15-20 mins)</label>
       </div>
 
       <div class="sub-box">
-        <h3>🔐 CONTROL SYSTEM RULES</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 📱 Reels Control (Break का मतलब Recovery)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 ओवरथिंकिंग कंट्रोल (STOP → लिखा → वापस लौटे)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🚭 Craving Control (पानी पिया + जगह बदली)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🔒 Content Control (Environment बदला)</label>
+        <h3>🔐 CONTROL SYSTEM & REVISION</h3>
+        <label class="routine-item"><input type="checkbox" id="chkCoaching" class="t-check"> 🏫 Coaching & Study Revision Done</label>
+        <label class="routine-item"><input type="checkbox" id="chkError" class="t-check"> ❌ Error Notebook Update Done</label>
+        <label class="routine-item"><input type="checkbox" id="chkControl" class="t-check"> 📱 Reels / Craving Control Active</label>
       </div>
     </div>
 
-    <!-- 5. DAILY CONTROL SCORE & ATTENDANCE -->
+    <!-- 4. DAILY SCORE & ATTENDANCE -->
     <div class="card">
-      <h2>⭐ DAILY CONTROL SCORE & ATTENDANCE 🔥</h2>
+      <h2>⭐ DAILY SCORE & ATTENDANCE 🔥</h2>
       <div class="score-grid">
         <div class="score-box">
           <label>📚 Study (Max 10)</label>
@@ -303,37 +199,32 @@
           <label>📱 Distraction (Max 5)</label>
           <input type="number" id="scoreDistraction" min="0" max="5" placeholder="0-5" oninput="calcTotalScore()">
         </div>
-        <div class="score-box">
-          <label>🎯 Accuracy (%)</label>
-          <input type="number" id="scoreAccuracy" min="0" max="100" placeholder="Auto %">
-        </div>
       </div>
       
       <div style="text-align: center; margin-top: 10px; font-weight: bold; font-size: 15px; color: var(--primary);">
-        🏆 आपका कुल स्कोर (Total Score): <span id="totalScoreLabel" style="color: var(--fire);">0</span> / 25
+        🏆 कुल स्कोर (Total Score): <span id="totalScoreLabel" style="color: var(--fire);">0</span> / 25
       </div>
 
       <button class="btn fire" onclick="saveAttendance()" style="padding: 12px; margin-top:12px;">🔥 आज की अटेंडेंस लगाएं & Target घटाएं</button>
     </div>
 
-    <!-- 6. ATTENDANCE SHEET LOG -->
+    <!-- 5. ATTENDANCE SHEET LOG -->
     <div class="card">
-      <h2>📊 विस्तृत अटेंडेंस और सम्पूर्ण डेटा इतिहास</h2>
+      <h2>📊 विस्तृत अटेंडेंस इतिहास</h2>
       <div class="table-responsive">
         <table>
           <thead>
             <tr>
               <th>तारीख</th>
-              <th>गणित (Done)</th>
-              <th>रीजनिंग (Done)</th>
-              <th>पॉलिटी (Done)</th>
-              <th>प्रशासनिक शब्द</th>
+              <th>गणित (Topic/Qs)</th>
+              <th>रीजनिंग (Topic/Qs)</th>
+              <th>पॉलिटी (Topic/Qs)</th>
+              <th>Vocab</th>
               <th>कुल स्कोर</th>
-              <th>एक्यूरेसी</th>
             </tr>
           </thead>
           <tbody id="attendanceTableBody">
-            <tr><td colspan="7" style="text-align:center;">अभी कोई डेटा सेव नहीं है।</td></tr>
+            <tr><td colspan="6" style="text-align:center;">अभी कोई डेटा सेव नहीं है।</td></tr>
           </tbody>
         </table>
       </div>
@@ -346,7 +237,7 @@
 
   <script>
     const today = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+    const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
     const todayStr = today.toLocaleDateString('hi-IN', options);
     document.getElementById('currentDateBanner').textContent = '📅 ' + todayStr;
 
@@ -361,4 +252,115 @@
     }
 
     let streak = parseInt(localStorage.getItem('user_streak') || '0');
- 
+    document.getElementById('streakDays').textContent = streak;
+
+    const INI = { math: 800, reasoning: 800, polity: 300, vocab: 600 };
+
+    function renderTargets() {
+      let remM = parseInt(localStorage.getItem('m_math') ?? INI.math);
+      let remR = parseInt(localStorage.getItem('m_reasoning') ?? INI.reasoning);
+      let remP = parseInt(localStorage.getItem('m_polity') ?? INI.polity);
+      let remV = parseInt(localStorage.getItem('m_vocab') ?? INI.vocab);
+
+      document.getElementById('remMath').textContent = remM;
+      document.getElementById('remReasoning').textContent = remR;
+      document.getElementById('remPolity').textContent = remP;
+      document.getElementById('remVocab').textContent = remV;
+
+      let totalInitial = INI.math + INI.reasoning + INI.polity + INI.vocab;
+      let totalDone = (INI.math - remM) + (INI.reasoning - remR) + (INI.polity - remP) + (INI.vocab - remV);
+
+      let percentage = Math.min(100, Math.round((totalDone / totalInitial) * 100));
+      let pBar = document.getElementById('monthlyProgressBar');
+      pBar.style.width = percentage + '%';
+      pBar.textContent = percentage + '% Complete';
+    }
+
+    function resetMonthlyTargets() {
+      if(confirm('क्या आप मंथली टारगेट्स रीसेट करना चाहते हैं?')) {
+        for(let key in INI) { localStorage.setItem('m_' + key, INI[key]); }
+        renderTargets();
+      }
+    }
+
+    function calcTotalScore() {
+      let sStudy = parseInt(document.getElementById('scoreStudy').value) || 0;
+      let sHealth = parseInt(document.getElementById('scoreHealth').value) || 0;
+      let sDisc = parseInt(document.getElementById('scoreDiscipline').value) || 0;
+      let sDist = parseInt(document.getElementById('scoreDistraction').value) || 0;
+
+      let total = sStudy + sHealth + sDisc + sDist;
+      document.getElementById('totalScoreLabel').textContent = total;
+      return total;
+    }
+
+    function saveAttendance() {
+      let tMath = parseInt(document.getElementById('todayMathQs').value) || 0;
+      let tReasoning = parseInt(document.getElementById('todayReasoningQs').value) || 0;
+      let tPolity = parseInt(document.getElementById('todayPolityQs').value) || 0;
+      let tVocab = parseInt(document.getElementById('todayVocabWords').value) || 0;
+
+      // Minus from Targets
+      localStorage.setItem('m_math', Math.max(0, (parseInt(localStorage.getItem('m_math') ?? INI.math)) - tMath));
+      localStorage.setItem('m_reasoning', Math.max(0, (parseInt(localStorage.getItem('m_reasoning') ?? INI.reasoning)) - tReasoning));
+      localStorage.setItem('m_polity', Math.max(0, (parseInt(localStorage.getItem('m_polity') ?? INI.polity)) - tPolity));
+      localStorage.setItem('m_vocab', Math.max(0, (parseInt(localStorage.getItem('m_vocab') ?? INI.vocab)) - tVocab));
+
+      renderTargets();
+
+      let entry = {
+        date: todayStr,
+        math: (document.getElementById('chapterMath').value || 'Math') + ` (${tMath} Qs)`,
+        reasoning: (document.getElementById('chapterReasoning').value || 'Reasoning') + ` (${tReasoning} Qs)`,
+        polity: (document.getElementById('chapterPolity').value || 'Polity') + ` (${tPolity} Qs)`,
+        vocab: `${tVocab} Words`,
+        totalScore: calcTotalScore() + '/25'
+      };
+
+      let history = JSON.parse(localStorage.getItem('study_history_v11') || '[]');
+      history.unshift(entry);
+      localStorage.setItem('study_history_v11', JSON.stringify(history));
+
+      streak += 1;
+      localStorage.setItem('user_streak', streak);
+      document.getElementById('streakDays').textContent = streak;
+
+      loadHistory();
+      alert('✅ अटेंडेंस सफलतापूर्वक लग गई है!');
+    }
+
+    function loadHistory() {
+      let history = JSON.parse(localStorage.getItem('study_history_v11') || '[]');
+      let tbody = document.getElementById('attendanceTableBody');
+      if(history.length === 0) return;
+
+      let html = '';
+      history.forEach(item => {
+        html += `<tr>
+          <td><b>${item.date}</b></td>
+          <td>${item.math}</td>
+          <td>${item.reasoning}</td>
+          <td>${item.polity}</td>
+          <td>${item.vocab}</td>
+          <td><b>${item.totalScore}</b></td>
+        </tr>`;
+      });
+      tbody.innerHTML = html;
+    }
+
+    function clearHistory() {
+      if(confirm('क्या आप सारा इतिहास साफ़ करना चाहते हैं?')) {
+        localStorage.removeItem('study_history_v11');
+        localStorage.removeItem('user_streak');
+        location.reload();
+      }
+    }
+
+    window.onload = function() {
+      loadHistory();
+      renderTargets();
+    };
+  </script>
+</body>
+  </html>
+  
