@@ -285,7 +285,6 @@ function login(){
   let u = document.getElementById('adminUser').value.trim();
   let p = document.getElementById('adminPass').value.trim();
  
-  // Simple direct Admin login setup
   if(u === 'admin' && p === 'admin123'){
     sessionStorage.setItem('jwl_admin_session','ok');
     document.getElementById('loginBox').classList.add('hidden');
@@ -293,10 +292,7 @@ function login(){
     renderAdmin();
     alert('✅ लॉगिन सफल!');
   } else {
-    alert('❌ गलत Username या Password!
- 
-सही Username: admin
-सही Password: admin123');
+    alert('❌ गलत Username या Password!\n\nसही Username: admin\nसही Password: admin123');
   }
 }
  
@@ -327,4 +323,4 @@ function addWork(){if(!wname.value.trim())return;works.unshift({name:wname.value
 render();
 </script>
  </body>
-    </html>
+                               </html>
