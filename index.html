@@ -3,151 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎯 Daily Master Routine & Tracker</title>
+  <title>🔥 Ultimate Course & Chapter Progress Tracker</title>
   <style>
     :root {
-      --primary: #176b3a;
-      --secondary: #0d4d2b;
+      --primary: #0f5132;
+      --secondary: #198754;
+      --fire: #d9534f;
       --bg: #ffffff;
-      --card-bg: #f9fbfd;
-      --text: #222;
-      --border: #d0d7de;
+      --card-bg: #f8f9fa;
+      --text: #212529;
+      --border: #ced4da;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 20px; text-align: center; }
-    header h1 { margin: 0 0 5px; font-size: 22px; }
-    header p { margin: 0; font-size: 14px; opacity: 0.9; }
+    body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+    header { background: linear-gradient(135deg, #0f5132, #198754); color: #fff; padding: 20px; text-align: center; }
+    header h1 { margin: 0 0 5px; font-size: 20px; }
     
-    .date-banner { background: #eaf5ee; color: var(--secondary); text-align: center; padding: 10px; font-weight: bold; font-size: 15px; border-bottom: 1px solid #c8e6c9; }
+    .streak-bar { background: #fff3cd; border-bottom: 2px solid #ffebaa; padding: 10px; text-align: center; font-size: 15px; font-weight: bold; color: #856404; display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; }
+    .streak-badge { background: var(--fire); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 14px; }
 
     main { max-width: 850px; margin: auto; padding: 15px; }
-    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 20px; }
-    .card h2 { color: var(--primary); margin-top: 0; border-bottom: 2px solid #eaf5ee; padding-bottom: 8px; font-size: 18px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; box-shadow: 0 2px 5px rgba(0,0,0,0.03); margin-bottom: 20px; }
+    .card h2 { color: var(--primary); margin-top: 0; border-bottom: 2px solid #cfe2ff; padding-bottom: 8px; font-size: 17px; }
     
-    .routine-item { display: flex; align-items: center; margin: 10px 0; font-size: 15px; cursor: pointer; }
-    .routine-item input[type="checkbox"] { width: 18px; height: 18px; margin-right: 12px; accent-color: var(--primary); cursor: pointer; }
+    .routine-item { display: flex; align-items: center; margin: 8px 0; font-size: 14px; cursor: pointer; }
+    .routine-item input[type="checkbox"] { width: 18px; height: 18px; margin-right: 10px; accent-color: var(--primary); cursor: pointer; }
     
-    .sub-box { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--primary); padding: 12px 15px; margin: 12px 0; border-radius: 0 8px 8px 0; }
-    .sub-box h3 { margin: 0 0 8px; font-size: 15px; color: var(--secondary); }
+    .sub-box { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--secondary); padding: 12px; margin: 10px 0; border-radius: 0 8px 8px 0; }
+    .sub-box h3 { margin: 0 0 6px; font-size: 14px; color: var(--primary); }
     
-    .topic-input { width: 100%; padding: 8px 10px; margin-top: 5px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px; }
+    .topic-input { width: 100%; padding: 7px 10px; margin-top: 5px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; }
 
-    .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 15px; }
-    .score-box { background: #fff; border: 1px solid var(--border); padding: 10px; border-radius: 8px; text-align: center; }
-    .score-box label { display: block; font-weight: bold; margin-bottom: 5px; color: var(--secondary); font-size: 13px; }
-    .score-box input { width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; text-align: center; font-size: 15px; }
+    /* Course Progress Meter */
+    .progress-container { background: #e9ecef; border-radius: 20px; height: 22px; width: 100%; margin: 10px 0; overflow: hidden; border: 1px solid var(--border); }
+    .progress-bar { background: linear-gradient(90deg, #198754, #d9534f); height: 100%; width: 0%; text-align: center; color: white; font-size: 12px; font-weight: bold; line-height: 22px; transition: width 0.4s ease; }
 
-    .control-tips { background: #fffdf4; border: 1px solid #ffe082; border-left: 5px solid #ffa000; padding: 12px; border-radius: 8px; margin-bottom: 12px; }
-    .control-tips h3 { margin: 0 0 5px; font-size: 15px; color: #d84315; }
+    /* Topic Inputs Grid */
+    .subject-block { background: #f1f8f5; border: 1px solid #c3e6cb; padding: 10px; border-radius: 6px; margin-bottom: 12px; }
+    .subject-block h4 { margin: 0 0 8px; font-size: 14px; color: var(--primary); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-top: 10px; }
+    .score-box { background: #fff; border: 1px solid var(--border); padding: 8px; border-radius: 6px; text-align: center; }
+    .score-box label { display: block; font-weight: bold; margin-bottom: 4px; color: var(--primary); font-size: 12px; }
+    .score-box input { width: 100%; padding: 6px; border: 1px solid var(--border); border-radius: 4px; text-align: center; font-size: 14px; }
+
+    .btn { background: var(--secondary); color: #fff; border: 0; padding: 10px 15px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; font-size: 14px; margin-top: 8px; }
+    .btn:hover { background: var(--primary); }
+    .btn.fire { background: var(--fire); }
+
+    .table-responsive { overflow-x: auto; margin-top: 10px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; background: #fff; }
+    th, td { border: 1px solid var(--border); padding: 8px; text-align: center; }
+    th { background: #d1e7dd; color: var(--primary); }
     
-    .btn { background: var(--primary); color: #fff; border: 0; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; margin-top: 10px; }
-    .btn:hover { background: var(--secondary); }
-    
-    /* Attendance Table */
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; background: #fff; }
-    th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: center; }
-    th { background: #eaf5ee; color: var(--secondary); }
-    
-    .footer { text-align: center; padding: 20px; color: #666; font-size: 13px; }
+    .footer { text-align: center; padding: 15px; color: #666; font-size: 12px; }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>🎯 DAILY MASTER ROUTINE & CONTROL SYSTEM</h1>
-    <p>“Perfect Day ❌ जरूरी नहीं, Comeback Day ✅ जरूरी है।”</p>
+    <h1>🎯 COURSE SPEED & CHAPTER TRACKER</h1>
   </header>
 
-  <div class="date-banner" id="currentDateBanner">📅 तारीख लोड हो रही है...</div>
+  <div class="streak-bar">
+    <span id="currentDateBanner">📅 तारीख...</span>
+    <span class="streak-badge">🔥 <span id="streakDays">0</span> Days Streak</span>
+  </div>
 
   <main>
-    <!-- Daily Checklist -->
+
+    <!-- 1. COURSE COMPLETION METER -->
     <div class="card">
-      <h2>⏳ आज का डेली रूटीन चेकलिस्ट</h2>
+      <h2>📚 Overall Course Completion Speed Tracker</h2>
+      <p style="font-size: 12px; color: #555; margin: 0 0 5px;">जैसे-जैसे आप चैप्टर्स **Complete ✅** मार्क करेंगे, आपका कोर्स प्रोग्रेस आगे बढ़ेगा:</p>
       
-      <div class="sub-box">
-        <h3>🌅 6:00–7:00 — MORNING RESET</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ⏰ 6:00 उठना</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🪥 Brush</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🚿 Fresh + नहाना</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🥗 Diet/नाश्ता</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🧘 Meditation — 10 मिनट</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🧘‍♂️ Yoga/हल्की exercise — 15–20 मिनट</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 📱 6–7 बजे Reel/Shorts = ZERO</label>
-      </div>
-
-      <div class="sub-box">
-        <h3>📚 7:00–11:00 — DEEP STUDY ZONE (विषय और टॉपिक लिखें)</h3>
-        <div style="margin-bottom: 10px;">
-          <label class="routine-item"><input type="checkbox" class="t-check"> ➗ MATH Target Complete</label>
-          <input type="text" id="topicMath" class="topic-input" placeholder="आज का मैथ टॉपिक लिखें (जैसे: Percentage)">
-        </div>
-        <div style="margin-bottom: 10px;">
-          <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 REASONING Target Complete</label>
-          <input type="text" id="topicReasoning" class="topic-input" placeholder="आज का रीजनिंग टॉपिक लिखें (जैसे: Syllogism)">
-        </div>
-        <div style="margin-bottom: 10px;">
-          <label class="routine-item"><input type="checkbox" class="t-check"> ⚖️ POLITY Target Complete</label>
-          <input type="text" id="topicPolity" class="topic-input" placeholder="आज की पॉलिटी टॉपिक लिखें (जैसे: Fundamental Rights)">
-        </div>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 📝 Notes System (Main, Short Notes, Doubt)</label>
-      </div>
-
-      <div class="sub-box">
-        <h3>🔄 11:40–3:30 — REVISION ZONE</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> Maths Revision Done</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> Reasoning Revision Done</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> Polity Revision Done</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> Coaching Revision Done</label>
-      </div>
-
-      <div class="sub-box">
-        <h3>🏫 4:00–6:00 — COACHING</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> Coaching Attended & Important Points Marked</label>
-      </div>
-
-      <div class="sub-box">
-        <h3>🔥 6:40–11:00 — PRACTICE + MCQ ZONE</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 6:40–8:00 Practice Questions</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 8:00–8:20 Coaching Revision</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 8:20–9:30 Maths Practice</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 9:30–10:10 Reasoning Practice</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 10:10–11:00 Polity MCQ + Calculation (पहाड़े, क्यूब, स्क्वायर)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ❌ Error Notebook Update (10 मिनट)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🔄 Quick Revision + कल का टारगेट</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ⌨️ Typing Practice (15-20 मिनट)</label>
+      <div class="progress-container">
+        <div class="progress-bar" id="courseProgressBar">0% Completed</div>
       </div>
     </div>
 
-    <!-- Control System Rules with Checkboxes -->
+    <!-- 2. DAILY CHAPTER & TOPIC DETAILS -->
     <div class="card">
-      <h2>🔐 नियंत्रण प्रणाली (Control System Quick Rules) - आज पालन हुआ?</h2>
+      <h2>📖 आज के चैप्टर्स और टॉपिक विवरण (Live Class & Study)</h2>
       
-      <div class="control-tips">
-        <h3>📱 1. Reels Control</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> फोन दूर रखा और रील्स से दूर रहा (Break = Recovery)</label>
+      <!-- MATH -->
+      <div class="subject-block">
+        <h4>➗ Math (गणित)</h4>
+        <div class="grid-2">
+          <input type="text" id="chapterMath" class="topic-input" placeholder="Chapter का नाम (जैसे: Percentage)">
+          <select id="statusMath" class="topic-input">
+            <option value="⏳ In Progress">⏳ Chapter In Progress</option>
+            <option value="✅ Chapter Completed">✅ Chapter Completed!</option>
+          </select>
+        </div>
+        <textarea id="detailMath" class="topic-input" rows="2" placeholder="Topic विवरण लिखना (जैसे: Type 1 to 5 Questions solved, Shortcut Tricks noted)"></textarea>
       </div>
 
-      <div class="control-tips">
-        <h3>🧠 2. ज्यादा सोचने का तरीका</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> नियम पालन: STOP → लिखा → वापस Task पर आया</label>
+      <!-- REASONING -->
+      <div class="subject-block">
+        <h4>🧠 Reasoning (रीजनिंग)</h4>
+        <div class="grid-2">
+          <input type="text" id="chapterReasoning" class="topic-input" placeholder="Chapter का नाम (जैसे: Syllogism)">
+          <select id="statusReasoning" class="topic-input">
+            <option value="⏳ In Progress">⏳ Chapter In Progress</option>
+            <option value="✅ Chapter Completed">✅ Chapter Completed!</option>
+          </select>
+        </div>
+        <textarea id="detailReasoning" class="topic-input" rows="2" placeholder="Topic विवरण लिखना (जैसे: Either-Or Concept and 30 Questions Practice)"></textarea>
       </div>
 
-      <div class="control-tips">
-        <h3>🚭 3. Cigarette / Craving</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> Craving आने पर पानी पिया / जगह बदली / कंट्रोल रखा</label>
-      </div>
-
-      <div class="control-tips">
-        <h3>🔒 4. अश्लील सामग्री से बचाव</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> फोन बिस्तर में नहीं ले गया / ट्रिगर से बचा रहा</label>
+      <!-- POLITY -->
+      <div class="subject-block">
+        <h4>⚖️ Polity (राजव्यवस्था)</h4>
+        <div class="grid-2">
+          <input type="text" id="chapterPolity" class="topic-input" placeholder="Chapter का नाम (जैसे: Fundamental Rights)">
+          <select id="statusPolity" class="topic-input">
+            <option value="⏳ In Progress">⏳ Chapter In Progress</option>
+            <option value="✅ Chapter Completed">✅ Chapter Completed!</option>
+          </select>
+        </div>
+        <textarea id="detailPolity" class="topic-input" rows="2" placeholder="Topic विवरण लिखना (जैसे: Article 12 to 35 Notes + Revision)"></textarea>
       </div>
     </div>
 
-    <!-- Daily Control Score -->
+    <!-- 3. CONTROL & SCORES -->
     <div class="card">
-      <h2>⭐ आपका DAILY CONTROL SCORE (सख्त सीमा के साथ)</h2>
+      <h2>⭐ DAILY SCORE & ATTENDANCE 🔥</h2>
       <div class="score-grid">
         <div class="score-box">
           <label>📚 Study (Max 10)</label>
@@ -170,22 +152,21 @@
           <input type="number" id="scoreDistraction" min="0" max="5" placeholder="0-5">
         </div>
       </div>
-      <button class="btn" onclick="saveAttendance()">💾 आज की अटेंडेंस और स्कोर सेव करें</button>
+      <button class="btn fire" onclick="saveAttendance()" style="padding: 12px; margin-top:15px;">🔥 आज की अटेंडेंस लगाएं & Progress चेक करें</button>
     </div>
 
-    <!-- Attendance & History Log -->
+    <!-- 4. ATTENDANCE & HISTORY LOG -->
     <div class="card">
-      <h2>📊 पिछला रिकॉर्ड / अटेंडेंस शीट (Page Log)</h2>
-      <p style="font-size: 13px; color: #555;">यहाँ आपके द्वारा सेव किए गए हर दिन के काम और स्कोर की पूरी जानकारी दिखेगी:</p>
-      <div style="overflow-x: auto;">
+      <h2>📊 विस्तृत अटेंडेंस शीट और चैप्टर रिकॉर्ड</h2>
+      <div class="table-responsive">
         <table>
           <thead>
             <tr>
-              <th>तारीख / दिन</th>
-              <th>मैथ्स टॉपिक</th>
-              <th>रीजनिंग टॉपिक</th>
-              <th>पॉलिटी टॉपिक</th>
-              <th>स्कोर (Study/10)</th>
+              <th>तारीख</th>
+              <th>गणित (Chapter & Detail)</th>
+              <th>रीजनिंग (Chapter & Detail)</th>
+              <th>पॉलिटी (Chapter & Detail)</th>
+              <th>स्कोर</th>
               <th>एक्यूरेसी</th>
             </tr>
           </thead>
@@ -194,88 +175,94 @@
           </tbody>
         </table>
       </div>
-      <button class="btn" style="background: #a21d1d; margin-top: 15px;" onclick="clearHistory()">🗑️ सारा इतिहास साफ़ करें</button>
+      <button class="btn" style="background: #a21d1d; margin-top: 10px;" onclick="clearHistory()">🗑️ Clear All History</button>
     </div>
+
   </main>
 
-  <div class="footer">© Daily Master Routine • लक्ष्य: सफलता और अनुशासन</div>
+  <div class="footer">© Ultimate Chapter Tracker • सिलेबस खत्म करना ही मुख्य उद्देश्य है</div>
 
   <script>
-    // Set Date and Day automatically
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    // Date Setup
+    const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
     const todayStr = new Date().toLocaleDateString('hi-IN', options);
-    document.getElementById('currentDateBanner').textContent = '📅 आज की तारीख और दिन: ' + todayStr;
+    document.getElementById('currentDateBanner').textContent = '📅 ' + todayStr;
 
-    // Checkboxes saving logic
-    const checkboxes = document.querySelectorAll('.t-check');
-    checkboxes.forEach((chk, index) => {
-      let savedState = localStorage.getItem('chk_' + index);
-      if(savedState === 'true') chk.checked = true;
-      
-      chk.addEventListener('change', () => {
-        localStorage.setItem('chk_' + index, chk.checked);
-      });
-    });
+    // Load Streak
+    let streak = parseInt(localStorage.getItem('user_streak') || '0');
+    document.getElementById('streakDays').textContent = streak;
 
-    // Topic inputs saving logic
-    ['topicMath', 'topicReasoning', 'topicPolity'].forEach(id => {
-      let el = document.getElementById(id);
-      if(localStorage.getItem(id)) el.value = localStorage.getItem(id);
-      el.addEventListener('input', () => {
-        localStorage.setItem(id, el.value);
-      });
-    });
-
-    // Score validation and Attendance Saving
+    // Save Attendance & Calculate Progress
     function saveAttendance() {
       let sStudy = parseInt(document.getElementById('scoreStudy').value) || 0;
-      let sHealth = parseInt(document.getElementById('scoreHealth').value) || 0;
-      let sDiscipline = parseInt(document.getElementById('scoreDiscipline').value) || 0;
-      let sAccuracy = parseInt(document.getElementById('scoreAccuracy').value) || 0;
-      let sDistraction = parseInt(document.getElementById('scoreDistraction').value) || 0;
-
-      // Strict validation based on user instructions
       if(sStudy > 10) { alert('❌ Study Target के नंबर 10 से ज्यादा नहीं हो सकते!'); return; }
-      if(sHealth > 5) { alert('❌ Health के नंबर 5 से ज्यादा नहीं हो सकते!'); return; }
-      if(sDiscipline > 5) { alert('❌ Discipline के नंबर 5 से ज्यादा नहीं हो सकते!'); return; }
-      if(sAccuracy > 100) { alert('❌ Accuracy 100% से ज्यादा नहीं हो सकती!'); return; }
-      if(sDistraction > 5) { alert('❌ Distraction Control के नंबर 5 से ज्यादा नहीं हो सकते!'); return; }
+
+      let cMath = document.getElementById('chapterMath').value || 'N/A';
+      let stMath = document.getElementById('statusMath').value;
+      let dMath = document.getElementById('detailMath').value || '-';
+
+      let cReasoning = document.getElementById('chapterReasoning').value || 'N/A';
+      let stReasoning = document.getElementById('statusReasoning').value;
+      let dReasoning = document.getElementById('detailReasoning').value || '-';
+
+      let cPolity = document.getElementById('chapterPolity').value || 'N/A';
+      let stPolity = document.getElementById('statusPolity').value;
+      let dPolity = document.getElementById('detailPolity').value || '-';
 
       let entry = {
         date: todayStr,
-        math: document.getElementById('topicMath').value || '-لا-',
-        reasoning: document.getElementById('topicReasoning').value || '-',
-        polity: document.getElementById('topicPolity').value || '-',
+        math: `<b>${cMath}</b><br>(${stMath})<br><i>${dMath}</i>`,
+        reasoning: `<b>${cReasoning}</b><br>(${stReasoning})<br><i>${dReasoning}</i>`,
+        polity: `<b>${cPolity}</b><br>(${stPolity})<br><i>${dPolity}</i>`,
         study: sStudy,
-        accuracy: sAccuracy + '%'
+        accuracy: (document.getElementById('scoreAccuracy').value || '0') + '%'
       };
 
-      let history = JSON.parse(localStorage.getItem('study_history') || '[]');
-      history.unshift(entry); // Add new entry to top
-      localStorage.setItem('study_history', JSON.stringify(history));
+      let history = JSON.parse(localStorage.getItem('study_history_v5') || '[]');
+      history.unshift(entry);
+      localStorage.setItem('study_history_v5', JSON.stringify(history));
+
+      // Calculate completed chapters
+      let completedCount = parseInt(localStorage.getItem('completed_chapters_count') || '0');
+      if(stMath.includes('Completed')) completedCount++;
+      if(stReasoning.includes('Completed')) completedCount++;
+      if(stPolity.includes('Completed')) completedCount++;
+      localStorage.setItem('completed_chapters_count', completedCount);
+
+      // Streak Update
+      streak += 1;
+      localStorage.setItem('user_streak', streak);
+      document.getElementById('streakDays').textContent = streak;
 
       loadHistory();
-      alert('✅ आपकी आज की अटेंडेंस और डेटा सफलतापूर्वक सेव हो गया है!');
+      updateCourseMeter();
+      alert('🔥 अटेंडेंस सफलतापूर्वक दर्ज हो गई! आपका चैप्टर रिकॉर्ड अपडेट कर दिया गया है।');
     }
 
-    // Load History Table
-    function loadHistory() {
-      let history = JSON.parse(localStorage.getItem('study_history') || '[]');
-      let tbody = document.getElementById('attendanceTableBody');
+    function updateCourseMeter() {
+      let completedCount = parseInt(localStorage.getItem('completed_chapters_count') || '0');
+      // Total estimated chapters in syllabus (e.g., 60 chapters total across subjects)
+      let totalSyllabusChapters = 60; 
+      let percentage = Math.min(100, Math.round((completedCount / totalSyllabusChapters) * 100));
       
-      if(history.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;">अभी कोई डेटा सेव नहीं है।</td></tr>`;
-        return;
-      }
+      let pBar = document.getElementById('courseProgressBar');
+      pBar.style.width = percentage + '%';
+      pBar.textContent = `${completedCount} Chapters Done (${percentage}% Syllabus Completed)`;
+    }
+
+    function loadHistory() {
+      let history = JSON.parse(localStorage.getItem('study_history_v5') || '[]');
+      let tbody = document.getElementById('attendanceTableBody');
+      if(history.length === 0) return;
 
       let html = '';
       history.forEach(item => {
         html += `<tr>
           <td>${item.date}</td>
-          <td>${item.math}</td>
-          <td>${item.reasoning}</td>
-          <td>${item.polity}</td>
-          <td>${item.study}/10</td>
+          <td style="text-align:left;">${item.math}</td>
+          <td style="text-align:left;">${item.reasoning}</td>
+          <td style="text-align:left;">${item.polity}</td>
+          <td><b>${item.study}</b>/10</td>
           <td>${item.accuracy}</td>
         </tr>`;
       });
@@ -283,17 +270,19 @@
     }
 
     function clearHistory() {
-      if(confirm('क्या आप सारा पुराना इतिहास मिटाना चाहते हैं?')) {
-        localStorage.removeItem('study_history');
-        loadHistory();
+      if(confirm('क्या आप सारा डेटा, इतिहास और कोर्स प्रोग्रेस रीसेट करना चाहते हैं?')) {
+        localStorage.removeItem('study_history_v5');
+        localStorage.removeItem('user_streak');
+        localStorage.removeItem('completed_chapters_count');
+        location.reload();
       }
     }
 
-    // Load history on page start
     window.onload = function() {
       loadHistory();
+      updateCourseMeter();
     };
   </script>
 </body>
-  </html>
-          
+        </html>
+            
