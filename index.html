@@ -604,4 +604,147 @@
                     id: 'MEM-' + Math.floor(1000 + Math.random() * 9000),
                     name: document.getElementById('mName').value,
                     phone: document.getElementById('mPhone').value,
-        
+                    ward: document.getElementById('mWard').value,
+                    age: document.getElementById('mAge').value,
+                    photo: base64Image,
+                    status: 'Pending'
+                };
+                members.push(newMember);
+                localStorage.setItem('jojal_members', JSON.stringify(members));
+                alert('आवेदन सफलतापूर्वक भेजा गया! आपकी ID है: ' + newMember.id);
+                document.getElementById('memberForm').reset();
+            });
+        });
+
+        // Issue Form Submit
+        document.getElementById('issueForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newIssue = {
+                id: 'JOJ-' + Math.floor(100 + Math.random() * 900),
+                name: document.getElementById('iName').value,
+                phone: document.getElementById('iPhone').value,
+                location: document.getElementById('iLoc').value,
+                type: document.getElementById('iType').value,
+                desc: document.getElementById('iDesc').value,
+                status: 'लंबित (Pending)'
+            };
+            issues.push(newIssue);
+            localStorage.setItem('jojal_issues', JSON.stringify(issues));
+            alert('समस्या दर्ज की गई! आपकी Ticket ID है: ' + newIssue.id);
+            document.getElementById('issueForm').reset();
+        });
+
+        // Track Status
+        function trackStatus() {
+            const id = document.getElementById('trackId').value.trim();
+            const resDiv = document.getElementById('trackResult');
+            const cardModal = document.getElementById('idCardSection');
+            resDiv.innerHTML = '';
+            cardModal.style.display = 'none';
+
+            const foundIssue = issues.find(i => i.id === id);
+            if(foundIssue) {
+                resDiv.innerHTML = `<p><strong>समस्या:</strong> ${foundIssue.type} | <strong>स्थिति:</strong> <span class="status-badge status-pending">${foundIssue.status}</span></p>`;
+                return;
+            }
+
+            const foundMember = members.find(m => m.id === id);
+            if(foundMember) {
+                if(foundMember.status === 'Approved') {
+                    resDiv.innerHTML = `<p style="color:green; font-weight:bold;">✔ आपका आवेदन स्वीकृत है! नीचे अपनी Digital ID देखें।</p>`;
+                    document.getElementById('cardImg').src = foundMember.photo;
+                    document.getElementById('cardName').innerText = foundMember.name;
+                    document.getElementById('cardPhone').innerText = foundMember.phone;
+                    document.getElementById('cardWard').innerText = foundMember.ward;
+                    document.getElementById('cardAge').innerText = foundMember.age;
+                    cardModal.style.display = 'block';
+                    cardModal.scrollIntoView({ behavior: 'smooth' });
+                } else if(foundMember.status === 'Rejected') {
+                    resDiv.innerHTML = `<p style="color:red; font-weight:bold;">❌ आपका आवेदन अस्वीकृत (Reject) कर दिया गया है।</p>`;
+                } else {
+                    resDiv.innerHTML = `<p><strong>स्थिति:</strong> <span class="status-badge status-pending">समीक्षाधीन (Pending Approval)</span></p>`;
+                }
+                return;
+            }
+
+            resDiv.innerHTML = `<p style="color:red;">कोई रिकॉर्ड नहीं मिला। सही Ticket ID डालें।</p>`;
+        }
+
+        // Admin Auth
+        function toggleAdminPanel() {
+            if(!adminLoggedIn) {
+                const pass = prompt('Admin पासवर्ड दर्ज करें:');
+                if(pass === ADMIN_PASSWORD) {
+                    adminLoggedIn = true;
+                    document.getElementById('adminPanel').style.display = 'block';
+                    loadAdminData();
+                    document.getElementById('adminPanel').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    alert('गलत पासवर्ड!');
+                }
+            } else {
+                document.getElementById('adminPanel').style.display = 'none';
+                adminLoggedIn = false;
+            }
+        }
+
+        function loadAdminData() {
+            const mBody = document.getElementById('adminMembersTable');
+            mBody.innerHTML = '';
+            members.forEach((m, idx) => {
+                mBody.innerHTML += `
+                    <tr>
+                        <td>${m.id}</td>
+                        <td>${m.name}</td>
+                        <td>${m.phone}</td>
+                        <td>${m.ward}</td>
+                        <td>${m.age}</td>
+                        <td><img src="${m.photo}" width="35" height="35" style="border-radius:50%"></td>
+                        <td><span class="status-badge ${m.status === 'Approved' ? 'status-approved' : 'status-pending'}">${m.status}</span></td>
+                        <td>
+                            <button onclick="approveMember(${idx})" class="btn btn-sm">Approve</button>
+                            <button onclick="rejectMember(${idx})" class="btn btn-sm btn-danger">Reject</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            const iBody = document.getElementById('adminIssuesTable');
+            iBody.innerHTML = '';
+            issues.forEach((i, idx) => {
+                iBody.innerHTML += `
+                    <tr>
+                        <td>${i.id}</td>
+                        <td>${i.name} (${i.phone})</td>
+                        <td>${i.type}</td>
+                        <td>${i.location}</td>
+                        <td>${i.desc}</td>
+                        <td>${i.status}</td>
+                        <td>
+                            <button onclick="resolveIssue(${idx})" class="btn btn-sm">Resolve</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function approveMember(idx) {
+            members[idx].status = 'Approved';
+            localStorage.setItem('jojal_members', JSON.stringify(members));
+            loadAdminData();
+        }
+
+        function rejectMember(idx) {
+            members[idx].status = 'Rejected';
+            localStorage.setItem('jojal_members', JSON.stringify(members));
+            loadAdminData();
+        }
+
+        function resolveIssue(idx) {
+            issues[idx].status = 'निस्तारित (Resolved)';
+            localStorage.setItem('jojal_issues', JSON.stringify(issues));
+            loadAdminData();
+        }
+    </script>
+ </body>
+</html>
