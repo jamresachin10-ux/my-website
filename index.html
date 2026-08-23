@@ -28,7 +28,7 @@
             padding-bottom: 50px;
         }
 
-        /* Top Header Styling (As per Reference Image) */
+        /* Top Header Styling */
         .top-header {
             background: #ffffff;
             padding: 15px 20px;
@@ -123,7 +123,7 @@
             margin-bottom: 20px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.06);
             border-top: 4px solid var(--green-theme);
-            display: none; /* Controlled via JS */
+            display: none;
         }
 
         .section-card.active {
@@ -465,7 +465,9 @@
         // Data Stores
         let membersData = JSON.parse(localStorage.getItem('jojalwadi_members')) || [];
         let issuesData = JSON.parse(localStorage.getItem('jojalwadi_issues')) || [];
-        const ADMIN_PASSWORD = "admin";
+        
+        // ADMIN PASSWORD UPDATED
+        const ADMIN_PASSWORD = "Sachin@312";
 
         // Navigation Controller
         function showSection(sectionId) {
@@ -550,73 +552,4 @@
                     text: `ग्राम पंचायत जोजलवाड़ी\nनाम: ${found.name}\nसत्यापित सदस्य`,
                     width: 70,
                     height: 70
-                });
-                container.style.display = 'block';
-            } else {
-                container.style.display = 'none';
-                alert('स्वीकृत (Approved) डिजिटल ID नहीं मिली। Admin Approval की प्रतीक्षा करें।');
-            }
-        }
-
-        // Track Issue
-        function trackTicket() {
-            const id = document.getElementById('trackTicketInput').value.trim();
-            const res = document.getElementById('ticketResult');
-            const found = issuesData.find(i => i.ticketId === id);
-
-            if(found) {
-                res.innerHTML = `<div style="background:#eef7f2; padding:10px; border-radius:6px;">
-                    <p><strong>Ticket ID:</strong> ${found.ticketId}</p>
-                    <p><strong>प्रकार:</strong> ${found.type}</p>
-                    <p><strong>स्थिति:</strong> ${found.status}</p>
-                </div>`;
-            } else {
-                res.innerHTML = `<p style="color:red;">Ticket ID नहीं मिली!</p>`;
-            }
-        }
-
-        // Render Admin Control
-        function renderAdminTables() {
-            const mBody = document.querySelector('#adminMembersTable tbody');
-            mBody.innerHTML = '';
-            membersData.forEach((m, idx) => {
-                mBody.innerHTML += `<tr>
-                    <td><img src="${m.photo}" width="35" height="35" style="border-radius:4px;"></td>
-                    <td>${m.name}</td>
-                    <td>${m.mobile}</td>
-                    <td>${m.ward}</td>
-                    <td><span class="badge badge-${m.status.toLowerCase()}">${m.status}</span></td>
-                    <td>
-                        <button onclick="approveMember(${m.id})" style="background:#5cb85c; color:white; border:none; padding:4px 8px; border-radius:4px;">Approve</button>
-                        <button onclick="deleteMember(${idx})" style="background:#d9534f; color:white; border:none; padding:4px 8px; border-radius:4px;">🗑️</button>
-                    </td>
-                </tr>`;
-            });
-
-            const iBody = document.querySelector('#adminIssuesTable tbody');
-            iBody.innerHTML = '';
-            issuesData.forEach((i, idx) => {
-                iBody.innerHTML += `<tr>
-                    <td><strong>${i.ticketId}</strong></td>
-                    <td>${i.name}</td>
-                    <td>${i.type}</td>
-                    <td>${i.desc}</td>
-                    <td>${i.status}</td>
-                    <td>
-                        <button onclick="resolveIssue(${idx})" style="background:#5cb85c; color:white; border:none; padding:4px 8px; border-radius:4px;">हल हुआ</button>
-                        <button onclick="deleteIssue(${idx})" style="background:#d9534f; color:white; border:none; padding:4px 8px; border-radius:4px;">🗑️</button>
-                    </td>
-                </tr>`;
-            });
-        }
-
-        function approveMember(id) {
-            const m = membersData.find(item => item.id === id);
-            if(m) { m.status = 'Approved'; updateStorage(); renderAdminTables(); }
-        }
-        function deleteMember(idx) { membersData.splice(idx,1); updateStorage(); renderAdminTables(); }
-        function resolveIssue(idx) { issuesData[idx].status = 'समाधानित'; updateStorage(); renderAdminTables(); }
-        function deleteIssue(idx) { issuesData.splice(idx,1); updateStorage(); renderAdminTables(); }
-    </script>
-</body>
-</html>
+              
