@@ -29,7 +29,7 @@ section{display:none}.active{display:block}.btn{background:#176b3a;color:#fff;bo
    <button onclick="show('works')">🏗️ पंचायत कार्य</button>
    <button onclick="show('gram')">🏛️ ग्रामसभा</button>
    <button onclick="show('contact')">📞 संपर्क</button>
-   <button id="navAdminBtn" class="admin-btn hidden" onclick="openAdmin()">🔐 Admin</button>
+   <button class="admin-btn" onclick="openAdmin()">🔐 Admin</button>
   </nav>
   <main>
    <section id="home" class="active">
@@ -85,7 +85,7 @@ section{display:none}.active{display:block}.btn{background:#176b3a;color:#fff;bo
         <label>नाम</label><input id="mname" required>
        </div>
        <div>
-        <label>मोबाइल (10 अंक)</label><input id="mphone" type="tel" pattern="[0-9]10" placeholder="10 अंकों का नंबर" required>
+        <label>मोबाइल (10 अंक)</label><input id="mphone" type="tel" pattern="[0-9]{10}" placeholder="10 अंकों का नंबर" required>
        </div>
        <div>
         <label>वार्ड/मोहल्ला</label><input id="mward" required>
@@ -109,7 +109,7 @@ section{display:none}.active{display:block}.btn{background:#176b3a;color:#fff;bo
         <label>नाम</label><input id="cname" required>
        </div>
        <div>
-        <label>मोबाइल (10 अंक)</label><input id="cphone" type="tel" pattern="[0-9]10" placeholder="10 अंकों का नंबर" required>
+        <label>मोबाइल (10 अंक)</label><input id="cphone" type="tel" pattern="[0-9]{10}" placeholder="10 अंकों का नंबर" required>
        </div>
        <div>
         <label>वार्ड/मोहल्ला</label><input id="cward" required>
@@ -160,7 +160,7 @@ section{display:none}.active{display:block}.btn{background:#176b3a;color:#fff;bo
     <div class="hero admin">
      <h2>🔐 Admin Panel Control</h2>
      <div id="loginBox">
-      <label>Username</label> <input id="adminUser" placeholder="यूज़रनेम"> <label>Password</label> <input id="adminPass" type="password" placeholder="पासवर्ड">
+      <label>Username</label> <input id="adminUser" placeholder="यूज़रनेम दर्ज करें"> <label>Password</label> <input id="adminPass" type="password" placeholder="पासवर्ड दर्ज करें">
       <button class="btn" onclick="login()">लॉगिन करें</button>
      </div>
      <div id="panel" class="hidden">
@@ -203,15 +203,6 @@ let notices=JSON.parse(localStorage.getItem(K.notices)||'[]'), home=JSON.parse(l
  
 function save(k,v){localStorage.setItem(k,JSON.stringify(v))}
  
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('admin') === 'on') {
-  localStorage.setItem('jwl_is_admin_device', 'true');
-}
- 
-if (localStorage.getItem('jwl_is_admin_device') === 'true') {
-  document.getElementById('navAdminBtn').classList.remove('hidden');
-}
- 
 function openAdmin(){
   show('admin');
   if(sessionStorage.getItem('jwl_admin_session')==='ok'){
@@ -244,13 +235,6 @@ function render(){
 }
  
 function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
- 
-async function hashText(text) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(text);
-  const hash = await crypto.subtle.digest('SHA-256', data);
-  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
-}
  
 document.getElementById('memberForm').onsubmit=e=>{
   e.preventDefault();
@@ -297,26 +281,29 @@ function getLocation(){if(!navigator.geolocation)return alert('Location उप�
  
 function trackComplaint(){let id=document.getElementById('trackId').value.trim();let c=complaints.find(x=>x.id===id),r=document.getElementById('trackResult');if(!c){r.innerHTML='<p>❌ शिकायत नहीं मिली।</p>';return}r.innerHTML=`<hr><h3>${esc(c.id)}</h3><p><b>श्रेणी:</b> ${esc(c.cat)}</p><p><b>स्थिति:</b> <span class="status">${esc(c.status)}</span></p><p><b>वर्तमान स्तर:</b> ${esc(c.level)}</p><p><b>विवरण:</b> ${esc(c.desc)}</p><div class="timeline">${c.history.map(h=>`<div>📌 <b>${esc(h.status)}</b><br>${esc(h.level)}<br><span class="small">${esc(h.date)}</span></div>`).join('')}</div>`}
  
-async function login(){
-  let u = document.getElementById('adminUser').value.trim().toLowerCase();
+function login(){
+  let u = document.getElementById('adminUser').value.trim();
   let p = document.getElementById('adminPass').value.trim();
  
-  let uHash = await hashText(u);
-  let pHash = await hashText(p);
- 
-  if(uHash === '2b4055f69beec230239eb8817730e6918d363715c0e1db501b1328c03ae92797' && 
-     pHash === '7df2e2ffcc8ca83dca0187fb2559eb53860d5b4dd258bbd4e83f3e1a052ffce5'){
+  // Simple direct Admin login setup
+  if(u === 'admin' && p === 'admin123'){
     sessionStorage.setItem('jwl_admin_session','ok');
     document.getElementById('loginBox').classList.add('hidden');
     document.getElementById('panel').classList.remove('hidden');
     renderAdmin();
+    alert('✅ लॉगिन सफल!');
   } else {
-    alert('❌ गलत Username या Password!');
+    alert('❌ गलत Username या Password!
+ 
+सही Username: admin
+सही Password: admin123');
   }
 }
  
 function logoutAdmin(){
   sessionStorage.removeItem('jwl_admin_session');
+  document.getElementById('panel').classList.add('hidden');
+  document.getElementById('loginBox').classList.remove('hidden');
   show('home');
 }
  
@@ -331,7 +318,7 @@ function approveMember(id){let m=members.find(x=>x.id===id);if(m){m.status='Appr
 function deleteMember(index){if(confirm('आवेदन बताएं?')){members.splice(index,1);save(K.members,members);render();}}
  
 function updateComplaint(id,status){if(!status)return;let c=complaints.find(x=>x.id===id);if(c){c.status=status;let map={'जनपद पंचायत को भेजी गई':'जनपद पंचायत','जिला पंचायत को भेजी गई':'जिला पंचायत','उच्च अधिकारी को भेजी गई':'उच्च अधिकारी','ग्राम पंचायत में प्राप्त':'ग्राम पंचायत','जाँच चल रही है':'ग्राम पंचायत','कार्यवाही पूर्ण':'संबंधित विभाग','समाधान/बंद':'संबंधित विभाग'};c.level=map[status]||c.level;c.history.push({status,level:c.level,date:new Date().toLocaleString('hi-IN')});save(K.complaints,complaints);render();alert('स्थिति अपडेट हो गई!');}}
-function deleteComplaint(index){if(confirm('शिकायतएं बताएं?')){complaints.splice(index,1);save(K.complaints,complaints);render();}}
+function deleteComplaint(index){if(confirm('शिकायत बताएं?')){complaints.splice(index,1);save(K.complaints,complaints);render();}}
  
 function saveHome(){home.title=aTitle.value;home.text=aText.value;let f=aPhoto.files[0];if(f){let rd=new FileReader();rd.onload=function(){localStorage.setItem(K.home,JSON.stringify({title:home.title,text:home.text,photo:rd.result}));render();alert('Home अपडेट हो गया।');};rd.readAsDataURL(f)}else{save(K.home,home);render();alert('Home अपडेट हो गया।')}}
 function addNotice(){if(!aNotice.value.trim())return;notices.unshift(aNotice.value.trim());save(K.notices,notices);aNotice.value='';render();alert('सूचना प्रकाशित हुई!');}
@@ -340,4 +327,4 @@ function addWork(){if(!wname.value.trim())return;works.unshift({name:wname.value
 render();
 </script>
  </body>
-        </html>
+    </html>
