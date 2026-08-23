@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎯 Ultimate Master Routine & Dynamic Target Tracker</title>
+  <title>🎯 Master Routine & Dynamic Target Tracker (Bug Free)</title>
   <style>
     :root {
       --primary: #0f5132;
@@ -26,7 +26,7 @@
     
     .alert-banner { background: #f8d7da; color: #842029; padding: 10px; text-align: center; font-weight: bold; border-bottom: 1px solid #f5c2c7; font-size: 14px; }
 
-    main { max-width: 850px; margin: auto; padding: 15px; }
+    main { max-width: 900px; margin: auto; padding: 15px; }
     .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; box-shadow: 0 2px 5px rgba(0,0,0,0.03); margin-bottom: 20px; }
     .card h2 { color: var(--primary); margin-top: 0; border-bottom: 2px solid #cfe2ff; padding-bottom: 8px; font-size: 17px; }
     .card.sunday-card h2 { color: var(--sunday); border-bottom-color: #ffeba0; }
@@ -39,10 +39,10 @@
     
     .topic-input { width: 100%; padding: 7px 10px; margin-top: 5px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; }
 
-    /* Target Display Grid */
-    .target-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 12px 0; }
+    /* Target Grid */
+    .target-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 12px 0; }
     .target-box { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; }
-    .target-box h4 { margin: 0 0 5px; font-size: 13px; color: var(--primary); }
+    .target-box h4 { margin: 0 0 5px; font-size: 12px; color: var(--primary); }
     .target-num { font-size: 18px; font-weight: bold; color: var(--fire); }
 
     .progress-container { background: #e9ecef; border-radius: 20px; height: 22px; width: 100%; margin: 10px 0; overflow: hidden; border: 1px solid var(--border); }
@@ -60,8 +60,8 @@
     .btn.fire { background: var(--fire); }
 
     .table-responsive { overflow-x: auto; margin-top: 10px; }
-    table { width: 100%; border-collapse: collapse; font-size: 12px; background: #fff; }
-    th, td { border: 1px solid var(--border); padding: 8px; text-align: center; }
+    table { width: 100%; border-collapse: collapse; font-size: 11px; background: #fff; }
+    th, td { border: 1px solid var(--border); padding: 6px; text-align: center; white-space: nowrap; }
     th { background: #d1e7dd; color: var(--primary); }
 
     .footer { text-align: center; padding: 15px; color: #666; font-size: 12px; }
@@ -70,7 +70,7 @@
 <body>
 
   <header id="mainHeader">
-    <h1 id="headerTitle">🎯 DAILY MASTER ROUTINE & CONTROL SYSTEM</h1>
+    <h1 id="headerTitle">🎯 DAILY MASTER ROUTINE & TRACKER</h1>
   </header>
 
   <div class="streak-bar">
@@ -79,7 +79,7 @@
   </div>
 
   <div class="alert-banner" id="mockAlertBanner" style="display:none;">
-    ⚠️ अलर्ट: हफ्ते में कम से कम 2 बार (जैसे Wednesday & Sunday) Mock Test / PYQ देना अनिवार्य है!
+    ⚠️ अलर्ट: हफ्ते में कम से कम 2 बार Mock Test / PYQ देना अनिवार्य है!
   </div>
 
   <main>
@@ -87,20 +87,18 @@
     <!-- 1. SUNDAY REVIEW MODE -->
     <div class="card sunday-card" id="sundaySection" style="display:none; background: #fffdf0; border-color: #ffeba0;">
       <h2>🏆 SUNDAY = TEST & REVIEW DAY (संडे स्पेशल मोड)</h2>
-      <p style="font-size: 13px; color: #660000; font-weight: bold;">आज का लक्ष्य सिर्फ पढ़ना नहीं—अपनी गलतियां पकड़ना है!</p>
-      <label class="routine-item"><input type="checkbox" class="t-check"> 🔄 पूरे सप्ताह का Complete Revision</label>
+      <label class="routine-item"><input type="checkbox" class="t-check"> 🔄 पूरे सप्ताह का Revision</label>
       <label class="routine-item"><input type="checkbox" class="t-check"> 📝 Short Notes Revision</label>
-      <label class="routine-item"><input type="checkbox" class="t-check"> ❌ Error Notebook Revision (पुरानी गलतियों का सुधार)</label>
+      <label class="routine-item"><input type="checkbox" class="t-check"> ❌ Error Notebook Revision</label>
       <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 Full Mock Test Attend किया</label>
-      <label class="routine-item"><input type="checkbox" class="t-check"> 🔍 गलत Questions का Depth Analysis</label>
-      <label class="routine-item"><input type="checkbox" class="t-check"> 📅 अगले सप्ताह का Routine & Plan तैयार</label>
+      <label class="routine-item"><input type="checkbox" class="t-check"> 🔍 Mock Test Analysis Complete</label>
     </div>
 
-    <!-- 2. AUTO-DEDUCT MONTHLY TARGET TRACKER WITH NEW SUBJECTS -->
+    <!-- 2. MONTHLY TARGET TRACKER -->
     <div class="card">
       <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #cfe2ff; padding-bottom: 5px;">
-        <h2 style="border:none; margin:0;">🔥 मंथली टारगेट ट्रैक (Auto Deduct Mode)</h2>
-        <button onclick="resetMonthlyTargets()" style="font-size: 11px; background: #6c757d; color: #fff; border:0; border-radius:4px; padding:3px 8px; cursor:pointer;">रीसेट करें</button>
+        <h2 style="border:none; margin:0;">🔥 मंथली टारगेट ट्रैक (अटेंडेंस लगाने पर माइनस होगा)</h2>
+        <button onclick="resetMonthlyTargets()" style="font-size: 11px; background: #6c757d; color: #fff; border:0; border-radius:4px; padding:3px 8px; cursor:pointer;">रीसेट</button>
       </div>
 
       <div class="progress-container">
@@ -108,204 +106,120 @@
       </div>
 
       <div class="target-grid">
-        <div class="target-box">
-          <h4>➗ Maths Qs Left</h4>
-          <div class="target-num" id="remMath">800</div>
-          <small style="font-size:10px; color:#666;">मूल: 800</small>
-        </div>
-        <div class="target-box">
-          <h4>🧠 Reasoning Qs Left</h4>
-          <div class="target-num" id="remReasoning">800</div>
-          <small style="font-size:10px; color:#666;">मूल: 800</small>
-        </div>
-        <div class="target-box">
-          <h4>⚖️ Polity MCQs Left</h4>
-          <div class="target-num" id="remPolity">300</div>
-          <small style="font-size:10px; color:#666;">मूल: 300</small>
-        </div>
-        <div class="target-box">
-          <h4>📖 बुद्ध बुक (Pages Left)</h4>
-          <div class="target-num" id="remBuddha">450</div>
-          <small style="font-size:10px; color:#666;">मूल: 450 (15p/day)</small>
-        </div>
-        <div class="target-box">
-          <h4>🔢 पहाड़े (1-30) Target</h4>
-          <div class="target-num" id="remTable">30</div>
-          <small style="font-size:10px; color:#666;">लक्ष्य: 30 तक</small>
-        </div>
-        <div class="target-box">
-          <h4>🧊 Cube (1-30) Target</h4>
-          <div class="target-num" id="remCube">30</div>
-          <small style="font-size:10px; color:#666;">लक्ष्य: 30 तक</small>
-        </div>
-        <div class="target-box">
-          <h4>📐 Square (1-50) Target</h4>
-          <div class="target-num" id="remSquare">50</div>
-          <small style="font-size:10px; color:#666;">लक्ष्य: 50 तक</small>
-        </div>
-        <div class="target-box">
-          <h4>🏛️ Vocab Words Left</h4>
-          <div class="target-num" id="remVocab">600</div>
-          <small style="font-size:10px; color:#666;">मूल: 600</small>
-        </div>
+        <div class="target-box"><h4>➗ Math Qs</h4><div class="target-num" id="remMath">800</div></div>
+        <div class="target-box"><h4>🧠 Reasoning Qs</h4><div class="target-num" id="remReasoning">800</div></div>
+        <div class="target-box"><h4>⚖️ Polity MCQs</h4><div class="target-num" id="remPolity">300</div></div>
+        <div class="target-box"><h4>📖 बुद्ध बुक Pgs</h4><div class="target-num" id="remBuddha">450</div></div>
+        <div class="target-box"><h4>🔢 पहाड़े Target</h4><div class="target-num" id="remTable">30</div></div>
+        <div class="target-box"><h4>🧊 Cube Target</h4><div class="target-num" id="remCube">30</div></div>
+        <div class="target-box"><h4>📐 Square Target</h4><div class="target-num" id="remSquare">50</div></div>
+        <div class="target-box"><h4>🏛️ Vocab Words</h4><div class="target-num" id="remVocab">600</div></div>
       </div>
     </div>
 
-    <!-- 3. ACCURACY CALCULATOR -->
-    <div class="card">
-      <h2>🎯 Accuracy & Practice Question Status Calculator</h2>
-      <div class="calc-grid">
-        <div>
-          <label style="font-size: 12px; font-weight: bold;">कुल सवाल (Total Qs):</label>
-          <input type="number" id="calcTotal" class="topic-input" placeholder="जैसे: 60" oninput="calculateAccuracy()">
-        </div>
-        <div>
-          <label style="font-size: 12px; font-weight: bold;">✅ सही सवाल (Correct):</label>
-          <input type="number" id="calcCorrect" class="topic-input" placeholder="जैसे: 50" oninput="calculateAccuracy()">
-        </div>
-        <div>
-          <label style="font-size: 12px; font-weight: bold;">❌ गलत सवाल (Wrong):</label>
-          <input type="number" id="calcWrong" class="topic-input" placeholder="जैसे: 10" oninput="calculateAccuracy(true)">
-        </div>
-      </div>
-      <div style="font-size: 14px; font-weight: bold; color: var(--primary); text-align: center; margin-top: 5px;">
-        आपकी Accuracy: <span id="accuracyResult" style="color: var(--fire);">0%</span>
-      </div>
-    </div>
-
-    <!-- 4. DAILY ROUTINE COMPLETE TIMETABLE -->
+    <!-- 3. DAILY ROUTINE INPUTS -->
     <div class="card" id="regularDailySection">
-      <h2>⏳ आज का डेली मास्टर रूटीन</h2>
+      <h2>⏳ आज का स्टडी और प्रैक्टिस रिकॉर्ड</h2>
 
+      <!-- DEEP STUDY ZONE -->
       <div class="sub-box">
-        <h3>🌅 6:00–7:00 — MORNING RESET</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ⏰ 6:00 उठना | 🪥 Brush | 🚿 Fresh | 🥗 नाश्ता</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🧘 Meditation (10m) + 🧘‍♂️ Yoga/Exercise (15-20m)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 📱 6–7 बजे Reel/Shorts = ZERO (फोन दूर)</label>
-      </div>
-
-      <div class="sub-box">
-        <h3>📚 7:00–11:00 — DEEP STUDY ZONE</h3>
-        <div style="margin-bottom: 10px;">
-          <label class="routine-item"><input type="checkbox" class="t-check"> ➗ MATH Target Complete</label>
-          <div style="display:flex; gap:5px;">
-            <input type="text" id="chapterMath" class="topic-input" placeholder="चैप्टर का नाम">
-            <select id="statusMath" class="topic-input" style="width: auto;">
-              <option value="In Progress">⏳ In Progress</option>
-              <option value="Completed ✅">Completed ✅</option>
-            </select>
+        <h3>📚 CHAPTER & TOPIC ZONE</h3>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px;">
+          <div>
+            <label style="font-size:12px; font-weight:bold;">➗ Math Chapter & Topic:</label>
+            <input type="text" id="topicMath" class="topic-input" placeholder="Chapter / Topic का नाम">
           </div>
-          <input type="text" id="detailMath" class="topic-input" placeholder="Topic विवरण लिखना">
-        </div>
-
-        <div style="margin-bottom: 10px;">
-          <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 REASONING Target Complete</label>
-          <div style="display:flex; gap:5px;">
-            <input type="text" id="chapterReasoning" class="topic-input" placeholder="चैप्टर का नाम">
-            <select id="statusReasoning" class="topic-input" style="width: auto;">
-              <option value="In Progress">⏳ In Progress</option>
-              <option value="Completed ✅">Completed ✅</option>
-            </select>
+          <div>
+            <label style="font-size:12px; font-weight:bold;">🧠 Reasoning Chapter & Topic:</label>
+            <input type="text" id="topicReasoning" class="topic-input" placeholder="Chapter / Topic का नाम">
           </div>
-          <input type="text" id="detailReasoning" class="topic-input" placeholder="Topic विवरण लिखना">
-        </div>
-
-        <div style="margin-bottom: 10px;">
-          <label class="routine-item"><input type="checkbox" class="t-check"> ⚖️ POLITY Target Complete</label>
-          <div style="display:flex; gap:5px;">
-            <input type="text" id="chapterPolity" class="topic-input" placeholder="चैप्टर का नाम">
-            <select id="statusPolity" class="topic-input" style="width: auto;">
-              <option value="In Progress">⏳ In Progress</option>
-              <option value="Completed ✅">Completed ✅</option>
-            </select>
+          <div>
+            <label style="font-size:12px; font-weight:bold;">⚖️ Polity Chapter & Topic:</label>
+            <input type="text" id="topicPolity" class="topic-input" placeholder="Chapter / Topic का नाम">
           </div>
-          <input type="text" id="detailPolity" class="topic-input" placeholder="Topic विवरण लिखना">
         </div>
       </div>
 
-      <!-- NEW BOOKS & CALCULATION DAILY INPUTS -->
+      <!-- PRACTICE & ACCURACY CALCULATOR INTEGRATED -->
+      <div class="sub-box" style="border-left-color: #d9534f;">
+        <h3>🎯 PRACTICE & ACCURACY SYSTEM</h3>
+        
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap:10px; margin-bottom:10px;">
+          <div>
+            <label style="font-size:11px; font-weight:bold;">कुल प्रश्न (Attempted):</label>
+            <input type="number" id="calcTotal" class="topic-input" placeholder="जैसे: 50" oninput="runAccuracyCalc()">
+          </div>
+          <div>
+            <label style="font-size:11px; font-weight:bold;">✅ सही प्रश्न (Correct):</label>
+            <input type="number" id="calcCorrect" class="topic-input" placeholder="जैसे: 40" oninput="runAccuracyCalc()">
+          </div>
+          <div>
+            <label style="font-size:11px; font-weight:bold;">❌ गलत (Wrong):</label>
+            <input type="number" id="calcWrong" class="topic-input" placeholder="Auto" readonly style="background:#e9ecef;">
+          </div>
+          <div>
+            <label style="font-size:11px; font-weight:bold;">🎯 Accuracy (%):</label>
+            <input type="text" id="accuracyDisplay" class="topic-input" value="0%" readonly style="background:#e9ecef; font-weight:bold; color:var(--fire);">
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:10px; margin-top:10px;">
+          <div>
+            <label style="font-size:11px; font-weight:bold;">➗ Math Qs Done:</label>
+            <input type="number" id="todayMathQs" class="topic-input" placeholder="0">
+          </div>
+          <div>
+            <label style="font-size:11px; font-weight:bold;">🧠 Reasoning Qs Done:</label>
+            <input type="number" id="todayReasoningQs" class="topic-input" placeholder="0">
+          </div>
+          <div>
+            <label style="font-size:11px; font-weight:bold;">⚖️ Polity Qs Done:</label>
+            <input type="number" id="todayPolityQs" class="topic-input" placeholder="0">
+          </div>
+          <div>
+            <label style="font-size:11px; font-weight:bold;">🏛️ Vocab Words Done:</label>
+            <input type="number" id="todayVocabWords" class="topic-input" placeholder="0">
+          </div>
+        </div>
+      </div>
+
+      <!-- READINGS & CALCULATION -->
       <div class="sub-box" style="border-left-color: #ffc107;">
-        <h3>📖 गौतम बुद्ध बुक + कैलकुलेशन (आज कितना किया?)</h3>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:10px;">
+        <h3>📖 बुक व कैलकुलेशन (आज कितना किया?)</h3>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap:10px;">
           <div>
             <label style="font-size:11px; font-weight:bold;">📖 बुद्ध बुक (Pages):</label>
             <input type="number" id="todayBuddhaPages" class="topic-input" placeholder="जैसे: 15">
           </div>
           <div>
             <label style="font-size:11px; font-weight:bold;">🔢 पहाड़े (कहां तक):</label>
-            <input type="number" id="todayTable" class="topic-input" placeholder="जैसे: 20">
+            <input type="number" id="todayTable" class="topic-input" placeholder="30">
           </div>
           <div>
             <label style="font-size:11px; font-weight:bold;">🧊 Cube (कहां तक):</label>
-            <input type="number" id="todayCube" class="topic-input" placeholder="जैसे: 15">
+            <input type="number" id="todayCube" class="topic-input" placeholder="30">
           </div>
           <div>
             <label style="font-size:11px; font-weight:bold;">📐 Square (कहां तक):</label>
-            <input type="number" id="todaySquare" class="topic-input" placeholder="जैसे: 30">
+            <input type="number" id="todaySquare" class="topic-input" placeholder="50">
           </div>
         </div>
       </div>
 
+      <!-- REVISION & CONTROL SYSTEM CHECKBOXES -->
       <div class="sub-box" style="border-left-color: #0d6efd;">
-        <h3>🏛️ प्रशासनिक भाषा एवं Vocabulary (Daily 20 Words)</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 📑 आज के प्रशासनिक शब्द याद किए</label>
-        <textarea id="adminWords" class="topic-input" rows="2" placeholder="आज के नए शब्द लिखना"></textarea>
-      </div>
-
-      <div class="sub-box">
-        <h3>🔄 11:40–3:30 — REVISION ZONE & PREPARATION</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ➗ Maths Revision टिक ✅</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 Reasoning Revision टिक ✅</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ⚖️ Polity Revision टिक ✅</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🏫 Coaching Revision टिक ✅</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🍱 30 मिनट खाना/नाश्ता Preparation (Planned Time)</label>
-      </div>
-
-      <div class="sub-box">
-        <h3>🏫 4:00–6:00 — COACHING ZONE</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> Coaching Attend + Important Points Marked</label>
-      </div>
-
-      <div class="sub-box" style="border-left-color: #d9534f;">
-        <h3>🔥 6:40–11:30 PM — DAILY PRACTICE (संख्या दर्ज करें - ऑटो घटेंगे)</h3>
-        
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:10px; margin-bottom:10px;">
-          <div>
-            <label style="font-size:11px; font-weight:bold;">➗ Math Qs Solved:</label>
-            <input type="number" id="todayMathQs" class="topic-input" placeholder="जैसे: 25">
-          </div>
-          <div>
-            <label style="font-size:11px; font-weight:bold;">🧠 Reasoning Qs Solved:</label>
-            <input type="number" id="todayReasoningQs" class="topic-input" placeholder="जैसे: 25">
-          </div>
-          <div>
-            <label style="font-size:11px; font-weight:bold;">⚖️ Polity MCQs Solved:</label>
-            <input type="number" id="todayPolityQs" class="topic-input" placeholder="जैसे: 10">
-          </div>
-          <div>
-            <label style="font-size:11px; font-weight:bold;">🏛️ Vocab Words Learned:</label>
-            <input type="number" id="todayVocabWords" class="topic-input" placeholder="जैसे: 20">
-          </div>
-        </div>
-
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🏫 Coaching Revision Complete</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ❌ Error Notebook Analysis (आज की गलतियाँ नोट कीं)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ⚡ Quick Revision (आज का पूरा दोहराव)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ⌨️ 11:00 PM के बाद: Typing Practice (15-20 mins)</label>
-      </div>
-
-      <div class="sub-box">
-        <h3>🔐 CONTROL SYSTEM RULES</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 📱 Reels Control (Break का मतलब Recovery)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 ओवरथिंकिंग कंट्रोल (STOP → लिखा → वापस लौटे)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🚭 Craving Control (पानी पिया + जगह बदली)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🔒 Content Control (Environment बदला)</label>
+        <h3>⚙️ REVISION, COACHING & CONTROL SYSTEM</h3>
+        <label class="routine-item"><input type="checkbox" id="chkRevision" class="t-check"> 🔄 Study & Self Revision Done</label>
+        <label class="routine-item"><input type="checkbox" id="chkCoaching" class="t-check"> 🏫 Coaching Class & Revision Done</label>
+        <label class="routine-item"><input type="checkbox" id="chkErrorNote" class="t-check"> ❌ Error Notebook Update Done</label>
+        <label class="routine-item"><input type="checkbox" id="chkQuickRev" class="t-check"> ⚡ Quick Night Revision Done</label>
+        <label class="routine-item"><input type="checkbox" id="chkControl" class="t-check"> 🔐 Phone/Reels/Craving Control Active</label>
       </div>
     </div>
 
-    <!-- 5. DAILY CONTROL SCORE & ATTENDANCE -->
+    <!-- 4. DAILY CONTROL SCORE & ATTENDANCE -->
     <div class="card">
-      <h2>⭐ DAILY CONTROL SCORE & ATTENDANCE 🔥</h2>
+      <h2>⭐ ATTENDANCE & CONTROL SCORE ENGINE 🔥</h2>
       <div class="score-grid">
         <div class="score-box">
           <label>📚 Study (Max 10)</label>
@@ -323,10 +237,6 @@
           <label>📱 Distraction (Max 5)</label>
           <input type="number" id="scoreDistraction" min="0" max="5" placeholder="0-5" oninput="calcTotalScore()">
         </div>
-        <div class="score-box">
-          <label>🎯 Accuracy (%)</label>
-          <input type="number" id="scoreAccuracy" min="0" max="100" placeholder="Auto %">
-        </div>
       </div>
       
       <div style="text-align: center; margin-top: 10px; font-weight: bold; font-size: 15px; color: var(--primary);">
@@ -336,24 +246,25 @@
       <button class="btn fire" onclick="saveAttendance()" style="padding: 12px; margin-top:12px;">🔥 आज की अटेंडेंस लगाएं & Target घटाएं</button>
     </div>
 
-    <!-- 6. ATTENDANCE SHEET LOG -->
+    <!-- 5. ATTENDANCE SHEET LOG -->
     <div class="card">
       <h2>📊 विस्तृत अटेंडेंस और सम्पूर्ण डेटा इतिहास</h2>
       <div class="table-responsive">
         <table>
           <thead>
             <tr>
-              <th>तारीख</th>
-              <th>गणित</th>
-              <th>रीजनिंग</th>
-              <th>पॉलिटी</th>
-              <th>बुद्ध बुक / Calc</th>
-              <th>कुल स्कोर</th>
-              <th>एक्यूरेसी</th>
+              <th>तारीख (Day & Date)</th>
+              <th>Math (Chap/Qs)</th>
+              <th>Reasoning (Chap/Qs)</th>
+              <th>Polity (Chap/Qs)</th>
+              <th>Practice (Tot/Cor/Acc)</th>
+              <th>बुद्ध बुक/Calc</th>
+              <th>Coaching/Revision/Control</th>
+              <th>स्कोर</th>
             </tr>
           </thead>
           <tbody id="attendanceTableBody">
-            <tr><td colspan="7" style="text-align:center;">अभी कोई डेटा सेव नहीं है।</td></tr>
+            <tr><td colspan="8" style="text-align:center;">अभी कोई डाटा सेव नहीं है।</td></tr>
           </tbody>
         </table>
       </div>
@@ -371,4 +282,94 @@
     document.getElementById('currentDateBanner').textContent = '📅 ' + todayStr;
 
     if (today.getDay() === 0) {
-      document.getElementByI
+      document.getElementById('sundaySection').style.display = 'block';
+      document.getElementById('mainHeader').classList.add('sunday-head');
+      document.getElementById('headerTitle').textContent = '🏆 SUNDAY SPECIAL: TEST & MOCK ANALYSIS MODE';
+    }
+
+    if (today.getDay() === 0 || today.getDay() === 3) {
+      document.getElementById('mockAlertBanner').style.display = 'block';
+    }
+
+    let streak = parseInt(localStorage.getItem('user_streak') || '0');
+    document.getElementById('streakDays').textContent = streak;
+
+    // MONTHLY TARGET INITIAL VALUES
+    const INI = { math: 800, reasoning: 800, polity: 300, buddha: 450, table: 30, cube: 30, square: 50, vocab: 600 };
+
+    function renderTargets() {
+      let remM = parseInt(localStorage.getItem('m_math') ?? INI.math);
+      let remR = parseInt(localStorage.getItem('m_reasoning') ?? INI.reasoning);
+      let remP = parseInt(localStorage.getItem('m_polity') ?? INI.polity);
+      let remB = parseInt(localStorage.getItem('m_buddha') ?? INI.buddha);
+      let remT = parseInt(localStorage.getItem('m_table') ?? INI.table);
+      let remC = parseInt(localStorage.getItem('m_cube') ?? INI.cube);
+      let remS = parseInt(localStorage.getItem('m_square') ?? INI.square);
+      let remV = parseInt(localStorage.getItem('m_vocab') ?? INI.vocab);
+
+      document.getElementById('remMath').textContent = remM;
+      document.getElementById('remReasoning').textContent = remR;
+      document.getElementById('remPolity').textContent = remP;
+      document.getElementById('remBuddha').textContent = remB;
+      document.getElementById('remTable').textContent = remT;
+      document.getElementById('remCube').textContent = remC;
+      document.getElementById('remSquare').textContent = remS;
+      document.getElementById('remVocab').textContent = remV;
+
+      let totalInitial = INI.math + INI.reasoning + INI.polity + INI.buddha + INI.vocab;
+      let totalDone = (INI.math - remM) + (INI.reasoning - remR) + (INI.polity - remP) + (INI.buddha - remB) + (INI.vocab - remV);
+
+      let percentage = Math.min(100, Math.round((totalDone / totalInitial) * 100));
+      let pBar = document.getElementById('monthlyProgressBar');
+      pBar.style.width = percentage + '%';
+      pBar.textContent = percentage + '% Completed';
+    }
+
+    function resetMonthlyTargets() {
+      if(confirm('क्या आप मंथली टारगेट्स रीसेट करना चाहते हैं?')) {
+        for(let key in INI) { localStorage.setItem('m_' + key, INI[key]); }
+        renderTargets();
+      }
+    }
+
+    // ACCURACY CALCULATOR LOGIC
+    function runAccuracyCalc() {
+      let total = parseInt(document.getElementById('calcTotal').value) || 0;
+      let correct = parseInt(document.getElementById('calcCorrect').value) || 0;
+
+      if(correct > total) { correct = total; document.getElementById('calcCorrect').value = total; }
+      
+      let wrong = Math.max(0, total - correct);
+      document.getElementById('calcWrong').value = wrong;
+
+      let acc = total > 0 ? Math.round((correct / total) * 100) : 0;
+      document.getElementById('accuracyDisplay').value = acc + '%';
+      return { total, correct, wrong, acc };
+    }
+
+    function calcTotalScore() {
+      let sStudy = parseInt(document.getElementById('scoreStudy').value) || 0;
+      let sHealth = parseInt(document.getElementById('scoreHealth').value) || 0;
+      let sDisc = parseInt(document.getElementById('scoreDiscipline').value) || 0;
+      let sDist = parseInt(document.getElementById('scoreDistraction').value) || 0;
+
+      let total = sStudy + sHealth + sDisc + sDist;
+      document.getElementById('totalScoreLabel').textContent = total;
+      return total;
+    }
+
+    // SAVE ATTENDANCE & MINUS TARGETS
+    function saveAttendance() {
+      let calcRes = runAccuracyCalc();
+      
+      let tMath = parseInt(document.getElementById('todayMathQs').value) || 0;
+      let tReasoning = parseInt(document.getElementById('todayReasoningQs').value) || 0;
+      let tPolity = parseInt(document.getElementById('todayPolityQs').value) || 0;
+      let tVocab = parseInt(document.getElementById('todayVocabWords').value) || 0;
+      let tBuddha = parseInt(document.getElementById('todayBuddhaPages').value) || 0;
+      let tTable = parseInt(document.getElementById('todayTable').value) || 0;
+      let tCube = parseInt(document.getElementById('todayCube').value) || 0;
+      let tSquare = parseInt(document.getElementById('todaySquare').value) || 0;
+
+      // Deduct targets only now
+      local
