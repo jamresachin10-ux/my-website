@@ -1,326 +1,192 @@
 <!doctype html>
 <html lang="hi">
- <head>
+<head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>हमारा गाँव, हमारी जिम्मेदारी — जोजलवाड़ी</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎯 Daily Master Routine & Control System</title>
   <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f6f9;color:#222}
-header{background:linear-gradient(135deg,#176b3a,#0d4d2b);color:#fff;padding:18px;text-align:center}
-header h1{margin:4px 0;font-size:24px}header p{margin:5px 0}
-nav{display:flex;gap:6px;overflow:auto;background:#fff;padding:9px;position:sticky;top:0;z-index:5;box-shadow:0 2px 8px #0001}
-nav button{border:0;background:#eaf5ee;padding:10px 13px;border-radius:8px;white-space:nowrap;font-weight:bold;cursor:pointer}
-nav button.admin-btn{background:#d9534f;color:#fff;}
-main{max-width:1050px;margin:auto;padding:14px}.hero{background:#fff;border-radius:15px;padding:22px;box-shadow:0 2px 10px #0001;margin-bottom:15px}
-.hero h2{color:#176b3a}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}.card{background:#fff;padding:17px;border-radius:13px;box-shadow:0 2px 9px #0001;margin-bottom:10px}.card b{font-size:24px;color:#176b3a}
-section{display:none}.active{display:block}.btn{background:#176b3a;color:#fff;border:0;border-radius:8px;padding:10px 15px;font-weight:bold;cursor:pointer}.btn.red{background:#a21d1d}.btn.blue{background:#2467a8}input,textarea,select{width:100%;padding:11px;margin:6px 0 12px;border:1px solid #ccd4dc;border-radius:8px}label{font-weight:bold}.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.notice{padding:12px;background:#fff5d8;border-left:5px solid #e0a000;border-radius:8px;margin:8px 0}.photo{width:100%;max-height:280px;object-fit:cover;border-radius:12px;background:#ddd}.status{padding:6px 10px;border-radius:20px;background:#e8f5e9;display:inline-block;font-weight:bold}.timeline{border-left:3px solid #176b3a;padding-left:15px}.timeline div{margin:12px 0}.small{font-size:13px;color:#666}.admin{background:#fff0f0;border:1px solid #e0aaaa}.hidden{display:none!important}.footer{text-align:center;padding:25px;color:#666}
-</style>
- </head>
- <body>
+    :root {
+      --primary: #176b3a;
+      --secondary: #0d4d2b;
+      --bg: #f4f6f9;
+      --card-bg: #fff;
+      --text: #222;
+      --border: #ccd4dc;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 20px; text-align: center; }
+    header h1 { margin: 0 0 5px; font-size: 24px; }
+    header p { margin: 0; font-size: 14px; opacity: 0.9; }
+    
+    main { max-width: 900px; margin: auto; padding: 15px; }
+    .card { background: var(--card-bg); border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
+    .card h2 { color: var(--primary); margin-top: 0; border-bottom: 2px solid #eaf5ee; padding-bottom: 8px; font-size: 20px; }
+    
+    .routine-item { display: flex; align-items: center; margin: 10px 0; font-size: 16px; cursor: pointer; }
+    .routine-item input[type="checkbox"] { width: 20px; height: 20px; margin-right: 12px; accent-color: var(--primary); cursor: pointer; }
+    
+    .sub-box { background: #f9fcfa; border-left: 4px solid var(--primary); padding: 12px 15px; margin: 12px 0; border-radius: 0 8px 8px 0; }
+    .sub-box h3 { margin: 0 0 8px; font-size: 16px; color: var(--secondary); }
+    
+    .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px; }
+    .score-box { background: #eaf5ee; padding: 12px; border-radius: 8px; text-align: center; }
+    .score-box label { display: block; font-weight: bold; margin-bottom: 5px; color: var(--secondary); }
+    .score-box input { width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 6px; text-align: center; font-size: 16px; }
+
+    .control-tips { background: #fff8e1; border-left: 5px solid #ffa000; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+    .control-tips h3 { margin-top: 0; color: #d84315; }
+    
+    .btn { background: var(--primary); color: #fff; border: 0; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; margin-top: 10px; }
+    .btn:hover { background: var(--secondary); }
+    
+    .footer { text-align: center; padding: 20px; color: #666; font-size: 13px; }
+  </style>
+</head>
+<body>
+
   <header>
-   <h1>🏡 हमारा गाँव, हमारी जिम्मेदारी</h1>
-   <p>ग्राम पंचायत जोजलवाड़ी • जनपद पंचायत सेगांव • जिला खरगोन</p>
+    <h1>🎯 DAILY MASTER ROUTINE & CONTROL SYSTEM</h1>
+    <p>“Perfect Day ❌ जरूरी नहीं, Comeback Day ✅ जरूरी है।”</p>
   </header>
-  <nav>
-   <button onclick="show('home')">🏠 Home</button>
-   <button onclick="show('members')">👥 सदस्यता</button>
-   <button onclick="show('complaint')">📝 समस्या दर्ज करें</button>
-   <button onclick="show('track')">🔎 शिकायत Tracking</button>
-   <button onclick="show('works')">🏗️ पंचायत कार्य</button>
-   <button onclick="show('gram')">🏛️ ग्रामसभा</button>
-   <button onclick="show('contact')">📞 संपर्क</button>
-   <button class="admin-btn" onclick="openAdmin()">🔐 Admin</button>
-  </nav>
+
   <main>
-   <section id="home" class="active">
-    <div class="hero">
-     <h2 id="homeTitle">हमारा गाँव, हमारी जिम्मेदारी</h2>
-     <p id="homeText">गाँव की समस्याओं, विकास कार्यों और जनभागीदारी की जानकारी एक जगह।</p>
-     <img id="panchayatPhoto" class="photo hidden" alt="ग्राम पंचायत फोटो">
-     <br>
-     <br>
-     <button class="btn" onclick="show('complaint')">📝 समस्या दर्ज करें</button>
-     <button class="btn blue" onclick="show('track')">🔎 शिकायत देखें</button>
-    </div>
-    <h3>📢 महत्वपूर्ण सूचना</h3>
-    <div id="noticeList"></div>
-    <h3>📊 हमारी वेबसाइट</h3>
-    <div class="cards">
-     <div class="card">
-      👥
-      <br>
-      <b id="memberCount">0</b>
-      <br>
-      सदस्य
-     </div>
-     <div class="card">
-      📝
-      <br>
-      <b id="complaintCount">0</b>
-      <br>
-      शिकायतें
-     </div>
-     <div class="card">
-      🏗️
-      <br>
-      <b id="workCount">0</b>
-      <br>
-      कार्य
-     </div>
-     <div class="card">
-      ✅
-      <br>
-      <b id="resolvedCount">0</b>
-      <br>
-      समाधान
-     </div>
-    </div>
-   </section>
-   <section id="members">
-    <div class="hero">
-     <h2>👥 सदस्यता आवेदन</h2>
-     <form id="memberForm">
-      <div class="row">
-       <div>
-        <label>नाम</label><input id="mname" required>
-       </div>
-       <div>
-        <label>मोबाइल (10 अंक)</label><input id="mphone" type="tel" pattern="[0-9]{10}" placeholder="10 अंकों का नंबर" required>
-       </div>
-       <div>
-        <label>वार्ड/मोहल्ला</label><input id="mward" required>
-       </div>
+    <!-- Daily Checklist -->
+    <div class="card">
+      <h2>⏳ आज का डेली रूटीन चेकलिस्ट</h2>
+      
+      <div class="sub-box">
+        <h3>🌅 6:00–7:00 — MORNING RESET</h3>
+        <label class="routine-item"><input type="checkbox" class="t-check"> ⏰ 6:00 उठना</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> 🪥 Brush</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> 🚿 Fresh + नहाना</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> 🥗 Diet/नाश्ता</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> 🧘 Meditation — 10 मिनट</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> 🧘‍♂️ Yoga/हल्की exercise — 15–20 मिनट</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> 📱 6–7 बजे Reel/Shorts = ZERO</label>
       </div>
-      <label>📸 सदस्य की फोटो</label><input id="mphoto" type="file" accept="image/*"> <label>उद्देश्य</label><textarea id="mreason" placeholder="गाँव के विकास में कैसे सहयोग करेंगे?"></textarea>
-      <button class="btn">आवेदन जमा करें (WhatsApp)</button>
-     </form>
-     <p class="small">आवेदन सबमिट करते ही डेटा सीधे व्हाट्सएप पर भेजा जाएगा।</p>
-    </div>
-   </section>
-   <section id="complaint">
-    <div class="hero">
-     <h2>📝 गाँव की समस्या दर्ज करें</h2>
-     <form id="complaintForm">
-      <div class="row">
-       <div>
-        <label>समस्या की श्रेणी</label><select id="ccat"><option>सड़क</option><option>पानी</option><option>नाली/स्वच्छता</option><option>बिजली/स्ट्रीट लाइट</option><option>शिक्षा</option><option>स्वास्थ्य</option><option>पंचायत कार्य</option><option>अन्य</option></select>
-       </div>
-       <div>
-        <label>नाम</label><input id="cname" required>
-       </div>
-       <div>
-        <label>मोबाइल (10 अंक)</label><input id="cphone" type="tel" pattern="[0-9]{10}" placeholder="10 अंकों का नंबर" required>
-       </div>
-       <div>
-        <label>वार्ड/मोहल्ला</label><input id="cward" required>
-       </div>
+
+      <div class="sub-box">
+        <h3>📚 7:00–11:00 — DEEP STUDY ZONE</h3>
+        <label class="routine-item"><input type="checkbox" class="t-check"> ➗ MATH Target Complete</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 REASONING Target Complete</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> ⚖️ POLITY Target Complete</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> 📝 Notes System (Main Notes, Short Notes, Doubt)</label>
       </div>
-      <label>समस्या का विवरण</label><textarea id="cdesc" rows="4" required></textarea> <label>📍 समस्या की Location</label><input id="cloc" placeholder="लोकेशन पाने के लिए बटन दबाएँ" readonly>
-      <button type="button" class="btn blue" onclick="getLocation()">📍 मेरी Location लें</button>
-      <br>
-      <br>
-      <label>📸 फोटो</label><input id="cphoto" type="file" accept="image/*">
-      <br>
-      <button class="btn">शिकायत जमा करें (WhatsApp)</button>
-     </form>
-    </div>
-   </section>
-   <section id="track">
-    <div class="hero">
-     <h2>🔎 शिकायत Tracking</h2>
-     <input id="trackId" placeholder="उदाहरण: JWL-CMP-000001">
-     <button class="btn" onclick="trackComplaint()">स्थिति देखें</button>
-     <div id="trackResult"></div>
-    </div>
-   </section>
-   <section id="works">
-    <div class="hero">
-     <h2>🏗️ पंचायत कार्य</h2>
-     <div id="workList"></div>
-    </div>
-   </section>
-   <section id="gram">
-    <div class="hero">
-     <h2>🏛️ ग्रामसभा</h2>
-     <div id="gramList">
-      <div class="notice">ग्रामसभा की तारीख, एजेंडा और निर्णय Admin द्वारा प्रकाशित किए जाएंगे।</div>
-     </div>
-    </div>
-   </section>
-   <section id="contact">
-    <div class="hero">
-     <h2>📞 जरूरी संपर्क</h2>
-     <p><b>ग्राम पंचायत:</b> जोजलवाड़ी</p>
-     <p><b>जनपद:</b> सेगांव, जिला खरगोन</p>
-     <p><b>WhatsApp सपोर्ट:</b> +919301543819</p>
-     <p class="small">आधिकारिक सरकारी शिकायत/आपातकालीन सेवाओं के लिए संबंधित सरकारी पोर्टल/कार्यालय का उपयोग करें।</p>
-    </div>
-   </section>
-   <section id="admin" class="admin-section">
-    <div class="hero admin">
-     <h2>🔐 Admin Panel Control</h2>
-     <div id="loginBox">
-      <label>Username</label> <input id="adminUser" placeholder="यूज़रनेम दर्ज करें"> <label>Password</label> <input id="adminPass" type="password" placeholder="पासवर्ड दर्ज करें">
-      <button class="btn" onclick="login()">लॉगिन करें</button>
-     </div>
-     <div id="panel" class="hidden">
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-       <span class="status">लॉगिन स्थिति: एडमिन (सक्रिय)</span>
-       <button class="btn red" onclick="logoutAdmin()">Logout</button>
+
+      <div class="sub-box">
+        <h3>🔄 11:40–3:30 — REVISION ZONE</h3>
+        <label class="routine-item"><input type="checkbox" class="t-check"> Maths Revision Done</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> Reasoning Revision Done</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> Polity Revision Done</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> Coaching Revision Done</label>
       </div>
-      <hr>
-      <h3>🏠 Home Control</h3>
-      <label>Home शीर्षक</label><input id="aTitle"><label>Home परिचय</label><textarea id="aText"></textarea> <label>📷 पंचायत की फोटो</label><input id="aPhoto" type="file" accept="image/*">
-      <button class="btn" onclick="saveHome()">Home Save/Publish</button>
-      <hr>
-      <h3>📢 सूचना</h3>
-      <input id="aNotice" placeholder="नई महत्वपूर्ण सूचना">
-      <button class="btn" onclick="addNotice()">सूचना Publish</button>
-      <hr>
-      <h3>👥 सदस्य आवेदन</h3>
-      <div id="adminMembers"></div>
-      <hr>
-      <h3>📝 शिकायतें</h3>
-      <div id="adminComplaints"></div>
-      <hr>
-      <h3>🏗️ पंचायत कार्य जोड़ें</h3>
-      <div class="row">
-       <input id="wname" placeholder="कार्य का नाम"><input id="wid" placeholder="Work ID"><input id="wamount" placeholder="राशि"><select id="wstatus"><option>प्रस्तावित</option><option>स्वीकृत</option><option>कार्य प्रगति पर</option><option>पूर्ण</option></select>
+
+      <div class="sub-box">
+        <h3>🏫 4:00–6:00 — COACHING</h3>
+        <label class="routine-item"><input type="checkbox" class="t-check"> Coaching Attended & Important Points Marked</label>
       </div>
-      <button class="btn" onclick="addWork()">कार्य Publish करें</button>
-     </div>
+
+      <div class="sub-box">
+        <h3>🔥 6:40–11:00 — PRACTICE + MCQ ZONE</h3>
+        <label class="routine-item"><input type="checkbox" class="t-check"> 6:40–8:00 Practice Questions</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> 8:00–8:20 Coaching Revision</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> 8:20–9:30 Maths Practice</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> 9:30–10:10 Reasoning Practice</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> 10:10–11:00 Polity MCQ + Calculation (पहाड़े, क्यूब, स्क्वायर)</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> ❌ Error Notebook Update (10 मिनट)</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> 🔄 Quick Revision + कल का टारगेट</label>
+        <label class="routine-item"><input type="checkbox" class="t-check"> ⌨️ Typing Practice (15-20 मिनट)</label>
+      </div>
     </div>
-   </section>
+
+    <!-- Daily Control Score -->
+    <div class="card">
+      <h2>⭐ आपका DAILY CONTROL SCORE (रात को भरें)</h2>
+      <div class="score-grid">
+        <div class="score-box">
+          <label>📚 Study Target (out of 10)</label>
+          <input type="number" id="scoreStudy" min="0" max="10" placeholder="जैसे: 8">
+        </div>
+        <div class="score-box">
+          <label>💪 Health (out of 5)</label>
+          <input type="number" id="scoreHealth" min="0" max="5" placeholder="जैसे: 4">
+        </div>
+        <div class="score-box">
+          <label>🔥 Discipline (out of 5)</label>
+          <input type="number" id="scoreDiscipline" min="0" max="5" placeholder="जैसे: 4">
+        </div>
+        <div class="score-box">
+          <label>🎯 Accuracy (%)</label>
+          <input type="text" id="scoreAccuracy" placeholder="जैसे: 85%">
+        </div>
+        <div class="score-box">
+          <label>📱 Distraction Control (out of 5)</label>
+          <input type="number" id="scoreDistraction" min="0" max="5" placeholder="जैसे: 5">
+        </div>
+      </div>
+      <button class="btn" onclick="saveScores()">💾 आज का स्कोर सेव करें</button>
+    </div>
+
+    <!-- Quick Control Guide -->
+    <div class="card">
+      <h2>🔐 नियंत्रण प्रणाली (Control System Quick Rules)</h2>
+      
+      <div class="control-tips">
+        <h3>📱 1. Reels Control</h3>
+        <p>Study Block के दौरान फोन दूसरे कमरे में रखें। "Break" का मतलब Reel नहीं, Recovery (पानी पीना/चलना) है।</p>
+      </div>
+
+      <div class="control-tips">
+        <h3>🧠 2. ज्यादा सोचने का तरीका</h3>
+        <p>नियम: <b>STOP → लिखो → वापस आओ।</b> कागज पर लिखें कि दिमाग में क्या चल रहा है और उसे कब सोचेंगे, फिर तुरंत Task पर लौटें।</p>
+      </div>
+
+      <div class="control-tips">
+        <h3>🚭 3. Cigarette / Craving</h3>
+        <p>Craving आने पर तुरंत रुकें, पानी पिएँ, जगह बदलें और अकेले न रहें। किसी भरोसेमंद व्यक्ति या डॉक्टर से मदद लें।</p>
+      </div>
+
+      <div class="control-tips">
+        <h3>🔒 4. अश्लील सामग्री से बचाव</h3>
+        <p>फोन अकेले बिस्तर में न ले जाएं। रात में फोन दूर रखें। गलती होने पर गिल्ट महसूस न करें, तुरंत रूटीन पर लौटें।</p>
+      </div>
+    </div>
   </main>
-  <div class="footer">© 2026 हमारा गाँव, हमारी जिम्मेदारी • ग्राम पंचायत जोजलवाड़ी</div>
+
+  <div class="footer">© 2026 Daily Master Routine • लक्ष्य: सफलता और अनुशासन</div>
+
   <script>
-const ADMIN_WHATSAPP_NUMBER = "919301543819";
- 
-const K={members:'jwl_members',complaints:'jwl_complaints',works:'jwl_works',notices:'jwl_notices',home:'jwl_home'};
-let members=JSON.parse(localStorage.getItem(K.members)||'[]'), complaints=JSON.parse(localStorage.getItem(K.complaints)||'[]');
-let works=JSON.parse(localStorage.getItem(K.works)||'[]');
-let notices=JSON.parse(localStorage.getItem(K.notices)||'[]'), home=JSON.parse(localStorage.getItem(K.home)||'{}');
- 
-function save(k,v){localStorage.setItem(k,JSON.stringify(v))}
- 
-function openAdmin(){
-  show('admin');
-  if(sessionStorage.getItem('jwl_admin_session')==='ok'){
-    document.getElementById('loginBox').classList.add('hidden');
-    document.getElementById('panel').classList.remove('hidden');
-    renderAdmin();
-  } else {
-    document.getElementById('loginBox').classList.remove('hidden');
-    document.getElementById('panel').classList.add('hidden');
-  }
-}
- 
-function show(id){
-  document.querySelectorAll('main section').forEach(x=>x.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  render();
-}
- 
-function render(){
-  document.getElementById('memberCount').textContent=members.filter(x=>x.status==='Approved').length;
-  document.getElementById('complaintCount').textContent=complaints.length;
-  document.getElementById('workCount').textContent=works.length;
-  document.getElementById('resolvedCount').textContent=complaints.filter(x=>x.status==='समाधान/बंद').length;
-  document.getElementById('homeTitle').textContent=home.title||'हमारा गाँव, हमारी जिम्मेदारी';
-  document.getElementById('homeText').textContent=home.text||'गाँव की समस्याओं, विकास कार्यों और जनभागीदारी की जानकारी एक जगह।';
-  let im=document.getElementById('panchayatPhoto'); if(home.photo){im.src=home.photo;im.classList.remove('hidden')}else im.classList.add('hidden');
-  document.getElementById('noticeList').innerHTML=notices.map(n=>`<div class="notice">📢 ${esc(n)}</div>`).join('')||'<div class="notice">अभी कोई नई सूचना नहीं।</div>';
-  document.getElementById('workList').innerHTML=works.map(w=>`<div class="card"><b>${esc(w.name)}</b><br>Work ID: ${esc(w.id)}<br>राशि: ${esc(w.amount)}<br><span class="status">${esc(w.status)}</span></div>`).join('')||'<p>अभी कोई कार्य प्रकाशित नहीं है।</p>';
-  if(document.getElementById('panel')&&!document.getElementById('panel').classList.contains('hidden')) renderAdmin();
-}
- 
-function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
- 
-document.getElementById('memberForm').onsubmit=e=>{
-  e.preventDefault();
-  let name = document.getElementById('mname').value.trim();
-  let phone = document.getElementById('mphone').value.trim();
-  let ward = document.getElementById('mward').value.trim();
-  let reason = document.getElementById('mreason').value.trim();
- 
-  let msg = "*नया सदस्यता आवेदन - ग्राम पंचायत जोजलवाड़ी*\n\n" +
-            "👤 *नाम:* " + name + "\n" +
-            "📞 *मोबाइल:* " + phone + "\n" +
-            "🏡 *वार्ड/मोहल्ला:* " + ward + "\n" +
-            "🎯 *उद्देश्य:* " + reason;
- 
-  let waUrl = "https://wa.me/" + ADMIN_WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
-  window.open(waUrl, '_blank');
-};
- 
-document.getElementById('complaintForm').onsubmit=e=>{
-  e.preventDefault();
-  let cat = document.getElementById('ccat').value;
-  let name = document.getElementById('cname').value.trim();
-  let phone = document.getElementById('cphone').value.trim();
-  let ward = document.getElementById('cward').value.trim();
-  let desc = document.getElementById('cdesc').value.trim();
-  let loc = document.getElementById('cloc').value;
- 
-  let id='JWL-CMP-'+String(Date.now()).slice(-6);
- 
-  let msg = "*नई शिकायत दर्ज - जोजलवाड़ी*\n\n" +
-            "🆔 *Ticket ID:* " + id + "\n" +
-            "📌 *श्रेणी:* " + cat + "\n" +
-            "👤 *नाम:* " + name + "\n" +
-            "📞 *मोबाइल:* " + phone + "\n" +
-            "🏡 *वार्ड:* " + ward + "\n" +
-            "📝 *विवरण:* " + desc + "\n" +
-            "📍 *Location:* " + (loc || 'उपलब्ध नहीं');
- 
-  let waUrl = "https://wa.me/" + ADMIN_WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
-  window.open(waUrl, '_blank');
-};
- 
-function getLocation(){if(!navigator.geolocation)return alert('Location उपलब्ध नहीं है।');navigator.geolocation.getCurrentPosition(p=>cloc.value=p.coords.latitude.toFixed(6)+', '+p.coords.longitude.toFixed(6),()=>alert('Location की अनुमति दें।'))}
- 
-function trackComplaint(){let id=document.getElementById('trackId').value.trim();let c=complaints.find(x=>x.id===id),r=document.getElementById('trackResult');if(!c){r.innerHTML='<p>❌ शिकायत नहीं मिली।</p>';return}r.innerHTML=`<hr><h3>${esc(c.id)}</h3><p><b>श्रेणी:</b> ${esc(c.cat)}</p><p><b>स्थिति:</b> <span class="status">${esc(c.status)}</span></p><p><b>वर्तमान स्तर:</b> ${esc(c.level)}</p><p><b>विवरण:</b> ${esc(c.desc)}</p><div class="timeline">${c.history.map(h=>`<div>📌 <b>${esc(h.status)}</b><br>${esc(h.level)}<br><span class="small">${esc(h.date)}</span></div>`).join('')}</div>`}
- 
-function login(){
-  let u = document.getElementById('adminUser').value.trim();
-  let p = document.getElementById('adminPass').value.trim();
- 
-  if(u === 'admin' && p === 'admin123'){
-    sessionStorage.setItem('jwl_admin_session','ok');
-    document.getElementById('loginBox').classList.add('hidden');
-    document.getElementById('panel').classList.remove('hidden');
-    renderAdmin();
-    alert('✅ लॉगिन सफल!');
-  } else {
-    alert('❌ गलत Username या Password!\n\nसही Username: admin\nसही Password: admin123');
-  }
-}
- 
-function logoutAdmin(){
-  sessionStorage.removeItem('jwl_admin_session');
-  document.getElementById('panel').classList.add('hidden');
-  document.getElementById('loginBox').classList.remove('hidden');
-  show('home');
-}
- 
-function renderAdmin(){
-  aTitle.value=home.title||'';aText.value=home.text||'';
-  adminMembers.innerHTML=members.map((m,i)=>`<div class="card"><b>${esc(m.name)}</b> • ${esc(m.ward)}<br>मोबाइल: ${esc(m.phone)}<br>स्थिति: <b>${esc(m.status)}</b><br>${m.status==='Pending'?`<button class="btn" onclick="approveMember(${m.id})">Approve & ID दें</button> <button class="btn red" onclick="deleteMember(${i})">Reject/Delete</button>`:''} ${m.status==='Approved'?`<span class="status">Member ID: ${esc(m.memberId)}</span> <button class="btn red" onclick="deleteMember(${i})">हटाएं</button>`:''}</div>`).join('')||'<p>कोई आवेदन नहीं।</p>';
- 
-  adminComplaints.innerHTML=complaints.map((c,i)=>`<div class="card"><b>${esc(c.id)}</b> • ${esc(c.cat)}<br>नाम: ${esc(c.name)} (${esc(c.phone)})<br>विवरण: ${esc(c.desc)}<br><small>वर्तमान: ${esc(c.status)} | ${esc(c.level)}</small><br><select onchange="updateComplaint('${c.id}',this.value)"><option value="">स्थिति बदलें</option><option>ग्राम पंचायत में प्राप्त</option><option>जाँच चल रही है</option><option>जनपद पंचायत को भेजी गई</option><option>जिला पंचायत को भेजी गई</option><option>उच्च अधिकारी को भेजी गई</option><option>कार्यवाही पूर्ण</option><option>समाधान/बंद</option></select> <button class="btn red" onclick="deleteComplaint(${i})">हटाएं</button></div>`).join('')||'<p>कोई शिकायत नहीं।</p>';
-}
- 
-function approveMember(id){let m=members.find(x=>x.id===id);if(m){m.status='Approved';m.memberId='HGMJ-'+String(members.indexOf(m)+1).padStart(4,'0');save(K.members,members);render();alert('सदस्यता Approve कर दी गई!');}}
-function deleteMember(index){if(confirm('आवेदन बताएं?')){members.splice(index,1);save(K.members,members);render();}}
- 
-function updateComplaint(id,status){if(!status)return;let c=complaints.find(x=>x.id===id);if(c){c.status=status;let map={'जनपद पंचायत को भेजी गई':'जनपद पंचायत','जिला पंचायत को भेजी गई':'जिला पंचायत','उच्च अधिकारी को भेजी गई':'उच्च अधिकारी','ग्राम पंचायत में प्राप्त':'ग्राम पंचायत','जाँच चल रही है':'ग्राम पंचायत','कार्यवाही पूर्ण':'संबंधित विभाग','समाधान/बंद':'संबंधित विभाग'};c.level=map[status]||c.level;c.history.push({status,level:c.level,date:new Date().toLocaleString('hi-IN')});save(K.complaints,complaints);render();alert('स्थिति अपडेट हो गई!');}}
-function deleteComplaint(index){if(confirm('शिकायत बताएं?')){complaints.splice(index,1);save(K.complaints,complaints);render();}}
- 
-function saveHome(){home.title=aTitle.value;home.text=aText.value;let f=aPhoto.files[0];if(f){let rd=new FileReader();rd.onload=function(){localStorage.setItem(K.home,JSON.stringify({title:home.title,text:home.text,photo:rd.result}));render();alert('Home अपडेट हो गया।');};rd.readAsDataURL(f)}else{save(K.home,home);render();alert('Home अपडेट हो गया।')}}
-function addNotice(){if(!aNotice.value.trim())return;notices.unshift(aNotice.value.trim());save(K.notices,notices);aNotice.value='';render();alert('सूचना प्रकाशित हुई!');}
-function addWork(){if(!wname.value.trim())return;works.unshift({name:wname.value,id:wid.value||'-',amount:wamount.value||'-',status:wstatus.value});save(K.works,works);wname.value='';wid.value='';wamount.value='';render();alert('कार्य Publish हो गया।')}
- 
-render();
-</script>
- </body>
-                               </html>
+    // Save/Load Checkboxes and Scores using localStorage
+    const checkboxes = document.querySelectorAll('.t-check');
+    
+    checkboxes.forEach((chk, index) => {
+      let savedState = localStorage.getItem('chk_' + index);
+      if(savedState === 'true') chk.checked = true;
+      
+      chk.addEventListener('change', () => {
+        localStorage.setItem('chk_' + index, chk.checked);
+      });
+    });
+
+    function saveScores() {
+      localStorage.setItem('scoreStudy', document.getElementById('scoreStudy').value);
+      localStorage.setItem('scoreHealth', document.getElementById('scoreHealth').value);
+      localStorage.setItem('scoreDiscipline', document.getElementById('scoreDiscipline').value);
+      localStorage.setItem('scoreAccuracy', document.getElementById('scoreAccuracy').value);
+      localStorage.setItem('scoreDistraction', document.getElementById('scoreDistraction').value);
+      alert('✅ आपका आज का स्कोर सुरक्षित हो गया है!');
+    }
+
+    // Load saved scores
+    window.onload = function() {
+      if(localStorage.getItem('scoreStudy')) document.getElementById('scoreStudy').value = localStorage.getItem('scoreStudy');
+      if(localStorage.getItem('scoreHealth')) document.getElementById('scoreHealth').value = localStorage.getItem('scoreHealth');
+      if(localStorage.getItem('scoreDiscipline')) document.getElementById('scoreDiscipline').value = localStorage.getItem('scoreDiscipline');
+      if(localStorage.getItem('scoreAccuracy')) document.getElementById('scoreAccuracy').value = localStorage.getItem('scoreAccuracy');
+      if(localStorage.getItem('scoreDistraction')) document.getElementById('scoreDistraction').value = localStorage.getItem('scoreDistraction');
+    };
+  </script>
+</body>
+                                     </html>
+         
