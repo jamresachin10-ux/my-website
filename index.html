@@ -41,7 +41,6 @@
     .topic-input { flex: 1; min-width: 140px; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; }
     .topic-select { padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; background: #fff; }
 
-    /* Monthly Target Grid */
     .target-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 12px 0; }
     .target-box { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; }
     .target-box h4 { margin: 0 0 5px; font-size: 13px; color: var(--primary); }
@@ -261,7 +260,7 @@
         🏆 आपका कुल स्कोर (Total Score): <span id="totalScoreLabel" style="color: var(--fire);">0</span> / 25
       </div>
 
-      <button class="btn fire" onclick="saveAttendance()" style="padding: 12px; margin-top:12px;">🔥 आज की अटेंडेंस लगाएं & Target घटाएं</button>
+      <button type="button" class="btn fire" onclick="saveAttendance()" style="padding: 12px; margin-top:12px;">🔥 आज की अटेंडेंस लगाएं & Target घटाएं</button>
     </div>
 
     <!-- 5. ATTENDANCE SHEET LOG -->
@@ -284,7 +283,7 @@
           </tbody>
         </table>
       </div>
-      <button class="btn" style="background: #a21d1d; margin-top: 10px;" onclick="clearHistory()">🗑️ सारा इतिहास साफ़ करें</button>
+      <button type="button" class="btn" style="background: #a21d1d; margin-top: 10px;" onclick="clearHistory()">🗑️ सारा इतिहास साफ़ करें</button>
     </div>
 
   </main>
@@ -299,13 +298,15 @@
     document.getElementById('currentDateBanner').textContent = '📅 ' + todayStr;
 
     if (today.getDay() === 0) {
-      document.getElementById('sundaySection').style.display = 'block';
+      const sunSec = document.getElementById('sundaySection');
+      if (sunSec) sunSec.style.display = 'block';
       document.getElementById('mainHeader').classList.add('sunday-head');
       document.getElementById('headerTitle').textContent = '🏆 SUNDAY SPECIAL: TEST & MOCK ANALYSIS MODE';
     }
 
     if (today.getDay() === 0 || today.getDay() === 3) {
-      document.getElementById('mockAlertBanner').style.display = 'block';
+      const alertBan = document.getElementById('mockAlertBanner');
+      if (alertBan) alertBan.style.display = 'block';
     }
 
     let streak = parseInt(localStorage.getItem('user_streak') || '0');
@@ -352,23 +353,25 @@
     }
 
     function saveAttendance() {
-      let tMath = parseInt(document.getElementById('todayMathQs').value) || 0;
-      let tReasoning = parseInt(document.getElementById('todayReasoningQs').value) || 0;
-      let tPolity = parseInt(document.getElementById('todayPolityQs').value) || 0;
-      let tVocab = parseInt(document.getElementById('todayVocabWords').value) || 0;
+      try {
+        let tMath = parseInt(document.getElementById('todayMathQs').value) || 0;
+        let tReasoning = parseInt(document.getElementById('todayReasoningQs').value) || 0;
+        let tPolity = parseInt(document.getElementById('todayPolityQs').value) || 0;
+        let tVocab = parseInt(document.getElementById('todayVocabWords').value) || 0;
 
-      // Deducting from Monthly Targets
-      localStorage.setItem('m_math', Math.max(0, (parseInt(localStorage.getItem('m_math') ?? INI.math)) - tMath));
-      localStorage.setItem('m_reasoning', Math.max(0, (parseInt(localStorage.getItem('m_reasoning') ?? INI.reasoning)) - tReasoning));
-      localStorage.setItem('m_polity', Math.max(0, (parseInt(localStorage.getItem('m_polity') ?? INI.polity)) - tPolity));
-      localStorage.setItem('m_vocab', Math.max(0, (parseInt(localStorage.getItem('m_vocab') ?? INI.vocab)) - tVocab));
+        // Auto deduct from monthly goals
+        let curM = parseInt(localStorage.getItem('m_math') ?? INI.math);
+        let curR = parseInt(localStorage.getItem('m_reasoning') ?? INI.reasoning);
+        let curP = parseInt(localStorage.getItem('m_polity') ?? INI.polity);
+        let curV = parseInt(localStorage.getItem('m_vocab') ?? INI.vocab);
 
-      renderTargets();
+        localStorage.setItem('m_math', Math.max(0, curM - tMath));
+        localStorage.setItem('m_reasoning', Math.max(0, curR - tReasoning));
+        localStorage.setItem('m_polity', Math.max(0, curP - tPolity));
+        localStorage.setItem('m_vocab', Math.max(0, curV - tVocab));
 
-      // Fetching Chapters and Topics
-      let mCh = document.getElementById('mathChapter').value || '-';
-      let rCh = document.getElementById('reasoningChapter').value || '-';
-      let pCh = document.getElementById('polityChapter').value || '-';
+        renderTargets();
 
-      let mTop = document.getElementById('mathTopic').value || '-';
-      let rTop = document.getElementById('reasoningTop
+        // Fetch values safely
+        let mCh = document.getElementById('mathChapter')?.value || '-';
+        let rCh = document.getElementById('reasoningChapter')
