@@ -26,7 +26,7 @@
     
     .alert-banner { background: #f8d7da; color: #842029; padding: 10px; text-align: center; font-weight: bold; border-bottom: 1px solid #f5c2c7; font-size: 14px; }
 
-    main { max-width: 850px; margin: auto; padding: 15px; }
+    main { max-width: 900px; margin: auto; padding: 15px; }
     .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; box-shadow: 0 2px 5px rgba(0,0,0,0.03); margin-bottom: 20px; }
     .card h2 { color: var(--primary); margin-top: 0; border-bottom: 2px solid #cfe2ff; padding-bottom: 8px; font-size: 17px; }
     .card.sunday-card h2 { color: var(--sunday); border-bottom-color: #ffeba0; }
@@ -37,7 +37,9 @@
     .sub-box { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--secondary); padding: 12px; margin: 10px 0; border-radius: 0 8px 8px 0; }
     .sub-box h3 { margin: 0 0 6px; font-size: 14px; color: var(--primary); }
     
-    .topic-input { width: 100%; padding: 7px 10px; margin-top: 5px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; }
+    .topic-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 5px; }
+    .topic-input { flex: 1; min-width: 140px; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; }
+    .topic-select { padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; background: #fff; }
 
     /* Monthly Target Grid */
     .target-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 12px 0; }
@@ -143,22 +145,52 @@
         <h3>📚 7:00–11:00 — DEEP STUDY ZONE</h3>
         
         <!-- Math Block -->
-        <div style="margin-bottom: 10px;">
+        <div style="margin-bottom: 12px;">
           <label class="routine-item"><input type="checkbox" class="t-check"> ➗ MATH Target Complete</label>
-          <input type="text" id="chapterMath" class="topic-input" placeholder="चैप्टर व टॉपिक का विवरण">
+          <div class="topic-group">
+            <input type="text" id="mathChapter" class="topic-input" placeholder="Chapter Name (जैसे: Profit & Loss)">
+            <input type="text" id="mathTopic" class="topic-input" placeholder="Topic Detail (जैसे: Type 3 Qs)">
+            <select id="mathStatus" class="topic-select">
+              <option value="In Progress">⏳ In Progress</option>
+              <option value="Completed">✅ Completed</option>
+            </select>
+          </div>
         </div>
 
         <!-- Reasoning Block -->
-        <div style="margin-bottom: 10px;">
+        <div style="margin-bottom: 12px;">
           <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 REASONING Target Complete</label>
-          <input type="text" id="chapterReasoning" class="topic-input" placeholder="चैप्टर व टॉपिक का विवरण">
+          <div class="topic-group">
+            <input type="text" id="reasoningChapter" class="topic-input" placeholder="Chapter Name (जैसे: Syllogism)">
+            <input type="text" id="reasoningTopic" class="topic-input" placeholder="Topic Detail (जैसे: Possibility Cases)">
+            <select id="reasoningStatus" class="topic-select">
+              <option value="In Progress">⏳ In Progress</option>
+              <option value="Completed">✅ Completed</option>
+            </select>
+          </div>
         </div>
 
         <!-- Polity Block -->
-        <div style="margin-bottom: 10px;">
+        <div style="margin-bottom: 12px;">
           <label class="routine-item"><input type="checkbox" class="t-check"> ⚖️ POLITY Target Complete</label>
-          <input type="text" id="chapterPolity" class="topic-input" placeholder="चैप्टर व टॉपिक का विवरण">
+          <div class="topic-group">
+            <input type="text" id="polityChapter" class="topic-input" placeholder="Chapter Name (जैसे: Fundamental Rights)">
+            <input type="text" id="polityTopic" class="topic-input" placeholder="Topic Detail (जैसे: Article 12-18)">
+            <select id="polityStatus" class="topic-select">
+              <option value="In Progress">⏳ In Progress</option>
+              <option value="Completed">✅ Completed</option>
+            </select>
+          </div>
         </div>
+      </div>
+
+      <!-- COACHING & REVISION ZONE -->
+      <div class="sub-box" style="border-left-color: #ffc107;">
+        <h3>🏫 11:40–3:30 — COACHING & REVISION ZONE</h3>
+        <label class="routine-item"><input type="checkbox" class="t-check" id="revCoachingClass"> 🏫 कोचिंग क्लास अटेंड की (Coaching Class Taken)</label>
+        <label class="routine-item"><input type="checkbox" class="t-check" id="revCoachingNotes"> 📝 कोचिंग क्लास नोट्स/कंटेंट का रिवीजन किया (Class Content Revision)</label>
+        <label class="routine-item"><input type="checkbox" class="t-check" id="revMathsReasoning"> ➗ Maths & Reasoning Quick Revision ✅</label>
+        <label class="routine-item"><input type="checkbox" class="t-check" id="revPolity"> ⚖️ Polity Quick Revision ✅</label>
       </div>
 
       <!-- ADMINISTRATIVE WORDS SECTION -->
@@ -166,13 +198,6 @@
         <h3>🏛️ प्रशासनिक एवं Vocabulary (हिंदी + इंग्लिश)</h3>
         <label class="routine-item"><input type="checkbox" class="t-check"> 📑 आज के नए शब्द याद किए</label>
         <textarea id="adminWords" class="topic-input" rows="2" placeholder="आज के नए शब्द (जैसे: Notification = अधिसूचना, Affidavit = शपथ-पत्र)"></textarea>
-      </div>
-
-      <div class="sub-box">
-        <h3>🔄 REVISION & COACHING ZONE</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ➗ Maths & Reasoning Revision ✅</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ⚖️ Polity Revision ✅</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🏫 Coaching Class & Revision Complete ✅</label>
       </div>
 
       <!-- PRACTICE INPUTS (AUTO DEDUCT) -->
@@ -246,11 +271,11 @@
         <table>
           <thead>
             <tr>
-              <th>तारीख</th>
-              <th>गणित (Done)</th>
-              <th>रीजनिंग (Done)</th>
-              <th>पॉलिटी (Done)</th>
-              <th>Vocab Words</th>
+              <th>दिन / तारीख</th>
+              <th>Chapter (अध्याय)</th>
+              <th>Topic Details (विषय)</th>
+              <th>Daily Revision</th>
+              <th>Daily Practice (हल किए प्रश्न)</th>
               <th>कुल स्कोर</th>
             </tr>
           </thead>
@@ -270,6 +295,7 @@
     const today = new Date();
     const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
     const todayStr = today.toLocaleDateString('hi-IN', options);
+    const dayName = today.toLocaleDateString('hi-IN', { weekday: 'long' });
     document.getElementById('currentDateBanner').textContent = '📅 ' + todayStr;
 
     if (today.getDay() === 0) {
@@ -331,7 +357,7 @@
       let tPolity = parseInt(document.getElementById('todayPolityQs').value) || 0;
       let tVocab = parseInt(document.getElementById('todayVocabWords').value) || 0;
 
-      // Minus from Targets
+      // Deducting from Monthly Targets
       localStorage.setItem('m_math', Math.max(0, (parseInt(localStorage.getItem('m_math') ?? INI.math)) - tMath));
       localStorage.setItem('m_reasoning', Math.max(0, (parseInt(localStorage.getItem('m_reasoning') ?? INI.reasoning)) - tReasoning));
       localStorage.setItem('m_polity', Math.max(0, (parseInt(localStorage.getItem('m_polity') ?? INI.polity)) - tPolity));
@@ -339,59 +365,10 @@
 
       renderTargets();
 
-      let entry = {
-        date: todayStr,
-        math: (document.getElementById('chapterMath').value || 'Math') + ` (${tMath} Qs)`,
-        reasoning: (document.getElementById('chapterReasoning').value || 'Reasoning') + ` (${tReasoning} Qs)`,
-        polity: (document.getElementById('chapterPolity').value || 'Polity') + ` (${tPolity} Qs)`,
-        vocab: `${tVocab} Words`,
-        totalScore: calcTotalScore() + '/25'
-      };
+      // Fetching Chapters and Topics
+      let mCh = document.getElementById('mathChapter').value || '-';
+      let rCh = document.getElementById('reasoningChapter').value || '-';
+      let pCh = document.getElementById('polityChapter').value || '-';
 
-      let history = JSON.parse(localStorage.getItem('study_history_v12') || '[]');
-      history.unshift(entry);
-      localStorage.setItem('study_history_v12', JSON.stringify(history));
-
-      streak += 1;
-      localStorage.setItem('user_streak', streak);
-      document.getElementById('streakDays').textContent = streak;
-
-      loadHistory();
-      alert('✅ अटेंडेंस सफलतापूर्वक दर्ज हो गई है!');
-    }
-
-    function loadHistory() {
-      let history = JSON.parse(localStorage.getItem('study_history_v12') || '[]');
-      let tbody = document.getElementById('attendanceTableBody');
-      if(history.length === 0) return;
-
-      let html = '';
-      history.forEach(item => {
-        html += `<tr>
-          <td><b>${item.date}</b></td>
-          <td>${item.math}</td>
-          <td>${item.reasoning}</td>
-          <td>${item.polity}</td>
-          <td>${item.vocab}</td>
-          <td><b>${item.totalScore}</b></td>
-        </tr>`;
-      });
-      tbody.innerHTML = html;
-    }
-
-    function clearHistory() {
-      if(confirm('क्या आप सारा इतिहास साफ़ करना चाहते हैं?')) {
-        localStorage.removeItem('study_history_v12');
-        localStorage.removeItem('user_streak');
-        location.reload();
-      }
-    }
-
-    window.onload = function() {
-      loadHistory();
-      renderTargets();
-    };
-  </script>
-</body>
-            </html>
-                                                                   
+      let mTop = document.getElementById('mathTopic').value || '-';
+      let rTop = document.getElementById('reasoningTop
