@@ -65,7 +65,7 @@
     <br>
     <span class="header-tag">जिला स्तरीय नागरिक अभियान</span>
     <h1>हमारा गाँव हमारी जिम्मेदारी</h1>
-    <p>मुख्य संयोजक & एडमिन: <b>Sachin Jamre</b></p>
+    <p>संस्थापक / एडमिन: <b>DIMAGI NAXAL</b></p>
   </div>
 
   <!-- Navigation Tabs -->
@@ -148,7 +148,7 @@
     <div id="sec-admin" class="page-section">
       <div class="card" id="admin-login-view">
         <h3>🔐 एडमिन लॉगिन</h3>
-        <p style="font-size:11px;color:#666;margin-bottom:10px;">केवल मुख्य संयोजक (सचिन जामरे) हेतु</p>
+        <p style="font-size:11px;color:#666;margin-bottom:10px;">केवल एडमिन (DIMAGI NAXAL) हेतु</p>
         <label>पासवर्ड</label>
         <input type="password" id="admin-password-input" placeholder="पासवर्ड दर्ज करें">
         <button class="btn" onclick="adminLogin()">लॉगिन</button>
@@ -157,7 +157,7 @@
       <div id="admin-dashboard-view" style="display:none;">
         <div class="card" style="background:#e8f5e9;border-color:#c8e6c9;">
           <div style="display:flex;justify-content:space-between;align-items:center;">
-            <h4>👑 District Admin Panel</h4>
+            <h4>👑 Admin Panel (DIMAGI NAXAL)</h4>
             <button onclick="adminLogout()" style="background:#c62828;color:#fff;border:none;padding:5px 10px;border-radius:6px;font-size:11px;cursor:pointer;">लॉगआउट</button>
           </div>
         </div>
@@ -172,7 +172,7 @@
   </div>
 
   <script>
-    var PASS_KEY = "Sachin@2026#Admin";
+    var PASS_KEY = "sachin@312";
 
     var memberData = JSON.parse(localStorage.getItem('district_members_db') || '[]');
 
@@ -240,7 +240,7 @@
         });
 
         localStorage.setItem('district_members_db', JSON.stringify(memberData));
-        alert('आपका आवेदन जमा हो गया है! एडमिन (सचिन जामरे) द्वारा स्वीकृत होने पर कार्ड दिखेगा।');
+        alert('आपका आवेदन जमा हो गया है! एडमिन द्वारा स्वीकृत होने पर कार्ड दिखेगा।');
 
         document.getElementById('reg-name').value = '';
         document.getElementById('reg-phone').value = '';
@@ -368,5 +368,5 @@
     }
   </script>
 </body>
-      </html>
-            
+    </html>
+  
