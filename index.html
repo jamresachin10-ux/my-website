@@ -1,377 +1,347 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎯 Ultimate Master Routine & Dynamic Target Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>हमारा गाँव हमारी जिम्मेदारी — जिला स्तरीय नागरिक पोर्टल</title>
   <style>
-    :root {
-      --primary: #0f5132;
-      --secondary: #198754;
-      --fire: #d9534f;
-      --sunday: #856404;
-      --bg: #ffffff;
-      --card-bg: #f8f9fa;
-      --text: #212529;
-      --border: #ced4da;
-    }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
-    header { background: linear-gradient(135deg, #0f5132, #198754); color: #fff; padding: 20px; text-align: center; }
-    header.sunday-head { background: linear-gradient(135deg, #856404, #b78103); }
-    header h1 { margin: 0 0 5px; font-size: 20px; }
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+    body{background:#f4f7f6;color:#333;padding-bottom:40px}
 
-    .streak-bar { background: #fff3cd; border-bottom: 2px solid #ffebaa; padding: 10px; text-align: center; font-size: 15px; font-weight: bold; color: #856404; display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; }
-    .streak-badge { background: var(--fire); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 14px; }
-    
-    .alert-banner { background: #f8d7da; color: #842029; padding: 10px; text-align: center; font-weight: bold; border-bottom: 1px solid #f5c2c7; font-size: 14px; }
+    /* Header Section */
+    .header{background:linear-gradient(135deg,#0d5c2e,#1b7e42);color:#fff;padding:25px 15px;text-align:center;border-bottom-left-radius:25px;border-bottom-right-radius:25px;box-shadow:0 4px 15px rgba(0,0,0,0.15)}
+    .header-logo{width:90px;height:90px;border-radius:50%;border:3px solid #ffe600;background:#fff;object-fit:cover;margin-bottom:8px;box-shadow:0 4px 10px rgba(0,0,0,0.3)}
+    .header-tag{background:#ffe600;color:#000;padding:4px 14px;border-radius:20px;font-size:11px;font-weight:bold;display:inline-block;margin-bottom:8px}
+    .header h1{font-size:22px;margin-bottom:4px}
+    .header p{font-size:12px;opacity:0.9}
 
-    main { max-width: 900px; margin: auto; padding: 15px; }
-    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; box-shadow: 0 2px 5px rgba(0,0,0,0.03); margin-bottom: 20px; }
-    .card h2 { color: var(--primary); margin-top: 0; border-bottom: 2px solid #cfe2ff; padding-bottom: 8px; font-size: 17px; }
-    .card.sunday-card h2 { color: var(--sunday); border-bottom-color: #ffeba0; }
+    /* Navigation Tabs */
+    .nav-tabs{display:flex;justify-content:space-around;background:#fff;margin:15px 12px;padding:6px;border-radius:15px;box-shadow:0 3px 10px rgba(0,0,0,0.08)}
+    .tab-btn{border:none;background:none;padding:10px 5px;font-weight:bold;color:#666;font-size:13px;cursor:pointer;border-radius:10px;flex:1;text-align:center;transition:0.2s}
+    .tab-btn.active{background:#e8f5e9;color:#1b7e42}
 
-    .routine-item { display: flex; align-items: center; margin: 8px 0; font-size: 14px; cursor: pointer; }
-    .routine-item input[type="checkbox"] { width: 18px; height: 18px; margin-right: 10px; accent-color: var(--primary); cursor: pointer; }
+    /* Container & Cards */
+    .container{padding:0 12px}
+    .page-section{display:none}
+    .page-section.active{display:block}
 
-    .sub-box { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--secondary); padding: 12px; margin: 10px 0; border-radius: 0 8px 8px 0; }
-    .sub-box h3 { margin: 0 0 6px; font-size: 14px; color: var(--primary); }
-    
-    .topic-group { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 5px; }
-    .topic-input { flex: 1; min-width: 140px; padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; }
-    .topic-select { padding: 7px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 13px; background: #fff; }
+    .card{background:#fff;padding:18px;border-radius:16px;margin-bottom:15px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:1px solid #e2e8f0}
+    .card h3{font-size:16px;color:#1b7e42;margin-bottom:12px;border-bottom:2px solid #e8f5e9;padding-bottom:6px}
 
-    .target-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 12px 0; }
-    .target-box { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px; text-align: center; }
-    .target-box h4 { margin: 0 0 5px; font-size: 13px; color: var(--primary); }
-    .target-num { font-size: 18px; font-weight: bold; color: var(--fire); }
+    label{font-size:12px;font-weight:bold;color:#444;display:block;margin:10px 0 4px}
+    input, select{width:100%;padding:11px;border:1px solid #cbd5e1;border-radius:10px;font-size:13px;outline:none;background:#f8fafc}
+    input:focus, select:focus{border-color:#1b7e42;background:#fff}
 
-    .progress-container { background: #e9ecef; border-radius: 20px; height: 22px; width: 100%; margin: 10px 0; overflow: hidden; border: 1px solid var(--border); }
-    .progress-bar { background: var(--secondary); height: 100%; width: 0%; text-align: center; color: white; font-size: 12px; font-weight: bold; line-height: 22px; transition: width 0.4s ease; }
+    .btn{width:100%;background:#1b7e42;color:#fff;border:none;padding:12px;border-radius:10px;font-weight:bold;font-size:14px;cursor:pointer;margin-top:12px;box-shadow:0 3px 8px rgba(27,126,66,0.2)}
 
-    .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-top: 10px; }
-    .score-box { background: #fff; border: 1px solid var(--border); padding: 8px; border-radius: 6px; text-align: center; }
-    .score-box label { display: block; font-weight: bold; margin-bottom: 4px; color: var(--primary); font-size: 12px; }
-    .score-box input { width: 100%; padding: 6px; border: 1px solid var(--border); border-radius: 4px; text-align: center; font-size: 14px; }
+    /* District VIP Member Card */
+    .vip-card{background:linear-gradient(135deg,#062b14,#0d5c2e,#1b7e42);color:#fff;padding:16px;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,0.2);border:2px solid #ffe600;margin-top:10px;position:relative}
+    .vc-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:8px;margin-bottom:12px}
+    .vc-header-left{display:flex;align-items:center;gap:8px}
+    .card-logo{width:35px;height:35px;border-radius:50%;border:1px solid #ffe600;background:#fff;object-fit:cover}
+    .vc-header h4{font-size:13px;color:#ffe600}
+    .vc-body{display:flex;gap:12px;align-items:center}
+    .vc-photo{width:75px;height:85px;border-radius:10px;border:2px solid #ffe600;object-fit:cover;background:#ddd}
+    .vc-details p{font-size:11px;margin-bottom:3px;opacity:0.95}
+    .vc-footer{margin-top:10px;background:rgba(0,0,0,0.3);padding:8px;border-radius:8px;text-align:center}
+    .vc-id{font-family:monospace;font-size:13px;color:#ffe600;font-weight:bold;letter-spacing:1px}
+    .vc-title{font-size:11px;color:#fff;font-weight:bold;margin-top:2px}
+    .vc-slogan{font-size:9px;color:#a5d6a7;font-style:italic}
 
-    .btn { background: var(--secondary); color: #fff; border: 0; padding: 10px 15px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; font-size: 14px; margin-top: 8px; }
-    .btn:hover { background: var(--primary); }
-    .btn.fire { background: var(--fire); }
-
-    .table-responsive { overflow-x: auto; margin-top: 10px; }
-    table { width: 100%; border-collapse: collapse; font-size: 12px; background: #fff; }
-    th, td { border: 1px solid var(--border); padding: 8px; text-align: center; }
-    th { background: #d1e7dd; color: var(--primary); }
-
-    .footer { text-align: center; padding: 15px; color: #666; font-size: 12px; }
+    /* Admin List */
+    .admin-item{background:#f8fafc;border:1px solid #e2e8f0;padding:12px;border-radius:12px;margin-bottom:10px}
+    .admin-item-top{display:flex;gap:10px;align-items:center}
+    .admin-item-top img{width:50px;height:60px;border-radius:6px;object-fit:cover}
+    .btn-group{display:flex;gap:8px;margin-top:10px}
+    .btn-acc{background:#2e7d32;color:#fff;border:none;padding:8px;border-radius:6px;flex:1;font-weight:bold;font-size:12px;cursor:pointer}
+    .btn-rej{background:#c62828;color:#fff;border:none;padding:8px;border-radius:6px;flex:1;font-weight:bold;font-size:12px;cursor:pointer}
   </style>
 </head>
 <body>
 
-  <header id="mainHeader">
-    <h1 id="headerTitle">🎯 DAILY MASTER ROUTINE & CONTROL SYSTEM</h1>
-  </header>
-
-  <div class="streak-bar">
-    <span id="currentDateBanner">📅 तारीख...</span>
-    <span class="streak-badge">🔥 <span id="streakDays">0</span> Days Streak</span>
+  <!-- Top Header -->
+  <div class="header">
+    <img src="1000467791.png" class="header-logo" alt="लोगो" onerror="this.style.display='none'">
+    <br>
+    <span class="header-tag">जिला स्तरीय नागरिक अभियान</span>
+    <h1>हमारा गाँव हमारी जिम्मेदारी</h1>
+    <p>मुख्य संयोजक & एडमिन: <b>Sachin Jamre</b></p>
   </div>
 
-  <div class="alert-banner" id="mockAlertBanner" style="display:none;">
-    ⚠️ अलर्ट: हफ्ते में कम से कम 2 बार Mock Test / PYQ देना अनिवार्य है!
+  <!-- Navigation Tabs -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" id="tb-form" onclick="switchTab('form')">✍️ जुड़ें (सदस्यता)</button>
+    <button class="tab-btn" id="tb-search" onclick="switchTab('search')">🔍 प्रोफाइल / कार्ड</button>
+    <button class="tab-btn" id="tb-admin" onclick="switchTab('admin')">⚙️ Admin Panel</button>
   </div>
 
-  <main>
-
-    <!-- 1. SUNDAY REVIEW MODE -->
-    <div class="card sunday-card" id="sundaySection" style="display:none; background: #fffdf0; border-color: #ffeba0;">
-      <h2>🏆 SUNDAY = TEST & REVIEW DAY (संडे स्पेशल मोड)</h2>
-      <p style="font-size: 13px; color: #660000; font-weight: bold;">आज का लक्ष्य सिर्फ पढ़ना नहीं—अपनी गलतियां पकड़ना है!</p>
-      <label class="routine-item"><input type="checkbox" class="t-check"> 🔄 पूरे सप्ताह का Complete Revision</label>
-      <label class="routine-item"><input type="checkbox" class="t-check"> 📝 Short Notes Revision</label>
-      <label class="routine-item"><input type="checkbox" class="t-check"> ❌ Error Notebook Revision</label>
-      <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 Full Mock Test Attend किया</label>
-      <label class="routine-item"><input type="checkbox" class="t-check"> 🔍 गलत Questions का Depth Analysis</label>
-    </div>
-
-    <!-- 2. AUTO-DEDUCT MONTHLY TARGET TRACKER -->
-    <div class="card">
-      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #cfe2ff; padding-bottom: 5px;">
-        <h2 style="border:none; margin:0;">🔥 मंथली टारगेट ट्रैक (Auto Deduct Mode)</h2>
-        <button onclick="resetMonthlyTargets()" style="font-size: 11px; background: #6c757d; color: #fff; border:0; border-radius:4px; padding:3px 8px; cursor:pointer;">महीना रीसेट करें</button>
-      </div>
-
-      <div class="progress-container">
-        <div class="progress-bar" id="monthlyProgressBar">0% Complete</div>
-      </div>
-
-      <div class="target-grid">
-        <div class="target-box">
-          <h4>➗ Maths Qs Left</h4>
-          <div class="target-num" id="remMath">800</div>
-          <small style="font-size:10px; color:#666;">मूल लक्ष्य: 800</small>
-        </div>
-        <div class="target-box">
-          <h4>🧠 Reasoning Qs Left</h4>
-          <div class="target-num" id="remReasoning">800</div>
-          <small style="font-size:10px; color:#666;">मूल लक्ष्य: 800</small>
-        </div>
-        <div class="target-box">
-          <h4>⚖️ Polity MCQs Left</h4>
-          <div class="target-num" id="remPolity">300</div>
-          <small style="font-size:10px; color:#666;">मूल लक्ष्य: 300</small>
-        </div>
-        <div class="target-box">
-          <h4>🏛️ Vocab Words Left (हिन्दी + Eng)</h4>
-          <div class="target-num" id="remVocab">600</div>
-          <small style="font-size:10px; color:#666;">मूल लक्ष्य: 600</small>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. DAILY ROUTINE COMPLETE TIMETABLE -->
-    <div class="card" id="regularDailySection">
-      <h2>⏳ आज का डेली मास्टर रूटीन</h2>
-
-      <div class="sub-box">
-        <h3>🌅 6:00–7:00 — MORNING RESET</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ⏰ 6:00 उठना | 🪥 Brush | 🚿 Fresh | 🥗 नाश्ता</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🧘 Meditation (10m) + 🧘‍♂️ Yoga/Exercise (15-20m)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 📱 6–7 बजे Reel/Shorts = ZERO (फोन दूर)</label>
-      </div>
-
-      <div class="sub-box">
-        <h3>📚 7:00–11:00 — DEEP STUDY ZONE</h3>
+  <div class="container">
+    
+    <!-- 1. DISTRICT REGISTRATION FORM -->
+    <div id="sec-form" class="page-section active">
+      <div class="card">
+        <h3>👥 जिला स्तरीय सदस्यता फॉर्म</h3>
         
-        <!-- Math Block -->
-        <div style="margin-bottom: 12px;">
-          <label class="routine-item"><input type="checkbox" class="t-check"> ➗ MATH Target Complete</label>
-          <div class="topic-group">
-            <input type="text" id="mathChapter" class="topic-input" placeholder="Chapter Name (जैसे: Profit & Loss)">
-            <input type="text" id="mathTopic" class="topic-input" placeholder="Topic Detail (जैसे: Type 3 Qs)">
-            <select id="mathStatus" class="topic-select">
-              <option value="In Progress">⏳ In Progress</option>
-              <option value="Completed">✅ Completed</option>
-            </select>
-          </div>
-        </div>
+        <label>आपका पूरा नाम *</label>
+        <input type="text" id="reg-name" placeholder="नाम दर्ज करें">
 
-        <!-- Reasoning Block -->
-        <div style="margin-bottom: 12px;">
-          <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 REASONING Target Complete</label>
-          <div class="topic-group">
-            <input type="text" id="reasoningChapter" class="topic-input" placeholder="Chapter Name (जैसे: Syllogism)">
-            <input type="text" id="reasoningTopic" class="topic-input" placeholder="Topic Detail (जैसे: Possibility Cases)">
-            <select id="reasoningStatus" class="topic-select">
-              <option value="In Progress">⏳ In Progress</option>
-              <option value="Completed">✅ Completed</option>
-            </select>
-          </div>
-        </div>
+        <label>पिता या पति का नाम *</label>
+        <input type="text" id="reg-father" placeholder="पिता/पति का नाम">
 
-        <!-- Polity Block -->
-        <div style="margin-bottom: 12px;">
-          <label class="routine-item"><input type="checkbox" class="t-check"> ⚖️ POLITY Target Complete</label>
-          <div class="topic-group">
-            <input type="text" id="polityChapter" class="topic-input" placeholder="Chapter Name (जैसे: Fundamental Rights)">
-            <input type="text" id="polityTopic" class="topic-input" placeholder="Topic Detail (जैसे: Article 12-18)">
-            <select id="polityStatus" class="topic-select">
-              <option value="In Progress">⏳ In Progress</option>
-              <option value="Completed">✅ Completed</option>
-            </select>
-          </div>
-        </div>
+        <label>मोबाइल नंबर *</label>
+        <input type="tel" id="reg-phone" placeholder="10 अंकों का नंबर">
+
+        <label>जिला (District) *</label>
+        <input type="text" id="reg-district" placeholder="उदा: खरगोन">
+
+        <label>तहसील / ब्लॉक *</label>
+        <input type="text" id="reg-tehsil" placeholder="उदा: सेगांव">
+
+        <label>ग्राम / शहर / वार्ड *</label>
+        <input type="text" id="reg-village" placeholder="उदा: तलकपुरा / पटेल फलिया">
+
+        <label>अपनी फोटो अपलोड करें * (ID कार्ड हेतु)</label>
+        <input type="file" id="reg-photo" accept="image/*">
+
+        <button class="btn" type="button" onclick="submitRegistration()">सदस्यता आवेदन जमा करें</button>
       </div>
+    </div>
 
-      <!-- COACHING & REVISION ZONE -->
-      <div class="sub-box" style="border-left-color: #ffc107;">
-        <h3>🏫 11:40–3:30 — COACHING & REVISION ZONE</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check" id="revCoachingClass"> 🏫 कोचिंग क्लास अटेंड की (Coaching Class Taken)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check" id="revCoachingNotes"> 📝 कोचिंग क्लास नोट्स/कंटेंट का रिवीजन किया (Class Content Revision)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check" id="revMathsReasoning"> ➗ Maths & Reasoning Quick Revision ✅</label>
-        <label class="routine-item"><input type="checkbox" class="t-check" id="revPolity"> ⚖️ Polity Quick Revision ✅</label>
-      </div>
-
-      <!-- ADMINISTRATIVE WORDS SECTION -->
-      <div class="sub-box" style="border-left-color: #0d6efd;">
-        <h3>🏛️ प्रशासनिक एवं Vocabulary (हिंदी + इंग्लिश)</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 📑 आज के नए शब्द याद किए</label>
-        <textarea id="adminWords" class="topic-input" rows="2" placeholder="आज के नए शब्द (जैसे: Notification = अधिसूचना, Affidavit = शपथ-पत्र)"></textarea>
-      </div>
-
-      <!-- PRACTICE INPUTS (AUTO DEDUCT) -->
-      <div class="sub-box" style="border-left-color: #d9534f;">
-        <h3>🔥 DAILY PRACTICE (संख्या दर्ज करें - अटेंडेंस पर घटेगा)</h3>
+    <!-- 2. CARD SEARCH -->
+    <div id="sec-search" class="page-section">
+      <div class="card">
+        <h3>🔍 सदस्यता कार्ड खोजें</h3>
+        <label>रजिस्टर्ड मोबाइल नंबर दर्ज करें</label>
+        <input type="tel" id="find-phone" placeholder="उदा: 9876543210">
+        <button class="btn" style="background:#0288d1;" onclick="findMemberCard()">कार्ड देखें</button>
         
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:10px; margin-bottom:10px;">
-          <div>
-            <label style="font-size:11px; font-weight:bold;">➗ आज हल किए Math Qs:</label>
-            <input type="number" id="todayMathQs" class="topic-input" placeholder="0">
-          </div>
-          <div>
-            <label style="font-size:11px; font-weight:bold;">🧠 आज हल किए Reasoning Qs:</label>
-            <input type="number" id="todayReasoningQs" class="topic-input" placeholder="0">
-          </div>
-          <div>
-            <label style="font-size:11px; font-weight:bold;">⚖️ आज हल किए Polity MCQs:</label>
-            <input type="number" id="todayPolityQs" class="topic-input" placeholder="0">
-          </div>
-          <div>
-            <label style="font-size:11px; font-weight:bold;">🏛️ आज याद किए Vocab Words:</label>
-            <input type="number" id="todayVocabWords" class="topic-input" placeholder="0">
-          </div>
-        </div>
-
-        <label class="routine-item"><input type="checkbox" class="t-check"> ❌ Error Notebook Analysis (आज की गलतियाँ नोट कीं)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> ⚡ Quick Revision (आज का पूरा दोहराव)</label>
-      </div>
-
-      <div class="sub-box">
-        <h3>🔐 CONTROL SYSTEM RULES</h3>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 📱 Reels Control (Break का मतलब Recovery)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🧠 ओवरथिंकिंग कंट्रोल (STOP → लिखा → वापस लौटे)</label>
-        <label class="routine-item"><input type="checkbox" class="t-check"> 🚭 Craving Control</label>
+        <div id="card-result-box" style="margin-top:15px;"></div>
       </div>
     </div>
 
-    <!-- 4. DAILY CONTROL SCORE & ATTENDANCE -->
-    <div class="card">
-      <h2>⭐ DAILY CONTROL SCORE & ATTENDANCE 🔥</h2>
-      <div class="score-grid">
-        <div class="score-box">
-          <label>📚 Study (Max 10)</label>
-          <input type="number" id="scoreStudy" min="0" max="10" placeholder="0-10" oninput="calcTotalScore()">
-        </div>
-        <div class="score-box">
-          <label>💪 Health (Max 5)</label>
-          <input type="number" id="scoreHealth" min="0" max="5" placeholder="0-5" oninput="calcTotalScore()">
-        </div>
-        <div class="score-box">
-          <label>🔥 Discipline (Max 5)</label>
-          <input type="number" id="scoreDiscipline" min="0" max="5" placeholder="0-5" oninput="calcTotalScore()">
-        </div>
-        <div class="score-box">
-          <label>📱 Distraction (Max 5)</label>
-          <input type="number" id="scoreDistraction" min="0" max="5" placeholder="0-5" oninput="calcTotalScore()">
-        </div>
-      </div>
-      
-      <div style="text-align: center; margin-top: 10px; font-weight: bold; font-size: 15px; color: var(--primary);">
-        🏆 आपका कुल स्कोर (Total Score): <span id="totalScoreLabel" style="color: var(--fire);">0</span> / 25
+    <!-- 3. ADMIN PANEL -->
+    <div id="sec-admin" class="page-section">
+      <div class="card" id="admin-login-view">
+        <h3>🔐 एडमिन लॉगिन</h3>
+        <p style="font-size:11px;color:#666;margin-bottom:10px;">केवल मुख्य संयोजक (सचिन जामरे) हेतु</p>
+        <label>पासवर्ड</label>
+        <input type="password" id="admin-password-input" placeholder="पासवर्ड दर्ज करें">
+        <button class="btn" onclick="adminLogin()">लॉगिन</button>
       </div>
 
-      <button type="button" class="btn fire" onclick="saveAttendance()" style="padding: 12px; margin-top:12px;">🔥 आज की अटेंडेंस लगाएं & Target घटाएं</button>
+      <div id="admin-dashboard-view" style="display:none;">
+        <div class="card" style="background:#e8f5e9;border-color:#c8e6c9;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <h4>👑 District Admin Panel</h4>
+            <button onclick="adminLogout()" style="background:#c62828;color:#fff;border:none;padding:5px 10px;border-radius:6px;font-size:11px;cursor:pointer;">लॉगआउट</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>👥 जिला स्तरीय आवेदन सूची</h3>
+          <div id="admin-applicants-list"></div>
+        </div>
+      </div>
     </div>
 
-    <!-- 5. ATTENDANCE SHEET LOG -->
-    <div class="card">
-      <h2>📊 विस्तृत अटेंडेंस और सम्पूर्ण डेटा इतिहास</h2>
-      <div class="table-responsive">
-        <table>
-          <thead>
-            <tr>
-              <th>दिन / तारीख</th>
-              <th>Chapter (अध्याय)</th>
-              <th>Topic Details (विषय)</th>
-              <th>Daily Revision</th>
-              <th>Daily Practice (हल किए प्रश्न)</th>
-              <th>कुल स्कोर</th>
-            </tr>
-          </thead>
-          <tbody id="attendanceTableBody">
-            <tr><td colspan="6" style="text-align:center;">अभी कोई डेटा सेव नहीं है।</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <button type="button" class="btn" style="background: #a21d1d; margin-top: 10px;" onclick="clearHistory()">🗑️ सारा इतिहास साफ़ करें</button>
-    </div>
-
-  </main>
-
-  <div class="footer">© Ultimate Master Routine • Perfect Day ❌ जरूरी नहीं, Comeback Day ✅ जरूरी है!</div>
+  </div>
 
   <script>
-    const today = new Date();
-    const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
-    const todayStr = today.toLocaleDateString('hi-IN', options);
-    const dayName = today.toLocaleDateString('hi-IN', { weekday: 'long' });
-    document.getElementById('currentDateBanner').textContent = '📅 ' + todayStr;
+    var PASS_KEY = "Sachin@2026#Admin";
 
-    if (today.getDay() === 0) {
-      const sunSec = document.getElementById('sundaySection');
-      if (sunSec) sunSec.style.display = 'block';
-      document.getElementById('mainHeader').classList.add('sunday-head');
-      document.getElementById('headerTitle').textContent = '🏆 SUNDAY SPECIAL: TEST & MOCK ANALYSIS MODE';
+    var memberData = JSON.parse(localStorage.getItem('district_members_db') || '[]');
+
+    function switchTab(tabName){
+      document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
+      document.getElementById('sec-' + tabName).classList.add('active');
+      document.getElementById('tb-' + tabName).classList.add('active');
     }
 
-    if (today.getDay() === 0 || today.getDay() === 3) {
-      const alertBan = document.getElementById('mockAlertBanner');
-      if (alertBan) alertBan.style.display = 'block';
+    // Photo Compression Algorithm
+    function processPhoto(fileInput, callback) {
+      if (!fileInput.files || !fileInput.files[0]) { callback(''); return; }
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var img = new Image();
+        img.onload = function () {
+          var canvas = document.createElement('canvas');
+          var max_size = 300;
+          var width = img.width;
+          var height = img.height;
+          if (width > height) {
+            if (width > max_size) { height *= max_size / width; width = max_size; }
+          } else {
+            if (height > max_size) { width *= max_size / height; height = max_size; }
+          }
+          canvas.width = width;
+          canvas.height = height;
+          var ctx = canvas.getContext('canvas');
+          ctx.drawImage(img, 0, 0, width, height);
+          callback(canvas.toDataURL('image/jpeg', 0.7));
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(fileInput.files[0]);
     }
 
-    let streak = parseInt(localStorage.getItem('user_streak') || '0');
-    document.getElementById('streakDays').textContent = streak;
+    function submitRegistration(){
+      var name = document.getElementById('reg-name').value.trim();
+      var father = document.getElementById('reg-father').value.trim();
+      var phone = document.getElementById('reg-phone').value.trim();
+      var district = document.getElementById('reg-district').value.trim();
+      var tehsil = document.getElementById('reg-tehsil').value.trim();
+      var village = document.getElementById('reg-village').value.trim();
+      var photoInput = document.getElementById('reg-photo');
 
-    const INI = { math: 800, reasoning: 800, polity: 300, vocab: 600 };
+      if(!name || !father || !phone || !district || !tehsil || !village || !photoInput.files[0]){
+        alert('कृपया सभी जिला और व्यक्तिगत जानकारी पूरी भरें!');
+        return;
+      }
 
-    function renderTargets() {
-      let remM = parseInt(localStorage.getItem('m_math') ?? INI.math);
-      let remR = parseInt(localStorage.getItem('m_reasoning') ?? INI.reasoning);
-      let remP = parseInt(localStorage.getItem('m_polity') ?? INI.polity);
-      let remV = parseInt(localStorage.getItem('m_vocab') ?? INI.vocab);
+      processPhoto(photoInput, function(photoBase64){
+        memberData.push({
+          id: Date.now(),
+          name: name,
+          father: father,
+          phone: phone,
+          district: district,
+          tehsil: tehsil,
+          village: village,
+          photo: photoBase64,
+          status: 'pending',
+          memberId: ''
+        });
 
-      document.getElementById('remMath').textContent = remM;
-      document.getElementById('remReasoning').textContent = remR;
-      document.getElementById('remPolity').textContent = remP;
-      document.getElementById('remVocab').textContent = remV;
+        localStorage.setItem('district_members_db', JSON.stringify(memberData));
+        alert('आपका आवेदन सफलतापूर्वक जमा हो गया है! एडमिन स्वीकृति के बाद कार्ड जारी होगा।');
 
-      let totalInitial = INI.math + INI.reasoning + INI.polity + INI.vocab;
-      let totalDone = (INI.math - remM) + (INI.reasoning - remR) + (INI.polity - remP) + (INI.vocab - remV);
-
-      let percentage = Math.min(100, Math.round((totalDone / totalInitial) * 100));
-      let pBar = document.getElementById('monthlyProgressBar');
-      pBar.style.width = percentage + '%';
-      pBar.textContent = percentage + '% Complete';
+        document.getElementById('reg-name').value = '';
+        document.getElementById('reg-father').value = '';
+        document.getElementById('reg-phone').value = '';
+        document.getElementById('reg-district').value = '';
+        document.getElementById('reg-tehsil').value = '';
+        document.getElementById('reg-village').value = '';
+        document.getElementById('reg-photo').value = '';
+      });
     }
 
-    function resetMonthlyTargets() {
-      if(confirm('क्या आप मंथली टारगेट्स रीसेट करना चाहते हैं?')) {
-        for(let key in INI) { localStorage.setItem('m_' + key, INI[key]); }
-        renderTargets();
+    function findMemberCard(){
+      var phone = document.getElementById('find-phone').value.trim();
+      var box = document.getElementById('card-result-box');
+      box.innerHTML = '';
+
+      if(!phone){ alert('मोबाइल नंबर दर्ज करें!'); return; }
+
+      var user = memberData.find(m => m.phone === phone);
+
+      if(!user){
+        box.innerHTML = '<p style="color:red;font-size:12px;text-align:center;">कोई रिकॉर्ड नहीं मिला। पहले आवेदन करें।</p>';
+        return;
+      }
+
+      if(user.status === 'pending'){
+        box.innerHTML = '<div style="background:#fff8e1;color:#f57f17;padding:12px;border-radius:10px;text-align:center;font-size:12px;border:1px solid #ffe082;">⏳ आपका आवेदन अभी पेंडिंग है। एडमिन (सचिन जामरे) द्वारा Approve होते ही कार्ड दिखाई देगा।</div>';
+        return;
+      }
+
+      box.innerHTML = `
+        <div class="vip-card">
+          <div class="vc-header">
+            <div class="vc-header-left">
+              <img src="1000467791.png" class="card-logo" alt="Logo">
+              <h4>जिला: ${user.district}</h4>
+            </div>
+            <span style="font-size:10px;background:#ffe600;color:#000;padding:2px 6px;border-radius:4px;font-weight:bold;">नागरिक सदस्य</span>
+          </div>
+          <div class="vc-body">
+            <img src="${user.photo}" class="vc-photo">
+            <div class="vc-details">
+              <p>नाम: <strong>${user.name}</strong></p>
+              <p>पिता/पति: <strong>${user.father}</strong></p>
+              <p>तहसील/ब्लॉक: <strong>${user.tehsil}</strong></p>
+              <p>ग्राम/वार्ड: <strong>${user.village}</strong></p>
+            </div>
+          </div>
+          <div class="vc-footer">
+            <div class="vc-id">ID: ${user.memberId}</div>
+            <div class="vc-title">हमारा गाँव हमारी जिम्मेदारी</div>
+            <div class="vc-slogan">"एक सोच, एक प्रयास, बेहतर गाँव"</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function adminLogin(){
+      var pass = document.getElementById('admin-password-input').value.trim();
+      if(pass === PASS_KEY){
+        document.getElementById('admin-login-view').style.display = 'none';
+        document.getElementById('admin-dashboard-view').style.display = 'block';
+        renderAdminList();
+      } else {
+        alert('गलत पासवर्ड!');
       }
     }
 
-    function calcTotalScore() {
-      let sStudy = parseInt(document.getElementById('scoreStudy').value) || 0;
-      let sHealth = parseInt(document.getElementById('scoreHealth').value) || 0;
-      let sDisc = parseInt(document.getElementById('scoreDiscipline').value) || 0;
-      let sDist = parseInt(document.getElementById('scoreDistraction').value) || 0;
-
-      let total = sStudy + sHealth + sDisc + sDist;
-      document.getElementById('totalScoreLabel').textContent = total;
-      return total;
+    function adminLogout(){
+      document.getElementById('admin-login-view').style.display = 'block';
+      document.getElementById('admin-dashboard-view').style.display = 'none';
+      document.getElementById('admin-password-input').value = '';
     }
 
-    function saveAttendance() {
-      try {
-        let tMath = parseInt(document.getElementById('todayMathQs').value) || 0;
-        let tReasoning = parseInt(document.getElementById('todayReasoningQs').value) || 0;
-        let tPolity = parseInt(document.getElementById('todayPolityQs').value) || 0;
-        let tVocab = parseInt(document.getElementById('todayVocabWords').value) || 0;
+    function renderAdminList(){
+      var listDiv = document.getElementById('admin-applicants-list');
+      if(memberData.length === 0){
+        listDiv.innerHTML = '<p style="font-size:12px;color:#777;">कोई आवेदन दर्ज नहीं है।</p>';
+        return;
+      }
 
-        // Auto deduct from monthly goals
-        let curM = parseInt(localStorage.getItem('m_math') ?? INI.math);
-        let curR = parseInt(localStorage.getItem('m_reasoning') ?? INI.reasoning);
-        let curP = parseInt(localStorage.getItem('m_polity') ?? INI.polity);
-        let curV = parseInt(localStorage.getItem('m_vocab') ?? INI.vocab);
+      listDiv.innerHTML = memberData.map(m => `
+        <div class="admin-item">
+          <div class="admin-item-top">
+            <img src="${m.photo}">
+            <div>
+              <strong style="font-size:13px;">${m.name}</strong> (${m.phone})<br>
+              <span style="font-size:11px;color:#666;">जिला: ${m.district} | ब्लॉक: ${m.tehsil} | ग्राम: ${m.village}</span><br>
+              <span style="font-size:10px;font-weight:bold;color:${m.status === 'approved' ? '#2e7d32' : '#f39c12'}">
+                स्थिति: ${m.status.toUpperCase()} ${m.memberId ? '(' + m.memberId + ')' : ''}
+              </span>
+            </div>
+          </div>
+          ${m.status === 'pending' ? `
+            <div class="btn-group">
+              <button class="btn-acc" onclick="approveMember(${m.id})">Approve & Card दें</button>
+              <button class="btn-rej" onclick="deleteMember(${m.id})">Reject</button>
+            </div>
+          ` : `
+            <div style="margin-top:8px;text-align:right;">
+              <button onclick="deleteMember(${m.id})" style="background:#c62828;color:#fff;border:none;padding:4px 8px;border-radius:4px;font-size:10px;cursor:pointer;">हटाएं</button>
+            </div>
+          `}
+        </div>
+      `).join('');
+    }
 
-        localStorage.setItem('m_math', Math.max(0, curM - tMath));
-        localStorage.setItem('m_reasoning', Math.max(0, curR - tReasoning));
-        localStorage.setItem('m_polity', Math.max(0, curP - tPolity));
-        localStorage.setItem('m_vocab', Math.max(0, curV - tVocab));
+    function approveMember(id){
+      var generatedID = 'DIST-' + Math.floor(10000 + Math.random() * 90000);
+      memberData = memberData.map(m => {
+        if(m.id === id){
+          return Object.assign({}, m, { status: 'approved', memberId: generatedID });
+        }
+        return m;
+      });
+      localStorage.setItem('district_members_db', JSON.stringify(memberData));
+      renderAdminList();
+    }
 
-        renderTargets();
-
-        // Fetch values safely
-        let mCh = document.getElementById('mathChapter')?.value || '-';
-        let rCh = document.getElementById('reasoningChapter')
+    function deleteMember(id){
+      if(confirm('क्या आप इसे हटाना चाहते हैं?')){
+        memberData = memberData.filter(m => m.id !== id);
+        localStorage.setItem('district_members_db', JSON.stringify(memberData));
+        renderAdminList();
+      }
+    }
+  </script>
+</body>
+</html>
