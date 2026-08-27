@@ -125,7 +125,7 @@
         <label>ग्राम / शहर / वार्ड का नाम *</label>
         <input type="text" id="reg-village" placeholder="उदा: तलकपुरा / जोजलवाड़ी">
 
-        <button class="btn" type="button" onclick="submitRegistration()">सदस्यता आवेदन जमा करें</button>
+        <button class="btn" type="button" onclick="submitRegistration()">सदस्यता आवेदन जमा करें (Gmail)</button>
       </div>
     </div>
 
@@ -170,6 +170,7 @@
 
   <script>
     var PASS_KEY = "sachin@312";
+    var adminEmail = "hamaragawofficial@gmail.com";
 
     var memberData = JSON.parse(localStorage.getItem('district_members_db') || '[]');
 
@@ -199,6 +200,9 @@
         return;
       }
 
+      var generatedID = 'DIST-' + Math.floor(10000 + Math.random() * 90000);
+
+      // Save locally so they can also search/view their card instantly
       memberData.push({
         id: Date.now(),
         name: name,
@@ -207,12 +211,29 @@
         tehsil: tehsil,
         role: role,
         village: village,
-        status: 'pending',
-        memberId: ''
+        status: 'approved', // Auto approved for smooth experience
+        memberId: generatedID
       });
 
       localStorage.setItem('district_members_db', JSON.stringify(memberData));
-      alert('आपका आवेदन सफलतापूर्वक जमा हो गया है! एडमिन स्वीकृति के बाद कार्ड दिखाई देगा।');
+
+      // Trigger Gmail App Intent
+      var subject = encodeURIComponent("नया सदस्यता आवेदन: " + name);
+      var body = encodeURIComponent(
+        "नया सदस्य विवरण:\n\n" +
+        "नाम: " + name + "\n" +
+        "मोबाइल नंबर: " + phone + "\n" +
+        "जिला: " + district + "\n" +
+        "तहसील/ब्लॉक: " + tehsil + "\n" +
+        "पद/भूमिका: " + role + "\n" +
+        "ग्राम/वार्ड: " + village + "\n" +
+        "जारी आईडी: " + generatedID + "\n\n" +
+        "--- हमारा गाँव हमारी जिम्मेदारी पोर्टल ---"
+      );
+
+      window.location.href = "mailto:" + adminEmail + "?subject=" + subject + "&body=" + body;
+
+      alert('आपका आवेदन जमा हो गया है और ईमेल तैयार हो रहा है! अब आप "प्रोफाइल / कार्ड" टैब में जाकर अपना डिजिटल कार्ड देख सकते हैं।');
 
       document.getElementById('reg-name').value = '';
       document.getElementById('reg-phone').value = '';
@@ -232,11 +253,6 @@
 
       if(!user){
         box.innerHTML = '<p style="color:red;font-size:12px;text-align:center;">कोई रिकॉर्ड नहीं मिला। पहले फॉर्म भरें।</p>';
-        return;
-      }
-
-      if(user.status === 'pending'){
-        box.innerHTML = '<div style="background:#fff8e1;color:#f57f17;padding:12px;border-radius:10px;text-align:center;font-size:12px;border:1px solid #ffe082;">⏳ आपका आवेदन अभी समीक्षा में है। एडमिन स्वीकृति के बाद कार्ड दिखेगा।</div>';
         return;
       }
 
@@ -298,35 +314,14 @@
             <div>
               <strong style="font-size:13px;">${m.name}</strong> (${m.phone})<br>
               <span style="font-size:11px;color:#666;">जिला: ${m.district} | तहसील: ${m.tehsil} | पद: ${m.role}</span><br>
-              <span style="font-size:10px;font-weight:bold;color:${m.status === 'approved' ? '#2e7d32' : '#f39c12'}">
-                स्थिति: ${m.status.toUpperCase()} ${m.memberId ? '(' + m.memberId + ')' : ''}
-              </span>
+              <span style="font-size:10px;font-weight:bold;color:#2e7d32">ID: ${m.memberId}</span>
             </div>
           </div>
-          ${m.status === 'pending' ? `
-            <div class="btn-group">
-              <button class="btn-acc" onclick="approveMember(${m.id})">Approve & Card दें</button>
-              <button class="btn-rej" onclick="deleteMember(${m.id})">Reject</button>
-            </div>
-          ` : `
-            <div style="margin-top:8px;text-align:right;">
-              <button onclick="deleteMember(${m.id})" style="background:#c62828;color:#fff;border:none;padding:4px 8px;border-radius:4px;font-size:10px;cursor:pointer;">हटाएं</button>
-            </div>
-          `}
+          <div style="margin-top:8px;text-align:right;">
+            <button onclick="deleteMember(${m.id})" style="background:#c62828;color:#fff;border:none;padding:4px 8px;border-radius:4px;font-size:10px;cursor:pointer;">हटाएं</button>
+          </div>
         </div>
       `).join('');
-    }
-
-    function approveMember(id){
-      var generatedID = 'DIST-' + Math.floor(10000 + Math.random() * 90000);
-      memberData = memberData.map(m => {
-        if(m.id === id){
-          return Object.assign({}, m, { status: 'approved', memberId: generatedID });
-        }
-        return m;
-      });
-      localStorage.setItem('district_members_db', JSON.stringify(memberData));
-      renderAdminList();
     }
 
     function deleteMember(id){
@@ -338,5 +333,5 @@
     }
   </script>
 </body>
-          </html>
+  </html>
   
