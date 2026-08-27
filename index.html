@@ -41,7 +41,7 @@
     .card-logo{width:35px;height:35px;border-radius:50%;border:1px solid #ffe600;background:#fff;object-fit:cover}
     .vc-header h4{font-size:13px;color:#ffe600}
     .vc-body{display:flex;gap:12px;align-items:center}
-    .vc-photo{width:75px;height:85px;border-radius:10px;border:2px solid #ffe600;object-fit:cover;background:#ddd}
+    .vc-photo{width:75px;height:75px;border-radius:50%;border:2px solid #ffe600;object-fit:cover;background:#fff;padding:2px}
     .vc-details p{font-size:11px;margin-bottom:3px;opacity:0.95}
     .vc-footer{margin-top:10px;background:rgba(0,0,0,0.3);padding:8px;border-radius:8px;text-align:center}
     .vc-id{font-family:monospace;font-size:13px;color:#ffe600;font-weight:bold;letter-spacing:1px}
@@ -51,7 +51,7 @@
     /* Admin List */
     .admin-item{background:#f8fafc;border:1px solid #e2e8f0;padding:12px;border-radius:12px;margin-bottom:10px}
     .admin-item-top{display:flex;gap:10px;align-items:center}
-    .admin-item-top img{width:50px;height:60px;border-radius:6px;object-fit:cover}
+    .admin-item-top img{width:45px;height:45px;border-radius:50%;object-fit:cover;border:1px solid #ccc}
     .btn-group{display:flex;gap:8px;margin-top:10px}
     .btn-acc{background:#2e7d32;color:#fff;border:none;padding:8px;border-radius:6px;flex:1;font-weight:bold;font-size:12px;cursor:pointer}
     .btn-rej{background:#c62828;color:#fff;border:none;padding:8px;border-radius:6px;flex:1;font-weight:bold;font-size:12px;cursor:pointer}
@@ -125,9 +125,6 @@
         <label>ग्राम / शहर / वार्ड का नाम *</label>
         <input type="text" id="reg-village" placeholder="उदा: तलकपुरा / जोजलवाड़ी">
 
-        <label>अपनी फोटो अपलोड करें * (ID कार्ड हेतु)</label>
-        <input type="file" id="reg-photo" accept="image/*">
-
         <button class="btn" type="button" onclick="submitRegistration()">सदस्यता आवेदन जमा करें</button>
       </div>
     </div>
@@ -184,33 +181,6 @@
       document.getElementById('tb-' + tabName).classList.add('active');
     }
 
-    // Photo Compression Algorithm
-    function processPhoto(fileInput, callback) {
-      if (!fileInput.files || !fileInput.files[0]) { callback(''); return; }
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        var img = new Image();
-        img.onload = function () {
-          var canvas = document.createElement('canvas');
-          var max_size = 300;
-          var width = img.width;
-          var height = img.height;
-          if (width > height) {
-            if (width > max_size) { height *= max_size / width; width = max_size; }
-          } else {
-            if (height > max_size) { width *= max_size / height; height = max_size; }
-          }
-          canvas.width = width;
-          canvas.height = height;
-          var ctx = canvas.getContext('canvas');
-          ctx.drawImage(img, 0, 0, width, height);
-          callback(canvas.toDataURL('image/jpeg', 0.7));
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(fileInput.files[0]);
-    }
-
     function submitRegistration(){
       var name = document.getElementById('reg-name').value.trim();
       var phone = document.getElementById('reg-phone').value.trim();
@@ -218,37 +188,37 @@
       var tehsil = document.getElementById('reg-tehsil').value;
       var role = document.getElementById('reg-role').value;
       var village = document.getElementById('reg-village').value.trim();
-      var photoInput = document.getElementById('reg-photo');
 
-      if(!name || !phone || !district || !tehsil || !village || !photoInput.files[0]){
-        alert('कृपया सभी जानकारी और ऑप्शन सही से चुनें!');
+      if(!name || !phone || !district || !tehsil || !village){
+        alert('कृपया सभी आवश्यक जानकारी भरें!');
         return;
       }
 
-      processPhoto(photoInput, function(photoBase64){
-        memberData.push({
-          id: Date.now(),
-          name: name,
-          phone: phone,
-          district: district,
-          tehsil: tehsil,
-          role: role,
-          village: village,
-          photo: photoBase64,
-          status: 'pending',
-          memberId: ''
-        });
+      if(phone.length < 10){
+        alert('कृपया 10 अंकों का सही मोबाइल नंबर दर्ज करें!');
+        return;
+      }
 
-        localStorage.setItem('district_members_db', JSON.stringify(memberData));
-        alert('आपका आवेदन जमा हो गया है! एडमिन द्वारा स्वीकृत होने पर कार्ड दिखेगा।');
-
-        document.getElementById('reg-name').value = '';
-        document.getElementById('reg-phone').value = '';
-        document.getElementById('reg-district').value = '';
-        document.getElementById('reg-tehsil').value = '';
-        document.getElementById('reg-village').value = '';
-        document.getElementById('reg-photo').value = '';
+      memberData.push({
+        id: Date.now(),
+        name: name,
+        phone: phone,
+        district: district,
+        tehsil: tehsil,
+        role: role,
+        village: village,
+        status: 'pending',
+        memberId: ''
       });
+
+      localStorage.setItem('district_members_db', JSON.stringify(memberData));
+      alert('आपका आवेदन सफलतापूर्वक जमा हो गया है! एडमिन स्वीकृति के बाद कार्ड दिखाई देगा।');
+
+      document.getElementById('reg-name').value = '';
+      document.getElementById('reg-phone').value = '';
+      document.getElementById('reg-district').value = '';
+      document.getElementById('reg-tehsil').value = '';
+      document.getElementById('reg-village').value = '';
     }
 
     function findMemberCard(){
@@ -266,7 +236,7 @@
       }
 
       if(user.status === 'pending'){
-        box.innerHTML = '<div style="background:#fff8e1;color:#f57f17;padding:12px;border-radius:10px;text-align:center;font-size:12px;border:1px solid #ffe082;">⏳ आपका आवेदन अभी पेंडिंग है। एडमिन स्वीकृति के बाद कार्ड जारी होगा।</div>';
+        box.innerHTML = '<div style="background:#fff8e1;color:#f57f17;padding:12px;border-radius:10px;text-align:center;font-size:12px;border:1px solid #ffe082;">⏳ आपका आवेदन अभी समीक्षा में है। एडमिन स्वीकृति के बाद कार्ड दिखेगा।</div>';
         return;
       }
 
@@ -274,13 +244,13 @@
         <div class="vip-card">
           <div class="vc-header">
             <div class="vc-header-left">
-              <img src="1000467791.png" class="card-logo" alt="Logo">
+              <img src="1000467791.png" class="card-logo" alt="Logo" onerror="this.src='https://via.placeholder.com/35'">
               <h4>जिला: ${user.district}</h4>
             </div>
             <span style="font-size:10px;background:#ffe600;color:#000;padding:2px 6px;border-radius:4px;font-weight:bold;">${user.role}</span>
           </div>
           <div class="vc-body">
-            <img src="${user.photo}" class="vc-photo">
+            <img src="1000467791.png" class="vc-photo" alt="Badge" onerror="this.src='https://via.placeholder.com/75'">
             <div class="vc-details">
               <p>नाम: <strong>${user.name}</strong></p>
               <p>तहसील/ब्लॉक: <strong>${user.tehsil}</strong></p>
@@ -324,7 +294,7 @@
       listDiv.innerHTML = memberData.map(m => `
         <div class="admin-item">
           <div class="admin-item-top">
-            <img src="${m.photo}">
+            <img src="1000467791.png" onerror="this.src='https://via.placeholder.com/45'">
             <div>
               <strong style="font-size:13px;">${m.name}</strong> (${m.phone})<br>
               <span style="font-size:11px;color:#666;">जिला: ${m.district} | तहसील: ${m.tehsil} | पद: ${m.role}</span><br>
@@ -368,5 +338,5 @@
     }
   </script>
 </body>
-    </html>
+          </html>
   
