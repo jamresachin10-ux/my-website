@@ -85,20 +85,45 @@
         <label>आपका पूरा नाम *</label>
         <input type="text" id="reg-name" placeholder="नाम दर्ज करें">
 
-        <label>पिता या पति का नाम *</label>
-        <input type="text" id="reg-father" placeholder="पिता/पति का नाम">
-
         <label>मोबाइल नंबर *</label>
         <input type="tel" id="reg-phone" placeholder="10 अंकों का नंबर">
 
-        <label>जिला (District) *</label>
-        <input type="text" id="reg-district" placeholder="उदा: खरगोन">
+        <label>जिला (District) चुनें *</label>
+        <select id="reg-district">
+          <option value="">-- जिला चुनें --</option>
+          <option value="खरगोन">खरगोन (Khargone)</option>
+          <option value="बड़वानी">बड़वानी (Barwani)</option>
+          <option value="धार">धार (Dhar)</option>
+          <option value="इंदौर">इंदौर (Indore)</option>
+          <option value="खंडवा">खंडवा (Khandwa)</option>
+          <option value="अन्य जिला">अन्य जिला (Other)</option>
+        </select>
 
-        <label>तहसील / ब्लॉक *</label>
-        <input type="text" id="reg-tehsil" placeholder="उदा: सेगांव">
+        <label>तहसील / ब्लॉक चुनें *</label>
+        <select id="reg-tehsil">
+          <option value="">-- तहसील/ब्लॉक चुनें --</option>
+          <option value="सेगांव">सेगांव</option>
+          <option value="खरगोन">खरगोन</option>
+          <option value="भगवानपुरा">भगवानपुरा</option>
+          <option value="भीकनगांव">भीकनगांव</option>
+          <option value="झिरन्या">झिरन्या</option>
+          <option value="कसरावद">कसरावद</option>
+          <option value="महेश्वर">महेश्वर</option>
+          <option value="बड़वाह">बड़वाह</option>
+          <option value="अन्य तहसील">अन्य तहसील</option>
+        </select>
 
-        <label>ग्राम / शहर / वार्ड *</label>
-        <input type="text" id="reg-village" placeholder="उदा: तलकपुरा / पटेल फलिया">
+        <label>सदस्यता पद / भूमिका *</label>
+        <select id="reg-role">
+          <option value="सक्रिय नागरिक सदस्य">सक्रिय नागरिक सदस्य</option>
+          <option value="युवा कार्यकर्ता">युवा कार्यकर्ता</option>
+          <option value="ग्राम संयोजक">ग्राम संयोजक</option>
+          <option value="ब्लॉक प्रतिनिधि">ब्लॉक प्रतिनिधि</option>
+          <option value="जिला प्रतिनिधि">जिला प्रतिनिधि</option>
+        </select>
+
+        <label>ग्राम / शहर / वार्ड का नाम *</label>
+        <input type="text" id="reg-village" placeholder="उदा: तलकपुरा / जोजलवाड़ी">
 
         <label>अपनी फोटो अपलोड करें * (ID कार्ड हेतु)</label>
         <input type="file" id="reg-photo" accept="image/*">
@@ -188,15 +213,15 @@
 
     function submitRegistration(){
       var name = document.getElementById('reg-name').value.trim();
-      var father = document.getElementById('reg-father').value.trim();
       var phone = document.getElementById('reg-phone').value.trim();
-      var district = document.getElementById('reg-district').value.trim();
-      var tehsil = document.getElementById('reg-tehsil').value.trim();
+      var district = document.getElementById('reg-district').value;
+      var tehsil = document.getElementById('reg-tehsil').value;
+      var role = document.getElementById('reg-role').value;
       var village = document.getElementById('reg-village').value.trim();
       var photoInput = document.getElementById('reg-photo');
 
-      if(!name || !father || !phone || !district || !tehsil || !village || !photoInput.files[0]){
-        alert('कृपया सभी जिला और व्यक्तिगत जानकारी पूरी भरें!');
+      if(!name || !phone || !district || !tehsil || !village || !photoInput.files[0]){
+        alert('कृपया सभी जानकारी और ऑप्शन सही से चुनें!');
         return;
       }
 
@@ -204,10 +229,10 @@
         memberData.push({
           id: Date.now(),
           name: name,
-          father: father,
           phone: phone,
           district: district,
           tehsil: tehsil,
+          role: role,
           village: village,
           photo: photoBase64,
           status: 'pending',
@@ -215,10 +240,9 @@
         });
 
         localStorage.setItem('district_members_db', JSON.stringify(memberData));
-        alert('आपका आवेदन सफलतापूर्वक जमा हो गया है! एडमिन स्वीकृति के बाद कार्ड जारी होगा।');
+        alert('आपका आवेदन जमा हो गया है! एडमिन (सचिन जामरे) द्वारा स्वीकृत होने पर कार्ड दिखेगा।');
 
         document.getElementById('reg-name').value = '';
-        document.getElementById('reg-father').value = '';
         document.getElementById('reg-phone').value = '';
         document.getElementById('reg-district').value = '';
         document.getElementById('reg-tehsil').value = '';
@@ -237,12 +261,12 @@
       var user = memberData.find(m => m.phone === phone);
 
       if(!user){
-        box.innerHTML = '<p style="color:red;font-size:12px;text-align:center;">कोई रिकॉर्ड नहीं मिला। पहले आवेदन करें।</p>';
+        box.innerHTML = '<p style="color:red;font-size:12px;text-align:center;">कोई रिकॉर्ड नहीं मिला। पहले फॉर्म भरें।</p>';
         return;
       }
 
       if(user.status === 'pending'){
-        box.innerHTML = '<div style="background:#fff8e1;color:#f57f17;padding:12px;border-radius:10px;text-align:center;font-size:12px;border:1px solid #ffe082;">⏳ आपका आवेदन अभी पेंडिंग है। एडमिन (सचिन जामरे) द्वारा Approve होते ही कार्ड दिखाई देगा।</div>';
+        box.innerHTML = '<div style="background:#fff8e1;color:#f57f17;padding:12px;border-radius:10px;text-align:center;font-size:12px;border:1px solid #ffe082;">⏳ आपका आवेदन अभी पेंडिंग है। एडमिन स्वीकृति के बाद कार्ड जारी होगा।</div>';
         return;
       }
 
@@ -253,15 +277,15 @@
               <img src="1000467791.png" class="card-logo" alt="Logo">
               <h4>जिला: ${user.district}</h4>
             </div>
-            <span style="font-size:10px;background:#ffe600;color:#000;padding:2px 6px;border-radius:4px;font-weight:bold;">नागरिक सदस्य</span>
+            <span style="font-size:10px;background:#ffe600;color:#000;padding:2px 6px;border-radius:4px;font-weight:bold;">${user.role}</span>
           </div>
           <div class="vc-body">
             <img src="${user.photo}" class="vc-photo">
             <div class="vc-details">
               <p>नाम: <strong>${user.name}</strong></p>
-              <p>पिता/पति: <strong>${user.father}</strong></p>
               <p>तहसील/ब्लॉक: <strong>${user.tehsil}</strong></p>
               <p>ग्राम/वार्ड: <strong>${user.village}</strong></p>
+              <p>भूमिका: <strong>${user.role}</strong></p>
             </div>
           </div>
           <div class="vc-footer">
@@ -303,7 +327,7 @@
             <img src="${m.photo}">
             <div>
               <strong style="font-size:13px;">${m.name}</strong> (${m.phone})<br>
-              <span style="font-size:11px;color:#666;">जिला: ${m.district} | ब्लॉक: ${m.tehsil} | ग्राम: ${m.village}</span><br>
+              <span style="font-size:11px;color:#666;">जिला: ${m.district} | तहसील: ${m.tehsil} | पद: ${m.role}</span><br>
               <span style="font-size:10px;font-weight:bold;color:${m.status === 'approved' ? '#2e7d32' : '#f39c12'}">
                 स्थिति: ${m.status.toUpperCase()} ${m.memberId ? '(' + m.memberId + ')' : ''}
               </span>
@@ -344,4 +368,5 @@
     }
   </script>
 </body>
-</html>
+      </html>
+            
