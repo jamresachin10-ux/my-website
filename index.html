@@ -15,162 +15,51 @@
       --border: #b0bec5;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); padding: 15px 10px 50px; }
+    .container { max-width: 950px; margin: 0 auto; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      padding: 20px 10px 50px;
-    }
+    /* Header & Navigation */
+    h1 { color: var(--primary); text-align: center; margin-bottom: 12px; font-size: 22px; border-bottom: 3px solid var(--primary); padding-bottom: 8px; }
+    
+    .nav-tabs { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; }
+    .tab-btn { background: #e8eaf6; border: 1px solid var(--border); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; color: var(--primary); font-size: 14px; }
+    .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
-    /* Header & Banners */
-    h1 {
-      color: var(--primary);
-      text-align: center;
-      margin-bottom: 15px;
-      font-size: 22px;
-      border-bottom: 3px solid var(--primary);
-      padding-bottom: 8px;
-    }
+    .quote-box { background: #e1f5fe; border-left: 5px solid var(--accent); padding: 12px 15px; border-radius: 8px; margin-bottom: 20px; font-size: 13.5px; line-height: 1.6; }
 
-    .quote-box {
-      background: #e1f5fe;
-      border-left: 5px solid var(--accent);
-      padding: 12px 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-    .quote-box strong {
-      color: #0277bd;
-    }
-
-    /* Sections & Cards */
-    .section-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 15px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      border: 1px solid #e2e8f0;
-    }
-
-    h2 {
-      color: var(--secondary);
-      font-size: 16px;
-      margin-bottom: 12px;
-      border-bottom: 2px solid #c5cae9;
-      padding-bottom: 5px;
-    }
+    /* Section Cards */
+    .section-card { background: var(--card-bg); border-radius: 12px; padding: 16px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+    h2 { color: var(--secondary); font-size: 16px; margin-bottom: 12px; border-bottom: 2px solid #c5cae9; padding-bottom: 5px; }
 
     /* Tables */
-    .table-responsive {
-      overflow-x: auto;
-    }
+    .table-responsive { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 5px; margin-bottom: 10px; font-size: 13px; }
+    th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+    th { background-color: #e8eaf6; color: var(--primary); font-weight: bold; }
+    tr:nth-child(even) { background-color: #f8fafc; }
+    .highlight-row { background-color: #e8f5e9 !important; font-weight: bold; }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 5px;
-      margin-bottom: 10px;
-      font-size: 13px;
+    /* Inputs & Selects */
+    select, input[type="text"], input[type="number"], input[type="date"] {
+      width: 100%; padding: 7px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; outline: none; background: #fff;
     }
+    select:focus, input:focus { border-color: var(--primary); }
 
-    th, td {
-      border: 1px solid var(--border);
-      padding: 8px 10px;
-      text-align: left;
-    }
+    .btn { padding: 10px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; transition: 0.2s; }
+    .btn-save { background: #2e7d32; color: white; width: 100%; margin-top: 10px; }
+    .btn-delete { background: #c62828; color: white; padding: 4px 8px; font-size: 11px; border-radius: 4px; border: none; cursor: pointer; }
 
-    th {
-      background-color: #e8eaf6;
-      color: var(--primary);
-      font-weight: bold;
-    }
-
-    tr:nth-child(even) {
-      background-color: #f8fafc;
-    }
-
-    .highlight-row {
-      background-color: #e8f5e9 !important;
-      font-weight: bold;
-    }
-
-    /* Inputs & Checkboxes */
-    input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-      accent-color: var(--primary);
-    }
-
-    input[type="text"], input[type="number"] {
-      width: 100%;
-      padding: 6px;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      font-size: 13px;
-      outline: none;
-    }
-
-    input[type="text"]:focus, input[type="number"]:focus {
-      border-color: var(--primary);
-      background-color: #fff;
-    }
-
-    /* Checklist Lists */
-    ul {
-      list-style: none;
-      padding-left: 5px;
-    }
-
-    li {
-      margin-bottom: 8px;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    /* Action Buttons */
-    .btn-group {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-    .btn {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 14px;
-      transition: 0.2s;
-    }
-
-    .btn-save { background: #2e7d32; color: white; }
-    .btn-reset { background: #c62828; color: white; }
-    .btn:hover { opacity: 0.9; }
+    /* Admin Log Box */
+    .log-item { background: #fff; border: 1px solid var(--border); border-left: 5px solid var(--primary); padding: 12px; margin-bottom: 12px; border-radius: 8px; }
+    .log-header { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 8px; font-weight: bold; color: var(--primary); }
 
     @media (max-width: 600px) {
-      th, td { padding: 6px 5px; font-size: 12px; }
+      th, td { padding: 6px 4px; font-size: 11.5px; }
       h1 { font-size: 18px; }
-      h2 { font-size: 14px; }
     }
   </style>
 </head>
@@ -178,393 +67,418 @@
 
 <div class="container">
 
-  <h1>🚀 MASTER TARGET LIST (MTL) & DAILY TRACKER</h1>
+  <h1>🚀 MASTER TARGET LIST (MTL) & STUDY TRACKER</h1>
 
-  <div class="quote-box">
-    <strong>🔥 SLOGAN:</strong> "रोज़ का 1% सुधार = संडे को 100% सिलेक्शन!"<br>
-    <strong>🎯 RULE:</strong> "कम पढ़ूँगा चलेगा, लेकिन जितना पढ़ूँगा ठोस पढ़ूँगा। संडे = नो न्यू टॉपिक (ओनली टेस्ट + मेगा रिवीजन)।"
+  <!-- Top Navigation Tabs -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="openTab('student-view')">📝 डेली स्टडी ट्रैकर</button>
+    <button class="tab-btn" onclick="openTab('admin-view')">👑 Admin Panel (इतिहास/डेटा Log)</button>
   </div>
 
-  <!-- 1. MONTHLY TARGET LIST -->
-  <div class="section-card">
-    <h2>📅 1. MONTHLY TARGET LIST (MTL) — COMPLETE GOALS</h2>
-    <div class="table-responsive">
-      <table>
-        <thead>
-          <tr>
-            <th>Category / Subject</th>
-            <th>Daily Target</th>
-            <th>Monthly Goal (30 Days)</th>
-            <th>Status Tracker</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>🧮 Maths MCQs</td>
-            <td>30 MCQs</td>
-            <td>900 MCQs</td>
-            <td><input type="checkbox" class="save-state" id="mtl_1"> Completed</td>
-          </tr>
-          <tr>
-            <td>🧠 Reasoning MCQs</td>
-            <td>30 MCQs</td>
-            <td>900 MCQs</td>
-            <td><input type="checkbox" class="save-state" id="mtl_2"> Completed</td>
-          </tr>
-          <tr>
-            <td>📖 Hindi MCQs</td>
-            <td>20 MCQs</td>
-            <td>600 MCQs</td>
-            <td><input type="checkbox" class="save-state" id="mtl_3"> Completed</td>
-          </tr>
-          <tr>
-            <td>🏛️ Polity MCQs</td>
-            <td>20 MCQs</td>
-            <td>600 MCQs</td>
-            <td><input type="checkbox" class="save-state" id="mtl_4"> Completed</td>
-          </tr>
-          <tr class="highlight-row">
-            <td>🎯 TOTAL MCQs</td>
-            <td>100 MCQs / Day</td>
-            <td>3,000 MCQs / Month</td>
-            <td><input type="checkbox" class="save-state" id="mtl_5"> 100% Target</td>
-          </tr>
-          <tr>
-            <td>🔢 Maths Tables (पहाड़े)</td>
-            <td>1 से 30 (रिवीजन/याद)</td>
-            <td>1 से 30 पक्का कंटस्थ</td>
-            <td><input type="checkbox" class="save-state" id="mtl_6"> Mastered</td>
-          </tr>
-          <tr>
-            <td>📐 Maths Squares (वर्ग)</td>
-            <td>1 से 50 (रिवीजन/याद)</td>
-            <td>1 से 50 पक्का कंटस्थ</td>
-            <td><input type="checkbox" class="save-state" id="mtl_7"> Mastered</td>
-          </tr>
-          <tr>
-            <td>🧊 Maths Cubes (घन)</td>
-            <td>1 से 30 (रिवीजन/याद)</td>
-            <td>1 से 30 पक्का कंटस्थ</td>
-            <td><input type="checkbox" class="save-state" id="mtl_8"> Mastered</td>
-          </tr>
-          <tr>
-            <td>🏛️ Administrative Words</td>
-            <td>10 Words / Day</td>
-            <td>300 Words / Month</td>
-            <td><input type="checkbox" class="save-state" id="mtl_9"> Learned</td>
-          </tr>
-          <tr>
-            <td>🔤 English Sentences</td>
-            <td>5 Sentences / Day</td>
-            <td>150 Sentences / Month</td>
-            <td><input type="checkbox" class="save-state" id="mtl_10"> Practiced</td>
-          </tr>
-          <tr>
-            <td>✍️ Hindi Official Sentences</td>
-            <td>5 Sentences / Day</td>
-            <td>150 Sentences / Month</td>
-            <td><input type="checkbox" class="save-state" id="mtl_11"> Practiced</td>
-          </tr>
-          <tr>
-            <td>🪞 Mirror Speaking Practice</td>
-            <td>2 Minutes / Day</td>
-            <td>60 Minutes / Month</td>
-            <td><input type="checkbox" class="save-state" id="mtl_12"> Done</td>
-          </tr>
-        </tbody>
-      </table>
+  <!-- TAB 1: STUDENT VIEW -->
+  <div id="student-view" class="tab-content active">
+
+    <div class="quote-box">
+      <strong>🔥 SLOGAN:</strong> "रोज़ का 1% सुधार = संडे को 100% सिलेक्शन!"<br>
+      <strong>🎯 RULE:</strong> "कम पढ़ूँगा चलेगा, लेकिन जितना पढ़ूँगा ठोस पढ़ूँगा। संडे = नो न्यू टॉपिक (ओनली टेस्ट + मेगा रिवीजन)।"
     </div>
-  </div>
 
-  <!-- 2. DAILY TIME-BLOCK ROUTINE -->
-  <div class="section-card">
-    <h2>⏰ 2. DAILY TIME-BLOCK ROUTINE</h2>
-    <div class="table-responsive">
-      <table>
-        <thead>
-          <tr>
-            <th>Time Slot</th>
-            <th>Focus Zone</th>
-            <th>Activity & Details</th>
-            <th>Done?</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>06:00 AM – 07:00 AM</td>
-            <td>🌅 Morning Power</td>
-            <td>🪥 Brush + 🧘 Meditation/Yoga + 🥣 Breakfast</td>
-            <td><input type="checkbox" class="save-state" id="routine_1"></td>
-          </tr>
-          <tr>
-            <td>07:00 AM – 11:00 AM</td>
-            <td>📚 Revision Zone</td>
-            <td>पिछले दिनों के टॉपिक्स का तगड़ा रिवीजन (4 Hours)</td>
-            <td><input type="checkbox" class="save-state" id="routine_2"></td>
-          </tr>
-          <tr>
-            <td>11:00 AM – 11:40 AM</td>
-            <td>🍽️ Fuel Zone</td>
-            <td>🍽️ Lunch + Power Rest</td>
-            <td><input type="checkbox" class="save-state" id="routine_3"></td>
-          </tr>
-          <tr>
-            <td>11:40 AM – 03:20 PM</td>
-            <td>⚔️ Practice Zone</td>
-            <td>✍️ 100 Daily MCQs Practice (Maths, Reasoning, Hindi, Polity)</td>
-            <td><input type="checkbox" class="save-state" id="routine_4"></td>
-          </tr>
-          <tr>
-            <td>03:20 PM – 03:40 PM</td>
-            <td>😴 Power Nap</td>
-            <td>Mind Recharge & Rest (20 Mins)</td>
-            <td><input type="checkbox" class="save-state" id="routine_5"></td>
-          </tr>
-          <tr>
-            <td>03:40 PM – 06:30 PM</td>
-            <td>💻 Skill Zone</td>
-            <td>Computer Coaching Class & Practice</td>
-            <td><input type="checkbox" class="save-state" id="routine_6"></td>
-          </tr>
-          <tr>
-            <td>06:30 PM – 07:00 PM</td>
-            <td>🍛 Dinner Zone</td>
-            <td>Dinner & Relax</td>
-            <td><input type="checkbox" class="save-state" id="routine_7"></td>
-          </tr>
-          <tr>
-            <td>07:00 PM – 11:00 PM</td>
-            <td>🎓 Class Zone</td>
-            <td>Online Classes + Self Notes Making (4 Hours)</td>
-            <td><input type="checkbox" class="save-state" id="routine_8"></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- 3. 10-MIN DAILY SKILL PRACTICE CHECKLIST -->
-  <div class="section-card">
-    <h2>⚡ 3. 10-MIN DAILY SKILL PRACTICE CHECKLIST</h2>
-    <ul>
-      <li><input type="checkbox" class="save-state" id="skill_1"> <span><strong>10 Administrative Words:</strong> (प्रशासनिक शब्द तैयार किए)</span></li>
-      <li><input type="checkbox" class="save-state" id="skill_2"> <span><strong>5 English Sentences:</strong> (अंग्रेजी बोलचाल के वाक्य याद किए)</span></li>
-      <li><input type="checkbox" class="save-state" id="skill_3"> <span><strong>5 Hindi Official Sentences:</strong> (शासकीय/कार्यालयीन भाषा के वाक्य तैयार किए)</span></li>
-      <li><input type="checkbox" class="save-state" id="skill_4"> <span><strong>2 Min Mirror Practice: 🪞</strong> (शीशे के सामने आत्मविश्वास के साथ बोला)</span></li>
-    </ul>
-  </div>
-
-  <!-- 4. DAILY CLASS LOG & SUBJECT TRACKER -->
-  <div class="section-card">
-    <h2>📖 4. DAILY CLASS LOG & SUBJECT TRACKER</h2>
-    <div class="table-responsive">
-      <table>
-        <thead>
-          <tr>
-            <th>Subject</th>
-            <th>Ongoing Chapter</th>
-            <th>Today's Topic</th>
-            <th>Class Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>🧮 Maths</td>
-            <td><input type="text" class="save-state" id="class_m_ch"></td>
-            <td><input type="text" class="save-state" id="class_m_tp"></td>
-            <td><input type="text" class="save-state" id="class_m_st" placeholder="🟡 Running / 🟢 Complete"></td>
-          </tr>
-          <tr>
-            <td>🧠 Reasoning</td>
-            <td><input type="text" class="save-state" id="class_r_ch"></td>
-            <td><input type="text" class="save-state" id="class_r_tp"></td>
-            <td><input type="text" class="save-state" id="class_r_st" placeholder="🟡 Running / 🟢 Complete"></td>
-          </tr>
-          <tr>
-            <td>📖 Hindi</td>
-            <td><input type="text" class="save-state" id="class_h_ch"></td>
-            <td><input type="text" class="save-state" id="class_h_tp"></td>
-            <td><input type="text" class="save-state" id="class_h_st" placeholder="🟡 Running / 🟢 Complete"></td>
-          </tr>
-          <tr>
-            <td>🏛️ Polity</td>
-            <td><input type="text" class="save-state" id="class_p_ch"></td>
-            <td><input type="text" class="save-state" id="class_p_tp"></td>
-            <td><input type="text" class="save-state" id="class_p_st" placeholder="🟡 Running / 🟢 Complete"></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- 5. DAILY PERFORMANCE & ERROR LOG -->
-  <div class="section-card">
-    <h2>📊 5. DAILY PERFORMANCE & ERROR LOG</h2>
-    <div class="table-responsive">
-      <table>
-        <thead>
-          <tr>
-            <th>Subject</th>
-            <th>Daily Target</th>
-            <th>Solved</th>
-            <th>Correct ✅</th>
-            <th>Wrong ❌</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>🧮 Maths</td>
-            <td>30 MCQs</td>
-            <td><input type="number" class="save-state" id="perf_m_sol"></td>
-            <td><input type="number" class="save-state" id="perf_m_cor"></td>
-            <td><input type="number" class="save-state" id="perf_m_wrg"></td>
-          </tr>
-          <tr>
-            <td>🧠 Reasoning</td>
-            <td>30 MCQs</td>
-            <td><input type="number" class="save-state" id="perf_r_sol"></td>
-            <td><input type="number" class="save-state" id="perf_r_cor"></td>
-            <td><input type="number" class="save-state" id="perf_r_wrg"></td>
-          </tr>
-          <tr>
-            <td>📖 Hindi</td>
-            <td>20 MCQs</td>
-            <td><input type="number" class="save-state" id="perf_h_sol"></td>
-            <td><input type="number" class="save-state" id="perf_h_cor"></td>
-            <td><input type="number" class="save-state" id="perf_h_wrg"></td>
-          </tr>
-          <tr>
-            <td>🏛️ Polity</td>
-            <td>20 MCQs</td>
-            <td><input type="number" class="save-state" id="perf_p_sol"></td>
-            <td><input type="number" class="save-state" id="perf_p_cor"></td>
-            <td><input type="number" class="save-state" id="perf_p_wrg"></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <br>
-    <div style="display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap;">
-      <div style="flex: 1; min-width: 200px;">
-        <label><strong>Accuracy Score (%):</strong></label>
-        <input type="text" class="save-state" id="accuracy_score">
-      </div>
-      <div style="flex: 1; min-width: 200px;">
-        <label><strong>Discipline Rating (1-10):</strong></label>
-        <input type="text" class="save-state" id="discipline_rating">
+    <!-- Date and Day Selector -->
+    <div class="section-card" style="background: #e8eaf6;">
+      <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 200px;">
+          <label><strong>📅 तारीख (Date):</strong></label>
+          <input type="date" id="entry_date">
+        </div>
+        <div style="flex: 1; min-width: 200px;">
+          <label><strong>🗓️ वार (Day):</strong></label>
+          <select id="entry_day">
+            <option value="सोमवार (Monday)">सोमवार (Monday)</option>
+            <option value="मंगलवार (Tuesday)">मंगलवार (Tuesday)</option>
+            <option value="बुधवार (Wednesday)">बुधवार (Wednesday)</option>
+            <option value="गुरुवार (Thursday)">गुरुवार (Thursday)</option>
+            <option value="शुक्रवार (Friday)">शुक्रवार (Friday)</option>
+            <option value="शनिवार (Saturday)">शनिवार (Saturday)</option>
+            <option value="रविवार (Sunday Special)">रविवार (Sunday Special)</option>
+          </select>
+        </div>
       </div>
     </div>
-    <div style="margin-bottom: 8px;">
-      <label>❌ <strong>आज की सबसे बड़ी गलती:</strong></label>
-      <input type="text" class="save-state" id="biggest_mistake">
+
+    <!-- 1. MONTHLY TARGET LIST (MTL) -->
+    <div class="section-card">
+      <h2>📅 1. MONTHLY TARGET LIST (MTL) — ROUTINE ALIGNED</h2>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Category / Subject</th>
+              <th>Daily Target</th>
+              <th>Monthly Goal (30 Days)</th>
+              <th>Routine Slot</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>🧮 <strong>Maths MCQs</strong></td>
+              <td>30 MCQs</td>
+              <td>900 MCQs</td>
+              <td>11:40 AM – 03:20 PM (Practice Zone)</td>
+            </tr>
+            <tr>
+              <td>🧠 <strong>Reasoning MCQs</strong></td>
+              <td>30 MCQs</td>
+              <td>900 MCQs</td>
+              <td>11:40 AM – 03:20 PM (Practice Zone)</td>
+            </tr>
+            <tr>
+              <td>📖 <strong>Hindi MCQs</strong></td>
+              <td>20 MCQs</td>
+              <td>600 MCQs</td>
+              <td>11:40 AM – 03:20 PM (Practice Zone)</td>
+            </tr>
+            <tr>
+              <td>🏛️ <strong>Polity MCQs</strong></td>
+              <td>20 MCQs</td>
+              <td>600 MCQs</td>
+              <td>11:40 AM – 03:20 PM (Practice Zone)</td>
+            </tr>
+            <tr class="highlight-row">
+              <td>🎯 <strong>TOTAL MCQs</strong></td>
+              <td><strong>100 MCQs / Day</strong></td>
+              <td><strong>3,000 MCQs / Month</strong></td>
+              <td><strong>Practice Zone Block</strong></td>
+            </tr>
+            <tr>
+              <td>🔢 <strong>Maths Tables (पहाड़े)</strong></td>
+              <td>1 से 30 (रिवीजन/याद)</td>
+              <td>कंठस्थ रिवीजन</td>
+              <td>07:00 AM – 11:00 AM (Revision Zone)</td>
+            </tr>
+            <tr>
+              <td>📐 <strong>Maths Squares (वर्ग)</strong></td>
+              <td>1 से 50 (रिवीजन/याद)</td>
+              <td>कंठस्थ रिवीजन</td>
+              <td>07:00 AM – 11:00 AM (Revision Zone)</td>
+            </tr>
+            <tr>
+              <td>🧊 <strong>Maths Cubes (घन)</strong></td>
+              <td>1 से 30 (रिवीजन/याद)</td>
+              <td>कंठस्थ रिवीजन</td>
+              <td>07:00 AM – 11:00 AM (Revision Zone)</td>
+            </tr>
+            <tr>
+              <td>🏛️ <strong>Administrative Words</strong></td>
+              <td>10 Words / Day</td>
+              <td>300 Words / Month</td>
+              <td>10-Min Skill Practice Block</td>
+            </tr>
+            <tr>
+              <td>🔤 <strong>English Sentences</strong></td>
+              <td>5 Sentences / Day</td>
+              <td>150 Sentences / Month</td>
+              <td>10-Min Skill Practice Block</td>
+            </tr>
+            <tr>
+              <td>✍️ <strong>Hindi Official Sentences</strong></td>
+              <td>5 Sentences / Day</td>
+              <td>150 Sentences / Month</td>
+              <td>10-Min Skill Practice Block</td>
+            </tr>
+            <tr>
+              <td>🪞 <strong>Mirror Speaking Practice</strong></td>
+              <td>2 Minutes / Day</td>
+              <td>60 Minutes / Month</td>
+              <td>10-Min Skill Practice Block</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div>
-      <label>💡 <strong>कल सबसे पहले क्या सुधारना है:</strong></label>
-      <input type="text" class="save-state" id="improvement_plan">
+
+    <!-- 2. DAILY TIME-BLOCK ROUTINE (WITH PROCESS / COMPLETE STATUS) -->
+    <div class="section-card">
+      <h2>⏰ 2. DAILY TIME-BLOCK ROUTINE TRACKER</h2>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Time Slot</th>
+              <th>Focus Zone</th>
+              <th>Activity & Details</th>
+              <th>Status Dropdown</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>06:00 AM – 07:00 AM</td>
+              <td>🌅 Morning Power</td>
+              <td>🪥 Brush + 🧘 Meditation/Yoga + 🥣 Breakfast</td>
+              <td>
+                <select id="st_r1">
+                  <option value="Pending ❌">Pending ❌</option>
+                  <option value="In Process ⏳">In Process ⏳</option>
+                  <option value="Complete ✅">Complete ✅</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>07:00 AM – 11:00 AM</td>
+              <td>📚 Revision Zone</td>
+              <td>पिछले दिनों के टॉपिक्स + पहाड़े/वर्ग/घन (4 Hours)</td>
+              <td>
+                <select id="st_r2">
+                  <option value="Pending ❌">Pending ❌</option>
+                  <option value="In Process ⏳">In Process ⏳</option>
+                  <option value="Complete ✅">Complete ✅</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>11:00 AM – 11:40 AM</td>
+              <td>🍽️ Fuel Zone</td>
+              <td>🍽️ Lunch + Power Rest</td>
+              <td>
+                <select id="st_r3">
+                  <option value="Pending ❌">Pending ❌</option>
+                  <option value="In Process ⏳">In Process ⏳</option>
+                  <option value="Complete ✅">Complete ✅</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>11:40 AM – 03:20 PM</td>
+              <td>⚔️ Practice Zone</td>
+              <td>✍️ 100 MCQs (Maths 30, Reasoning 30, Hindi 20, Polity 20)</td>
+              <td>
+                <select id="st_r4">
+                  <option value="Pending ❌">Pending ❌</option>
+                  <option value="In Process ⏳">In Process ⏳</option>
+                  <option value="Complete ✅">Complete ✅</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>03:20 PM – 03:40 PM</td>
+              <td>😴 Power Nap</td>
+              <td>Mind Recharge & Rest (20 Mins)</td>
+              <td>
+                <select id="st_r5">
+                  <option value="Pending ❌">Pending ❌</option>
+                  <option value="In Process ⏳">In Process ⏳</option>
+                  <option value="Complete ✅">Complete ✅</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>03:40 PM – 06:30 PM</td>
+              <td>💻 Skill Zone</td>
+              <td>Computer Coaching Class & Practice</td>
+              <td>
+                <select id="st_r6">
+                  <option value="Pending ❌">Pending ❌</option>
+                  <option value="In Process ⏳">In Process ⏳</option>
+                  <option value="Complete ✅">Complete ✅</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>06:30 PM – 07:00 PM</td>
+              <td>🍛 Dinner Zone</td>
+              <td>Dinner & Relax</td>
+              <td>
+                <select id="st_r7">
+                  <option value="Pending ❌">Pending ❌</option>
+                  <option value="In Process ⏳">In Process ⏳</option>
+                  <option value="Complete ✅">Complete ✅</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>07:00 PM – 11:00 PM</td>
+              <td>🎓 Class Zone</td>
+              <td>Online Classes + Self Notes Making (4 Hours)</td>
+              <td>
+                <select id="st_r8">
+                  <option value="Pending ❌">Pending ❌</option>
+                  <option value="In Process ⏳">In Process ⏳</option>
+                  <option value="Complete ✅">Complete ✅</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+
+    <!-- 3. DAILY PERFORMANCE & ERROR LOG -->
+    <div class="section-card">
+      <h2>📊 3. DAILY PERFORMANCE & MCQs LOG</h2>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th>Target</th>
+              <th>Solved</th>
+              <th>Correct ✅</th>
+              <th>Wrong ❌</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>🧮 Maths</td>
+              <td>30 MCQs</td>
+              <td><input type="number" id="p_m_sol"></td>
+              <td><input type="number" id="p_m_cor"></td>
+              <td><input type="number" id="p_m_wrg"></td>
+            </tr>
+            <tr>
+              <td>🧠 Reasoning</td>
+              <td>30 MCQs</td>
+              <td><input type="number" id="p_r_sol"></td>
+              <td><input type="number" id="p_r_cor"></td>
+              <td><input type="number" id="p_r_wrg"></td>
+            </tr>
+            <tr>
+              <td>📖 Hindi</td>
+              <td>20 MCQs</td>
+              <td><input type="number" id="p_h_sol"></td>
+              <td><input type="number" id="p_h_cor"></td>
+              <td><input type="number" id="p_h_wrg"></td>
+            </tr>
+            <tr>
+              <td>🏛️ Polity</td>
+              <td>20 MCQs</td>
+              <td><input type="number" id="p_p_sol"></td>
+              <td><input type="number" id="p_p_cor"></td>
+              <td><input type="number" id="p_p_wrg"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div style="margin-top: 10px;">
+        <label>❌ <strong>आज की सबसे बड़ी गलती:</strong></label>
+        <input type="text" id="p_mistake">
+      </div>
+      <div style="margin-top: 8px;">
+        <label>💡 <strong>कल सबसे पहले क्या सुधारना है:</strong></label>
+        <input type="text" id="p_improvement">
+      </div>
+
+      <button class="btn btn-save" onclick="saveToAdminPanel()">💾 आज का पूरा डेटा Admin Panel में सेव करें</button>
+    </div>
+
   </div>
 
-  <!-- 6. SUNDAY SPECIAL -->
-  <div class="section-card">
-    <h2>👑 6. SUNDAY SPECIAL (WEEKLY TEST + MEGA REVISION)</h2>
-    <p style="font-size: 12px; color: #555; margin-bottom: 10px;"><em>संडे का नियम: कोई नया टॉपिक नहीं पढ़ना है! पूरे हफ्ते जो भी पढ़ा, उसका 100% रिवीजन और फुल मॉक टेस्ट।</em></p>
-    
-    <h3>🔄 Weekly Revision Checklist</h3>
-    <ul style="margin-top: 8px; margin-bottom: 15px;">
-      <li><input type="checkbox" class="save-state" id="sun_rev_1"> <span><strong>Maths:</strong> हफ्ते के पूरे चैप्टर्स + पहाड़े/वर्ग/घन रिवीजन</span></li>
-      <li><input type="checkbox" class="save-state" id="sun_rev_2"> <span><strong>Reasoning:</strong> हफ्ते के पूरे टॉपिक्स रिवीजन</span></li>
-      <li><input type="checkbox" class="save-state" id="sun_rev_3"> <span><strong>Hindi:</strong> हफ्ते के पूरे नोट्स + प्रशासनिक शब्द रिवीजन</span></li>
-      <li><input type="checkbox" class="save-state" id="sun_rev_4"> <span><strong>Polity:</strong> हफ्ते के पूरे आर्टिकल्स & नोट्स रिवीजन</span></li>
-      <li><input type="checkbox" class="save-state" id="sun_rev_5"> <span><strong>Skills & Vocab:</strong> पूरे हफ्ते के Words & Sentences रिवीजन</span></li>
-    </ul>
-
-    <h3>📝 Sunday Mock Test Scoreboard</h3>
-    <div class="table-responsive" style="margin-top: 8px;">
-      <table>
-        <tbody>
-          <tr>
-            <td><strong>Test Name / Subject:</strong></td>
-            <td><input type="text" class="save-state" id="test_name"></td>
-          </tr>
-          <tr>
-            <td><strong>Total Questions:</strong></td>
-            <td><input type="number" class="save-state" id="test_total"></td>
-          </tr>
-          <tr>
-            <td><strong>Attempted Questions:</strong></td>
-            <td><input type="number" class="save-state" id="test_att"></td>
-          </tr>
-          <tr>
-            <td><strong>Correct ✅:</strong></td>
-            <td><input type="number" class="save-state" id="test_cor"></td>
-          </tr>
-          <tr>
-            <td><strong>Wrong ❌:</strong></td>
-            <td><input type="number" class="save-state" id="test_wrg"></td>
-          </tr>
-          <tr>
-            <td><strong>Final Score:</strong></td>
-            <td><input type="text" class="save-state" id="test_score"></td>
-          </tr>
-          <tr>
-            <td><strong>Accuracy Percentage:</strong></td>
-            <td><input type="text" class="save-state" id="test_acc"></td>
-          </tr>
-          <tr>
-            <td><strong>Weekly Rating:</strong></td>
-            <td><input type="text" class="save-state" id="test_rating" placeholder="🏆 ⭐⭐⭐⭐⭐"></td>
-          </tr>
-        </tbody>
-      </table>
+  <!-- TAB 2: ADMIN PANEL VIEW -->
+  <div id="admin-view" class="tab-content">
+    <div class="section-card">
+      <h2>👑 ADMIN PANEL — SAVED RECORDS (DATE & DAY WISE)</h2>
+      <p style="font-size:12px; color:#666; margin-bottom:12px;">यहाँ आपके द्वारा सेव की गई हर दिन की स्टडी रिपोर्ट सुरक्षित स्टोर होगी:</p>
+      
+      <div id="admin-logs-container">
+        <!-- Dynamic Saved Data Logs Will Appear Here -->
+      </div>
     </div>
-  </div>
-
-  <div class="btn-group">
-    <button class="btn btn-save" onclick="saveData()">💾 डेटा सेव करें</button>
-    <button class="btn btn-reset" onclick="resetData()">🔄 रीसेट करें</button>
   </div>
 
 </div>
 
 <script>
-  // Save inputs locally
-  function saveData() {
-    const inputs = document.querySelectorAll('.save-state');
-    inputs.forEach(input => {
-      if (input.type === 'checkbox') {
-        localStorage.setItem(input.id, input.checked);
-      } else {
-        localStorage.setItem(input.id, input.value);
-      }
-    });
-    alert('आपका पूरा डेटा सुरक्षित सेव हो गया है!');
-  }
+  // Set Today's Date by Default
+  document.getElementById('entry_date').valueAsDate = new Date();
 
-  // Load inputs on page refresh
-  function loadData() {
-    const inputs = document.querySelectorAll('.save-state');
-    inputs.forEach(input => {
-      const savedValue = localStorage.getItem(input.id);
-      if (savedValue !== null) {
-        if (input.type === 'checkbox') {
-          input.checked = (savedValue === 'true');
-        } else {
-          input.value = savedValue;
-        }
-      }
-    });
-  }
+  function openTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    
+    document.getElementById(tabId).classList.add('active');
+    event.currentTarget.classList.add('active');
 
-  // Clear data
-  function resetData() {
-    if (confirm('क्या आप सच में पूरा डेटा रीसेट करना चाहते हैं?')) {
-      localStorage.clear();
-      location.reload();
+    if(tabId === 'admin-view') {
+      renderAdminLogs();
     }
   }
 
-  // Auto load on page start
-  window.onload = loadData;
+  function saveToAdminPanel() {
+    const dateVal = document.getElementById('entry_date').value;
+    const dayVal = document.getElementById('entry_day').value;
+
+    if(!dateVal) { alert('कृपया तारीख (Date) दर्ज करें!'); return; }
+
+    const entryData = {
+      id: Date.now(),
+      date: dateVal,
+      day: dayVal,
+      routineStatus: {
+        morning: document.getElementById('st_r1').value,
+        revision: document.getElementById('st_r2').value,
+        fuel: document.getElementById('st_r3').value,
+        practice: document.getElementById('st_r4').value,
+        nap: document.getElementById('st_r5').value,
+        skill: document.getElementById('st_r6').value,
+        dinner: document.getElementById('st_r7').value,
+        class: document.getElementById('st_r8').value,
+      },
+      mcqStats: {
+        maths: { sol: document.getElementById('p_m_sol').value || '0', cor: document.getElementById('p_m_cor').value || '0', wrg: document.getElementById('p_m_wrg').value || '0' },
+        reasoning: { sol: document.getElementById('p_r_sol').value || '0', cor: document.getElementById('p_r_cor').value || '0', wrg: document.getElementById('p_r_wrg').value || '0' },
+        hindi: { sol: document.getElementById('p_h_sol').value || '0', cor: document.getElementById('p_h_cor').value || '0', wrg: document.getElementById('p_h_wrg').value || '0' },
+        polity: { sol: document.getElementById('p_p_sol').value || '0', cor: document.getElementById('p_p_cor').value || '0', wrg: document.getElementById('p_p_wrg').value || '0' }
+      },
+      mistake: document.getElementById('p_mistake').value || 'कोई नहीं',
+      improvement: document.getElementById('p_improvement').value || 'कोई नहीं'
+    };
+
+    let existingLogs = JSON.parse(localStorage.getItem('mtl_admin_db') || '[]');
+    existingLogs.unshift(entryData);
+    localStorage.setItem('mtl_admin_db', JSON.stringify(existingLogs));
+
+    alert('शाबाश! तारीख ' + dateVal + ' (' + dayVal + ') का डेटा Admin Panel में सफलतापूर्वक सेव हो गया है!');
+  }
+
+  function renderAdminLogs() {
+    const container = document.getElementById('admin-logs-container');
+    const logs = JSON.parse(localStorage.getItem('mtl_admin_db') || '[]');
+
+    if(logs.length === 0) {
+      container.innerHTML = '<p style="font-size:13px; color:#777; text-align:center; padding:20px;">अभी तक कोई डेटा सेव नहीं किया गया है।</p>';
+      return;
+    }
+
+    container.innerHTML = logs.map(log => `
+      <div class="log-item">
+        <div class="log-header">
+          <span>📅 Date: ${log.date} | 🗓️ ${log.day}</span>
+          <button class="btn-delete" onclick="deleteLog(${log.id})">हटाएं ❌</button>
+        </div>
+        <div style="font-size:12px; line-height:1.6;">
+          <strong>⏱️ Routine Status:</strong><br>
+          • Revision Zone: <mark>${log.routineStatus.revision}</mark> | Practice Zone: <mark>${log.routineStatus.practice}</mark> | Skill Zone: <mark>${log.routineStatus.skill}</mark> | Class Zone: <mark>${log.routineStatus.class}</mark><br><br>
+          
+          <strong>✍️ MCQs Performance:</strong><br>
+          • Maths: ${log.mcqStats.maths.sol} Solved (✅ ${log.mcqStats.maths.cor} | ❌ ${log.mcqStats.maths.wrg})<br>
+          • Reasoning: ${log.mcqStats.reasoning.sol} Solved (✅ ${log.mcqStats.reasoning.cor} | ❌ ${log.mcqStats.reasoning.wrg})<br>
+          • Hindi: ${log.mcqStats.hindi.sol} Solved (✅ ${log.mcqStats.hindi.cor} | ❌ ${log.mcqStats.hindi.wrg})<br>
+          • Polity: ${log.mcqStats.polity.sol} Solved (✅ ${log.mcqStats.polity.cor} | ❌ ${log.mcqStats.polity.wrg})<br><br>
+          
+          ❌ <strong>आज की गलती:</strong> ${log.mistake}<br>
+          💡 <strong>कल का सुधार:</strong> ${log.improvement}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function deleteLog(id) {
+    if(confirm('क्या आप इस तारीख की रिपोर्ट हटाना चाहते हैं?')) {
+      let logs = JSON.parse(localStorage.getItem('mtl_admin_db') || '[]');
+      logs = logs.filter(item => item.id !== id);
+      localStorage.setItem('mtl_admin_db', JSON.stringify(logs));
+      renderAdminLogs();
+    }
+  }
 </script>
 
 </body>
