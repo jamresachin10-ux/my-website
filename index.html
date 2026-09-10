@@ -22,7 +22,7 @@
     body { background: var(--bg); color: var(--text); padding: 15px 10px 60px; }
     .container { max-width: 950px; margin: 0 auto; }
 
-    /* Header & Navigation */
+    /* Header Panel */
     .header-panel {
       background: linear-gradient(135deg, #0a192f, #1e3a8a);
       border: 2px solid var(--accent);
@@ -32,17 +32,10 @@
       box-shadow: 0 8px 25px rgba(0,0,0,0.5);
       margin-bottom: 20px;
     }
-    .header-panel h1 { font-size: 24px; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 5px; }
-    .header-panel h2 { font-size: 16px; color: var(--accent); }
+    .header-panel h1 { font-size: 22px; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 5px; }
+    .header-panel h2 { font-size: 15px; color: var(--accent); }
 
-    .nav-tabs { display: flex; gap: 8px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; }
-    .tab-btn { background: var(--secondary); border: 1px solid var(--border); padding: 10px 16px; border-radius: 8px; cursor: pointer; font-weight: bold; color: var(--text); font-size: 13px; transition: 0.3s; }
-    .tab-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 800; }
-
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-
-    /* Section Cards */
+    /* Cards & Layout */
     .card { background: var(--card-bg); border-radius: 14px; padding: 18px; margin-bottom: 20px; border: 1px solid var(--border); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
     .card h3 { color: var(--accent-gold); font-size: 16px; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
 
@@ -51,8 +44,7 @@
     .progress-bar-fill { background: linear-gradient(90deg, #2ec4b6, #64ffda, #ffd700); height: 100%; width: 0%; transition: width 0.5s ease-in-out; }
     .progress-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 11px; font-weight: bold; color: #fff; text-shadow: 1px 1px 2px #000; }
 
-    /* Grid & Forms */
-    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
     .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
     
     label { font-size: 12px; color: var(--accent); font-weight: bold; display: block; margin-bottom: 4px; }
@@ -67,21 +59,21 @@
     th, td { border: 1px solid var(--border); padding: 8px; text-align: left; }
     th { background: var(--secondary); color: var(--accent); }
 
-    /* Status Badges & Buttons */
+    /* Status Badges & Checkboxes */
     .badge { padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: bold; display: inline-block; }
     .badge-gold { background: var(--accent-gold); color: #000; }
     .badge-diamond { background: #00b4d8; color: #fff; }
 
-    .btn { padding: 10px 18px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 13px; transition: 0.2s; }
-    .btn-save { background: var(--accent); color: #000; width: 100%; margin-top: 12px; }
-    .btn-danger { background: var(--danger); color: #fff; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; }
+    .btn { padding: 12px 20px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; transition: 0.2s; }
+    .btn-save { background: var(--accent); color: #000; width: 100%; margin-top: 15px; }
 
-    /* Checkbox Styling */
     .chk-item { display: flex; align-items: center; gap: 8px; font-size: 13px; margin-bottom: 6px; }
     .chk-item input { width: 16px; height: 16px; accent-color: var(--accent); }
 
+    .sub-card { background: #0b132b; border: 1px solid var(--border); border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+
     @media (max-width: 600px) {
-      .header-panel h1 { font-size: 20px; }
+      .header-panel h1 { font-size: 18px; }
       th, td { padding: 6px 4px; font-size: 11px; }
     }
   </style>
@@ -90,13 +82,13 @@
 
 <div class="container">
 
-  <!-- Main Title Header -->
+  <!-- Header Panel -->
   <div class="header-panel">
     <h1>🎓 SACHIN JAMRE STUDY ZONE</h1>
     <h2>🚀 ADMIN PANEL 2027 — 🏆 लक्ष्य: सरकारी नौकरी 2027</h2>
   </div>
 
-  <!-- Auto Dashboard Summary -->
+  <!-- 1. AUTO DASHBOARD & OFFICER MODE -->
   <div class="card" style="border-color: var(--accent-gold);">
     <h3>🤖 AUTO DASHBOARD & OFFICER MODE <span id="officer-badge" class="badge badge-gold">🥉 Bronze Mode</span></h3>
     
@@ -111,7 +103,7 @@
       </div>
       <div>
         <label>🔥 Study Streak</label>
-        <input type="text" id="auto-streak" value="0 Days" readonly>
+        <input type="text" id="auto-streak" value="1 Day" readonly>
       </div>
       <div>
         <label>🎯 Discipline Score</label>
@@ -119,7 +111,7 @@
       </div>
     </div>
 
-    <!-- Officer Progress Meter -->
+    <!-- Officer Selection Progress Meter -->
     <label>🏆 OFFICER SELECTION PROGRESS METER (Auto %)</label>
     <div class="progress-bar-container">
       <div class="progress-bar-fill" id="progress-bar"></div>
@@ -127,287 +119,201 @@
     </div>
   </div>
 
-  <!-- Navigation Tabs -->
-  <div class="nav-tabs">
-    <button class="tab-btn active" onclick="openTab('tab-daily')">📝 Daily Routine & Logs</button>
-    <button class="tab-btn" onclick="openTab('tab-mistakes')">❌ Mistake Bank</button>
-    <button class="tab-btn" onclick="openTab('tab-analytics')">📊 Weekly Analytics & Rewards</button>
-  </div>
-
-  <!-- TAB 1: DAILY ROUTINE & LOGS -->
-  <div id="tab-daily" class="tab-content active">
-
-    <!-- Monthly Targets Overview -->
-    <div class="card">
-      <h3>📈 Monthly Target List (MTL) Checklist</h3>
-      <div class="grid-2">
-        <div class="chk-item"><input type="checkbox" class="mtl-chk" onchange="calculateAutoDashboard()"> 🧠 3000 MCQs Target</div>
-        <div class="chk-item"><input type="checkbox" class="mtl-chk" onchange="calculateAutoDashboard()"> 📝 100 Mock Tests Target</div>
-        <div class="chk-item"><input type="checkbox" class="mtl-chk" onchange="calculateAutoDashboard()"> 🏛️ 150 Administrative Words</div>
-        <div class="chk-item"><input type="checkbox" class="mtl-chk" onchange="calculateAutoDashboard()"> 🇬🇧 150 English Sentences</div>
-        <div class="chk-item"><input type="checkbox" class="mtl-chk" onchange="calculateAutoDashboard()"> 🇮🇳 150 Hindi Official Sentences</div>
-        <div class="chk-item"><input type="checkbox" class="mtl-chk" onchange="calculateAutoDashboard()"> 🔢 Tables / Squares / Cubes Complete</div>
-      </div>
-    </div>
-
-    <!-- Practice Zone Table -->
-    <div class="card">
-      <h3>🎯 PRACTICE ZONE (Daily MCQs Target)</h3>
-      <div class="table-responsive">
-        <table>
-          <thead>
-            <tr>
-              <th>Subject</th>
-              <th>Target</th>
-              <th>Solved</th>
-              <th>Correct ✅</th>
-              <th>Wrong ❌</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>🧮 Maths</td>
-              <td>30</td>
-              <td><input type="number" class="mcq-sol" oninput="calculateAutoDashboard()"></td>
-              <td><input type="number" class="mcq-cor" oninput="calculateAutoDashboard()"></td>
-              <td><input type="number" class="mcq-wrg"></td>
-              <td><input type="checkbox" class="mcq-chk" onchange="calculateAutoDashboard()"> Complete</td>
-            </tr>
-            <tr>
-              <td>🧠 Reasoning</td>
-              <td>30</td>
-              <td><input type="number" class="mcq-sol" oninput="calculateAutoDashboard()"></td>
-              <td><input type="number" class="mcq-cor" oninput="calculateAutoDashboard()"></td>
-              <td><input type="number" class="mcq-wrg"></td>
-              <td><input type="checkbox" class="mcq-chk" onchange="calculateAutoDashboard()"> Complete</td>
-            </tr>
-            <tr>
-              <td>📖 Hindi</td>
-              <td>20</td>
-              <td><input type="number" class="mcq-sol" oninput="calculateAutoDashboard()"></td>
-              <td><input type="number" class="mcq-cor" oninput="calculateAutoDashboard()"></td>
-              <td><input type="number" class="mcq-wrg"></td>
-              <td><input type="checkbox" class="mcq-chk" onchange="calculateAutoDashboard()"> Complete</td>
-            </tr>
-            <tr>
-              <td>🏛️ Polity</td>
-              <td>20</td>
-              <td><input type="number" class="mcq-sol" oninput="calculateAutoDashboard()"></td>
-              <td><input type="number" class="mcq-cor" oninput="calculateAutoDashboard()"></td>
-              <td><input type="number" class="mcq-wrg"></td>
-              <td><input type="checkbox" class="mcq-chk" onchange="calculateAutoDashboard()"> Complete</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Skills & Vocab Zone -->
-    <div class="card">
-      <h3>🏛️ 10-Min Skill & Language Zone (Daily 5)</h3>
-      <div class="grid-2">
-        <div>
-          <label>🏛️ Administrative Words (5)</label>
-          <div class="chk-item"><input type="checkbox" class="skill-chk" onchange="calculateAutoDashboard()"> Word 1 to 5 Completed</div>
-        </div>
-        <div>
-          <label>🇬🇧 English Sentences (5)</label>
-          <div class="chk-item"><input type="checkbox" class="skill-chk" onchange="calculateAutoDashboard()"> Sentence 1 to 5 Completed</div>
-        </div>
-        <div>
-          <label>🇮🇳 Hindi Official Sentences (5)</label>
-          <div class="chk-item"><input type="checkbox" class="skill-chk" onchange="calculateAutoDashboard()"> Official Sentence 1 to 5 Completed</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Daily Discipline Check -->
-    <div class="card">
-      <h3>🎯 Daily Discipline Calculator Checklist</h3>
-      <div class="grid-2">
-        <div class="chk-item"><input type="checkbox" id="disc-study" onchange="calculateAutoDashboard()"> 📚 Study completed (30 Pts)</div>
-        <div class="chk-item"><input type="checkbox" id="disc-practice" onchange="calculateAutoDashboard()"> 📝 Practice completed (20 Pts)</div>
-        <div class="chk-item"><input type="checkbox" id="disc-revision" onchange="calculateAutoDashboard()"> 🔁 Revision completed (20 Pts)</div>
-        <div class="chk-item"><input type="checkbox" id="disc-mock" onchange="calculateAutoDashboard()"> 🧪 Mock Test given (15 Pts)</div>
-        <div class="chk-item"><input type="checkbox" id="disc-exer" onchange="calculateAutoDashboard()"> 💪 Exercise / Yoga (5 Pts)</div>
-        <div class="chk-item"><input type="checkbox" id="disc-sleep" onchange="calculateAutoDashboard()"> 😴 Proper Sleep (5 Pts)</div>
-        <div class="chk-item"><input type="checkbox" id="disc-phone" onchange="calculateAutoDashboard()"> 📵 No Phone Distraction (5 Pts)</div>
-      </div>
-    </div>
-
-    <button class="btn btn-save" onclick="saveDailyData()">💾 Save Today's Complete Log</button>
-
-  </div>
-
-  <!-- TAB 2: MISTAKE BANK -->
-  <div id="tab-mistakes" class="tab-content">
-    <div class="card">
-      <h3>❌ MISTAKE BANK (गलती रजिस्टर)</h3>
-      <div class="grid-2" style="margin-bottom: 10px;">
-        <div>
-          <label>❌ Question / Mistake Detail</label>
-          <input type="text" id="mb-question" placeholder="सवाल या गलती लिखें...">
-        </div>
-        <div>
-          <label>🤔 Reason for Mistake</label>
-          <input type="text" id="mb-reason" placeholder="उदा: जल्दबाज़ी / फार्म्युला भूला">
-        </div>
-        <div>
-          <label>✅ Correct Method / Solution</label>
-          <input type="text" id="mb-method" placeholder="सही तरीका क्या है...">
-        </div>
-        <div>
-          <label>📅 Revision Date</label>
-          <input type="date" id="mb-revdate">
-        </div>
-      </div>
-      <button class="btn btn-save" onclick="addMistake()">➕ Add Mistake to Bank</button>
-
-      <div class="table-responsive" style="margin-top: 15px;">
-        <table>
-          <thead>
-            <tr>
-              <th>Question</th>
-              <th>Reason</th>
-              <th>Correct Method</th>
-              <th>Revision Date</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="mistake-list-body">
-            <!-- Dynamic Mistakes -->
-          </tbody>
-        </table>
-      </div>
+  <!-- 2. MONTHLY TARGETS LIST (MTL) -->
+  <div class="card">
+    <h3>📈 MONTHLY TARGETS & FORMULA CHECKLIST</h3>
+    <div class="grid-2">
+      <div class="chk-item"><input type="checkbox" class="mtl-chk" onchange="calculateAutoDashboard()"> 🧠 3000 MCQs Target</div>
+      <div class="chk-item"><input type="checkbox" class="mtl-chk" onchange="calculateAutoDashboard()"> 📝 100 Mock Tests Target</div>
+      <div class="chk-item"><input type="checkbox" class="mtl-chk" onchange="calculateAutoDashboard()"> 🏛️ 150 Administrative Words</div>
+      <div class="chk-item"><input type="checkbox" class="mtl-chk" onchange="calculateAutoDashboard()"> 🇬🇧 150 English Sentences</div>
+      <div class="chk-item"><input type="checkbox" class="mtl-chk" onchange="calculateAutoDashboard()"> 🇮🇳 150 Hindi Official Sentences</div>
+      <div class="chk-item"><input type="checkbox" class="mtl-chk" onchange="calculateAutoDashboard()"> 🔢 Tables / Squares / Cubes Complete</div>
     </div>
   </div>
 
-  <!-- TAB 3: WEEKLY ANALYTICS & REWARDS -->
-  <div id="tab-analytics" class="tab-content">
-    <div class="card">
-      <h3>📊 WEEKLY ANALYTICS & REWARD SYSTEM</h3>
-      <div class="grid-2">
-        <div>
-          <p>🧠 <strong>Total Solved MCQs:</strong> <span id="total-mcqs-disp" style="color:var(--accent);">0</span></p>
-          <p>📝 <strong>Total Tests Given:</strong> <span id="total-tests-disp" style="color:var(--accent);">0</span></p>
-        </div>
-        <div>
-          <p>🏅 <strong>Current Badge:</strong> <span id="badge-disp" class="badge badge-gold">Bronze (500 MCQs)</span></p>
-          <p>👑 <strong>Officer Status:</strong> <span id="officer-disp" style="color:var(--accent-gold);">Running...</span></p>
-        </div>
-      </div>
+  <!-- 3. MORNING ROUTINE -->
+  <div class="card">
+    <h3>🌅 06:00–07:00 AM | MORNING ROUTINE</h3>
+    <div class="grid-2">
+      <div class="chk-item"><input type="checkbox" id="m-brush" onchange="calculateAutoDashboard()"> 🪥 Brush</div>
+      <div class="chk-item"><input type="checkbox" id="m-meditation" onchange="calculateAutoDashboard()"> 🧘 Meditation</div>
+      <div class="chk-item"><input type="checkbox" id="m-yoga" onchange="calculateAutoDashboard()"> 🤸 Yoga</div>
+      <div class="chk-item"><input type="checkbox" id="m-breakfast" onchange="calculateAutoDashboard()"> 🍳 Breakfast</div>
+    </div>
+    <div style="margin-top: 10px;" class="chk-item">
+      <input type="checkbox" id="m-routine-done" onchange="calculateAutoDashboard()"> <strong>✅ Morning Routine Completed</strong>
     </div>
   </div>
+
+  <!-- 4. PRACTICE ZONE TABLE -->
+  <div class="card">
+    <h3>🎯 PRACTICE ZONE (Daily MCQs)</h3>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Target</th>
+            <th>Solved</th>
+            <th>Correct ✅</th>
+            <th>Wrong ❌</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>🧮 Maths</td>
+            <td>30</td>
+            <td><input type="number" class="mcq-sol" oninput="calculateAutoDashboard()"></td>
+            <td><input type="number" class="mcq-cor" oninput="calculateAutoDashboard()"></td>
+            <td><input type="number" class="mcq-wrg"></td>
+            <td><input type="checkbox" class="mcq-chk" onchange="calculateAutoDashboard()"> Complete</td>
+          </tr>
+          <tr>
+            <td>🧠 Reasoning</td>
+            <td>30</td>
+            <td><input type="number" class="mcq-sol" oninput="calculateAutoDashboard()"></td>
+            <td><input type="number" class="mcq-cor" oninput="calculateAutoDashboard()"></td>
+            <td><input type="number" class="mcq-wrg"></td>
+            <td><input type="checkbox" class="mcq-chk" onchange="calculateAutoDashboard()"> Complete</td>
+          </tr>
+          <tr>
+            <td>📖 Hindi</td>
+            <td>20</td>
+            <td><input type="number" class="mcq-sol" oninput="calculateAutoDashboard()"></td>
+            <td><input type="number" class="mcq-cor" oninput="calculateAutoDashboard()"></td>
+            <td><input type="number" class="mcq-wrg"></td>
+            <td><input type="checkbox" class="mcq-chk" onchange="calculateAutoDashboard()"> Complete</td>
+          </tr>
+          <tr>
+            <td>🏛️ Polity</td>
+            <td>20</td>
+            <td><input type="number" class="mcq-sol" oninput="calculateAutoDashboard()"></td>
+            <td><input type="number" class="mcq-cor" oninput="calculateAutoDashboard()"></td>
+            <td><input type="number" class="mcq-wrg"></td>
+            <td><input type="checkbox" class="mcq-chk" onchange="calculateAutoDashboard()"> Complete</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 5. ONLINE CLASSES + NOTES -->
+  <div class="card">
+    <h3>🌙 07:00–11:00 PM | ONLINE CLASSES + NOTES</h3>
+
+    <!-- Maths Notes -->
+    <div class="sub-card">
+      <h4 style="color:var(--accent); margin-bottom:8px;">🧮 Maths Notes</h4>
+      <div class="grid-2" style="margin-bottom: 8px;">
+        <div>
+          <label>📘 Chapter</label>
+          <input type="text" placeholder="चैप्टर दर्ज करें...">
+        </div>
+        <div>
+          <label>📑 Topic</label>
+          <input type="text" placeholder="टॉपिक दर्ज करें...">
+        </div>
+      </div>
+      <div style="margin-bottom: 8px;">
+        <label>📄 Description</label>
+        <input type="text" placeholder="विवरण लिखें...">
+      </div>
+      <div class="grid-2">
+        <div class="chk-item"><input type="checkbox"> ▶️ Started</div>
+        <div class="chk-item"><input type="checkbox"> 🔄 Running</div>
+        <div class="chk-item"><input type="checkbox"> 📝 Notes Completed</div>
+        <div class="chk-item"><input type="checkbox" onchange="calculateAutoDashboard()"> ✅ Completed</div>
+      </div>
+    </div>
+
+    <!-- Reasoning Notes -->
+    <div class="sub-card">
+      <h4 style="color:var(--accent); margin-bottom:8px;">🧠 Reasoning Notes</h4>
+      <div class="grid-2" style="margin-bottom: 8px;">
+        <div>
+          <label>📘 Chapter</label>
+          <input type="text" placeholder="चैप्टर दर्ज करें...">
+        </div>
+        <div>
+          <label>📑 Topic</label>
+          <input type="text" placeholder="टॉपिक दर्ज करें...">
+        </div>
+      </div>
+      <div style="margin-bottom: 8px;">
+        <label>📄 Description</label>
+        <input type="text" placeholder="विवरण लिखें...">
+      </div>
+      <div class="grid-2">
+        <div class="chk-item"><input type="checkbox"> ▶️ Started</div>
+        <div class="chk-item"><input type="checkbox"> 🔄 Running</div>
+        <div class="chk-item"><input type="checkbox"> 📝 Notes Completed</div>
+        <div class="chk-item"><input type="checkbox" onchange="calculateAutoDashboard()"> ✅ Completed</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Save Button -->
+  <button class="btn btn-save" onclick="saveData()">💾 आज का पूरा डेटा Admin Panel में सेव करें</button>
 
 </div>
 
 <script>
-  // Auto Set Date and Day
-  const now = new Date();
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  document.getElementById('auto-date').value = now.toLocaleDateString('hi-IN');
-  document.getElementById('auto-day').value = days[now.getDay()];
+  // Auto Set Current Date & Day
+  const today = new Date();
+  const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  document.getElementById('auto-date').value = today.toLocaleDateString('hi-IN');
+  document.getElementById('auto-day').value = dayNames[today.getDay()];
 
-  function openTab(tabId) {
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    event.currentTarget.classList.add('active');
-  }
-
-  // Auto Calculations
+  // Auto Dashboard Calculation
   function calculateAutoDashboard() {
-    // 1. Calculate Discipline Score
     let score = 0;
-    if(document.getElementById('disc-study').checked) score += 30;
-    if(document.getElementById('disc-practice').checked) score += 20;
-    if(document.getElementById('disc-revision').checked) score += 20;
-    if(document.getElementById('disc-mock').checked) score += 15;
-    if(document.getElementById('disc-exer').checked) score += 5;
-    if(document.getElementById('disc-sleep').checked) score += 5;
-    if(document.getElementById('disc-phone').checked) score += 5;
 
+    // Morning Routine Points
+    if(document.getElementById('m-routine-done').checked) score += 10;
+
+    // Practice Checkpoints
+    document.querySelectorAll('.mcq-chk').forEach(chk => {
+      if(chk.checked) score += 15;
+    });
+
+    // MTL Checkpoints
+    document.querySelectorAll('.mtl-chk').forEach(chk => {
+      if(chk.checked) score += 5;
+    });
+
+    score = Math.min(score, 100);
     document.getElementById('auto-discipline').value = score + " / 100";
 
-    // 2. Total MCQs Solved
+    // MCQs Solved Calculation
     let totalSolved = 0;
     document.querySelectorAll('.mcq-sol').forEach(input => {
       totalSolved += Number(input.value || 0);
     });
-    document.getElementById('total-mcqs-disp').innerText = totalSolved;
 
-    // 3. Officer Mode & Reward System Badge
-    let badge = "🥉 Bronze";
-    let badgeClass = "badge-gold";
+    // Officer Mode Status
+    let badgeText = "🥉 Bronze Mode";
+    if(totalSolved >= 3000) { badgeText = "👑 Officer Mode (Diamond)"; }
+    else if(totalSolved >= 2000) { badgeText = "🥇 Gold Mode"; }
+    else if(totalSolved >= 1000) { badgeText = "🥈 Silver Mode"; }
 
-    if(totalSolved >= 3000) { badge = "👑 Officer Mode (Diamond)"; badgeClass = "badge-diamond"; }
-    else if(totalSolved >= 2000) { badge = "🥇 Gold Mode"; }
-    else if(totalSolved >= 1000) { badge = "🥈 Silver Mode"; }
+    document.getElementById('officer-badge').innerText = badgeText;
 
-    document.getElementById('officer-badge').innerText = badge;
-    document.getElementById('badge-disp').innerText = badge;
-
-    // 4. Progress Bar Percentage
-    let progressPct = Math.min(Math.round((totalSolved / 3000) * 100), 100);
-    document.getElementById('progress-bar').style.width = progressPct + "%";
-    document.getElementById('progress-text').innerText = progressPct + "% Completed";
+    // Selection Progress Percentage
+    let pct = Math.min(Math.round((totalSolved / 3000) * 100), 100);
+    document.getElementById('progress-bar').style.width = pct + "%";
+    document.getElementById('progress-text').innerText = pct + "% Completed";
   }
 
-  // Mistake Bank Functions
-  let mistakeBank = JSON.parse(localStorage.getItem('mistake_bank_db') || '[]');
-
-  function addMistake() {
-    let q = document.getElementById('mb-question').value.trim();
-    let r = document.getElementById('mb-reason').value.trim();
-    let m = document.getElementById('mb-method').value.trim();
-    let d = document.getElementById('mb-revdate').value;
-
-    if(!q) { alert('कृपया सवाल लिखें!'); return; }
-
-    mistakeBank.push({ id: Date.now(), question: q, reason: r, method: m, revdate: d, status: 'Fixed ❌' });
-    localStorage.setItem('mistake_bank_db', JSON.stringify(mistakeBank));
-    renderMistakes();
-
-    document.getElementById('mb-question').value = '';
-    document.getElementById('mb-reason').value = '';
-    document.getElementById('mb-method').value = '';
+  function saveData() {
+    alert('आज का डेटा Admin Panel 2027 में सफलतापूर्वक सुरक्षित कर लिया गया है!');
   }
 
-  function renderMistakes() {
-    let tbody = document.getElementById('mistake-list-body');
-    if(mistakeBank.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">कोई गलती दर्ज नहीं है।</td></tr>';
-      return;
-    }
-
-    tbody.innerHTML = mistakeBank.map(item => `
-      <tr>
-        <td>${item.question}</td>
-        <td>${item.reason}</td>
-        <td>${item.method}</td>
-        <td>${item.revdate || 'N/A'}</td>
-        <td><span class="badge badge-gold">${item.status}</span></td>
-        <td><button class="btn-danger" onclick="deleteMistake(${item.id})">हटाएं</button></td>
-      </tr>
-    `).join('');
-  }
-
-  function deleteMistake(id) {
-    mistakeBank = mistakeBank.filter(i => i.id !== id);
-    localStorage.setItem('mistake_bank_db', JSON.stringify(mistakeBank));
-    renderMistakes();
-  }
-
-  function saveDailyData() {
-    alert('आज का पूरा डेटा सफलतापूर्वक सेव हो गया है!');
-  }
-
-  // Initialize
-  renderMistakes();
   calculateAutoDashboard();
 </script>
 
 </body>
-</html>
+    </html>
+  
