@@ -107,96 +107,78 @@
 
     <!-- 1. MONTHLY TARGET LIST (MTL) -->
     <div class="section-card">
-      <h2>📅 1. MONTHLY TARGET LIST (MTL) — ROUTINE ALIGNED</h2>
+      <h2>📅 1. MONTHLY TARGET LIST (MTL) — EXACT GOALS</h2>
       <div class="table-responsive">
         <table>
           <thead>
             <tr>
               <th>Category / Subject</th>
-              <th>Daily Target</th>
               <th>Monthly Goal (30 Days)</th>
-              <th>Routine Slot</th>
+              <th>Details & Target Type</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>🧮 <strong>Maths MCQs</strong></td>
-              <td>30 MCQs</td>
-              <td>900 MCQs</td>
-              <td>11:40 AM – 03:20 PM (Practice Zone)</td>
+              <td><strong>900 MCQs</strong></td>
+              <td>30 MCQs / Day</td>
             </tr>
             <tr>
               <td>🧠 <strong>Reasoning MCQs</strong></td>
-              <td>30 MCQs</td>
-              <td>900 MCQs</td>
-              <td>11:40 AM – 03:20 PM (Practice Zone)</td>
+              <td><strong>900 MCQs</strong></td>
+              <td>30 MCQs / Day</td>
             </tr>
             <tr>
               <td>📖 <strong>Hindi MCQs</strong></td>
-              <td>20 MCQs</td>
-              <td>600 MCQs</td>
-              <td>11:40 AM – 03:20 PM (Practice Zone)</td>
+              <td><strong>600 MCQs</strong></td>
+              <td>20 MCQs / Day</td>
             </tr>
             <tr>
               <td>🏛️ <strong>Polity MCQs</strong></td>
-              <td>20 MCQs</td>
-              <td>600 MCQs</td>
-              <td>11:40 AM – 03:20 PM (Practice Zone)</td>
+              <td><strong>600 MCQs</strong></td>
+              <td>20 MCQs / Day</td>
             </tr>
             <tr class="highlight-row">
-              <td>🎯 <strong>TOTAL MCQs</strong></td>
-              <td><strong>100 MCQs / Day</strong></td>
-              <td><strong>3,000 MCQs / Month</strong></td>
-              <td><strong>Practice Zone Block</strong></td>
+              <td>📝 <strong>Tests Target</strong></td>
+              <td><strong>100 Tests</strong></td>
+              <td>Mock Tests / Chapter Tests</td>
             </tr>
             <tr>
               <td>🔢 <strong>Maths Tables (पहाड़े)</strong></td>
               <td>1 से 30 (रिवीजन/याद)</td>
               <td>कंठस्थ रिवीजन</td>
-              <td>07:00 AM – 11:00 AM (Revision Zone)</td>
             </tr>
             <tr>
               <td>📐 <strong>Maths Squares (वर्ग)</strong></td>
               <td>1 से 50 (रिवीजन/याद)</td>
               <td>कंठस्थ रिवीजन</td>
-              <td>07:00 AM – 11:00 AM (Revision Zone)</td>
             </tr>
             <tr>
               <td>🧊 <strong>Maths Cubes (घन)</strong></td>
-              <td>1 से 30 (रिवीजन/याद)</td>
+              <td>1 से 30</td>
               <td>कंठस्थ रिवीजन</td>
-              <td>07:00 AM – 11:00 AM (Revision Zone)</td>
             </tr>
             <tr>
               <td>🏛️ <strong>Administrative Words</strong></td>
-              <td>10 Words / Day</td>
-              <td>300 Words / Month</td>
-              <td>10-Min Skill Practice Block</td>
+              <td><strong>150 Words</strong></td>
+              <td>5 Words / Day</td>
             </tr>
             <tr>
               <td>🔤 <strong>English Sentences</strong></td>
+              <td><strong>150 Sentences</strong></td>
               <td>5 Sentences / Day</td>
-              <td>150 Sentences / Month</td>
-              <td>10-Min Skill Practice Block</td>
             </tr>
             <tr>
               <td>✍️ <strong>Hindi Official Sentences</strong></td>
+              <td><strong>150 Sentences</strong></td>
               <td>5 Sentences / Day</td>
-              <td>150 Sentences / Month</td>
-              <td>10-Min Skill Practice Block</td>
-            </tr>
-            <tr>
-              <td>🪞 <strong>Mirror Speaking Practice</strong></td>
-              <td>2 Minutes / Day</td>
-              <td>60 Minutes / Month</td>
-              <td>10-Min Skill Practice Block</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <!-- 2. DAILY TIME-BLOCK ROUTINE (WITH PROCESS / COMPLETE STATUS) -->
+    <!-- 2. DAILY TIME-BLOCK ROUTINE (WITH SKILL ZONE & COMPLETE OPTION) -->
     <div class="section-card">
       <h2>⏰ 2. DAILY TIME-BLOCK ROUTINE TRACKER</h2>
       <div class="table-responsive">
@@ -300,6 +282,18 @@
               <td>Online Classes + Self Notes Making (4 Hours)</td>
               <td>
                 <select id="st_r8">
+                  <option value="Pending ❌">Pending ❌</option>
+                  <option value="In Process ⏳">In Process ⏳</option>
+                  <option value="Complete ✅">Complete ✅</option>
+                </select>
+              </td>
+            </tr>
+            <tr class="highlight-row">
+              <td>11:00 PM – 11:15 PM</td>
+              <td>⚡ 10-Min Skill Practice</td>
+              <td>5 Administrative Words + 5 English Sentences + 5 Hindi Sentences</td>
+              <td>
+                <select id="st_r9">
                   <option value="Pending ❌">Pending ❌</option>
                   <option value="In Process ⏳">In Process ⏳</option>
                   <option value="Complete ✅">Complete ✅</option>
@@ -421,6 +415,7 @@
         skill: document.getElementById('st_r6').value,
         dinner: document.getElementById('st_r7').value,
         class: document.getElementById('st_r8').value,
+        skillsDaily: document.getElementById('st_r9').value,
       },
       mcqStats: {
         maths: { sol: document.getElementById('p_m_sol').value || '0', cor: document.getElementById('p_m_cor').value || '0', wrg: document.getElementById('p_m_wrg').value || '0' },
@@ -456,7 +451,8 @@
         </div>
         <div style="font-size:12px; line-height:1.6;">
           <strong>⏱️ Routine Status:</strong><br>
-          • Revision Zone: <mark>${log.routineStatus.revision}</mark> | Practice Zone: <mark>${log.routineStatus.practice}</mark> | Skill Zone: <mark>${log.routineStatus.skill}</mark> | Class Zone: <mark>${log.routineStatus.class}</mark><br><br>
+          • Revision Zone: <mark>${log.routineStatus.revision}</mark> | Practice Zone: <mark>${log.routineStatus.practice}</mark> | Skill Zone: <mark>${log.routineStatus.skill}</mark><br>
+          • Class Zone: <mark>${log.routineStatus.class}</mark> | 10-Min Skills (Vocab/Sentences): <mark>${log.routineStatus.skillsDaily}</mark><br><br>
           
           <strong>✍️ MCQs Performance:</strong><br>
           • Maths: ${log.mcqStats.maths.sol} Solved (✅ ${log.mcqStats.maths.cor} | ❌ ${log.mcqStats.maths.wrg})<br>
